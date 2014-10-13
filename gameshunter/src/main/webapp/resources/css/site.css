@@ -1,0 +1,132 @@
+body {
+	line-height: 1.5;
+	font-family: "Cabin", sans-serif;
+	background-color: #F2FFFC;
+	font-family: "Cabin", sans-serif;
+}
+
+h1 {
+	text-transform: uppercase;
+}
+
+h1, h2 {
+	font-family: "Open Sans Condensed", sans-serif;
+}
+
+p {
+	text-align: justify;
+	margin: 20px;
+}
+
+main {
+	float: left;
+	width: 85%;
+	padding-bottom: 80px;
+}
+
+main a {
+	color: #851944;
+	font-family: "Open Sans Condensed", sans-serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+.container {
+	width: 720px;
+	margin: 0 auto;
+	padding: 30px;
+}
+
+.titulo {
+	background-color: #851944;
+	text-align: center;
+	padding: 25px;
+	border-bottom: 10px solid black;
+	font-size: 60px;
+	color: #FFF;
+}
+
+.subtitulo {
+	font-size: 30px;
+	clear: both;
+}
+
+.foto-joao, .navegacao {
+	border-bottom: 10px solid black;
+	border-left: 10px solid black;
+}
+
+.foto-joao {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.navegacao {
+	width: 15%;
+	position: relative;
+	float: right;
+	top: 310px;
+	box-sizing: border-box;
+	text-align: center;
+	background-color: #3C1D3D;
+	color: #F2FFFC;
+	background-color: #3C1D3D;
+}
+
+.link-navegacao {
+	color: inherit;
+	font-family: "Open Sans Condensed", sans-serif;
+	text-transform: lowercase;
+}
+
+.navegacao h1 {
+	font-size: 30px;
+	margin-bottom: 25px;
+}
+
+.navegacao nav {
+	padding: 20px;
+}
+
+.rodape {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #000;
+	color: #FFF;
+	padding: 20px;
+	background-color: #000;
+	background-color: #000;
+}
+
+.icones-redes-sociais li {
+	display: inline-block;
+}
+
+.icones-redes-sociais a {
+	width: 40px;
+	height: 40px;
+	display: block;
+	text-indent: -5000px;
+	display: block;
+}
+
+.github {
+	background-image: url("../img/github.png");
+}
+
+.twitter {
+	background-image: url("../img/twitter.png");
+}
+
+.linkedin {
+	background-image: url("../img/linkedin.png");
+}
