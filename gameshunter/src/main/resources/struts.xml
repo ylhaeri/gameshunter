@@ -9,11 +9,11 @@
 		
 		<interceptors>
 			
-			<interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/>
+			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/>-->
 			
 			<interceptor-stack name="seguranca">
 				
-				<interceptor-ref name="autorizador" />
+				<!-- <interceptor-ref name="autorizador" />-->
 				
 				<interceptor-ref name="defaultStack" />
 				

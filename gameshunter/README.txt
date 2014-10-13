@@ -1,3 +1,5 @@
+Explicação da estrutura e alguns lembretes
+
 Java Resources
 		Onde estão todos os recursos da aplicação, as partes web também ficam lá por 
 		causa do Maven. Mas apesar de ficar 'aqui', não podemos acessá-lo diretamente
@@ -83,3 +85,9 @@ Java Resources
 	
 	A anotação de javadoc já é aplicada automaticamente no projeto. Só precisamos
 	criar o javadoc quando quisermos colocar em um site bonitinho. Use e abuse disso.
+	
+	Lembre de SEMPRE criar um novo branch quando chegar em um ponto considerável das
+	suas alterações. Não arrisque quebrar tudo por ter incluido uma nova classe
+	que por motivos bobos podem foder com tudo. Faça um novo branch quando achar
+	que deve e implemente as novas coisas, vai te dar mais segurança. Antes de dar push,
+	É só você dar merge no master branch, que é o padrão e que vai ser nossa guide-line.
