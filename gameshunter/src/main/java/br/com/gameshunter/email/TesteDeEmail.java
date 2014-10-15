@@ -18,8 +18,7 @@ public class TesteDeEmail {
 		email.setSubject("Teste de email do hue");
 		email.setFrom("testeghunter@gmail.com", "T Games Hunter");
 		email.setMsg("Teste de email básico");
-		email.addTo("alexfelipevieira@gmail.com",
-				"Alex Felipe Vieira the lelek of hue");
+		email.addTo("emailaqui@aqui.aqui", "nomedocaraaqui");
 		email.send();
 	}
 }
