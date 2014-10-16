@@ -1,4 +1,4 @@
-package br.com.gameshunter.JPAUtil;
+package br.com.gameshunter.DAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -3,7 +3,6 @@ package br.com.gameshunter.DAO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.gameshunter.JPAUtil.JPAUtil;
 import br.com.gameshunter.model.Usuario;
 
 /**
