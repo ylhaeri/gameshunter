@@ -9,54 +9,38 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gameshunter.DAO.UsuarioDAO;
 
 public class UsuarioTest {
 
 	private Usuario joao;
-	private Calendar c;
+	private Calendar dataNascimento;
 
 	@Before
 	public void criaUsuarios() {
 
-		c = Calendar.getInstance();
-		c.set(1990, 1, 12);
-		joao = new Usuario("João da Silva Machado")
-				.setEmail("joaomachado@silva.com")
-				.setApelido("Pikachu Iluminado").setCpf("000.000.000-00")
-				.setDataNascimento(c)
-				.setEndereco("Rua Vergueiro, 18, São Paulo, SP")
-				.setTelefone("(11) 1111-1111").setRg("1234567-890");
-		
-	}
-
-	@Test
-	public void deveRetornarEmailCorreto() {
-
-		assertEquals("joaomachado@silva.com", joao.getEmail());
+		joao = new Usuario("");
 	}
 
 	@Test
 	public void deveRetornarNomeCorreto() {
 
+		joao.setNome("João da Silva Machado");
 		assertEquals("João da Silva Machado", joao.getNome());
 	}
 
 	@Test
 	public void deveRetornarApelidoCorreto() {
 
+		joao.setApelido("Pikachu Iluminado");
 		assertEquals("Pikachu Iluminado", joao.getApelido());
-	}
-
-	@Test
-	public void deveRetornarCpfCorreto() {
-
-		assertEquals("000.000.000-00", joao.getCpf());
 	}
 
 	@Test
 	public void deveRetornarDataCorreta() {
 
+		dataNascimento = Calendar.getInstance();
+		dataNascimento.set(1990, 1, 12);
+		joao.setDataNascimento(dataNascimento);
 		assertThat(joao.getDataNascimento().getTime().toString(),
 				containsString("Mon Feb 12"));
 		assertThat(joao.getDataNascimento().getTime().toString(),
@@ -64,20 +48,37 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void deveRetornarEnderecoCorreto() {
+	public void deveRetornarEmailCorreto() {
 
-		assertEquals("Rua Vergueiro, 18, São Paulo, SP", joao.getEndereco());
+		joao.setEmail("joaomachado@silva.com");
+		assertEquals("joaomachado@silva.com", joao.getEmail());
 	}
 
 	@Test
 	public void deveRetornarTelefoneCorreto() {
 
+		joao.setTelefone("(11) 1111-1111");
 		assertEquals("(11) 1111-1111", joao.getTelefone());
+	}
+
+	@Test
+	public void deveRetornarCpfCorreto() {
+
+		joao.setCpf("000.000.000-00");
+		assertEquals("000.000.000-00", joao.getCpf());
 	}
 
 	@Test
 	public void deveRetornarRgCorrreto() {
 
+		joao.setRg("1234567-890");
 		assertEquals("1234567-890", joao.getRg());
+	}
+
+	@Test
+	public void deveRetornarEnderecoCorreto() {
+
+		joao.setEndereco("Rua Vergueiro, 18, São Paulo, SP");
+		assertEquals("Rua Vergueiro, 18, São Paulo, SP", joao.getEndereco());
 	}
 }

@@ -60,13 +60,11 @@ public class Usuario {
 	 * 
 	 * @param email
 	 *            O e-mail que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
-		return this;
 	}
 
 	public String getNome() {
@@ -77,15 +75,12 @@ public class Usuario {
 	 * Define o nome do usuário.
 	 * 
 	 * @param nome
-	 * 
 	 *            O nome que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
-		return this;
 	}
 
 	public String getApelido() {
@@ -97,13 +92,11 @@ public class Usuario {
 	 * 
 	 * @param apelido
 	 *            O apelido que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setApelido(String apelido) {
+	public void setApelido(String apelido) {
 		this.apelido = apelido;
-		return this;
 	}
 
 	public String getCpf() {
@@ -115,13 +108,11 @@ public class Usuario {
 	 * 
 	 * @param cpf
 	 *            O cpf que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setCpf(String cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
-		return this;
 	}
 
 	public Calendar getDataNascimento() {
@@ -133,13 +124,11 @@ public class Usuario {
 	 * 
 	 * @param dataNascimento
 	 *            A data de nascimento que deve ser definida para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
-		return this;
 	}
 
 	public String getEndereco() {
@@ -151,13 +140,11 @@ public class Usuario {
 	 * 
 	 * @param endereco
 	 *            O endereço que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setEndereco(String endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-		return this;
 	}
 
 	public String getTelefone() {
@@ -169,13 +156,11 @@ public class Usuario {
 	 * 
 	 * @param telefone
 	 *            O telefone que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setTelefone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-		return this;
 	}
 
 	public String getRg() {
@@ -187,17 +172,16 @@ public class Usuario {
 	 * 
 	 * @param rg
 	 *            O RG que deve ser definido para o usuário
-	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
 	 */
-	public Usuario setRg(String rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
-		return this;
 	}
 
 	/**
-	 * Constructor que deve ser utilizado somente pelas API's do projeto.
+	 * Constructor que deve ser utilizado somente pelas API's do projeto. Use o
+	 * constructor que recebe um nome ou todos os atributos.
 	 *
 	 * @since 0.0.1
 	 */
