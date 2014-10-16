@@ -19,7 +19,8 @@ public class UsuarioTest {
 
 		c = Calendar.getInstance();
 		c.set(1990, 1, 12);
-		joao = new Usuario("João da Silva Machado").setEmail("joaomachado@silva.com")
+		joao = new Usuario("João da Silva Machado")
+				.setEmail("joaomachado@silva.com")
 				.setApelido("Pikachu Iluminado").setCpf("000.000.000-00")
 				.setDataNascimento(c)
 				.setEndereco("Rua Vergueiro, 18, São Paulo, SP")

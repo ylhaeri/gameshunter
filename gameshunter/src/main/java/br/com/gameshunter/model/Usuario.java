@@ -132,7 +132,7 @@ public class Usuario {
 	 * Define a data de nascimento do usuário.
 	 * 
 	 * @param dataNascimento
-	 *            A data de nascimento que deve ser definido para o usuário
+	 *            A data de nascimento que deve ser definida para o usuário
 	 * @return O próprio {@code objeto}
 	 * 
 	 * @since 0.0.1
