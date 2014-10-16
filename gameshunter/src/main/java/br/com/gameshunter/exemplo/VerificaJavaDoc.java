@@ -8,4 +8,4 @@ public class VerificaJavaDoc {
 		rc.arara();
 		rc.testeJavaDoc();
 	}
-}
+} 

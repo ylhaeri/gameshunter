@@ -1,13 +1,15 @@
 package br.com.gameshunter.model;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import br.com.gameshunter.DAO.UsuarioDAO;
 
 public class UsuarioTest {
 
@@ -25,6 +27,7 @@ public class UsuarioTest {
 				.setDataNascimento(c)
 				.setEndereco("Rua Vergueiro, 18, São Paulo, SP")
 				.setTelefone("(11) 1111-1111").setRg("1234567-890");
+		
 	}
 
 	@Test
