@@ -5,11 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Calendar;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import br.com.gameshunter.DAO.UsuarioDAO;
 
 public class UsuarioTest {
 
@@ -21,12 +18,13 @@ public class UsuarioTest {
 
 		c = Calendar.getInstance();
 		c.set(1990, 1, 12);
-		joao = new Usuario("João da Silva Machado").setEmail("joaomachado@silva.com")
+		joao = new Usuario("João da Silva Machado")
+				.setEmail("joaomachado@silva.com")
 				.setApelido("Pikachu Iluminado").setCpf("000.000.000-00")
 				.setDataNascimento(c)
 				.setEndereco("Rua Vergueiro, 18, São Paulo, SP")
 				.setTelefone("(11) 1111-1111").setRg("1234567-890");
-		
+
 	}
 
 	@Test
