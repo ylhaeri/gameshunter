@@ -1,14 +1,16 @@
-package br.com.gameshunter.email;
+package br.com.gameshunter.action;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-public class TesteDeEmail {
+public class TesteDeEmailAction {
 
+	
 	public static void main(String[] args) throws EmailException {
 
+		
 		Email email = new SimpleEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);

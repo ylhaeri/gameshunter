@@ -6,18 +6,17 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-	private static EntityManagerFactory gamesHunter;
+	private static EntityManagerFactory emf;
 
 	static {
-		gamesHunter = Persistence.createEntityManagerFactory("tarefa");
+		emf = Persistence.createEntityManagerFactory("gameshunter");
 	}
 
 	public EntityManager getEntityManager() {
-		return gamesHunter.createEntityManager();
+		return emf.createEntityManager();
 	}
 
 	public void closeFactory() {
-		gamesHunter.close();
+		emf.close();
 	}
-
 }
