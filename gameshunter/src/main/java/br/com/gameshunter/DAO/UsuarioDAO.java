@@ -21,7 +21,6 @@ public class UsuarioDAO {
 	 * @param usuario
 	 *            Usuário que será adicionado ao banco
 	 * 
-	 * @since 0.0.1
 	 */
 	public void salva(Usuario usuario) {
 
@@ -50,4 +49,35 @@ public class UsuarioDAO {
 		return usuario;
 
 	}
+
+	/**
+	 * Altera as informações de um usuário existente
+	 * 
+	 * @param usuario
+	 *            Usuário identifica o usuário no banco
+	 */
+	public void altera(Usuario usuario) {
+
+		EntityManager manager = new JPAUtil().getEntityManager();
+
+		manager.getTransaction().begin();
+		manager.merge(usuario);
+		manager.getTransaction().commit();
+
+	}
+
+	/**
+	 * Remove um usuário existente do banco
+	 * 
+	 * @param usuario
+	 *            Usuário identifica o usuário no banco
+	 */
+	public void remove(Usuario usuario) {
+		EntityManager manager = new JPAUtil().getEntityManager();
+
+		manager.getTransaction().begin();
+		manager.remove(usuario);
+		manager.getTransaction().commit();
+	}
+
 }
