@@ -11,7 +11,6 @@ import org.junit.Test;
 public class UsuarioTest {
 
 	private Usuario joao;
-	private Calendar dataNascimento;
 
 	@Before
 	public void criaUsuarios() {
@@ -36,7 +35,7 @@ public class UsuarioTest {
 	@Test
 	public void deveRetornarDataCorreta() {
 
-		dataNascimento = Calendar.getInstance();
+		Calendar dataNascimento = Calendar.getInstance();
 		dataNascimento.set(1990, 1, 12);
 		joao.setDataNascimento(dataNascimento);
 		assertThat(joao.getDataNascimento().getTime().toString(),

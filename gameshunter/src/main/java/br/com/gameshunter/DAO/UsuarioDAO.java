@@ -1,7 +1,6 @@
 package br.com.gameshunter.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import br.com.gameshunter.model.Usuario;
 
@@ -15,6 +14,13 @@ import br.com.gameshunter.model.Usuario;
  */
 public class UsuarioDAO {
 
+	private EntityManager manager;
+
+	public UsuarioDAO(EntityManager manager) {
+
+		this.manager = manager;
+	}
+
 	/**
 	 * Cadastra um usuário no banco de dados
 	 * 
@@ -25,13 +31,7 @@ public class UsuarioDAO {
 	 */
 	public void salva(Usuario usuario) {
 
-		EntityManager manager = new JPAUtil().getEntityManager();
-
-		manager.getTransaction().begin();
 		manager.persist(usuario);
-		manager.getTransaction().commit();
-
-		manager.close();
 	}
 
 	/**
@@ -44,10 +44,41 @@ public class UsuarioDAO {
 	 */
 	public Usuario pega(String email) {
 
-		EntityManager manager = new JPAUtil().getEntityManager();
-
 		Usuario usuario = manager.find(Usuario.class, email);
 		return usuario;
 
+	}
+
+	/**
+	 * Responsável por reverter qualquer ação do banco de dados. Deve ser usado
+	 * após iterações com o banco de dados, caso seja o efeito desejado.
+	 * 
+	 * @return Ele mesmo
+	 */
+	public UsuarioDAO rollback() {
+
+		manager.getTransaction().rollback();
+		manager.close();
+		return this;
+	}
+
+	/**
+	 * Responsável por fazer o commit e encerrar a transaction. Deve ser usado
+	 * após iterações com o banco de dados, caso seja o efeito desejado.
+	 */
+	public void submete() {
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
+	/**
+	 * Responsável por iniciar as transactions. Deve ser usado antes de qualquer
+	 * ação com o banco de dados ser invocada.
+	 * 
+	 * @return Ele mesmo
+	 */
+	public UsuarioDAO inicia() {
+		manager.getTransaction().begin();
+		return this;
 	}
 }

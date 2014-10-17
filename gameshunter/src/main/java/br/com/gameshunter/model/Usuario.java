@@ -2,7 +2,6 @@ package br.com.gameshunter.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -35,7 +34,6 @@ public class Usuario {
 	 * Valor usado para armazenar o cpf do usuário . {@code cpf} deve ser um
 	 * valor único no banco de dados.
 	 */
-	@Column(unique = true)
 	private String cpf;
 
 	/** Valor usado para armazenar a data de nascimento do usuário */
@@ -56,12 +54,7 @@ public class Usuario {
 	}
 
 	/**
-	 * Define o e-mail do usuário.
-	 * 
 	 * @param email
-	 *            O e-mail que deve ser definido para o usuário
-	 * 
-	 * @since 0.0.1
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -180,12 +173,11 @@ public class Usuario {
 	}
 
 	/**
-	 * Constructor que deve ser utilizado somente pelas API's do projeto. Use o
-	 * constructor que recebe um nome ou todos os atributos.
+	 * Constructor que deve ser utilizado somente pelas API's do projeto. Dê
+	 * preferência para os constructores que recebem parâmetros.
 	 *
 	 * @since 0.0.1
 	 */
-	@Deprecated
 	public Usuario() {
 	}
 
