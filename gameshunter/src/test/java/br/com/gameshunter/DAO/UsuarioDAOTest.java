@@ -35,10 +35,12 @@ public class UsuarioDAOTest {
 		joao = new Usuario();
 		manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
+
 	}
 
 	@After
 	public void finaliza() {
+
 		manager.getTransaction().rollback();
 		manager.close();
 	}
@@ -144,5 +146,10 @@ public class UsuarioDAOTest {
 		Usuario joao = new UsuarioDAO(manager).pega("joao@gmail.com");
 		assertEquals(new EnderecoFactory().comLogradouro("Rua Jesompla"),
 				joao.getEndereco());
+	}
+
+	@Test
+	public void deveRemoverUsuarioContidoNoBanco() {
+
 	}
 }
