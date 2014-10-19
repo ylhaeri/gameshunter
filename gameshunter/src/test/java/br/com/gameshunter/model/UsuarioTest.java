@@ -10,11 +10,20 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import br.com.gameshunter.factory.EnderecoFactory;
 
 public class UsuarioTest {
 
 	private Usuario joao;
+	private static EnderecoFactory enderecoFactory;
+
+	@BeforeClass
+	public static void globalSetUp() {
+		enderecoFactory = new EnderecoFactory();
+	}
 
 	@Before
 	public void setUp() {
@@ -106,8 +115,8 @@ public class UsuarioTest {
 	@Test
 	public void deveCadastrarEnderecosCorretamente() {
 
-		Endereco enviado = enderecoRepetido();
-		Endereco esperado = enderecoRepetido();
+		Endereco enviado = enderecoFactory.repetido();
+		Endereco esperado = enderecoFactory.repetido();
 
 		joao.setEndereco(enviado);
 
@@ -115,17 +124,17 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void deveCadastrar2Enderecos() {
+	public void deveCadastrarVariosEnderecos() {
 
-		Endereco enviado1 = enderecoComRua("Avenida Zambreta");
-		Endereco esperado1 = enderecoComRua("Avenida Zambreta");
-		Endereco enviado2 = enderecoComRua("Rua Pentombla");
-		Endereco esperado2 = enderecoComRua("Rua Pentombla");
+		Endereco enviado1 = enderecoFactory.comLogradouro("Avenida Zambreta");
+		Endereco esperado1 = enderecoFactory.comLogradouro("Avenida Zambreta");
+		Endereco enviado2 = enderecoFactory.comLogradouro("Rua Pentombla");
+		Endereco esperado2 = enderecoFactory.comLogradouro("Rua Pentombla");
 
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
 
-		List<Endereco> enderecos = listaEnderecos();
+		List<Endereco> enderecos = joao.getEnderecos();
 
 		assertThat(enderecos.size(), equalTo(2));
 		assertThat(enderecos, hasItems(esperado1, esperado2));
@@ -134,21 +143,21 @@ public class UsuarioTest {
 	@Test
 	public void naoDeveCadastrarMaisQue3Enderecos() {
 
-		Endereco enviado1 = enderecoComRua("Rua Vergueiro");
+		Endereco enviado1 = enderecoFactory.comLogradouro("Rua Vergueiro");
 
-		Endereco enviado2 = enderecoComRua("Rua Manolia");
+		Endereco enviado2 = enderecoFactory.comLogradouro("Rua Manolia");
 
-		Endereco enviado3 = enderecoComRua("Rua Tamborim");
+		Endereco enviado3 = enderecoFactory.comLogradouro("Rua Tamborim");
 
-		Endereco enviado4 = enderecoComRua("Rua Macarronada");
-		Endereco esperado4 = enderecoComRua("Rua Macarronada");
+		Endereco enviado4 = enderecoFactory.comLogradouro("Rua Macarronada");
+		Endereco esperado4 = enderecoFactory.comLogradouro("Rua Macarronada");
 
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
 		joao.adicionaEndereco(enviado3);
 		joao.adicionaEndereco(enviado4);
 
-		List<Endereco> enderecos = listaEnderecos();
+		List<Endereco> enderecos = joao.getEnderecos();
 
 		assertThat(enderecos.size(), equalTo(3));
 		assertThat(enderecos, not(hasItem(esperado4)));
@@ -157,50 +166,17 @@ public class UsuarioTest {
 	@Test
 	public void naoDeveCadastrarEnderecosRepetidos() {
 
-		Endereco enviado1 = enderecoRepetido();
-		Endereco esperado = enderecoRepetido();
+		Endereco enviado1 = enderecoFactory.repetido();
+		Endereco esperado = enderecoFactory.repetido();
 
-		Endereco enviado2 = enderecoRepetido();
+		Endereco enviado2 = enderecoFactory.repetido();
 
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
 
-		List<Endereco> enderecos = listaEnderecos();
+		List<Endereco> enderecos = joao.getEnderecos();
 
 		assertThat(enderecos.size(), equalTo(1));
 		assertThat(enderecos, hasItem(esperado));
-	}
-
-	/**
-	 * Retorna uma instância de endereco com a rua definida pelo usuário.
-	 * Utilize quando precisar de instâncias diferentes.
-	 * 
-	 * @param Rua
-	 *            para o novo endereço
-	 * @return Novo endereço
-	 */
-	private Endereco enderecoComRua(String rua) {
-		return new Endereco(rua, 18, "Jazui", "São Paulo", "SP", "11111-111",
-				"Brasil");
-	}
-
-	/**
-	 * Retorna uma nova instância de objeto sempre com o mesmo valor. Utilize
-	 * quando não precisar de instâncias diferentes.
-	 * 
-	 * @return Novo endereço
-	 */
-	private Endereco enderecoRepetido() {
-		return new Endereco("Rua Vergueiro", 18, "Jazui", "São Paulo", "SP",
-				"11111-111", "Brasil");
-	}
-
-	/**
-	 * Retorna a lista de endereços atual do usuário.
-	 * 
-	 * @return Lista de endereços atuais
-	 */
-	private List<Endereco> listaEnderecos() {
-		return joao.getEnderecos();
 	}
 }

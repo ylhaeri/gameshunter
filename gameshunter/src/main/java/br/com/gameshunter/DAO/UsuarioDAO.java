@@ -49,7 +49,7 @@ public class UsuarioDAO {
 	}
 
 	/**
-
+	 * 
 	 * Responsável por reverter qualquer ação do banco de dados. Deve ser usado
 	 * após iterações com o banco de dados, caso seja o efeito desejado.
 	 * 
@@ -81,5 +81,4 @@ public class UsuarioDAO {
 		manager.getTransaction().begin();
 		return this;
 	}
-
 }

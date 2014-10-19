@@ -6,17 +6,22 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-	private static EntityManagerFactory emf;
+	private static EntityManagerFactory EMF;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("gameshunter");
+		EMF = Persistence.createEntityManagerFactory("gameshunter");
 	}
 
 	public EntityManager getEntityManager() {
-		return emf.createEntityManager();
+		return EMF.createEntityManager();
 	}
 
 	public void closeFactory() {
-		emf.close();
+		EMF.close();
+	}
+
+	public static void main(String[] args) {
+
+		new JPAUtil();
 	}
 }

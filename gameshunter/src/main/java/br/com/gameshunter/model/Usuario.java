@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,8 +45,11 @@ public class Usuario {
 	private Calendar dataNascimento;
 
 	/** Variável usada pelas API's para as API's */
+	@OneToOne
 	private Endereco endereco;
 
+	/** Variável usada para armazenar os endereços do usuário */
+	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 
 	/** Valor usado para armazenar o telefone do usuário */
@@ -158,19 +163,7 @@ public class Usuario {
 	 *            endereço que deve ser definido
 	 */
 	public void setEndereco(Endereco endereco) {
-		enderecoPrincipal(endereco);
-	}
-
-	/**
-	 * Define o endereço principal do usuário.
-	 * 
-	 * @param e
-	 *            O endereço que deve ser definido para o usuário
-	 * 
-	 * @since 0.0.1
-	 */
-	public void enderecoPrincipal(Endereco e) {
-		this.endereco = e;
+		this.endereco = endereco;
 	}
 
 	/**
