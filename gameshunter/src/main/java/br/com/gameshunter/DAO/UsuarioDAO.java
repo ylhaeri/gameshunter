@@ -17,7 +17,6 @@ public class UsuarioDAO {
 	private EntityManager manager;
 
 	public UsuarioDAO(EntityManager manager) {
-
 		this.manager = manager;
 	}
 
@@ -29,7 +28,6 @@ public class UsuarioDAO {
 	 * 
 	 */
 	public void salva(Usuario usuario) {
-
 		manager.persist(usuario);
 	}
 
@@ -46,6 +44,11 @@ public class UsuarioDAO {
 		Usuario usuario = manager.find(Usuario.class, email);
 		return usuario;
 
+	}
+	
+	public void remove(Usuario usuario){
+		manager.merge(usuario);
+		manager.remove(usuario);
 	}
 
 	/**
