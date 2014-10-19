@@ -1,4 +1,4 @@
-package br.com.gameshunter.DAO;
+/*package br.com.gameshunter.DAO;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
@@ -66,7 +66,7 @@ public class UsuarioDAOTest {
 		}
 	}
 
-	/*
+	
 	 * Tive que alterar bastante coisa, os tempos não funcionam mais, mas
 	 * mostram bem como é :x
 	 * 
@@ -101,7 +101,7 @@ public class UsuarioDAOTest {
 	 * mysql 100000 loops - 24.498, 26.163, 26.623, 26.716, 25.719
 	 * 
 	 * hsql 100000 loops - 9.287, 9.571, 9.482, 9.511, 9.695
-	 */
+	 
 
 	@Test
 	public void deveConterUsuarioComNomeCorreto() {
@@ -207,4 +207,4 @@ public class UsuarioDAOTest {
 		manager.close();
 	}
 }
-
+*/

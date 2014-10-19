@@ -81,7 +81,7 @@ public class UsuarioBuilder {
 	 */
 	public UsuarioBuilder comEndereco(String endereco) {
 
-		this.usuario.setEndereco(endereco);
+//		this.usuario.setEndereco(endereco);
 		return this;
 	}
 

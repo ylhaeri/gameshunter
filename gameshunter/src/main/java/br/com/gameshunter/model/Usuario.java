@@ -1,6 +1,8 @@
 package br.com.gameshunter.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -40,8 +42,10 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 
-	/** Valor usado para armazenar o endereço do usuário */
-	private String endereco;
+	/** Variável usada pelas API's para as API's */
+	private Endereco endereco;
+
+	private List<Endereco> enderecos = new ArrayList<>(3);
 
 	/** Valor usado para armazenar o telefone do usuário */
 	private String telefone;
@@ -49,6 +53,9 @@ public class Usuario {
 	/** Valor usado para armazenar o rf do usuário */
 	private String rg;
 
+	/**
+	 * @return O e-mail
+	 */
 	public String getEmail() {
 		return email;
 	}
@@ -60,6 +67,9 @@ public class Usuario {
 		this.email = email;
 	}
 
+	/**
+	 * @return O nome
+	 */
 	public String getNome() {
 		return nome;
 	}
@@ -76,6 +86,9 @@ public class Usuario {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return O apelido
+	 */
 	public String getApelido() {
 		return apelido;
 	}
@@ -92,6 +105,9 @@ public class Usuario {
 		this.apelido = apelido;
 	}
 
+	/**
+	 * @return o CPF
+	 */
 	public String getCpf() {
 		return cpf;
 	}
@@ -108,6 +124,9 @@ public class Usuario {
 		this.cpf = cpf;
 	}
 
+	/**
+	 * @return A data de nascimento
+	 */
 	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
@@ -124,22 +143,39 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEndereco() {
+	/**
+	 * @return O endereço
+	 */
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
 	/**
-	 * Define o endereço do usuário.
+	 * Usado pelo Hibernate para definir o endereço principal, método delegado
+	 * somente
 	 * 
 	 * @param endereco
+	 *            endereço que deve ser definido
+	 */
+	public void setEndereco(Endereco endereco) {
+		enderecoPrincipal(endereco);
+	}
+
+	/**
+	 * Define o endereço principal do usuário.
+	 * 
+	 * @param e
 	 *            O endereço que deve ser definido para o usuário
 	 * 
 	 * @since 0.0.1
 	 */
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void enderecoPrincipal(Endereco e) {
+		this.endereco = e;
 	}
 
+	/**
+	 * @return O telefone
+	 */
 	public String getTelefone() {
 		return telefone;
 	}
@@ -156,6 +192,9 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * @return o RG
+	 */
 	public String getRg() {
 		return rg;
 	}
@@ -170,6 +209,37 @@ public class Usuario {
 	 */
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	/**
+	 * @return Lista de endereços
+	 */
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	/**
+	 * Método responsável por adicionar novos endereços.
+	 * 
+	 * @param endereco
+	 *            O endereço que deve ser adicionado
+	 */
+	public void adicionaEndereco(Endereco endereco) {
+
+		if (podeAdicionarEndereco(endereco))
+			this.enderecos.add(endereco);
+	}
+
+	/**
+	 * Método responsável por verificar se o endereço pode ou não ser adicionado
+	 * 
+	 * @param endereco
+	 *            Endereço que deve passar pela verificação.
+	 * @return verdadeiro caso possa ser adicionado, falso caso não.
+	 */
+	private boolean podeAdicionarEndereco(Endereco endereco) {
+		return enderecos.isEmpty()
+				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
@@ -211,7 +281,7 @@ public class Usuario {
 	 * @since 0.0.1
 	 */
 	public Usuario(String email, String nome, String apelido, String cpf,
-			Calendar dataNascimento, String endereco, String telefone) {
+			Calendar dataNascimento, Endereco endereco, String telefone) {
 
 		this.email = email;
 		this.nome = nome;
