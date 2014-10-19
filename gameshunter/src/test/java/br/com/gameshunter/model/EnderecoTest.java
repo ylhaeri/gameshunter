@@ -72,4 +72,9 @@ public class EnderecoTest {
 		endereco.setPais("Brasil");
 		assertThat(endereco.getPais(), equalTo("Brasil"));
 	}
+
+	@Test
+	public void deveCompararEnderecosCorretamente() {
+		assertThat(endereco, equalTo(new Endereco()));
+	}
 }

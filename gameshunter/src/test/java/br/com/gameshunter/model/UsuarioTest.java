@@ -1,12 +1,9 @@
 package br.com.gameshunter.model;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.hasItem;
-
 import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Calendar;
@@ -20,7 +17,7 @@ public class UsuarioTest {
 	private Usuario joao;
 
 	@Before
-	public void criaUsuarios() {
+	public void setUp() {
 
 		joao = new Usuario();
 	}
@@ -28,121 +25,182 @@ public class UsuarioTest {
 	@Test
 	public void deveCadastrarNomeCorretamente() {
 
-		joao.setNome("João da Silva Machado");
-		assertEquals("João da Silva Machado", joao.getNome());
+		String enviado = "João da Silva Machado";
+		String esperado = "João da Silva Machado";
+
+		joao.setNome(enviado);
+
+		assertThat(joao.getNome(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarApelidoCorretamente() {
 
-		joao.setApelido("Pikachu Iluminado");
-		assertEquals("Pikachu Iluminado", joao.getApelido());
+		String enviado = "PikachuIluminado";
+		String esperado = "PikachuIluminado";
+
+		joao.setApelido(enviado);
+
+		assertThat(joao.getApelido(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarDataCorreta() {
 
-		Calendar dataNascimento = Calendar.getInstance();
-		dataNascimento.set(1990, 1, 12);
-		joao.setDataNascimento(dataNascimento);
+		Calendar enviado = Calendar.getInstance();
+		enviado.set(1990, 1, 1, 12, 0, 0);
+
+		Calendar esperado = Calendar.getInstance();
+		esperado.set(1990, 1, 1, 12, 0, 0);
+
+		joao.setDataNascimento(enviado);
+
 		assertThat(joao.getDataNascimento().getTime().toString(),
-				containsString("Mon Feb 12"));
-		assertThat(joao.getDataNascimento().getTime().toString(),
-				containsString("1990"));
+				equalTo(esperado.getTime().toString()));
 	}
 
 	@Test
 	public void deveCadastrarEmailCorretamente() {
 
-		joao.setEmail("joaomachado@silva.com");
-		assertEquals("joaomachado@silva.com", joao.getEmail());
+		String enviado = "joaomachado@gmail.com";
+		String esperado = "joaomachado@gmail.com";
+
+		joao.setEmail(enviado);
+
+		assertThat(joao.getEmail(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarTelefoneCorretamente() {
 
-		joao.setTelefone("(11) 1111-1111");
-		assertEquals("(11) 1111-1111", joao.getTelefone());
+		String enviado = "(11) 1111-1111";
+		String esperado = "(11) 1111-1111";
+
+		joao.setTelefone(enviado);
+
+		assertThat(joao.getTelefone(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarCpfCorretamente() {
 
-		joao.setCpf("000.000.000-00");
-		assertEquals("000.000.000-00", joao.getCpf());
+		String enviado = "000.000.000-00";
+		String esperado = "000.000.000-00";
+
+		joao.setCpf(enviado);
+
+		assertThat(joao.getCpf(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarRgCorretamente() {
 
-		joao.setRg("1234567-890");
-		assertEquals("1234567-890", joao.getRg());
-	}
+		String enviado = "1234567-890";
+		String esperado = "1234567-890";
 
-	@Test
-	public void deveCompararEnderecosCorretamente() {
+		joao.setRg(enviado);
 
-		joao.setEndereco(new Endereco());
-		assertThat(joao.getEndereco(), equalTo(new Endereco()));
+		assertThat(joao.getRg(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrarEnderecosCorretamente() {
 
-		joao.setEndereco(new Endereco("Rua Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		assertThat(
-				joao.getEndereco().formatado(),
-				equalTo("Rua Vergueiro, 18 - Jazui - 11111-111 - São Paulo, SP - Brasil"));
+		Endereco enviado = enderecoRepetido();
+		Endereco esperado = enderecoRepetido();
+
+		joao.setEndereco(enviado);
+
+		assertThat(joao.getEndereco(), equalTo(esperado));
 	}
 
 	@Test
 	public void deveCadastrar2Enderecos() {
 
-		joao.adicionaEndereco(new Endereco("Rua Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		joao.adicionaEndereco(new Endereco("Avenida Zambreta", 180, "Jazui",
-				"São Paulo", "SP", "11111-151", "Brasil"));
-		assertThat(joao.getEnderecos().size(), equalTo(2));
-		assertThat(
-				joao.getEnderecos().get(0).formatado(),
-				equalTo("Rua Vergueiro, 18 - Jazui - 11111-111 - São Paulo, SP - Brasil"));
-		assertThat(
-				joao.getEnderecos().get(1).formatado(),
-				equalTo("Avenida Zambreta, 180 - Jazui - 11111-151 - São Paulo, SP - Brasil"));
+		Endereco enviado1 = enderecoComRua("Avenida Zambreta");
+		Endereco esperado1 = enderecoComRua("Avenida Zambreta");
+		Endereco enviado2 = enderecoComRua("Rua Pentombla");
+		Endereco esperado2 = enderecoComRua("Rua Pentombla");
+
+		joao.adicionaEndereco(enviado1);
+		joao.adicionaEndereco(enviado2);
+
+		List<Endereco> enderecos = listaEnderecos();
+
+		assertThat(enderecos.size(), equalTo(2));
+		assertThat(enderecos, hasItems(esperado1, esperado2));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test
 	public void naoDeveCadastrarMaisQue3Enderecos() {
 
-		joao.adicionaEndereco(new Endereco("Rua Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		joao.adicionaEndereco(new Endereco("Rue Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		joao.adicionaEndereco(new Endereco("Rui Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		joao.adicionaEndereco(new Endereco("Ruo Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		List<Endereco> enderecos = joao.getEnderecos();
+		Endereco enviado1 = enderecoComRua("Rua Vergueiro");
+
+		Endereco enviado2 = enderecoComRua("Rua Manolia");
+
+		Endereco enviado3 = enderecoComRua("Rua Tamborim");
+
+		Endereco enviado4 = enderecoComRua("Rua Macarronada");
+		Endereco esperado4 = enderecoComRua("Rua Macarronada");
+
+		joao.adicionaEndereco(enviado1);
+		joao.adicionaEndereco(enviado2);
+		joao.adicionaEndereco(enviado3);
+		joao.adicionaEndereco(enviado4);
+
+		List<Endereco> enderecos = listaEnderecos();
+
 		assertThat(enderecos.size(), equalTo(3));
-
-		assertThat(enderecos, not(hasItem(new Endereco("Ruo Vergueiro", 18,
-				"Jazui", "São Paulo", "SP", "11111-111", "Brasil"))));
-
-		// Não existe, deve lançar exceção
-		enderecos.get(3);
+		assertThat(enderecos, not(hasItem(esperado4)));
 	}
 
 	@Test
 	public void naoDeveCadastrarEnderecosRepetidos() {
 
-		joao.adicionaEndereco(new Endereco("Rua Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		joao.adicionaEndereco(new Endereco("Rua Vergueiro", 18, "Jazui",
-				"São Paulo", "SP", "11111-111", "Brasil"));
-		assertThat(joao.getEnderecos().size(), equalTo(1));
-		assertThat(
-				joao.getEnderecos().get(0).formatado(),
-				equalTo("Rua Vergueiro, 18 - Jazui - 11111-111 - São Paulo, SP - Brasil"));
+		Endereco enviado1 = enderecoRepetido();
+		Endereco esperado = enderecoRepetido();
+
+		Endereco enviado2 = enderecoRepetido();
+
+		joao.adicionaEndereco(enviado1);
+		joao.adicionaEndereco(enviado2);
+
+		List<Endereco> enderecos = listaEnderecos();
+
+		assertThat(enderecos.size(), equalTo(1));
+		assertThat(enderecos, hasItem(esperado));
+	}
+
+	/**
+	 * Retorna uma instância de endereco com a rua definida pelo usuário.
+	 * Utilize quando precisar de instâncias diferentes.
+	 * 
+	 * @param Rua
+	 *            para o novo endereço
+	 * @return Novo endereço
+	 */
+	private Endereco enderecoComRua(String rua) {
+		return new Endereco(rua, 18, "Jazui", "São Paulo", "SP", "11111-111",
+				"Brasil");
+	}
+
+	/**
+	 * Retorna uma nova instância de objeto sempre com o mesmo valor. Utilize
+	 * quando não precisar de instâncias diferentes.
+	 * 
+	 * @return Novo endereço
+	 */
+	private Endereco enderecoRepetido() {
+		return new Endereco("Rua Vergueiro", 18, "Jazui", "São Paulo", "SP",
+				"11111-111", "Brasil");
+	}
+
+	/**
+	 * Retorna a lista de endereços atual do usuário.
+	 * 
+	 * @return Lista de endereços atuais
+	 */
+	private List<Endereco> listaEnderecos() {
+		return joao.getEnderecos();
 	}
 }
