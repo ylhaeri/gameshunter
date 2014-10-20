@@ -27,41 +27,58 @@ public class UsuarioDAO {
 	 *            Usuário que será adicionado ao banco
 	 * 
 	 */
-	public void salva(Usuario usuario) {
+	public UsuarioDAO salva(Usuario usuario) {
 		manager.persist(usuario);
+		return this;
 	}
 
 	/**
-	 * Retorna um usuário desejado
+	 * Retorna o usuário desejado
 	 * 
 	 * @param email
-	 *            identifica o usuário no banco
+	 *            Identifica o usuário no banco
 	 * 
 	 * @return usuario Object de Usuario
 	 */
 	public Usuario pega(String email) {
 
-		Usuario usuario = manager.find(Usuario.class, email);
-		return usuario;
-
-	}
-	
-	public void remove(Usuario usuario){
-		manager.merge(usuario);
-		manager.remove(usuario);
+		return manager.find(Usuario.class, email);
 	}
 
 	/**
+	 * Responsável por atualizar as informações do usuário no banco.
 	 * 
-	 * Responsável por reverter qualquer ação do banco de dados. Deve ser usado
-	 * após iterações com o banco de dados, caso seja o efeito desejado.
+	 * @param usuario
+	 *            Usuário que será atualizado
+	 * @return
+	 * @return
+	 */
+	public Usuario atualiza(Usuario usuario) {
+		return manager.merge(usuario);
+	}
+
+	/**
+	 * Responsável por remover usuários do banco de dados.
+	 * 
+	 * @param usuario
+	 *            Usuário que será removido.
+	 * @return
+	 */
+	public Usuario remove(Usuario usuario) {
+		manager.merge(usuario);
+		manager.remove(usuario);
+
+		return pega(usuario.getEmail());
+	}
+
+	/**
+	 * Responsável por iniciar as transactions. Deve ser usado antes de qualquer
+	 * ação com o banco de dados ser invocada.
 	 * 
 	 * @return Ele mesmo
 	 */
-	public UsuarioDAO rollback() {
-
-		manager.getTransaction().rollback();
-		manager.close();
+	public UsuarioDAO inicia() {
+		manager.getTransaction().begin();
 		return this;
 	}
 
@@ -75,13 +92,16 @@ public class UsuarioDAO {
 	}
 
 	/**
-	 * Responsável por iniciar as transactions. Deve ser usado antes de qualquer
-	 * ação com o banco de dados ser invocada.
+	 * Responsável por reverter qualquer ação que ainda não tenha sido
+	 * commitada. Deve ser usado após iterações com o banco de dados, caso seja
+	 * o efeito desejado.
 	 * 
 	 * @return Ele mesmo
 	 */
-	public UsuarioDAO inicia() {
-		manager.getTransaction().begin();
+	public UsuarioDAO rollback() {
+
+		manager.getTransaction().rollback();
+		manager.close();
 		return this;
 	}
 }

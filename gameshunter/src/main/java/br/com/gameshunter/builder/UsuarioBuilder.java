@@ -18,7 +18,7 @@ public class UsuarioBuilder {
 	 * Usuário que será retornado pelo Builder quando o método constroi for
 	 * invocado.
 	 */
-	private Usuario usuario = new Usuario("");
+	private Usuario usuario = new Usuario();
 
 	/**
 	 * Recebe os dados de identificação do usuário
@@ -81,7 +81,7 @@ public class UsuarioBuilder {
 	 */
 	public UsuarioBuilder comEndereco(String endereco) {
 
-//		this.usuario.setEndereco(endereco);
+		// this.usuario.setEndereco(endereco);
 		return this;
 	}
 

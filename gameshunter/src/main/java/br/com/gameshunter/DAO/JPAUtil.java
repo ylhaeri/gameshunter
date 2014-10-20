@@ -19,9 +19,8 @@ public class JPAUtil {
 	public void closeFactory() {
 		EMF.close();
 	}
-
+	
 	public static void main(String[] args) {
-
-		new JPAUtil();
+		
 	}
 }

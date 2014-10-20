@@ -13,8 +13,9 @@ public class EnderecoFactory {
 	 * @return Novo endereço
 	 */
 	public Endereco comLogradouro(String logradouro) {
-		return new Endereco(logradouro, 18, "Jazui", "São Paulo", "SP",
-				"11111-111", "Brasil");
+		return new Endereco(logradouro, 18,
+				"Apto 598, Bloco 367, Praça do Geraldo", "Jazui", "São Paulo",
+				"SP", "11111-111", "Brasil");
 	}
 
 	/**
@@ -24,7 +25,8 @@ public class EnderecoFactory {
 	 * @return Novo endereço
 	 */
 	public Endereco repetido() {
-		return new Endereco("Rua Vergueiro", 18, "Jazui", "São Paulo", "SP",
-				"11111-111", "Brasil");
+		return new Endereco("Rua Amaricano Chamumblenho", 18,
+				"Apto 598, Bloco 367, Praça do Geraldo", "Jazui", "São Paulo",
+				"SP", "11111-111", "Brasil");
 	}
 }

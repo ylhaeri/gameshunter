@@ -1,13 +1,12 @@
 package br.com.gameshunter.model;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.util.Calendar;
-import java.util.List;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,9 +14,15 @@ import org.junit.Test;
 
 import br.com.gameshunter.factory.EnderecoFactory;
 
+/**
+ * Testes da classe Usuario
+ * 
+ * @author Myho
+ */
 public class UsuarioTest {
 
 	private Usuario joao;
+	private Collection<Endereco> enderecos;
 	private static EnderecoFactory enderecoFactory;
 
 	@BeforeClass
@@ -29,6 +34,7 @@ public class UsuarioTest {
 	public void setUp() {
 
 		joao = new Usuario();
+		enderecos = joao.getEnderecos();
 	}
 
 	@Test
@@ -118,9 +124,9 @@ public class UsuarioTest {
 		Endereco enviado = enderecoFactory.repetido();
 		Endereco esperado = enderecoFactory.repetido();
 
-		joao.setEndereco(enviado);
+		joao.adicionaEndereco(enviado);
 
-		assertThat(joao.getEndereco(), equalTo(esperado));
+		assertThat(enderecos, hasItem(esperado));
 	}
 
 	@Test
@@ -133,8 +139,6 @@ public class UsuarioTest {
 
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
-
-		List<Endereco> enderecos = joao.getEnderecos();
 
 		assertThat(enderecos.size(), equalTo(2));
 		assertThat(enderecos, hasItems(esperado1, esperado2));
@@ -157,8 +161,6 @@ public class UsuarioTest {
 		joao.adicionaEndereco(enviado3);
 		joao.adicionaEndereco(enviado4);
 
-		List<Endereco> enderecos = joao.getEnderecos();
-
 		assertThat(enderecos.size(), equalTo(3));
 		assertThat(enderecos, not(hasItem(esperado4)));
 	}
@@ -174,9 +176,57 @@ public class UsuarioTest {
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
 
-		List<Endereco> enderecos = joao.getEnderecos();
-
 		assertThat(enderecos.size(), equalTo(1));
 		assertThat(enderecos, hasItem(esperado));
+	}
+
+	@Test
+	public void devePegarOEnderecoCorretoDentroDaLista() {
+
+		Endereco enviado1 = enderecoFactory.comLogradouro("Rua Malumarumba");
+		Endereco esperado1 = enderecoFactory.comLogradouro("Rua Malumarumba");
+		Endereco enviado2 = enderecoFactory
+				.comLogradouro("Avenida João da Silva");
+		Endereco esperado2 = enderecoFactory
+				.comLogradouro("Avenida João da Silva");
+		Endereco enviado3 = enderecoFactory
+				.comLogradouro("Rua Marcilio Salomb");
+		Endereco esperado3 = enderecoFactory
+				.comLogradouro("Rua Marcilio Salomb");
+
+		joao.adicionaEndereco(enviado1);
+		joao.adicionaEndereco(enviado2);
+		joao.adicionaEndereco(enviado3);
+
+		assertThat(enderecos.size(), equalTo(3));
+		assertThat(joao.pegaEndereco(0), equalTo(esperado1));
+		assertThat(joao.pegaEndereco(1), equalTo(esperado2));
+		assertThat(joao.pegaEndereco(2), equalTo(esperado3));
+	}
+
+	@Test
+	public void deveRemoverOEndereco() {
+
+		Endereco enviado = enderecoFactory
+				.comLogradouro("Peninsula da Mabilia");
+
+		joao.adicionaEndereco(enviado);
+
+		joao.removeEndereco(enviado);
+
+		assertThat(enderecos.size(), equalTo(0));
+	}
+
+	@Test
+	public void deveAlterarOEndereco() {
+
+		Endereco enviado = enderecoFactory.comLogradouro("Rua Aranha Pomba");
+		Endereco alterado = enderecoFactory.repetido();
+		Endereco esperado = enderecoFactory.repetido();
+
+		joao.adicionaEndereco(enviado);
+		joao.alteraEndereco(0, alterado);
+
+		assertThat(joao.pegaEndereco(0), equalTo(esperado));
 	}
 }

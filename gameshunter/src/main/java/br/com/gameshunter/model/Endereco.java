@@ -1,20 +1,17 @@
 package br.com.gameshunter.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Endereco {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private String chave;
 	private String cep;
 	private String logradouro;
 	private Integer numero;
-	private String complemento;
+	private String complemento = "";
 	private String bairro;
 	private String cidade;
 	private String estado;
@@ -23,15 +20,21 @@ public class Endereco {
 	public Endereco() {
 	}
 
-	public Endereco(String rua, int numero, String bairro, String cidade,
-			String estado, String cep, String pais) {
+	public Endereco(String rua, int numero, String complemento, String bairro,
+			String cidade, String estado, String cep, String pais) {
 		this.logradouro = rua;
 		this.bairro = bairro;
+		this.complemento = complemento;
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
 		this.pais = pais;
+		geraChaveDePesquisa();
+	}
+
+	private void geraChaveDePesquisa() {
+		chave = this.toString();
 	}
 
 	public String getLogradouro() {
@@ -40,6 +43,14 @@ public class Endereco {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+
+	public String getChave() {
+		return chave;
+	}
+
+	public void setChave(String chave) {
+		this.chave = chave;
 	}
 
 	public Integer getNumero() {
@@ -98,9 +109,14 @@ public class Endereco {
 		return pais;
 	}
 
-	public Object formatado() {
-		return logradouro + ", " + numero + " - " + bairro + " - " + cep
-				+ " - " + cidade + ", " + estado + " - " + pais;
+	public String formatado() {
+		if (complemento.isEmpty())
+			return logradouro + ", " + numero + ", " + bairro + " - " + cep
+					+ " - " + cidade + ", " + estado + " - " + pais;
+		else
+			return logradouro + ", " + numero + ", " + complemento + ", "
+					+ bairro + " - " + cep + " - " + cidade + ", " + estado
+					+ " - " + pais;
 	}
 
 	@Override
@@ -113,7 +129,6 @@ public class Endereco {
 		result = prime * result
 				+ ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
@@ -154,11 +169,6 @@ public class Endereco {
 			if (other.estado != null)
 				return false;
 		} else if (!estado.equals(other.estado))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (logradouro == null) {
 			if (other.logradouro != null)
