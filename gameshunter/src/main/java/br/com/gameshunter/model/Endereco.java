@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Endereco {
 
 	@Id
-	private String chave;
+	private static Integer chave = 0;
 	private String cep;
 	private String logradouro;
 	private Integer numero;
@@ -18,6 +18,7 @@ public class Endereco {
 	private String pais;
 
 	public Endereco() {
+		chave++;
 	}
 
 	public Endereco(String rua, int numero, String complemento, String bairro,
@@ -30,11 +31,6 @@ public class Endereco {
 		this.estado = estado;
 		this.cep = cep;
 		this.pais = pais;
-		geraChaveDePesquisa();
-	}
-
-	private void geraChaveDePesquisa() {
-		chave = this.toString();
 	}
 
 	public String getLogradouro() {
@@ -45,12 +41,8 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public String getChave() {
+	public Integer getChave() {
 		return chave;
-	}
-
-	public void setChave(String chave) {
-		this.chave = chave;
 	}
 
 	public Integer getNumero() {

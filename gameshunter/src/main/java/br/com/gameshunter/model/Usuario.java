@@ -28,6 +28,7 @@ public class Usuario {
 	private String apelido;
 	private String cpf;
 	@Temporal(TemporalType.DATE)
+	
 	private Calendar dataNascimento;
 
 	@OneToMany
