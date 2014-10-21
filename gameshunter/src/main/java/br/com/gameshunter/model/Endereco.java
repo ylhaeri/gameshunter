@@ -1,13 +1,16 @@
 package br.com.gameshunter.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Endereco {
 
 	@Id
-	private String chave;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String cep;
 	private String logradouro;
 	private Integer numero;
@@ -30,11 +33,6 @@ public class Endereco {
 		this.estado = estado;
 		this.cep = cep;
 		this.pais = pais;
-		geraChaveDePesquisa();
-	}
-
-	private void geraChaveDePesquisa() {
-		chave = this.toString();
 	}
 
 	public String getLogradouro() {
@@ -45,12 +43,12 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public String getChave() {
-		return chave;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setChave(String chave) {
-		this.chave = chave;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getNumero() {

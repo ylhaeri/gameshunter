@@ -111,6 +111,7 @@ public class Usuario {
 		return enderecos;
 	}
 
+	/** @param enderecos */
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
@@ -179,10 +180,5 @@ public class Usuario {
 
 	/** Construtor padrão */
 	public Usuario() {
-	}
-
-	public void novaLista() {
-
-		enderecos = new ArrayList<>(3);
 	}
 }

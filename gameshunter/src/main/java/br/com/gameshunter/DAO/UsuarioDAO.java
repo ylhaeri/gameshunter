@@ -1,6 +1,7 @@
 package br.com.gameshunter.DAO;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.gameshunter.model.Usuario;
 
@@ -12,7 +13,7 @@ import br.com.gameshunter.model.Usuario;
  *
  * @since 0.0.1
  */
-public class UsuarioDAO {
+public class UsuarioDAO implements DatabaseDAO<Usuario> {
 
 	private EntityManager manager;
 
@@ -27,9 +28,9 @@ public class UsuarioDAO {
 	 *            Usuário que será adicionado ao banco
 	 * 
 	 */
-	public UsuarioDAO salva(Usuario usuario) {
+	@Override
+	public void salva(Object usuario) {
 		manager.persist(usuario);
-		return this;
 	}
 
 	/**
@@ -40,10 +41,11 @@ public class UsuarioDAO {
 	 * 
 	 * @return usuario Object de Usuario
 	 */
-	public Usuario pega(String email) {
-
-		return manager.find(Usuario.class, email);
-	}
+	// @Override
+	// public Class<Usuario> pega(Object id) {
+	//
+	// return manager.find(Usuario.class, id);
+	// }
 
 	/**
 	 * Responsável por atualizar as informações do usuário no banco.
@@ -64,11 +66,10 @@ public class UsuarioDAO {
 	 *            Usuário que será removido.
 	 * @return
 	 */
-	public Usuario remove(Usuario usuario) {
+	@Override
+	public void remove(Object usuario) {
 		manager.merge(usuario);
 		manager.remove(usuario);
-
-		return pega(usuario.getEmail());
 	}
 
 	/**
@@ -103,5 +104,17 @@ public class UsuarioDAO {
 		manager.getTransaction().rollback();
 		manager.close();
 		return this;
+	}
+
+	@Override
+	public Long conta() {
+		Query query = manager.createQuery("select count(u) from Usuario u");
+		return (Long) query.getSingleResult();
+	}
+
+	@Override
+	public Usuario pega(Object object) {
+		System.out.println("arara");
+		return manager.find(Usuario.class, object);
 	}
 }

@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -51,28 +50,6 @@ public class UsuarioDAOTest {
 		new JPAUtil().closeFactory();
 	}
 
-	/**
-	 * Solução temporária
-	 */
-	private void limpa() {
-		Query query = manager.createQuery("delete from Usuario u");
-		query.executeUpdate();
-		query = manager.createQuery("delete from Endereco e");
-		query.executeUpdate();
-		commitENovaTransaction();
-	}
-
-	/**
-	 * Solução temporária
-	 */
-	private void commitENovaTransaction() {
-		manager.getTransaction().commit();
-		manager.close();
-		manager = new JPAUtil().getEntityManager();
-		uDao = new UsuarioDAO(manager);
-		manager.getTransaction().begin();
-	}
-
 	@Test
 	public void deveConterUsuarioComNomeCorreto() {
 
@@ -93,11 +70,10 @@ public class UsuarioDAOTest {
 
 		uDao.salva(joao);
 
-		Query query = manager.createQuery("select count(u) from Usuario u");
-		Long contagem = (long) query.getFirstResult();
-
-		assertThat(contagem, equalTo(0l));
 		// Faz a contagem do número de linhas na tabela de Usuarios
+		Long contagem = uDao.conta();
+
+		assertThat(contagem, equalTo(1l));
 	}
 
 	@Test
@@ -234,6 +210,9 @@ public class UsuarioDAOTest {
 		assertThat(joao.getEnderecos().size(), equalTo(3));
 		assertThat(joao.getEnderecos(),
 				hasItems(esperado1, esperado2, esperado3));
+		assertThat(joao.getEnderecos().get(0), equalTo(esperado1));
+		assertThat(joao.getEnderecos().get(1), equalTo(esperado2));
+		assertThat(joao.getEnderecos().get(2), equalTo(esperado3));
 	}
 
 	/**
@@ -242,52 +221,28 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveAtualizarUsuariosDoBanco() {
 
-		Endereco eEnviado = new EnderecoFactory().repetido();
-		Endereco eAlterado = new EnderecoFactory()
-				.comLogradouro("Rua Chasplim");
-		Endereco eEsperado = new EnderecoFactory()
-				.comLogradouro("Rua Chasplim");
 		String nEnviado = "Dedinho Osvaldo";
 		String nAlterado = "Osvaldo Patricio";
 		String nEsperado = "Osvaldo Patricio";
 
-		joao.adicionaEndereco(eEnviado);
 		joao.setNome(nEnviado);
 
-		manager.persist(eEnviado);
 		uDao.salva(joao);
-
-		commitENovaTransaction();
 
 		joao = uDao.pega(email);
 		joao.setNome(nAlterado);
-		joao.alteraEndereco(0, eAlterado);
-
-		eEnviado = manager.merge(eEnviado);
-		manager.remove(eEnviado);
-		manager.persist(eAlterado);
-		manager.merge(joao);
-
-		commitENovaTransaction();
 
 		joao = uDao.pega(email);
 
-		assertThat(joao.pegaEndereco(0), equalTo(eEsperado));
 		assertThat(joao.getNome(), equalTo(nEsperado));
-
-		limpa();
 	}
 
 	@Test
 	public void deveRemoverUsuarioDoBanco() {
-		Endereco enviado = new EnderecoFactory().repetido();
 
-		joao.adicionaEndereco(enviado);
-		manager.persist(enviado);
 		uDao.salva(joao);
-
+		uDao.remove(joao);
 		joao = uDao.pega(email);
-		joao = uDao.remove(joao);
 
 		assertNull(joao);
 	}
