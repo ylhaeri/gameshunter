@@ -13,7 +13,7 @@ import br.com.gameshunter.model.Usuario;
  *
  * @since 0.0.1
  */
-public class UsuarioDAO implements DatabaseDAO<Usuario> {
+public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 
 	private EntityManager manager;
 
@@ -29,7 +29,7 @@ public class UsuarioDAO implements DatabaseDAO<Usuario> {
 	 * 
 	 */
 	@Override
-	public void salva(Object usuario) {
+	public void salva(Usuario usuario) {
 		manager.persist(usuario);
 	}
 
@@ -41,11 +41,10 @@ public class UsuarioDAO implements DatabaseDAO<Usuario> {
 	 * 
 	 * @return usuario Object de Usuario
 	 */
-	// @Override
-	// public Class<Usuario> pega(Object id) {
-	//
-	// return manager.find(Usuario.class, id);
-	// }
+	@Override
+	public Usuario pega(String chavePrimaria) {
+		return manager.find(Usuario.class, chavePrimaria);
+	}
 
 	/**
 	 * Responsável por atualizar as informações do usuário no banco.
@@ -53,10 +52,10 @@ public class UsuarioDAO implements DatabaseDAO<Usuario> {
 	 * @param usuario
 	 *            Usuário que será atualizado
 	 * @return
-	 * @return
 	 */
-	public Usuario atualiza(Usuario usuario) {
-		return manager.merge(usuario);
+	@Override
+	public void atualiza(Usuario usuario) {
+		manager.merge(usuario);
 	}
 
 	/**
@@ -67,7 +66,7 @@ public class UsuarioDAO implements DatabaseDAO<Usuario> {
 	 * @return
 	 */
 	@Override
-	public void remove(Object usuario) {
+	public void remove(Usuario usuario) {
 		manager.merge(usuario);
 		manager.remove(usuario);
 	}
@@ -110,11 +109,5 @@ public class UsuarioDAO implements DatabaseDAO<Usuario> {
 	public Long conta() {
 		Query query = manager.createQuery("select count(u) from Usuario u");
 		return (Long) query.getSingleResult();
-	}
-
-	@Override
-	public Usuario pega(Object object) {
-		System.out.println("arara");
-		return manager.find(Usuario.class, object);
 	}
 }

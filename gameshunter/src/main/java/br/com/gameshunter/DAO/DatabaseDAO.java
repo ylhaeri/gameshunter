@@ -1,15 +1,20 @@
 package br.com.gameshunter.DAO;
 
-public interface DatabaseDAO<t> {
+import javax.persistence.EntityManager;
 
-	/**
-	 * @return Arara
-	 */
+public interface DatabaseDAO<T, PK> {
+
 	public Long conta();
 
-	public void salva(Object objeto);
+	public void salva(T objeto);
 
-	public <T>t pega(Object chavePrimaria);
+	public T pega(PK chavePrimaria);
 
-	public void remove(Object objeto);
+	public void remove(T objeto);
+
+	public void atualiza(T objeto);
+
+	default public void persist(EntityManager manager, T objeto) {
+		manager.persist(objeto);
+	}
 }

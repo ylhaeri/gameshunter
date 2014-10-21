@@ -226,14 +226,13 @@ public class UsuarioDAOTest {
 		String nEsperado = "Osvaldo Patricio";
 
 		joao.setNome(nEnviado);
-
 		uDao.salva(joao);
 
 		joao = uDao.pega(email);
 		joao.setNome(nAlterado);
+		uDao.atualiza(joao);
 
 		joao = uDao.pega(email);
-
 		assertThat(joao.getNome(), equalTo(nEsperado));
 	}
 
