@@ -1,4 +1,5 @@
 package br.com.gameshunter.DAO;
+
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -51,6 +52,7 @@ public class EnderecoDAOTest {
 
 	@Test
 	public void adicionaUmEndereco() {
+
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua paranaue");
 		endereco.setNumero(123);
@@ -75,6 +77,7 @@ public class EnderecoDAOTest {
 		salva(endereco);
 
 		endereco.setLogradouro("Rua Nova Lua");
+
 		atualiza(endereco);
 
 		Endereco resultado = pega(id);
@@ -85,7 +88,9 @@ public class EnderecoDAOTest {
 
 	@Test
 	public void removeEndereco() {
+
 		endereco.setCidade("Osasco");
+
 		salva(endereco);
 
 		remove(endereco);
@@ -94,6 +99,20 @@ public class EnderecoDAOTest {
 
 		assertNull(resultado);
 	}
+
+	@Test
+	public void quantidadeDeEnderecos() {
+
+		salva(endereco);
+
+		Endereco end2 = new Endereco();
+		end2.setBairro("paranaue");
+		salva(end2);
+
+		assertThat(conta("Endereco"), equalTo(2L));
+	}
+	
+	
 
 	private void salva(Endereco end) {
 		id++;
