@@ -9,6 +9,8 @@ import javax.persistence.Id;
 public class Endereco {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String cep;
 	private String logradouro;
 	private Integer numero;
