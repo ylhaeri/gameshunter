@@ -16,11 +16,7 @@ public class JPAUtil {
 		return EMF.createEntityManager();
 	}
 
-	public void closeFactory() {
+	public static void closeFactory() {
 		EMF.close();
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }
