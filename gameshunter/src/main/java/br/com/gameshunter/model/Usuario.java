@@ -203,5 +203,4 @@ public class Usuario {
 		this.enderecos = enderecos;
 		this.telefone = telefone;
 	}
-
 }

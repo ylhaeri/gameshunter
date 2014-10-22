@@ -43,14 +43,6 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Integer getNumero() {
 		return numero;
 	}

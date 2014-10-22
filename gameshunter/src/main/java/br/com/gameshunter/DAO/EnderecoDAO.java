@@ -37,7 +37,10 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 
 	@Override
 	public Endereco pega(Integer id) {
-		return manager.find(Endereco.class, id);
+		criaManager();
+		Endereco endereco = manager.find(Endereco.class, id);
+		manager.close();
+		return endereco;
 	}
 
 	@Override
