@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,11 +23,12 @@ public class UsuarioDAOTest {
 	private final String email = "joao@gmail.com";
 	private Usuario joao;
 	private EntityManager manager;
-	private UsuarioDAO uDao;
+	private static UsuarioDAO uDao;
 
 	@BeforeClass
 	public static void globalSetUp() {
 		new JPAUtil();
+		uDao = new UsuarioDAO();
 	}
 
 	@Before
@@ -36,7 +36,6 @@ public class UsuarioDAOTest {
 		joao = new Usuario();
 		joao.setEmail(email);
 		manager = new JPAUtil().getEntityManager();
-		uDao = new UsuarioDAO(manager);
 		manager.getTransaction().begin();
 	}
 
@@ -48,29 +47,7 @@ public class UsuarioDAOTest {
 
 	@AfterClass
 	public static void encerra() {
-		new JPAUtil().closeFactory();
-	}
-
-	/**
-	 * Solução temporária
-	 */
-	private void limpa() {
-		Query query = manager.createQuery("delete from Usuario u");
-		query.executeUpdate();
-		query = manager.createQuery("delete from Endereco e");
-		query.executeUpdate();
-		commitENovaTransaction();
-	}
-
-	/**
-	 * Solução temporária
-	 */
-	private void commitENovaTransaction() {
-		manager.getTransaction().commit();
-		manager.close();
-		manager = new JPAUtil().getEntityManager();
-		uDao = new UsuarioDAO(manager);
-		manager.getTransaction().begin();
+		JPAUtil.closeFactory();
 	}
 
 	@Test
@@ -81,9 +58,9 @@ public class UsuarioDAOTest {
 
 		joao.setNome(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getNome(), equalTo(esperado));
 	}
@@ -91,13 +68,12 @@ public class UsuarioDAOTest {
 	@Test
 	public void tabelaDeveConterSomenteUmaLinha() {
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Query query = manager.createQuery("select count(u) from Usuario u");
-		Long contagem = (long) query.getFirstResult();
-
-		assertThat(contagem, equalTo(0l));
 		// Faz a contagem do número de linhas na tabela de Usuarios
+		Long contagem = conta();
+
+		assertThat(contagem, equalTo(1l));
 	}
 
 	@Test
@@ -108,9 +84,9 @@ public class UsuarioDAOTest {
 
 		joao.setApelido(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getApelido(), equalTo(esperado));
 	}
@@ -129,9 +105,9 @@ public class UsuarioDAOTest {
 
 		joao.setDataNascimento(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getDataNascimento().getTime(),
 				equalTo(esperado.getTime()));
@@ -144,9 +120,9 @@ public class UsuarioDAOTest {
 		String esperado = "joao@gmail.com";
 
 		joao.setEmail(enviado);
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getEmail(), equalTo(esperado));
 	}
@@ -159,9 +135,9 @@ public class UsuarioDAOTest {
 
 		joao.setTelefone(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getTelefone(), equalTo(esperado));
 	}
@@ -174,9 +150,9 @@ public class UsuarioDAOTest {
 
 		joao.setCpf(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getCpf(), equalTo(esperado));
 	}
@@ -189,9 +165,9 @@ public class UsuarioDAOTest {
 
 		joao.setRg(enviado);
 
-		uDao.salva(joao);
+		salva(joao);
 
-		Usuario joao = uDao.pega(email);
+		Usuario joao = pega(email);
 
 		assertThat(joao.getRg(), equalTo(esperado));
 	}
@@ -203,9 +179,9 @@ public class UsuarioDAOTest {
 		Endereco esperado = new EnderecoFactory().repetido();
 
 		joao.adicionaEndereco(enviado);
-		uDao.salva(joao);
+		salva(joao);
 
-		joao = uDao.pega(email);
+		joao = pega(email);
 
 		assertThat(joao.pegaEndereco(0), equalTo(esperado));
 	}
@@ -229,11 +205,16 @@ public class UsuarioDAOTest {
 		joao.adicionaEndereco(enviado2);
 		joao.adicionaEndereco(enviado3);
 
-		uDao.salva(joao);
+		salva(joao);
+
+		joao = pega(email);
 
 		assertThat(joao.getEnderecos().size(), equalTo(3));
 		assertThat(joao.getEnderecos(),
 				hasItems(esperado1, esperado2, esperado3));
+		assertThat(joao.getEnderecos().get(0), equalTo(esperado1));
+		assertThat(joao.getEnderecos().get(1), equalTo(esperado2));
+		assertThat(joao.getEnderecos().get(2), equalTo(esperado3));
 	}
 
 	/**
@@ -242,53 +223,49 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveAtualizarUsuariosDoBanco() {
 
-		Endereco eEnviado = new EnderecoFactory().repetido();
-		Endereco eAlterado = new EnderecoFactory()
-				.comLogradouro("Rua Chasplim");
-		Endereco eEsperado = new EnderecoFactory()
-				.comLogradouro("Rua Chasplim");
 		String nEnviado = "Dedinho Osvaldo";
 		String nAlterado = "Osvaldo Patricio";
 		String nEsperado = "Osvaldo Patricio";
 
-		joao.adicionaEndereco(eEnviado);
 		joao.setNome(nEnviado);
+		salva(joao);
 
-		manager.persist(eEnviado);
-		uDao.salva(joao);
-
-		commitENovaTransaction();
-
-		joao = uDao.pega(email);
+		joao = pega(email);
 		joao.setNome(nAlterado);
-		joao.alteraEndereco(0, eAlterado);
+		atualiza(joao);
 
-		eEnviado = manager.merge(eEnviado);
-		manager.remove(eEnviado);
-		manager.persist(eAlterado);
-		manager.merge(joao);
-
-		commitENovaTransaction();
-
-		joao = uDao.pega(email);
-
-		assertThat(joao.pegaEndereco(0), equalTo(eEsperado));
+		joao = pega(email);
 		assertThat(joao.getNome(), equalTo(nEsperado));
-
-		limpa();
 	}
 
 	@Test
 	public void deveRemoverUsuarioDoBanco() {
-		Endereco enviado = new EnderecoFactory().repetido();
 
-		joao.adicionaEndereco(enviado);
-		manager.persist(enviado);
-		uDao.salva(joao);
+		salva(joao);
+		remove(joao);
 
-		joao = uDao.pega(email);
-		joao = uDao.remove(joao);
+		joao = pega(email);
 
 		assertNull(joao);
+	}
+
+	private void salva(Usuario usuario) {
+		uDao.salva(manager, usuario);
+	}
+
+	private void remove(Usuario usuario) {
+		uDao.remove(manager, usuario);
+	}
+
+	private Long conta() {
+		return uDao.conta(manager);
+	}
+
+	private void atualiza(Usuario usuario) {
+		uDao.atualiza(manager, usuario);
+	}
+
+	private Usuario pega(String email) {
+		return uDao.pega(manager, email);
 	}
 }
