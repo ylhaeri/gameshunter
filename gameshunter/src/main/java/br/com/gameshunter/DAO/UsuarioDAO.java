@@ -65,23 +65,4 @@ public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 	private void criaManager() {
 		this.manager = new JPAUtil().getEntityManager();
 	}
-
-	/*
-	 * Método deve ser usado somente para testes. Deve ser colocada como default
-	 * method assim que possível.
-	 */
-	@Override
-	public Long conta(EntityManager manager) {
-		Query query = manager.createQuery("select count(u) from Usuario u");
-		return (Long) query.getSingleResult();
-	}
-
-	/*
-	 * Método deve ser usado somente para testes. Deve ser colocado como default
-	 * method assim que possível.
-	 */
-	@Override
-	public Usuario pega(EntityManager manager, String email) {
-		return manager.find(Usuario.class, email);
-	}
 }

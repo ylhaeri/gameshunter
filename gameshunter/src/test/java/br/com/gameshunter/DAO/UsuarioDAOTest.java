@@ -71,7 +71,7 @@ public class UsuarioDAOTest {
 		salva(joao);
 
 		// Faz a contagem do número de linhas na tabela de Usuarios
-		Long contagem = conta();
+		Long contagem = conta("Usuario");
 
 		assertThat(contagem, equalTo(1l));
 	}
@@ -257,8 +257,8 @@ public class UsuarioDAOTest {
 		uDao.remove(manager, usuario);
 	}
 
-	private Long conta() {
-		return uDao.conta(manager);
+	private Long conta(String tabela) {
+		return uDao.conta(manager, tabela);
 	}
 
 	private void atualiza(Usuario usuario) {
@@ -266,6 +266,6 @@ public class UsuarioDAOTest {
 	}
 
 	private Usuario pega(String email) {
-		return uDao.pega(manager, email);
+		return uDao.pega(manager, Usuario.class, email);
 	}
 }

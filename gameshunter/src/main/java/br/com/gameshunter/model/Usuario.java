@@ -181,4 +181,27 @@ public class Usuario {
 	/** Construtor padrão */
 	public Usuario() {
 	}
+
+	/**
+	 * Construtor completo de usuário.
+	 * 
+	 * @param email
+	 * @param nome
+	 * @param apelido
+	 * @param cpf
+	 * @param dataNascimento
+	 * @param enderecos
+	 * @param telefone
+	 */
+	public Usuario(String email, String nome, String apelido, String cpf,
+			Calendar dataNascimento, List<Endereco> enderecos, String telefone) {
+		this.email = email;
+		this.nome = nome;
+		this.apelido = apelido;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.enderecos = enderecos;
+		this.telefone = telefone;
+	}
+
 }

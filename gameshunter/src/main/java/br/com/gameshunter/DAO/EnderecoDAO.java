@@ -20,7 +20,7 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	@Override
 	public Long conta() {
 		criaManager();
-		Query query = manager.createQuery("select count(u) from Usuario u");
+		Query query = manager.createQuery("select count(e) from Endereco e");
 		Long contagem = (Long) query.getSingleResult();
 		manager.close();
 		return contagem;
@@ -59,24 +59,5 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 
 	private void criaManager() {
 		this.manager = new JPAUtil().getEntityManager();
-	}
-
-	/*
-	 * Método deve ser usado somente para testes. Deve ser colocada como default
-	 * method assim que possível.
-	 */
-	@Override
-	public Long conta(EntityManager manager) {
-		Query query = manager.createQuery("select count(u) from Usuario u");
-		return (Long) query.getSingleResult();
-	}
-
-	/*
-	 * Método deve ser usado somente para testes. Deve ser colocada como default
-	 * method assim que possível.
-	 */
-	@Override
-	public Endereco pega(EntityManager manager, Integer id) {
-		return manager.find(Endereco.class, id);
 	}
 }

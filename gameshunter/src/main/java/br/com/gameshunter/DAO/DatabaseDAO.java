@@ -1,6 +1,7 @@
 package br.com.gameshunter.DAO;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public interface DatabaseDAO<T, PK> {
 
@@ -60,7 +61,11 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @see conta();
 	 */
-	public Long conta(EntityManager manager);
+	default public Long conta(EntityManager manager, String tabela) {
+		Query query = manager.createQuery("select count(o) from " + tabela
+				+ " o");
+		return (Long) query.getSingleResult();
+	}
 
 	/**
 	 * Usado para persistir o usuário no banco de dados. Deve ser usado somente
@@ -86,7 +91,9 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @return Objeto resgatado do banco.
 	 */
-	public T pega(EntityManager manager, PK privateKey);
+	default public T pega(EntityManager manager, Class<T> classe, PK privateKey) {
+		return manager.find(classe, privateKey);
+	}
 
 	/**
 	 * Usado para remover o usuário do banco de dados. Deve ser usado somente em
