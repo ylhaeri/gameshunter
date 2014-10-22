@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.gameshunter.factory.EnderecoFactory;
+import br.com.gameshunter.factory.UsuarioFactory;
 import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Usuario;
 
@@ -33,8 +34,7 @@ public class UsuarioDAOTest {
 
 	@Before
 	public void inicia() {
-		joao = new Usuario();
-		joao.setEmail(email);
+		joao = new UsuarioFactory().comEmailSemEndereco(email);
 		manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 	}
@@ -51,21 +51,6 @@ public class UsuarioDAOTest {
 	}
 
 	@Test
-	public void deveConterUsuarioComNomeCorreto() {
-
-		String enviado = "João da Silva Machado";
-		String esperado = "João da Silva Machado";
-
-		joao.setNome(enviado);
-
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getNome(), equalTo(esperado));
-	}
-
-	@Test
 	public void tabelaDeveConterSomenteUmaLinha() {
 
 		salva(joao);
@@ -77,113 +62,41 @@ public class UsuarioDAOTest {
 	}
 
 	@Test
-	public void deveConterUsuarioComApelidoCorreto() {
+	public void deveConterUsuarioComCamposCorretos() {
 
-		String enviado = "Pikachu Iluminado";
-		String esperado = "Pikachu Iluminado";
+		Usuario joao = new Usuario();
+		String nome = "João da Silva Machado";
+		String apelido = "Pikachu Iluminado";
+		Calendar dataNascimento = Calendar.getInstance();
+		dataNascimento.set(1990, 1, 12, 12, 0, 0);
+		String email = "joao@gmail.com";
+		String telefone = "(11) 1111-1111";
+		String cpf = "000.000.000-00";
+		String rg = "1234567-890";
+		Endereco endereco = new EnderecoFactory().repetido();
 
-		joao.setApelido(enviado);
-
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getApelido(), equalTo(esperado));
-	}
-
-	/**
-	 * SÉRIOS PROBLEMAS NO CALENDAR, O VALOR É MUITO INCONSTANTE, O TEMPO
-	 * INTEIRO PEGA ERROS AQUI POR DIFERENÇA DE 1 MILÉSIMO
-	 */
-	@Test
-	public void deveConterUsuarioComDataDeNascimentoCorreta() {
-
-		Calendar enviado = Calendar.getInstance();
-		enviado.set(1990, 1, 12, 12, 0, 0);
-		Calendar esperado = Calendar.getInstance();
-		esperado.set(1990, 1, 12, 12, 0, 0);
-
-		joao.setDataNascimento(enviado);
+		joao.setApelido(apelido);
+		joao.setNome(nome);
+		joao.setDataNascimento(dataNascimento);
+		joao.setEmail(email);
+		joao.setTelefone(telefone);
+		joao.setCpf(cpf);
+		joao.setRg(rg);
+		joao.adicionaEndereco(endereco);
 
 		salva(joao);
 
-		Usuario joao = pega(email);
+		Usuario joana = pega(email);
 
-		assertThat(joao.getDataNascimento().getTime(),
-				equalTo(esperado.getTime()));
-	}
-
-	@Test
-	public void deveConterUsuarioComEmailCorreto() {
-
-		String enviado = "joao@gmail.com";
-		String esperado = "joao@gmail.com";
-
-		joao.setEmail(enviado);
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getEmail(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveConterUsuarioComTelefoneCorreto() {
-
-		String enviado = "(11) 1111-1111";
-		String esperado = "(11) 1111-1111";
-
-		joao.setTelefone(enviado);
-
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getTelefone(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveConterUsuarioComCpfCorreto() {
-
-		String enviado = "000.000.000-00";
-		String esperado = "000.000.000-00";
-
-		joao.setCpf(enviado);
-
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getCpf(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveConterUsuarioComRgCorrreto() {
-
-		String enviado = "1234567-890";
-		String esperado = "1234567-890";
-
-		joao.setRg(enviado);
-
-		salva(joao);
-
-		Usuario joao = pega(email);
-
-		assertThat(joao.getRg(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveConterUsuarioComEnderecoCorreto() {
-
-		Endereco enviado = new EnderecoFactory().repetido();
-		Endereco esperado = new EnderecoFactory().repetido();
-
-		joao.adicionaEndereco(enviado);
-		salva(joao);
-
-		joao = pega(email);
-
-		assertThat(joao.pegaEndereco(0), equalTo(esperado));
+		assertThat(joana.getNome(), equalTo(nome));
+		assertThat(joana.getApelido(), equalTo(apelido));
+		assertThat(joana.getDataNascimento().getTime(),
+				equalTo(dataNascimento.getTime()));
+		assertThat(joana.getEmail(), equalTo(email));
+		assertThat(joana.getTelefone(), equalTo(telefone));
+		assertThat(joana.getCpf(), equalTo(cpf));
+		assertThat(joana.getRg(), equalTo(rg));
+		assertThat(joana.pegaEndereco(0), equalTo(endereco));
 	}
 
 	@Test
@@ -212,14 +125,26 @@ public class UsuarioDAOTest {
 		assertThat(joao.getEnderecos().size(), equalTo(3));
 		assertThat(joao.getEnderecos(),
 				hasItems(esperado1, esperado2, esperado3));
-		assertThat(joao.getEnderecos().get(0), equalTo(esperado1));
-		assertThat(joao.getEnderecos().get(1), equalTo(esperado2));
-		assertThat(joao.getEnderecos().get(2), equalTo(esperado3));
 	}
 
-	/**
-	 * Precisa resolver essa bosta, tá gigantesco e nada legível
-	 */
+	@Test
+	public void deveConterVariosUsuariosComOMesmoEndereco() {
+
+		Endereco endereco = new EnderecoFactory().repetido();
+
+		Usuario ronaldo = new UsuarioFactory()
+				.comEmailSemEndereco("ronaldo@gmail.com");
+		Usuario usuario3 = new UsuarioFactory().repetidoSemEnderecos();
+
+		joao.adicionaEndereco(endereco);
+		ronaldo.adicionaEndereco(endereco);
+		usuario3.adicionaEndereco(endereco);
+
+		manager.persist(endereco);
+		salva(joao);
+		salva(ronaldo);
+	}
+
 	@Test
 	public void deveAtualizarUsuariosDoBanco() {
 

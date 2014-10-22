@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,16 +23,13 @@ public class Usuario {
 	/** Chave principal do banco */
 	@Id
 	private String email;
-
 	private String nome;
 	private String apelido;
 	private String cpf;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
-
-	@OneToMany
+	@ManyToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
-
 	private String telefone;
 	private String rg;
 
