@@ -4,9 +4,7 @@
   "http://struts.apache.org/dtds/struts-2.3.dtd">
  
 <struts>
-	
 	<package name="default" extends="struts-default">
-		
 		<interceptors>
 			
 			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/>-->
@@ -18,9 +16,6 @@
 				<interceptor-ref name="defaultStack" />
 				
 			</interceptor-stack>
-			
 		</interceptors>
-		
 	</package>
-	
 </struts>
