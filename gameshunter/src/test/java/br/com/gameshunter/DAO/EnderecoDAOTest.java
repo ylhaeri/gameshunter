@@ -90,6 +90,8 @@ public class EnderecoDAOTest {
 
 		salva(endereco);
 
+		assertThat(eDao.pega(id), equalTo(endereco));
+
 		eDao.remove(endereco);
 
 		Endereco resultado = eDao.pega(id);

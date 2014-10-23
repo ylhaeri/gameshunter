@@ -142,7 +142,7 @@ public class UsuarioDAOTest {
 
 		joao.adicionaEndereco(endereco);
 
-		eDao.salva(endereco);
+		salva(endereco);
 		uDao.salva(joao);
 
 		Long uContagem = uDao.conta();
