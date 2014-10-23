@@ -22,7 +22,7 @@
 			name="senha" /> <input type="submit" value="Logar">
 	</form>
 	<div><a href="recuperarsenha.jsp">Esqueceu a senha?</a></div>
-	<div><a href="cadastrar.jsp">Cadastra-se</a></div>
+	<div><a href="cadastrar-usuario.jsp">Cadastra-se</a></div>
 	
 
 
