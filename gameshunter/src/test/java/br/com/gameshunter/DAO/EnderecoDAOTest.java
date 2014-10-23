@@ -3,11 +3,9 @@ package br.com.gameshunter.DAO;
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,13 +20,13 @@ public class EnderecoDAOTest {
 	private EntityManager manager;
 	private static EnderecoDAO eDao;
 	private Endereco endereco;
-	private static int id = 0;
+	private static int id;
 	private static EnderecoFactory eFactory;
 
 	@BeforeClass
 	public static void globalSetUp() {
 		new JPAUtil();
-		eDao = new EnderecoDAO();
+		id = Indice.pegaEndereco();
 		eFactory = new EnderecoFactory();
 	}
 
@@ -36,6 +34,7 @@ public class EnderecoDAOTest {
 	public void inicia() {
 		endereco = eFactory.repetido();
 		manager = new JPAUtil().getEntityManager();
+		eDao = new EnderecoDAO(manager);
 		manager.getTransaction().begin();
 	}
 
@@ -45,13 +44,8 @@ public class EnderecoDAOTest {
 		manager.close();
 	}
 
-	@AfterClass
-	public static void encerra() {
-		JPAUtil.closeFactory();
-	}
-
 	@Test
-	public void adicionaUmEndereco() {
+	public void deveAdicionarUmEndereco() {
 
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua paranaue");
@@ -65,10 +59,11 @@ public class EnderecoDAOTest {
 
 		salva(endereco);
 
-		Endereco esperado = pega(id);
+		Endereco resultado = eDao.pega(id);
+		Long contagem = eDao.conta();
 
-		assertThat(endereco, equalTo(esperado));
-
+		assertThat(contagem, equalTo(1l));
+		assertThat(resultado, equalTo(endereco));
 	}
 
 	@Test
@@ -78,10 +73,12 @@ public class EnderecoDAOTest {
 
 		endereco.setLogradouro("Rua Nova Lua");
 
-		atualiza(endereco);
+		eDao.atualiza(endereco);
 
-		Endereco resultado = pega(id);
+		Endereco resultado = eDao.pega(id);
+		Long contagem = eDao.conta();
 
+		assertThat(contagem, equalTo(1l));
 		assertThat(resultado, equalTo(endereco));
 
 	}
@@ -93,10 +90,12 @@ public class EnderecoDAOTest {
 
 		salva(endereco);
 
-		remove(endereco);
+		eDao.remove(endereco);
 
-		Endereco resultado = pega(id);
+		Endereco resultado = eDao.pega(id);
+		Long contagem = eDao.conta();
 
+		assertThat(contagem, equalTo(0l));
 		assertNull(resultado);
 	}
 
@@ -109,29 +108,12 @@ public class EnderecoDAOTest {
 		end2.setBairro("paranaue");
 		salva(end2);
 
-		assertThat(conta("Endereco"), equalTo(2L));
+		assertThat(eDao.conta(), equalTo(2L));
 	}
-	
-	
 
 	private void salva(Endereco end) {
 		id++;
-		eDao.salva(manager, end);
-	}
-
-	private void remove(Endereco end) {
-		eDao.remove(manager, end);
-	}
-
-	private Long conta(String tabela) {
-		return eDao.conta(manager, tabela);
-	}
-
-	private void atualiza(Endereco end) {
-		eDao.atualiza(manager, end);
-	}
-
-	private Endereco pega(Integer id) {
-		return eDao.pega(manager, Endereco.class, id);
+		eDao.salva(end);
+		Indice.contaEndereco();
 	}
 }

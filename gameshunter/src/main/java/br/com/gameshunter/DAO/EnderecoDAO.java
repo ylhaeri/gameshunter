@@ -17,50 +17,44 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 
 	private EntityManager manager;
 
+	public EnderecoDAO(EntityManager manager) {
+		this.manager = manager;
+	}
+
 	@Override
 	public Long conta() {
-		criaManager();
 		Query query = manager.createQuery("select count(e) from Endereco e");
-		Long contagem = (Long) query.getSingleResult();
-		manager.close();
-		return contagem;
+		return (Long) query.getSingleResult();
 	}
 
 	@Override
 	public void salva(Endereco endereco) {
-		criaManager();
-		manager.getTransaction().begin();
 		manager.persist(endereco);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 
 	@Override
 	public Endereco pega(Integer id) {
-		criaManager();
-		Endereco endereco = manager.find(Endereco.class, id);
-		manager.close();
-		return endereco;
+		return manager.find(Endereco.class, id);
 	}
 
 	@Override
 	public void remove(Endereco endereco) {
-		criaManager();
-		manager.getTransaction().begin();
 		manager.merge(endereco);
 		manager.remove(endereco);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 
 	@Override
 	public void atualiza(Endereco endereco) {
-		criaManager();
 		manager.merge(endereco);
-		manager.close();
 	}
 
-	private void criaManager() {
-		this.manager = new JPAUtil().getEntityManager();
+	@Override
+	public void iniciaTransaction() {
+		manager.getTransaction().begin();
+	}
+
+	@Override
+	public void commit() {
+		manager.getTransaction().commit();
 	}
 }

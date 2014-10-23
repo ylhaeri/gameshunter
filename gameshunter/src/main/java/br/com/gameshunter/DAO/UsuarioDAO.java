@@ -17,52 +17,50 @@ public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 
 	private EntityManager manager;
 
+	public UsuarioDAO(EntityManager manager) {
+		this.manager = manager;
+	}
+
 	@Override
 	public Long conta() {
-		criaManager();
 		Query query = manager.createQuery("select count(u) from Usuario u");
 		Long contagem = (Long) query.getSingleResult();
-		manager.close();
 		return contagem;
 	}
 
 	@Override
 	public void salva(Usuario usuario) {
-		criaManager();
-		manager.getTransaction().begin();
 		manager.persist(usuario);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 
 	@Override
 	public Usuario pega(String email) {
-		criaManager();
 		Usuario usuario = manager.find(Usuario.class, email);
-		manager.close();
 		return usuario;
 	}
 
 	@Override
 	public void atualiza(Usuario usuario) {
-		criaManager();
-		manager.getTransaction().begin();
 		manager.merge(usuario);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 
 	@Override
 	public void remove(Usuario usuario) {
-		criaManager();
-		manager.getTransaction().begin();
+		if (usuario.getEnderecos() != null)
+			usuario.getEnderecos().forEach(
+					e -> new EnderecoDAO(manager).remove(e));
 		manager.merge(usuario);
 		manager.remove(usuario);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 
-	private void criaManager() {
-		this.manager = new JPAUtil().getEntityManager();
+	@Override
+	public void iniciaTransaction() {
+		this.manager.getTransaction().begin();
+	}
+
+	@Override
+	public void commit() {
+		this.manager.getTransaction().commit();
+		this.manager.close();
 	}
 }

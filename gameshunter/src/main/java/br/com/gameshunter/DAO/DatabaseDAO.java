@@ -1,8 +1,5 @@
 package br.com.gameshunter.DAO;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 public interface DatabaseDAO<T, PK> {
 
 	/**
@@ -47,81 +44,15 @@ public interface DatabaseDAO<T, PK> {
 	 */
 	public void atualiza(T objeto);
 
-	/*
-	 * 
-	 * Métodos para classes de teste
+	/**
+	 * Inicia a transação com o banco de dados. Deve ser usado para que a
+	 * iteração pode ser feita.
 	 */
+	public void iniciaTransaction();
 
 	/**
-	 * Usado para fazer a contagem em testes, deve ser usado somente para
-	 * testes, não possui comportamento efetivo imediato.
-	 * 
-	 * @param manager
-	 *            EntityManager que será usado.
-	 * 
-	 * @see conta();
+	 * Faz o commit do que foi efetuado na transação com o banco de dados. Deve
+	 * ser usado para que os dados sejam gravados no banco de dados.
 	 */
-	default public Long conta(EntityManager manager, String tabela) {
-		Query query = manager.createQuery("select count(o) from " + tabela
-				+ " o");
-		return (Long) query.getSingleResult();
-	}
-
-	/**
-	 * Usado para persistir o usuário no banco de dados. Deve ser usado somente
-	 * para testes, não possui comportamento efetivo imediato.
-	 * 
-	 * @param manager
-	 *            EntityManager que será usado.
-	 * @param objeto
-	 *            Objeto que será persistido.
-	 * 
-	 * @see salva(entidade);
-	 */
-	default public void salva(EntityManager manager, T objeto) {
-		manager.persist(objeto);
-	}
-
-	/**
-	 * Pega o objeto desejado a partir de sua chave primária.
-	 *
-	 * @param manager
-	 * @param chavePrimaria
-	 *            Chave primária da classe.
-	 * 
-	 * @return Objeto resgatado do banco.
-	 */
-	default public T pega(EntityManager manager, Class<T> classe, PK privateKey) {
-		return manager.find(classe, privateKey);
-	}
-
-	/**
-	 * Usado para remover o usuário do banco de dados. Deve ser usado somente em
-	 * ambiente de testes, não possui comportamento efetivo imediato.
-	 * 
-	 * @param manager
-	 *            EntityManager que será usado.
-	 * @param objeto
-	 *            Objeto que será persistido.
-	 * 
-	 * @see remove(entidade);
-	 */
-	default public void remove(EntityManager manager, T objeto) {
-		manager.merge(objeto);
-		manager.remove(objeto);
-	}
-
-	/**
-	 * Usado para atualizar o usuário do banco de dados. Deve ser usado somente
-	 * em ambiente de testes, não possui comportamento efetivo imediato.
-	 * 
-	 * @param manager
-	 *            Entitymanager que será usado.
-	 * @param objeto
-	 *            Objeto que será atualizado.
-	 */
-	default public void atualiza(EntityManager manager, T objeto) {
-		manager.merge(objeto);
-	}
-
+	public void commit();
 }

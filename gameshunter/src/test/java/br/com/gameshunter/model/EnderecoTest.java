@@ -19,62 +19,102 @@ public class EnderecoTest {
 	@Test
 	public void deveCadastrarCepCorretamente() {
 
-		endereco.setCep("11111-111");
-		assertThat(endereco.getCep(), equalTo("11111-111"));
+		String cep = "11111-111";
+
+		endereco.setCep(cep);
+
+		assertThat(endereco.getCep(), equalTo(cep));
 	}
 
 	@Test
 	public void deveCadastrarLogradouroCorretamente() {
 
-		endereco.setLogradouro("Avenida Barreilinhos Churimplante");
-		assertThat(endereco.getLogradouro(),
-				equalTo("Avenida Barreilinhos Churimplante"));
+		String logradouro = "Avenida Barreilinhos Churimplante";
+
+		endereco.setLogradouro(logradouro);
+
+		assertThat(endereco.getLogradouro(), equalTo(logradouro));
 	}
 
 	@Test
 	public void deveCadastrarNumeroCorretamente() {
 
-		endereco.setNumero(2763);
-		assertThat(endereco.getNumero(), equalTo(2763));
+		Integer numero = 2763;
+
+		endereco.setNumero(numero);
+
+		assertThat(endereco.getNumero(), equalTo(numero));
 	}
 
 	@Test
 	public void deveCadastrarComplementoCorretamente() {
 
-		endereco.setComplemento("apto 302 bloco 2");
-		assertThat(endereco.getComplemento(), equalTo("apto 302 bloco 2"));
+		String complemento = "Apto 302, Bloco 2";
+		endereco.setComplemento(complemento);
+		assertThat(endereco.getComplemento(), equalTo(complemento));
 	}
 
 	@Test
 	public void deveCadastrarBairroCorretamente() {
 
-		endereco.setBairro("Paralelepipedo");
-		assertThat(endereco.getBairro(), equalTo("Paralelepipedo"));
+		String bairro = "Paralelepipedo";
+
+		endereco.setBairro(bairro);
+
+		assertThat(endereco.getBairro(), equalTo(bairro));
 	}
 
 	@Test
 	public void deveCadastrarCidadeCorretamente() {
 
-		endereco.setCidade("São Paulo");
-		assertThat(endereco.getCidade(), equalTo("São Paulo"));
+		String cidade = "São Paulo";
+
+		endereco.setCidade(cidade);
+		assertThat(endereco.getCidade(), equalTo(cidade));
 	}
 
 	@Test
 	public void deveCadastrarEstadoCorretamente() {
 
-		endereco.setEstado("São Paulo");
-		assertThat(endereco.getEstado(), equalTo("São Paulo"));
+		String estado = "São Paulo";
+
+		endereco.setEstado(estado);
+		assertThat(endereco.getEstado(), equalTo(estado));
 	}
 
 	@Test
 	public void deveCadastrarPaisCorretamente() {
 
-		endereco.setPais("Brasil");
-		assertThat(endereco.getPais(), equalTo("Brasil"));
+		String pais = "Brasil";
+
+		endereco.setPais(pais);
+		assertThat(endereco.getPais(), equalTo(pais));
 	}
 
 	@Test
 	public void deveCompararEnderecosCorretamente() {
 		assertThat(endereco, equalTo(new Endereco()));
+	}
+
+	@Test
+	public void deveFormatarEnderecoSemComplementoCorretamente() {
+		Endereco endereco = new Endereco("Rua Vergueiro", 18,
+				"Apto 103, Bloco 2", "Sanola", "São Paulo", "SP", "11111-111",
+				"Brasil");
+		String formatado = "Rua Vergueiro, 18, Apto 103, Bloco 2 - Bairro Sanola - "
+				+ "11111-111 - São Paulo, SP - Brasil";
+
+		assertThat(endereco.formatado(), equalTo(formatado));
+	}
+	
+	@Test
+	public void deveFormatarEnderecoComComplementoCorretamente() {
+		Endereco endereco = new Endereco("Rua Vergueiro", 18,
+				"", "Sanola", "São Paulo", "SP", "11111-111",
+				"Brasil");
+		String formatado = "Rua Vergueiro, 18 - Bairro Sanola - "
+				+ "11111-111 - São Paulo, SP - Brasil";
+
+		assertThat(endereco.formatado(), equalTo(formatado));
 	}
 }

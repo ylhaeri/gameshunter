@@ -35,6 +35,14 @@ public class Endereco {
 		this.pais = pais;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -101,12 +109,13 @@ public class Endereco {
 
 	public String formatado() {
 		if (complemento.isEmpty())
-			return logradouro + ", " + numero + ", " + bairro + " - " + cep
-					+ " - " + cidade + ", " + estado + " - " + pais;
+			return logradouro + ", " + numero + " - " + "Bairro " + bairro
+					+ " - " + cep + " - " + cidade + ", " + estado + " - "
+					+ pais;
 		else
-			return logradouro + ", " + numero + ", " + complemento + ", "
-					+ bairro + " - " + cep + " - " + cidade + ", " + estado
-					+ " - " + pais;
+			return logradouro + ", " + numero + ", " + complemento + " - "
+					+ "Bairro " + bairro + " - " + cep + " - " + cidade + ", "
+					+ estado + " - " + pais;
 	}
 
 	@Override

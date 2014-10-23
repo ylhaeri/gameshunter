@@ -212,7 +212,7 @@ public class UsuarioTest {
 
 		joao.adicionaEndereco(enviado);
 
-		joao.removeEndereco(enviado);
+		joao.removeEndereco(0);
 
 		assertThat(enderecos.size(), equalTo(0));
 	}

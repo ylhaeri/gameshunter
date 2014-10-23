@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,7 +28,7 @@ public class Usuario {
 	private String cpf;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
-	@ManyToMany
+	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private String telefone;
 	private String rg;
@@ -143,9 +143,9 @@ public class Usuario {
 	 * @param enviado
 	 *            Indice do endereço na lista
 	 */
-	public void removeEndereco(Endereco enviado) {
+	public void removeEndereco(Integer numero) {
 
-		enderecos.remove(enviado);
+		enderecos.remove(pegaEndereco(numero));
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class Usuario {
 	 */
 	public void alteraEndereco(Integer numero, Endereco alterado) {
 
-		removeEndereco(pegaEndereco(numero));
+		removeEndereco(numero);
 		adicionaEndereco(alterado);
 	}
 
