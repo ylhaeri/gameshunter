@@ -8,8 +8,7 @@ name="endereco.numero">
 <label for="comt">Complemento</label><input type="text" id="comt" 
 name="endereco.complemento">
 <br />
-<label for="bairrot">Bairro</label><input type="text" id="bairrot" name="
-endereco.bairro">
+<label for="bairrot">Bairro</label><input type="text" id="bairrot" name="endereco.bairro">
 <br />
 <label id="pais">País</label><select name="endereco.pais">
 	<option>Selecione um país</option>

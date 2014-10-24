@@ -47,11 +47,20 @@
 		<label id="dtnasc" for="diabox">Data de Nascimento</label>
 		<br />
 		<select id="diabox" name="nascDia">
-			<option>1</option>
+			<option selected="selected">Dia</option>
+			<c:forEach var="dia" items="${dias}">
+				<option>${dia}</option>
+			</c:forEach>
 		</select><select id="mesbox" name="nascMes">
-			<option>1</option>
+			<option selected="selected">Mês</option>
+			<c:forEach var="mes" items="${meses}" varStatus="status">
+				<option value="${status.index}">${mes}</option>
+			</c:forEach>
 		</select><select id="anobox" name="nascAno">
-			<option>1990</option>
+			<option selected="selected">Ano</option>
+			<c:forEach var="ano" items="${anos}">
+				<option>${ano}</option>
+			</c:forEach>
 		</select>
 		<br />
 		<fieldset class="endereco">
