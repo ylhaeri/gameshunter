@@ -56,5 +56,6 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	@Override
 	public void commit() {
 		manager.getTransaction().commit();
+		manager.close();
 	}
 }

@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-
+<title>Games Hunter</title>
 <link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="resources/css/gameshunter.css">
 </head>
-<body>
+<body class="container">
 
 	<img src="resources/img/logo.png" />
 
@@ -21,10 +21,11 @@
 		Email<input type="text" name="email" /> Senha<input type="password"
 			name="senha" /> <input type="submit" value="Logar">
 	</form>
-	<div><a href="recuperarsenha.jsp">Esqueceu a senha?</a></div>
-	<div><a href="cadastrar-usuario.jsp">Cadastra-se</a></div>
-	
-
-
+	<div>
+		<a href="recuperarsenha.jsp">Esqueceu a senha?</a>
+	</div>
+	<div>
+		<a href="cadastrar-usuario.jsp">Cadastra-se</a>
+	</div>
 </body>
 </html>
