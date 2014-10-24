@@ -5,8 +5,10 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -38,95 +40,55 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void deveCadastrarNomeCorretamente() {
+	public void deveCadastrarDadosCorretamente() {
 
-		String enviado = "João da Silva Machado";
-		String esperado = "João da Silva Machado";
+		String nome = "João da Silva Machado";
+		String apelido = "PikachuIluminado";
+		String senha = "ararinhaPumbapulma";
+		Sexo sexo = Sexo.Masculino;
+		Calendar dataNasc = Calendar.getInstance();
+		dataNasc.set(1990, 1, 1, 12, 0, 0);
+		String email = "joaomachado@gmail.com";
+		String telefone = "(11) 1111-1111";
+		String cpf = "000.000.000-00";
+		String rg = "1234567-890";
+		Endereco endereco = enderecoFactory.repetido();
 
-		joao.setNome(enviado);
+		joao.setNome(nome);
+		joao.setApelido(apelido);
+		joao.setSenha(senha);
+		joao.setSexo(sexo);
+		joao.setDataNascimento(dataNasc);
+		joao.setEmail(email);
+		joao.setTelefone(telefone);
+		joao.setCpf(cpf);
+		joao.setRg(rg);
+		joao.adicionaEndereco(endereco);
 
-		assertThat(joao.getNome(), equalTo(esperado));
+		assertThat(joao.getSexo(), equalTo(sexo));
+		assertThat(joao.getNome(), equalTo(nome));
+		assertThat(joao.getApelido(), equalTo(apelido));
+		assertThat(joao.getSenha(), equalTo(senha));
+		assertThat(joao.getDataNascimento().getTime(),
+				equalTo(dataNasc.getTime()));
+		assertThat(joao.getEmail(), equalTo(email));
+		assertThat(joao.getTelefone(), equalTo(telefone));
+		assertThat(joao.getCpf(), equalTo(cpf));
+		assertThat(joao.getRg(), equalTo(rg));
+		assertThat(enderecos, hasItem(endereco));
 	}
 
 	@Test
-	public void deveCadastrarApelidoCorretamente() {
+	public void deveAlterarAListaAtual() {
 
-		String enviado = "PikachuIluminado";
-		String esperado = "PikachuIluminado";
+		joao.adicionaEndereco(new Endereco());
 
-		joao.setApelido(enviado);
+		List<Endereco> antigo = joao.getEnderecos();
+		List<Endereco> novo = new ArrayList<>();
 
-		assertThat(joao.getApelido(), equalTo(esperado));
-	}
+		joao.setEnderecos(novo);
 
-	@Test
-	public void deveCadastrarDataCorreta() {
-
-		Calendar enviado = Calendar.getInstance();
-		enviado.set(1990, 1, 1, 12, 0, 0);
-
-		Calendar esperado = Calendar.getInstance();
-		esperado.set(1990, 1, 1, 12, 0, 0);
-
-		joao.setDataNascimento(enviado);
-
-		assertThat(joao.getDataNascimento().getTime().toString(),
-				equalTo(esperado.getTime().toString()));
-	}
-
-	@Test
-	public void deveCadastrarEmailCorretamente() {
-
-		String enviado = "joaomachado@gmail.com";
-		String esperado = "joaomachado@gmail.com";
-
-		joao.setEmail(enviado);
-
-		assertThat(joao.getEmail(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveCadastrarTelefoneCorretamente() {
-
-		String enviado = "(11) 1111-1111";
-		String esperado = "(11) 1111-1111";
-
-		joao.setTelefone(enviado);
-
-		assertThat(joao.getTelefone(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveCadastrarCpfCorretamente() {
-
-		String enviado = "000.000.000-00";
-		String esperado = "000.000.000-00";
-
-		joao.setCpf(enviado);
-
-		assertThat(joao.getCpf(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveCadastrarRgCorretamente() {
-
-		String enviado = "1234567-890";
-		String esperado = "1234567-890";
-
-		joao.setRg(enviado);
-
-		assertThat(joao.getRg(), equalTo(esperado));
-	}
-
-	@Test
-	public void deveCadastrarEnderecosCorretamente() {
-
-		Endereco enviado = enderecoFactory.repetido();
-		Endereco esperado = enderecoFactory.repetido();
-
-		joao.adicionaEndereco(enviado);
-
-		assertThat(enderecos, hasItem(esperado));
+		assertThat(joao.getEnderecos(), not(equalTo(antigo)));
 	}
 
 	@Test
@@ -220,13 +182,12 @@ public class UsuarioTest {
 	@Test
 	public void deveAlterarOEndereco() {
 
-		Endereco enviado = enderecoFactory.comLogradouro("Rua Aranha Pomba");
+		Endereco endereco = enderecoFactory.comLogradouro("Rua Aranha Pomba");
 		Endereco alterado = enderecoFactory.repetido();
-		Endereco esperado = enderecoFactory.repetido();
 
-		joao.adicionaEndereco(enviado);
+		joao.adicionaEndereco(endereco);
 		joao.alteraEndereco(0, alterado);
 
-		assertThat(joao.pegaEndereco(0), equalTo(esperado));
+		assertThat(joao.pegaEndereco(0), equalTo(alterado));
 	}
 }
