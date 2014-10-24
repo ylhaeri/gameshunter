@@ -13,7 +13,7 @@ public class Estado {
 	private String uf;
 	@ManyToOne
 	private Pais pais;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -45,5 +45,4 @@ public class Estado {
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
-
 }

@@ -8,67 +8,57 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="resources/css/gameshunter.css">
+<link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
 <title>Cadastro - Games Hunter</title>
 </head>
-<body>
-	<h1>Cadastre-se</h1>
-	<form method="post">
-		Nome <input type="text" size="80">
+<body class="container">
+	<h1 id="titulo">Cadastre-se</h1>
+	<form method="post" class="cadastro">
+		<label>Nome</label><input type="text" size="50">
 		<br />
-		Apelido <input type="text">
+		<label>Apelido</label><input type="text">
 		<br />
-		E-mail <input type="text">
+		<label>E-mail</label><input type="text">
 		<br />
-		Senha <input type="password">
+		<label for="senha">Senha</label><input type="password" id="senha">
 		<br />
-		Confirme sua senha<input type="text">
+		<label for="confirmasenha">Confirme sua senha</label><input
+			type="password" id="confirmasenha">
 		<br />
-		Sexo Masculino <input type="radio"> Feminino <input
-			type="radio">
+		<h2 id="sexo">Sexo</h2>
 		<br />
-		Data de Nascimento
+		<label for="masulinobtn" id="masculino">Masculino</label><input
+			type="radio" name="sexo" id="masculinobtn"><label
+			for="feminino" id="feminino">Feminino</label><input type="radio"
+			name="sexo" id="femininobtn">
 		<br />
-		dia
-		<select>
+		<h2 id="dtnasc">Data de Nascimento</h2>
+		<br />
+		<label for="diabox" id="dia">Dia</label>
+		<select id="diabox">
 			<option>1</option>
 		</select>
-		mês
-		<select>
+		<label for="mesbox" id="mes">Mês</label>
+		<select id="mesbox">
 			<option>1</option>
 		</select>
-		ano
-		<select>
+		<label for="anobox" id="ano">Ano</label>
+		<select id="anobox">
 			<option>1990</option>
 		</select>
 		<br />
-		Endereço
+		<fieldset class="endereco">
+			<h2 id="ende">Endereço</h2>
+			<br />
+			<s:include value="cadastro-endereco.jsp"></s:include>
+		</fieldset>
 		<br />
-		CEP<input type="text">
+		<label>Telefone</label><input type="text">
 		<br />
-		Logradouro<input type="text">Número<input type="text">
+		<label>RG</label><input type="text">
 		<br />
-		Complemento<input type="text">
-		<br />
-		Bairro<input type="text">
-		<br />
-		País
-		<select>
-			<option>Selecione um país</option>
-		</select>
-		Estado
-		<select>
-			<option>Selecione um estado</option>
-		</select>
-		Cidade
-		<select>
-			<option>Selecione uma cidade</option>
-		</select>
-		<br />
-		Telefone <input type="text">
-		<br />
-		RG <input type="text">
-		<br />
-		<input type="submit" value="Pirocuda">
+		<input type="submit" value="Enviar" id="enviar">
 	</form>
 </body>
 </html>
