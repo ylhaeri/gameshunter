@@ -1,52 +1,32 @@
 package br.com.gameshunter.DAO;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.gameshunter.model.Cidade;
+import br.com.gameshunter.model.Estado;
 
-public class CidadeDAO implements DatabaseDAO<Cidade, Integer> {
+public class CidadeDAO {
 
-	private EntityManager manager;
+	EntityManager manager;
 
 	public CidadeDAO(EntityManager manager) {
 		this.manager = manager;
 	}
 
-	public void atualiza(Cidade cidade) {
-		this.manager.merge(cidade);
-	};
-
-	@Override
-	public void salva(Cidade cidade) {
-		this.manager.persist(cidade);
+	public List<Cidade> pega(Estado estado) {
+		Query query = manager.createQuery("Select c from Cidade as c "
+				+ "where c.estado= :pEstado");
+		query.setParameter("pEstado", estado);
+		@SuppressWarnings("unchecked")
+		List<Cidade> cidades = query.getResultList();
+		return cidades;
 	}
 
-	@Override
-	public Cidade pega(Integer id) {
-		return this.manager.find(Cidade.class, id);
-	}
-
-	@Override
-	public void remove(Cidade cidade) {
-		this.manager.merge(cidade);
-		this.manager.remove(cidade);
-	}
-
-	@Override
-	public Long conta() {
-		Query query = manager.createQuery("select count(c) from Cidade c");
-		return (Long) query.getSingleResult();
-	}
-
-	@Override
-	public void commit() {
-		this.manager.getTransaction().commit();
-	}
-
-	@Override
-	public void iniciaTransaction() {
-		this.manager.getTransaction().begin();
+	public void fechaConexao() {
+		this.manager.close();
 	}
 
 }

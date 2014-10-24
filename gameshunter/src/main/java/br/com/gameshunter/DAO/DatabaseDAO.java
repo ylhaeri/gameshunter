@@ -55,4 +55,9 @@ public interface DatabaseDAO<T, PK> {
 	 * ser usado para que os dados sejam gravados no banco de dados.
 	 */
 	public void commit();
+	
+	/**
+	 * Fecha a conexão criada
+	 */
+	public void fechaConexao();
 }

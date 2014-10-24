@@ -13,7 +13,7 @@ public class Estado {
 	private String uf;
 	@ManyToOne
 	private Pais pais;
-	
+
 	public Integer getId() {
 		return id;
 	}

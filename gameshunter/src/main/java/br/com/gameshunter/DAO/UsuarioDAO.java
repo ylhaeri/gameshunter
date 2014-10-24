@@ -63,4 +63,10 @@ public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 		this.manager.getTransaction().commit();
 		this.manager.close();
 	}
+
+	@Override
+	public void fechaConexao() {
+		this.manager.close();
+
+	}
 }
