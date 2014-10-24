@@ -21,7 +21,6 @@ public class EnderecoDAOTest {
 	private Endereco endereco;
 	private static int id;
 	private static EnderecoFactory eFactory;
-	
 
 	@BeforeClass
 	public static void globalSetUp() {
@@ -67,7 +66,7 @@ public class EnderecoDAOTest {
 	}
 
 	@Test
-	public void atualizaEndereco() {
+	public void deveAtualizaEndereco() {
 
 		salva(endereco);
 
@@ -84,7 +83,7 @@ public class EnderecoDAOTest {
 	}
 
 	@Test
-	public void removeEndereco() {
+	public void deveRemoverEndereco() {
 
 		endereco.setCidade("Osasco");
 
@@ -102,7 +101,7 @@ public class EnderecoDAOTest {
 	}
 
 	@Test
-	public void quantidadeDeEnderecos() {
+	public void deveConterAQuantidadeCorretaDeEnderecos() {
 
 		salva(endereco);
 
@@ -111,6 +110,35 @@ public class EnderecoDAOTest {
 		salva(end2);
 
 		assertThat(eDao.conta(), equalTo(2L));
+	}
+
+	@Test
+	public void deveSaberIniciarTransactionECommitarCorretamente() {
+
+		this.manager.close();
+		manager = new JPAUtil().getEntityManager();
+
+		eDao = new EnderecoDAO(manager);
+
+		eDao.iniciaTransaction().salva(endereco).commit().close();
+		id++;
+		Indice.contaEndereco();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		eDao = new EnderecoDAO(manager);
+
+		Long contagem = eDao.conta();
+		Endereco encontrado = eDao.pega(id);
+
+		eDao.remove(encontrado).commit().close();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		eDao = new EnderecoDAO(manager);
+
+		assertThat(contagem, equalTo(1l));
+		assertThat(encontrado, equalTo(endereco));
 	}
 
 	private void salva(Endereco end) {

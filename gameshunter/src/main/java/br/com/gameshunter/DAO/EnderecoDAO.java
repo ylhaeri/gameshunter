@@ -28,8 +28,9 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	}
 
 	@Override
-	public void salva(Endereco endereco) {
+	public EnderecoDAO salva(Endereco endereco) {
 		manager.persist(endereco);
+		return this;
 	}
 
 	@Override
@@ -38,24 +39,32 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	}
 
 	@Override
-	public void remove(Endereco endereco) {
+	public EnderecoDAO remove(Endereco endereco) {
 		manager.merge(endereco);
 		manager.remove(endereco);
+		return this;
 	}
 
 	@Override
-	public void atualiza(Endereco endereco) {
+	public EnderecoDAO atualiza(Endereco endereco) {
 		manager.merge(endereco);
+		return this;
 	}
 
 	@Override
-	public void iniciaTransaction() {
+	public EnderecoDAO iniciaTransaction() {
 		manager.getTransaction().begin();
+		return this;
 	}
 
 	@Override
-	public void commit() {
+	public EnderecoDAO commit() {
 		manager.getTransaction().commit();
-		manager.close();
+		return this;
+	}
+
+	@Override
+	public void close() {
+		this.manager.close();
 	}
 }

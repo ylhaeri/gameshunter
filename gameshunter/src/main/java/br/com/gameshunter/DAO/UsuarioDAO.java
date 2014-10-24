@@ -29,8 +29,9 @@ public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 	}
 
 	@Override
-	public void salva(Usuario usuario) {
+	public UsuarioDAO salva(Usuario usuario) {
 		manager.persist(usuario);
+		return this;
 	}
 
 	@Override
@@ -40,27 +41,35 @@ public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
 	}
 
 	@Override
-	public void atualiza(Usuario usuario) {
+	public UsuarioDAO atualiza(Usuario usuario) {
 		manager.merge(usuario);
+		return this;
 	}
 
 	@Override
-	public void remove(Usuario usuario) {
+	public UsuarioDAO remove(Usuario usuario) {
 		if (usuario.getEnderecos() != null)
 			usuario.getEnderecos().forEach(
 					e -> new EnderecoDAO(manager).remove(e));
 		manager.merge(usuario);
 		manager.remove(usuario);
+		return this;
 	}
 
 	@Override
-	public void iniciaTransaction() {
-		this.manager.getTransaction().begin();
+	public UsuarioDAO iniciaTransaction() {
+		manager.getTransaction().begin();
+		return this;
 	}
 
 	@Override
-	public void commit() {
-		this.manager.getTransaction().commit();
-		this.manager.close();
+	public UsuarioDAO commit() {
+		manager.getTransaction().commit();
+		return this;
+	}
+
+	@Override
+	public void close() {
+		manager.close();
 	}
 }

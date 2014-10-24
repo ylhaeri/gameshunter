@@ -14,14 +14,17 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @param objeto
 	 *            Objeto que deve ser salvo.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void salva(T objeto);
+	public DatabaseDAO<?, ?> salva(T objeto);
 
 	/**
 	 * Pega o objeto desejado a partir de sua chave primária.
 	 * 
 	 * @param chavePrimaria
 	 *            Chave primária da classe.
+	 * 
 	 * @return Objeto resgatado do banco.
 	 */
 	public T pega(PK chavePrimaria);
@@ -31,8 +34,10 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @param objeto
 	 *            Objeto que será removido.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void remove(T objeto);
+	public DatabaseDAO<?, ?> remove(T objeto);
 
 	/**
 	 * Atualiza os dados do objeto no banco de dados.
@@ -40,19 +45,29 @@ public interface DatabaseDAO<T, PK> {
 	 * @param objeto
 	 *            Objeto que será atualizado.
 	 * 
-	 * @return Retorna a entidade removida
+	 * @return Ele mesmo.
 	 */
-	public void atualiza(T objeto);
+	public DatabaseDAO<?, ?> atualiza(T objeto);
 
 	/**
 	 * Inicia a transação com o banco de dados. Deve ser usado para que a
 	 * iteração pode ser feita.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void iniciaTransaction();
+	public DatabaseDAO<?, ?> iniciaTransaction();
 
 	/**
 	 * Faz o commit do que foi efetuado na transação com o banco de dados. Deve
 	 * ser usado para que os dados sejam gravados no banco de dados.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void commit();
+	public DatabaseDAO<?, ?> commit();
+
+	/**
+	 * Faz o fechamento do manager, deve ser usado ao final de qualquer
+	 * transação com o DAO.
+	 */
+	public void close();
 }
