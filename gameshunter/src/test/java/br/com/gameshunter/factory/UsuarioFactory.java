@@ -26,7 +26,7 @@ public class UsuarioFactory {
 		List<Endereco> enderecos = new ArrayList<>();
 		return new Usuario("ronaldoplosra@hotmail.com", "Ronaldo Plosra Silva",
 				"Rosnaldin", "senhadoronaldo", Sexo.Masculino,
-				"111.111.111-11", c, enderecos, "(11) 1111-1111");
+				"111.111.111-11", c, enderecos, "(11) 1111-1111", "1234567-890");
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class UsuarioFactory {
 		List<Endereco> enderecos = new ArrayList<>();
 		return new Usuario(email, "Ronaldo Plosra Silva", "Rosnaldin",
 				"senhadoronaldo", Sexo.Masculino, "111.111.111-11", c,
-				enderecos, "(11) 1111-1111");
+				enderecos, "(11) 1111-1111", "1234567-890");
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class UsuarioFactory {
 		enderecos.add(new EnderecoFactory().comLogradouro("Avenida Muranha"));
 		return new Usuario("ronaldoplosra@hotmail.com", "Ronaldo Plosra Silva",
 				"Rosnaldin", "senhadoronaldo", Sexo.Masculino,
-				"111.111.111-11", c, enderecos, "(11) 1111-1111");
+				"111.111.111-11", c, enderecos, "(11) 1111-1111", "1234567-890");
 	}
 
 	/**
@@ -68,6 +68,6 @@ public class UsuarioFactory {
 		enderecos.add(new EnderecoFactory().comLogradouro("Avenida Muranha"));
 		return new Usuario(email, "Ronaldo Plosra Silva", "Rosnaldin",
 				"senhadoronaldo", Sexo.Masculino, "111.111.111-11", c,
-				enderecos, "(11) 1111-1111");
+				enderecos, "(11) 1111-1111", "1234567-890");
 	}
 }

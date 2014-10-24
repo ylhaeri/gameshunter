@@ -215,7 +215,7 @@ public class Usuario {
 	 */
 	public Usuario(String email, String nome, String apelido, String senha,
 			Sexo sexo, String cpf, Calendar dataNascimento,
-			List<Endereco> enderecos, String telefone) {
+			List<Endereco> enderecos, String telefone, String rg) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
@@ -225,5 +225,6 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.enderecos = enderecos;
 		this.telefone = telefone;
+		this.rg = rg;
 	}
 }
