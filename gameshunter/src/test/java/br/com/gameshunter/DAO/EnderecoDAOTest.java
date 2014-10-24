@@ -12,10 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.gameshunter.factory.EnderecoFactory;
-import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Endereco;
-import br.com.gameshunter.model.Estado;
-import br.com.gameshunter.model.Pais;
 
 public class EnderecoDAOTest {
 
@@ -121,5 +118,4 @@ public class EnderecoDAOTest {
 		eDao.salva(end);
 		Indice.contaEndereco();
 	}
-
 }

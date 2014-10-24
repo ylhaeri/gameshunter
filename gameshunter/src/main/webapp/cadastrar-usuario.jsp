@@ -15,11 +15,14 @@
 <body class="container">
 	<h1 id="titulo">Cadastre-se</h1>
 	<form method="post" class="cadastro" action="novoUsuario">
-		<label>Nome</label><input type="text" name="usuario.nome">
+		<label for="nome">Nome</label><input type="text" id="nome"
+			name="usuario.nome">
 		<br />
-		<label>Apelido</label><input type="text" name="usuario.apelido">
+		<label for="ape">Apelido</label><input type="text"
+			name="usuario.apelido" id="ape">
 		<br />
-		<label>E-mail</label><input type="text" name="usuario.email">
+		<label for="mail">E-mail</label><input type="text"
+			name="usuario.email" id="mail">
 		<br />
 		<label for="senha">Senha</label><input type="password" id="senha">
 		<br />
@@ -29,29 +32,25 @@
 		<label for="cpf">CPF</label><input type="text" id="cpf"
 			name="usuario.cpf">
 		<br />
-		<label>Telefone</label><input type="text" id="telefone" name="usuario.telefone">
+		<label for="tel">Telefone</label><input type="text" id="tel"
+			name="usuario.telefone">
 		<br />
 		<label for="rg">RG</label><input type="text" id="rg" name="usuario.rg">
 		<br />
-		<h2 id="sexo">Sexo</h2>
-		<br />
-		<label for="masulinobtn" id="masculino">Masculino</label><input
-			type="radio" name="sexo" id="masculinobtn" name="usuario.sexo"><label
-			for="feminino" id="feminino">Feminino</label><input type="radio"
-			name="sexo" id="femininobtn" name="usuario.sexo">
-		<br />
-		<h2 id="dtnasc">Data de Nascimento</h2>
-		<br />
-		<label for="diabox" id="dia">Dia</label>
-		<select id="diabox" name="dia">
-			<option>1</option>
+		<label id="sexo" for="gndbx">Sexo</label><select name="usuario.sexo">
+			<option>---Selecione---</option>
+			<c:forEach var="sexo" items="${sexo}">
+				<option>${sexo}</option>
+			</c:forEach>
 		</select>
-		<label for="mesbox" id="mes">Mês</label>
-		<select id="mesbox" name="mes">
+		<br />
+		<label id="dtnasc" for="diabox">Data de Nascimento</label>
+		<br />
+		<select id="diabox" name="nascDia">
 			<option>1</option>
-		</select>
-		<label for="anobox" id="ano">Ano</label>
-		<select id="anobox" name="ano">
+		</select><select id="mesbox" name="nascMes">
+			<option>1</option>
+		</select><select id="anobox" name="nascAno">
 			<option>1990</option>
 		</select>
 		<br />

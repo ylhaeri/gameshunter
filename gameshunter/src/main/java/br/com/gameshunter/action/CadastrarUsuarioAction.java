@@ -1,54 +1,26 @@
 package br.com.gameshunter.action;
 
-import java.util.Calendar;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
-import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.model.Sexo;
 
 public class CadastrarUsuarioAction {
 
-	private Usuario usuario;
-	private Integer dia;
-	private Integer mes;
-	private Integer ano;
+	private Sexo[] sexo = Sexo.values();
 
-	@Action(value = "novoUsuario", results = {
+	@Action(value = "cadastrar-usuario", results = {
 
-	@Result(name = "ok", location = "usuario-adicionado.jsp") })
+	@Result(name = "ok", location = "../../cadastrar-usuario.jsp") })
 	public String execute() {
-
-		Calendar dataNascimento = Calendar.getInstance();
-		dataNascimento.set(ano, mes, dia, 0, 0, 0);
-		usuario.setDataNascimento(dataNascimento);
-		System.out.println(usuario.getNome());
-		System.out.println(usuario.getApelido());
-		System.out.println(usuario.getCpf());
-		System.out.println(usuario.getEmail());
-		System.out.println(usuario.getRg());
-		System.out.println(usuario.getTelefone());
-		System.out.println(usuario.getDataNascimento().getTime());
 		return "ok";
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public Sexo[] getSexo() {
+		return sexo;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-
-	public void setMes(Integer mes) {
-		this.mes = mes;
-	}
-
-	public void setAno(Integer ano) {
-		this.ano = ano;
+	public void setSexo(Sexo[] sexo) {
+		this.sexo = sexo;
 	}
 }

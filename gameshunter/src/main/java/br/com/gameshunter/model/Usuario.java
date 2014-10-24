@@ -25,6 +25,7 @@ public class Usuario {
 	private String email;
 	private String nome;
 	private String apelido;
+	private Sexo sexo;
 	private String cpf;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
@@ -111,6 +112,14 @@ public class Usuario {
 	/** @param enderecos */
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
 	}
 
 	/**
