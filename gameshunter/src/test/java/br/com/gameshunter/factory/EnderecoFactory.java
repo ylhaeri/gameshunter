@@ -29,4 +29,5 @@ public class EnderecoFactory {
 				"Apto 598, Bloco 367, Praça do Geraldo", "Jazui", "São Paulo",
 				"SP", "11111-111", "Brasil");
 	}
+	
 }

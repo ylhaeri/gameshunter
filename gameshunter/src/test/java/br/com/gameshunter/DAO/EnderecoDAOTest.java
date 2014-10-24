@@ -1,19 +1,21 @@
 package br.com.gameshunter.DAO;
 
-import javax.persistence.EntityManager;
-
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import javax.persistence.EntityManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.gameshunter.DAO.EnderecoDAO;
-import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.factory.EnderecoFactory;
+import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Estado;
+import br.com.gameshunter.model.Pais;
 
 public class EnderecoDAOTest {
 
@@ -22,6 +24,7 @@ public class EnderecoDAOTest {
 	private Endereco endereco;
 	private static int id;
 	private static EnderecoFactory eFactory;
+	
 
 	@BeforeClass
 	public static void globalSetUp() {
@@ -118,4 +121,5 @@ public class EnderecoDAOTest {
 		eDao.salva(end);
 		Indice.contaEndereco();
 	}
+
 }
