@@ -9,10 +9,10 @@ import javax.persistence.Id;
 public class Pais {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String Sigla;
+	private String sigla;
 
 	public Integer getId() {
 		return id;
@@ -31,11 +31,35 @@ public class Pais {
 	}
 
 	public String getSigla() {
-		return Sigla;
+		return sigla;
 	}
 
 	public void setSigla(String sigla) {
-		Sigla = sigla;
+		this.sigla = sigla;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pais other = (Pais) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
 }
