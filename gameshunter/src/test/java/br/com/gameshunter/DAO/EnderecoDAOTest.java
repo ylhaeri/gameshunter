@@ -12,7 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.com.gameshunter.factory.EnderecoFactory;
+import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Estado;
+import br.com.gameshunter.model.Pais;
 
 public class EnderecoDAOTest {
 
@@ -21,12 +24,31 @@ public class EnderecoDAOTest {
 	private Endereco endereco;
 	private static int id;
 	private static EnderecoFactory eFactory;
+	private static Pais pais;
+	private static Estado estado;
+	private static Cidade cidade;
 
 	@BeforeClass
 	public static void globalSetUp() {
 		new JPAUtil();
 		id = Indice.pegaEndereco();
 		eFactory = new EnderecoFactory();
+		cidade = new Cidade();
+		estado = new Estado();
+		pais = new Pais();
+
+		pais.setId(30);
+		pais.setNome("Brasil");
+		pais.setSigla("BR");
+
+		estado.setId(66);
+		estado.setNome("São Paulo");
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		cidade.setId(7270);
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
 	}
 
 	@Before
@@ -50,12 +72,15 @@ public class EnderecoDAOTest {
 		endereco.setLogradouro("Rua paranaue");
 		endereco.setNumero(123);
 		endereco.setBairro("Parque Br");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("SP");
+		endereco.setCidade(cidade);
+		endereco.setEstado(estado);
 		endereco.setCep("31456892");
 		endereco.setComplemento("Conj B");
-		endereco.setPais("Brasil");
+		endereco.setPais(pais);
 
+		manager.persist(pais);
+		manager.persist(estado);
+		manager.persist(cidade);
 		salva(endereco);
 
 		Endereco resultado = eDao.pega(id);
