@@ -70,4 +70,28 @@ public class UsuarioFactory {
 				"senhadoronaldo", Sexo.Masculino, "111.111.111-11", c,
 				enderecos, "(11) 1111-1111", "1234567-890");
 	}
+
+	/**
+	 * Compara 2 usuários.
+	 * 
+	 * @param primeiro
+	 * @param segundo
+	 * 
+	 * @return verdadeiro ou falso.
+	 */
+	public boolean saoIguais(Usuario primeiro, Usuario segundo) {
+
+		if (primeiro.getApelido().equals(segundo.getApelido())
+				&& primeiro.getCpf().equals(segundo.getCpf())
+				&& primeiro.getEmail().equals(segundo.getEmail())
+				&& primeiro.getEnderecos().equals(segundo.getEnderecos())
+				&& primeiro.getNome().equals(segundo.getNome())
+				&& primeiro.getRg().equals(segundo.getRg())
+				&& primeiro.getSenha().equals(segundo.getSenha())
+				&& primeiro.getSexo().equals(segundo.getSexo())
+				&& primeiro.getTelefone().equals(segundo.getTelefone()))
+			return true;
+		else
+			return false;
+	}
 }

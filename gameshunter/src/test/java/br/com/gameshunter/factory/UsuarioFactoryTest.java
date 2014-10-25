@@ -17,7 +17,7 @@ public class UsuarioFactoryTest {
 		Usuario primeiro = uFac.repetidoSemEnderecos();
 		Usuario segundo = uFac.repetidoSemEnderecos();
 
-		assertTrue(saoIguais(primeiro, segundo));
+		assertTrue(uFac.saoIguais(primeiro, segundo));
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class UsuarioFactoryTest {
 		Usuario primeiro = uFac.comEmailSemEndereco("ronaldo@silva.com");
 		Usuario segundo = uFac.comEmailSemEndereco("jose@paulista.com");
 
-		assertFalse(saoIguais(primeiro, segundo));
+		assertFalse(uFac.saoIguais(primeiro, segundo));
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class UsuarioFactoryTest {
 
 		Integer contagem = primeiro.getEnderecos().size();
 
-		assertTrue(saoIguais(primeiro, segundo));
+		assertTrue(uFac.saoIguais(primeiro, segundo));
 		assertThat(contagem, equalTo(3));
 	}
 
@@ -46,25 +46,7 @@ public class UsuarioFactoryTest {
 
 		Integer contagem = primeiro.getEnderecos().size();
 
-		assertFalse(saoIguais(primeiro, segundo));
+		assertFalse(uFac.saoIguais(primeiro, segundo));
 		assertThat(contagem, equalTo(3));
-	}
-
-	private boolean saoIguais(Usuario primeiro, Usuario segundo) {
-
-		if (primeiro.getApelido().equals(segundo.getApelido())
-				&& primeiro.getCpf().equals(segundo.getCpf())
-				&& primeiro.getDataNascimento().equals(
-						segundo.getDataNascimento())
-				&& primeiro.getEmail().equals(segundo.getEmail())
-				&& primeiro.getEnderecos().equals(segundo.getEnderecos())
-				&& primeiro.getNome().equals(segundo.getNome())
-				&& primeiro.getRg().equals(segundo.getRg())
-				&& primeiro.getSenha().equals(segundo.getSenha())
-				&& primeiro.getSexo().equals(segundo.getSexo())
-				&& primeiro.getTelefone().equals(segundo.getTelefone()))
-			return true;
-		else
-			return false;
 	}
 }

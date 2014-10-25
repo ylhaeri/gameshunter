@@ -27,15 +27,19 @@ public class UsuarioDAOTest {
 	private List<Endereco> enderecos;
 	private static UsuarioDAO uDao;
 	private static EnderecoDAO eDao;
+	private static UsuarioFactory uFac;
+	private static EnderecoFactory eFac;
 
 	@BeforeClass
 	public static void globalSetUp() {
 		new JPAUtil();
+		uFac = new UsuarioFactory();
+		eFac = new EnderecoFactory();
 	}
 
 	@Before
 	public void inicia() {
-		joao = new UsuarioFactory().comEmailSemEndereco(email);
+		joao = uFac.comEmailSemEndereco(email);
 		enderecos = joao.getEnderecos();
 		manager = new JPAUtil().getEntityManager();
 		uDao = new UsuarioDAO(manager);
@@ -71,7 +75,7 @@ public class UsuarioDAOTest {
 		String telefone = "(11) 1111-1111";
 		String cpf = "000.000.000-00";
 		String rg = "1234567-890";
-		Endereco endereco = new EnderecoFactory().repetido();
+		Endereco endereco = eFac.repetido();
 
 		joao.setApelido(apelido);
 		joao.setNome(nome);
@@ -138,7 +142,7 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveEncontrarEnderecoAtravesDoUsuario() {
 
-		Endereco endereco = new EnderecoFactory().repetido();
+		Endereco endereco = eFac.repetido();
 
 		joao.adicionaEndereco(endereco);
 
@@ -159,12 +163,9 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveConterUsuarioComVariosEnderecos() {
 
-		Endereco endereco1 = new EnderecoFactory()
-				.comLogradouro("Rua Vergueiro");
-		Endereco endereco2 = new EnderecoFactory()
-				.comLogradouro("Avenida Tupabaram");
-		Endereco endereco3 = new EnderecoFactory()
-				.comLogradouro("Rua Tamborim");
+		Endereco endereco1 = eFac.comLogradouro("Rua Vergueiro");
+		Endereco endereco2 = eFac.comLogradouro("Avenida Tupabaram");
+		Endereco endereco3 = eFac.comLogradouro("Rua Tamborim");
 
 		joao.adicionaEndereco(endereco1);
 		joao.adicionaEndereco(endereco2);
@@ -189,13 +190,12 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveConterVariosUsuariosComOMesmoEndereco() {
 
-		Endereco endereco1 = new EnderecoFactory().repetido();
-		Endereco endereco2 = new EnderecoFactory().repetido();
-		Endereco endereco3 = new EnderecoFactory().repetido();
+		Endereco endereco1 = eFac.repetido();
+		Endereco endereco2 = eFac.repetido();
+		Endereco endereco3 = eFac.repetido();
 
-		Usuario ronaldo = new UsuarioFactory()
-				.comEmailSemEndereco("ronaldo@gmail.com");
-		Usuario jamelao = new UsuarioFactory()
+		Usuario ronaldo = uFac.comEmailSemEndereco("ronaldo@gmail.com");
+		Usuario jamelao = uFac
 				.comEmailSemEndereco("jamelao.osvaldo@hotmail.com");
 
 		joao.adicionaEndereco(endereco1);
@@ -222,7 +222,7 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveAlterarEnderecoDoUsuario() {
 
-		Endereco endereco = new EnderecoFactory().comLogradouro("Rua Chalompa");
+		Endereco endereco = eFac.comLogradouro("Rua Chalompa");
 
 		joao.adicionaEndereco(endereco);
 
@@ -237,7 +237,7 @@ public class UsuarioDAOTest {
 
 		joao = uDao.pega(email);
 
-		Endereco enderedoAtualizado = new EnderecoFactory()
+		Endereco enderedoAtualizado = eFac
 				.comLogradouro("Bairro da Joana do coraçãozinhos2");
 		Long contagem = eDao.conta();
 
@@ -249,7 +249,7 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveRemoverEnderecoJuntoDoUsuario() {
 
-		joao = new UsuarioFactory().comEmailEEnderecos("renatinho@hotmail.com");
+		joao = uFac.comEmailEEnderecos("renatinho@hotmail.com");
 
 		enderecos = joao.getEnderecos();
 
@@ -264,6 +264,47 @@ public class UsuarioDAOTest {
 		assertThat(uContagem, equalTo(0l));
 		assertThat(eContagem, equalTo(0l));
 		assertThat(enderecos.size(), equalTo(3));
+	}
+
+	@Test
+	public void deveRemoverUsuarioSemEndereco() {
+		Usuario usuario = uFac.comEmailSemEndereco(email);
+		uDao.salva(usuario);
+
+		usuario = uDao.pega(email);
+		uDao.remove(usuario);
+
+		Long uContagem = uDao.conta();
+
+		assertThat(uContagem, equalTo(0l));
+	}
+
+	@Test
+	public void deveSaberIniciarTransactionECommitarCorretamente() {
+
+		this.manager.close();
+		manager = new JPAUtil().getEntityManager();
+
+		uDao = new UsuarioDAO(manager);
+
+		uDao.iniciaTransaction().salva(joao).commit().close();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		uDao = new UsuarioDAO(manager);
+
+		Long contagem1 = uDao.conta();
+		joao = uDao.pega(email);
+		uDao.remove(joao).commit().close();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		uDao = new UsuarioDAO(manager);
+
+		Long contagem2 = uDao.conta();
+
+		assertThat(contagem1, equalTo(1l));
+		assertThat(contagem2, equalTo(0l));
 	}
 
 	private void salva(Endereco endereco) {
