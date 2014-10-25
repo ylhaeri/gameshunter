@@ -29,4 +29,21 @@ public class CidadeTest {
 		assertThat(cidade.getId(), equalTo(id));
 		assertThat(cidade.getNome(), equalTo(nome));
 	}
+
+	@Test
+	public void deveCompararCidadesCorretamente() {
+		Cidade primeira = new Cidade();
+		Cidade segunda = new Cidade();
+		String nome = "São Paulo";
+
+		primeira.setId(1);
+		primeira.setNome(nome);
+		primeira.setEstado(new Estado());
+
+		segunda.setId(8);
+		segunda.setNome(nome);
+		segunda.setEstado(new Estado());
+
+		assertThat(primeira, equalTo(segunda));
+	}
 }

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Endereco {
@@ -16,8 +17,11 @@ public class Endereco {
 	private Integer numero;
 	private String complemento = "";
 	private String bairro;
+	@ManyToOne
 	private Cidade cidade;
+	@ManyToOne
 	private Estado estado;
+	@ManyToOne
 	private Pais pais;
 
 	public Integer getId() {
@@ -109,13 +113,13 @@ public class Endereco {
 
 	public String formatado() {
 		if (complemento.isEmpty())
-			return logradouro + ", " + numero + " - " + "Bairro " + bairro
-					+ " - " + cep + " - " + cidade + ", " + estado + " - "
-					+ pais;
+			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro
+					+ " - " + cidade.getNome() + "/" + estado.getUf()
+					+ " CEP: " + cep;
 		else
-			return logradouro + ", " + numero + ", " + complemento + " - "
-					+ "Bairro " + bairro + " - " + cep + " - " + cidade + ", "
-					+ estado + " - " + pais;
+			return logradouro + ", N.°" + numero + " - " + complemento + " - "
+					+ "Bairro " + bairro + " " + cidade.getNome() + "/"
+					+ estado.getUf() + " CEP: " + cep;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import br.com.gameshunter.model.Usuario;
  *
  * @since 0.0.1
  */
-public class UsuarioDAO implements DatabaseDAO<Usuario, String> {
+public class UsuarioDAO implements DbDAO<Usuario, String> {
 
 	private EntityManager manager;
 

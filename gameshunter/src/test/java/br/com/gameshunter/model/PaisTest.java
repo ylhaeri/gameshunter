@@ -29,4 +29,22 @@ public class PaisTest {
 		assertThat(pais.getNome(), equalTo(nome));
 		assertThat(pais.getSigla(), equalTo(sigla));
 	}
+
+	@Test
+	public void deveCompararPaisesCorretamente() {
+		Pais primeiro = new Pais();
+		Pais segundo = new Pais();
+		String nome = "Brasil";
+		String sigla = "BR";
+
+		primeiro.setId(5);
+		primeiro.setNome(nome);
+		primeiro.setSigla(sigla);
+
+		segundo.setId(1);
+		segundo.setNome(nome);
+		segundo.setSigla(sigla);
+
+		assertThat(primeiro, equalTo(segundo));
+	}
 }

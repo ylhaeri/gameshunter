@@ -25,9 +25,9 @@ public class EnderecoTest {
 		String cep = "11111-111";
 		String complemento = "Apto 302, Bloco 2";
 		String bairro = "Paralelepipedo";
-		String cidade = "São Paulo";
-		String estado = "São Paulo";
-		String pais = "Brasil";
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
 
 		endereco.setId(id);
 		endereco.setLogradouro(logradouro);
@@ -57,21 +57,47 @@ public class EnderecoTest {
 
 	@Test
 	public void deveFormatarEnderecoSemComplementoCorretamente() {
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
+
+		pais.setNome("Brasil");
+
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
+
 		Endereco endereco = new Endereco("Rua Vergueiro", 18,
-				"Apto 103, Bloco 2", "Sanola", "São Paulo", "SP", "11111-111",
-				"Brasil");
-		String formatado = "Rua Vergueiro, 18, Apto 103, Bloco 2 - Bairro Sanola - "
-				+ "11111-111 - São Paulo, SP - Brasil";
+				"Apto 103, Bloco 2", "Sanola", cidade, estado, "11111-111",
+				pais);
+
+		String formatado = "Rua Vergueiro, N.°18 - Apto 103, Bloco 2 - Bairro Sanola "
+				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}
 
 	@Test
 	public void deveFormatarEnderecoComComplementoCorretamente() {
-		Endereco endereco = new Endereco("Rua Vergueiro", 18, "", "Sanola",
-				"São Paulo", "SP", "11111-111", "Brasil");
-		String formatado = "Rua Vergueiro, 18 - Bairro Sanola - "
-				+ "11111-111 - São Paulo, SP - Brasil";
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
+
+		pais.setNome("Brasil");
+
+		estado.setUf("MG");
+		estado.setPais(pais);
+
+		cidade.setNome("Belo Horizonte");
+		cidade.setEstado(estado);
+
+		Endereco endereco = new Endereco("Rua Manoel Passos", 315, "Casa",
+				"Santa Cruz", cidade, estado, "31150-470", pais);
+
+		String formatado = "Rua Manoel Passos, N.°315 - Casa - Bairro Santa Cruz "
+				+ "Belo Horizonte/MG CEP: 31150-470";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}

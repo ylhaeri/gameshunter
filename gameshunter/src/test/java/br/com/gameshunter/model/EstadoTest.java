@@ -32,4 +32,24 @@ public class EstadoTest {
 		assertThat(estado.getNome(), equalTo(nome));
 		assertThat(estado.getUf(), equalTo(uf));
 	}
+
+	@Test
+	public void deveCompararEstadosCorretamente() {
+		Estado primeiro = new Estado();
+		Estado segundo = new Estado();
+		String nome = "São Paulo";
+		String uf = "SP";
+
+		primeiro.setId(1);
+		primeiro.setNome(nome);
+		primeiro.setUf(uf);
+		primeiro.setPais(new Pais());
+
+		segundo.setId(9);
+		segundo.setNome(nome);
+		segundo.setUf(uf);
+		segundo.setPais(new Pais());
+
+		assertThat(primeiro, equalTo(segundo));
+	}
 }

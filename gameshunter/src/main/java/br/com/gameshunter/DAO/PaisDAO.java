@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import br.com.gameshunter.model.Pais;
 
-public class PaisDAO {
+public class PaisDAO implements BasicDbDAO {
 
 	private EntityManager manager;
 
@@ -18,22 +18,25 @@ public class PaisDAO {
 		return manager.find(Pais.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Pais> pegaTodos() {
+		return manager.createQuery("select p from Pais p").getResultList();
+	}
+
+	@Override
 	public PaisDAO iniciaTransaction() {
 		manager.getTransaction().begin();
 		return this;
 	}
 
+	@Override
 	public PaisDAO commit() {
 		manager.getTransaction().commit();
 		return this;
 	}
 
+	@Override
 	public void close() {
 		manager.close();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Pais> pegaTodos() {
-		return manager.createQuery("select p from Pais p").getResultList();
 	}
 }

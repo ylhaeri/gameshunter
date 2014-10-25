@@ -13,7 +13,7 @@ import br.com.gameshunter.model.Endereco;
  *
  * @since 0.0.1
  */
-public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
+public class EnderecoDAO implements DbDAO<Endereco, Integer> {
 
 	private EntityManager manager;
 
