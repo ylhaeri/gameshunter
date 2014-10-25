@@ -13,14 +13,14 @@
 		<class>br.com.gameshunter.model.Estado</class>
 		<class>br.com.gameshunter.model.Pais</class>
 
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:gameshunter" />
-			<property name="javax.persistence.jdbc.user" value="SA" />
-			<property name="javax.persistence.jdbc.password" value="" />
-
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-		</properties>
+			<properties>
+				<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+				<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:gameshunter" />
+				<property name="javax.persistence.jdbc.user" value="SA" />
+				<property name="javax.persistence.jdbc.password" value="" />
+	
+				<property name="hibernate.hbm2ddl.auto" value="update" />
+				<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			</properties>
 	</persistence-unit>
 </persistence>

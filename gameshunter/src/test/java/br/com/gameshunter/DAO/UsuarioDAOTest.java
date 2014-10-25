@@ -116,10 +116,10 @@ public class UsuarioDAOTest {
 	@Test
 	public void deveAtualizarUsuariosDoBanco() {
 
-		String nEnviado = "Dedinho Osvaldo";
+		String nome = "Dedinho Osvaldo";
 		String nAlterado = "Osvaldo Patricio";
 
-		joao.setNome(nEnviado);
+		joao.setNome(nome);
 		uDao.salva(joao);
 
 		joao = uDao.pega(email);
@@ -317,5 +317,12 @@ public class UsuarioDAOTest {
 	private void salva(Endereco endereco) {
 		eDao.salva(endereco);
 		Indice.contaEndereco();
+		manager.persist(endereco.getPais());
+		manager.persist(endereco.getEstado());
+		manager.persist(endereco.getCidade());
+	}
+
+	protected void persist(Object o) {
+		manager.persist(o);
 	}
 }
