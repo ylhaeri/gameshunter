@@ -22,18 +22,9 @@ public class NovoUsuarioAction {
 	public String execute() {
 
 		Calendar dataNasc = Calendar.getInstance();
-		System.out.println(nascMes);
 		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
 		usuario.setDataNascimento(dataNasc);
-		System.out.println(usuario.getDataNascimento().getTime());
-		System.out.println(usuario.getNome());
-		System.out.println(usuario.getApelido());
-		System.out.println(usuario.getSexo());
-		System.out.println(usuario.getCpf());
-		System.out.println(usuario.getEmail());
-		System.out.println(usuario.getRg());
-		System.out.println(usuario.getTelefone());
-		System.out.println(endereco.formatado());
+		System.out.println(endereco.getPais());
 		return "ok";
 	}
 

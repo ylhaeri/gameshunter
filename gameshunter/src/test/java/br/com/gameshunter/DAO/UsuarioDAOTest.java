@@ -17,6 +17,7 @@ import org.junit.Test;
 import br.com.gameshunter.factory.EnderecoFactory;
 import br.com.gameshunter.factory.UsuarioFactory;
 import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 
 public class UsuarioDAOTest {
@@ -69,6 +70,8 @@ public class UsuarioDAOTest {
 		Usuario joao = new Usuario();
 		String nome = "João da Silva Machado";
 		String apelido = "Pikachu Iluminado";
+		Sexo sexo = Sexo.Masculino;
+		String senha = "aranhaBolao";
 		Calendar dataNascimento = Calendar.getInstance();
 		dataNascimento.set(1990, 1, 12, 12, 0, 0);
 		String email = "joao@gmail.com";
@@ -77,8 +80,10 @@ public class UsuarioDAOTest {
 		String rg = "1234567-890";
 		Endereco endereco = eFac.repetido();
 
-		joao.setApelido(apelido);
 		joao.setNome(nome);
+		joao.setApelido(apelido);
+		joao.setSexo(sexo);
+		joao.setSenha(senha);
 		joao.setDataNascimento(dataNascimento);
 		joao.setEmail(email);
 		joao.setTelefone(telefone);
@@ -97,6 +102,8 @@ public class UsuarioDAOTest {
 		assertThat(eContagem, equalTo(1l));
 		assertThat(joana.getNome(), equalTo(nome));
 		assertThat(joana.getApelido(), equalTo(apelido));
+		assertThat(joana.getSexo(), equalTo(sexo));
+		assertThat(joana.getSenha(), equalTo(senha));
 		assertThat(joana.getDataNascimento().getTime(),
 				equalTo(dataNascimento.getTime()));
 		assertThat(joana.getEmail(), equalTo(email));

@@ -27,7 +27,7 @@
 		<label for="senha">Senha</label><input type="password" id="senha">
 		<br />
 		<label for="confirmasenha">Confirme sua senha</label><input
-			type="password" id="confirmasenha">
+			type="password" id="confirmasenha" name="usuario.senha">
 		<br />
 		<label for="cpf">CPF</label><input type="text" id="cpf"
 			name="usuario.cpf">

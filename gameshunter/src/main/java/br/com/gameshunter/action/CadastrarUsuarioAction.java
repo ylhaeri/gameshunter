@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import br.com.gameshunter.DAO.JPAUtil;
+import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
 public class CadastrarUsuarioAction {
@@ -14,6 +17,7 @@ public class CadastrarUsuarioAction {
 	private List<Integer> dias = new ArrayList<>();
 	private List<String> meses = new ArrayList<>();
 	private List<Integer> anos = new ArrayList<>();
+	private List<Pais> paises = new ArrayList<>();
 
 	@Action(value = "cadastrar-usuario", results = {
 
@@ -22,7 +26,14 @@ public class CadastrarUsuarioAction {
 		adicionaDias();
 		adicionaMeses();
 		adicionaAnos();
+		adicionaPaises();
 		return "ok";
+	}
+
+	private void adicionaPaises() {
+		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
+		this.paises = pDao.pegaTodos();
+		pDao.close();
 	}
 
 	public Sexo[] getSexo() {
@@ -57,6 +68,14 @@ public class CadastrarUsuarioAction {
 		this.anos = anos;
 	}
 
+	public List<Pais> getPaises() {
+		return paises;
+	}
+
+	public void setPaises(List<Pais> paises) {
+		this.paises = paises;
+	}
+
 	public void adicionaDias() {
 		for (int a = 1; a <= 31; a++)
 			dias.add(a);
@@ -80,5 +99,12 @@ public class CadastrarUsuarioAction {
 		meses.add("Outubro");
 		meses.add("Novembro");
 		meses.add("Dezembro");
+	}
+
+	public static void main(String[] args) {
+		CadastrarUsuarioAction teste = new CadastrarUsuarioAction();
+		teste.adicionaPaises();
+		List<Pais> paises = teste.getPaises();
+		System.out.println(paises.size() + "      " + paises.get(0).getNome());
 	}
 }
