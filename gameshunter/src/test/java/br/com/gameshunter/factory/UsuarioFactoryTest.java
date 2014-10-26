@@ -12,41 +12,47 @@ public class UsuarioFactoryTest {
 	private UsuarioFactory uFac = new UsuarioFactory();
 
 	@Test
-	public void deveFazerUsuariosIguais() {
+	public void deveCriarUsuariosIguais() {
 
 		Usuario primeiro = uFac.repetidoSemEnderecos();
 		Usuario segundo = uFac.repetidoSemEnderecos();
 
+		Integer contagem = primeiro.getEnderecos().size();
+
+		assertThat(contagem, equalTo(0));
 		assertTrue(uFac.saoIguais(primeiro, segundo));
 	}
 
 	@Test
-	public void deveFazerUsuariosDiferentes() {
+	public void deveCriarUsuariosDiferentes() {
 		Usuario primeiro = uFac.comEmailSemEndereco("ronaldo@silva.com");
 		Usuario segundo = uFac.comEmailSemEndereco("jose@paulista.com");
 
+		Integer contagem = primeiro.getEnderecos().size();
+
+		assertThat(contagem, equalTo(0));
 		assertFalse(uFac.saoIguais(primeiro, segundo));
 	}
 
 	@Test
-	public void deveFazerUsuarioIgualComEnderecos() {
+	public void deveCriarUsuarioIgualComEnderecos() {
 		Usuario primeiro = uFac.repetidoComEnderecos();
 		Usuario segundo = uFac.repetidoComEnderecos();
 
 		Integer contagem = primeiro.getEnderecos().size();
 
-		assertTrue(uFac.saoIguais(primeiro, segundo));
 		assertThat(contagem, equalTo(3));
+		assertTrue(uFac.saoIguais(primeiro, segundo));
 	}
 
 	@Test
-	public void deveFazerUsuarioDiferenteComEnderecos() {
+	public void deveCriarUsuarioDiferenteComEnderecos() {
 		Usuario primeiro = uFac.comEmailEEnderecos("ronaldinho@dasilva.com.br");
 		Usuario segundo = uFac.comEmailEEnderecos("perna.pereira@oi.com.br");
 
 		Integer contagem = primeiro.getEnderecos().size();
 
-		assertFalse(uFac.saoIguais(primeiro, segundo));
 		assertThat(contagem, equalTo(3));
+		assertFalse(uFac.saoIguais(primeiro, segundo));
 	}
 }

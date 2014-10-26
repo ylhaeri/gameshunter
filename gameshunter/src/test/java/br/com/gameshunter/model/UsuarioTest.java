@@ -94,46 +94,39 @@ public class UsuarioTest {
 	@Test
 	public void deveCadastrarVariosEnderecos() {
 
-		Endereco enviado1 = enderecoFactory.comLogradouro("Avenida Zambreta");
-		Endereco esperado1 = enderecoFactory.comLogradouro("Avenida Zambreta");
-		Endereco enviado2 = enderecoFactory.comLogradouro("Rua Pentombla");
-		Endereco esperado2 = enderecoFactory.comLogradouro("Rua Pentombla");
+		Endereco endereco1 = enderecoFactory.comLogradouro("Avenida Zambreta");
+		Endereco endereco2 = enderecoFactory.comLogradouro("Rua Pentombla");
 
-		joao.adicionaEndereco(enviado1);
-		joao.adicionaEndereco(enviado2);
+		joao.adicionaEndereco(endereco1);
+		joao.adicionaEndereco(endereco2);
 
 		assertThat(enderecos.size(), equalTo(2));
-		assertThat(enderecos, hasItems(esperado1, esperado2));
+		assertThat(enderecos, hasItems(endereco1, endereco2));
 	}
 
 	@Test
 	public void naoDeveCadastrarMaisQue3Enderecos() {
 
-		Endereco enviado1 = enderecoFactory.comLogradouro("Rua Vergueiro");
+		Endereco endereco1 = enderecoFactory.comLogradouro("Rua Vergueiro");
+		Endereco endereco2 = enderecoFactory.comLogradouro("Rua Manolia");
+		Endereco endereco3 = enderecoFactory.comLogradouro("Rua Tamborim");
+		Endereco endereco4 = enderecoFactory.comLogradouro("Rua Macarronada");
 
-		Endereco enviado2 = enderecoFactory.comLogradouro("Rua Manolia");
-
-		Endereco enviado3 = enderecoFactory.comLogradouro("Rua Tamborim");
-
-		Endereco enviado4 = enderecoFactory.comLogradouro("Rua Macarronada");
-		Endereco esperado4 = enderecoFactory.comLogradouro("Rua Macarronada");
-
-		joao.adicionaEndereco(enviado1);
-		joao.adicionaEndereco(enviado2);
-		joao.adicionaEndereco(enviado3);
-		joao.adicionaEndereco(enviado4);
+		joao.adicionaEndereco(endereco1);
+		joao.adicionaEndereco(endereco2);
+		joao.adicionaEndereco(endereco3);
+		joao.adicionaEndereco(endereco4);
 
 		assertThat(enderecos.size(), equalTo(3));
-		assertThat(enderecos, not(hasItem(esperado4)));
+		assertThat(enderecos, not(hasItem(endereco4)));
 	}
 
 	@Test
 	public void naoDeveCadastrarEnderecosRepetidos() {
 
 		Endereco enviado1 = enderecoFactory.repetido();
-		Endereco esperado = enderecoFactory.repetido();
-
 		Endereco enviado2 = enderecoFactory.repetido();
+		Endereco esperado = enderecoFactory.repetido();
 
 		joao.adicionaEndereco(enviado1);
 		joao.adicionaEndereco(enviado2);
@@ -169,10 +162,10 @@ public class UsuarioTest {
 	@Test
 	public void deveRemoverOEndereco() {
 
-		Endereco enviado = enderecoFactory
+		Endereco endereco = enderecoFactory
 				.comLogradouro("Peninsula da Mabilia");
 
-		joao.adicionaEndereco(enviado);
+		joao.adicionaEndereco(endereco);
 
 		joao.removeEndereco(0);
 

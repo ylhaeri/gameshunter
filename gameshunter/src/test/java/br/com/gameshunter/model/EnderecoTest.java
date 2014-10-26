@@ -87,17 +87,17 @@ public class EnderecoTest {
 
 		pais.setNome("Brasil");
 
-		estado.setUf("MG");
+		estado.setUf("SP");
 		estado.setPais(pais);
 
-		cidade.setNome("Belo Horizonte");
+		cidade.setNome("São Paulo");
 		cidade.setEstado(estado);
 
-		Endereco endereco = new Endereco("Rua Manoel Passos", 315, "Casa",
-				"Santa Cruz", cidade, estado, "31150-470", pais);
+		Endereco endereco = new Endereco("Rua Vergueiro", 18, "Casa", "Sanola",
+				cidade, estado, "11111-111", pais);
 
-		String formatado = "Rua Manoel Passos, N.°315 - Casa - Bairro Santa Cruz "
-				+ "Belo Horizonte/MG CEP: 31150-470";
+		String formatado = "Rua Vergueiro, N.°18 - Casa - Bairro Sanola "
+				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}

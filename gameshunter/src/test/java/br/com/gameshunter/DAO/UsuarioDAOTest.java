@@ -321,8 +321,4 @@ public class UsuarioDAOTest {
 		manager.persist(endereco.getEstado());
 		manager.persist(endereco.getCidade());
 	}
-
-	protected void persist(Object o) {
-		manager.persist(o);
-	}
 }

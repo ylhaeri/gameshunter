@@ -17,6 +17,10 @@ import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 
+/**
+ * Precisa dar um jeito aqui, tá esquisita
+ *
+ */
 public class EnderecoDAOTest {
 
 	private EntityManager manager;
