@@ -25,6 +25,8 @@ public class Usuario {
 	private String email;
 	private String nome;
 	private String apelido;
+	private String senha;
+	private Sexo sexo;
 	private String cpf;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
@@ -113,6 +115,26 @@ public class Usuario {
 		this.enderecos = enderecos;
 	}
 
+	/** @return O sexo */
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	/** @param sexo */
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	/** @return A senha */
+	public String getSenha() {
+		return senha;
+	}
+
+	/** @param senha */
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	/**
 	 * Responsável por adicionar novos endereços.
 	 * 
@@ -185,19 +207,24 @@ public class Usuario {
 	 * @param email
 	 * @param nome
 	 * @param apelido
+	 * @param sexo
 	 * @param cpf
 	 * @param dataNascimento
 	 * @param enderecos
 	 * @param telefone
 	 */
-	public Usuario(String email, String nome, String apelido, String cpf,
-			Calendar dataNascimento, List<Endereco> enderecos, String telefone) {
+	public Usuario(String email, String nome, String apelido, String senha,
+			Sexo sexo, String cpf, Calendar dataNascimento,
+			List<Endereco> enderecos, String telefone, String rg) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
+		this.senha = senha;
+		this.sexo = sexo;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.enderecos = enderecos;
 		this.telefone = telefone;
+		this.rg = rg;
 	}
 }

@@ -1,4 +1,4 @@
-package br.com.gameshunter.DAO;
+/*package br.com.gameshunter.DAO;
 
 import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -46,5 +46,4 @@ public class CidadeDAOTest {
 		cidades = cDAO.pega(estado);
 		assertThat(102, equalTo(cidades.size()));
 	}
-
-}
+}*/

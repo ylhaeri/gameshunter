@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Endereco {
@@ -16,24 +17,12 @@ public class Endereco {
 	private Integer numero;
 	private String complemento = "";
 	private String bairro;
-	private String cidade;
-	private String estado;
-	private String pais;
-
-	public Endereco() {
-	}
-
-	public Endereco(String rua, int numero, String complemento, String bairro,
-			String cidade, String estado, String cep, String pais) {
-		this.logradouro = rua;
-		this.bairro = bairro;
-		this.complemento = complemento;
-		this.numero = numero;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.cep = cep;
-		this.pais = pais;
-	}
+	@ManyToOne
+	private Cidade cidade;
+	@ManyToOne
+	private Estado estado;
+	@ManyToOne
+	private Pais pais;
 
 	public Integer getId() {
 		return id;
@@ -41,6 +30,14 @@ public class Endereco {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getLogradouro() {
@@ -59,38 +56,6 @@ public class Endereco {
 		this.numero = numero;
 	}
 
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
 	public String getComplemento() {
 		return complemento;
 	}
@@ -99,23 +64,62 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public void setPais(String pais) {
-		this.pais = pais;
+	public String getBairro() {
+		return bairro;
 	}
 
-	public String getPais() {
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Pais getPais() {
 		return pais;
 	}
 
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public Endereco() {
+	}
+
+	public Endereco(String rua, Integer numero, String complemento,
+			String bairro, Cidade cidade, Estado estado, String cep, Pais pais) {
+		this.logradouro = rua;
+		this.bairro = bairro;
+		this.complemento = complemento;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.cep = cep;
+		this.pais = pais;
+	}
+
 	public String formatado() {
-		if (complemento.isEmpty())
-			return logradouro + ", " + numero + " - " + "Bairro " + bairro
-					+ " - " + cep + " - " + cidade + ", " + estado + " - "
-					+ pais;
+		if (complemento.equals(""))
+			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro
+					+ " " + cidade.getNome() + "/" + estado.getUf()
+					+ " CEP: " + cep;
 		else
-			return logradouro + ", " + numero + ", " + complemento + " - "
-					+ "Bairro " + bairro + " - " + cep + " - " + cidade + ", "
-					+ estado + " - " + pais;
+			return logradouro + ", N.°" + numero + " - " + complemento + " - "
+					+ "Bairro " + bairro + " " + cidade.getNome() + "/"
+					+ estado.getUf() + " CEP: " + cep;
 	}
 
 	@Override

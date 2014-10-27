@@ -1,6 +1,6 @@
 package br.com.gameshunter.DAO;
 
-public interface DatabaseDAO<T, PK> {
+public interface DbDAO<T, PK> extends BasicDbDAO {
 
 	/**
 	 * Retorna a quantidade de objetos existentes na tabela do banco.
@@ -14,14 +14,17 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @param objeto
 	 *            Objeto que deve ser salvo.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void salva(T objeto);
+	public DbDAO<?, ?> salva(T objeto);
 
 	/**
 	 * Pega o objeto desejado a partir de sua chave primária.
 	 * 
 	 * @param chavePrimaria
 	 *            Chave primária da classe.
+	 * 
 	 * @return Objeto resgatado do banco.
 	 */
 	public T pega(PK chavePrimaria);
@@ -31,8 +34,10 @@ public interface DatabaseDAO<T, PK> {
 	 * 
 	 * @param objeto
 	 *            Objeto que será removido.
+	 * 
+	 * @return Ele mesmo.
 	 */
-	public void remove(T objeto);
+	public DbDAO<?, ?> remove(T objeto);
 
 	/**
 	 * Atualiza os dados do objeto no banco de dados.
@@ -40,24 +45,7 @@ public interface DatabaseDAO<T, PK> {
 	 * @param objeto
 	 *            Objeto que será atualizado.
 	 * 
-	 * @return Retorna a entidade removida
+	 * @return Ele mesmo.
 	 */
-	public void atualiza(T objeto);
-
-	/**
-	 * Inicia a transação com o banco de dados. Deve ser usado para que a
-	 * iteração pode ser feita.
-	 */
-	public void iniciaTransaction();
-
-	/**
-	 * Faz o commit do que foi efetuado na transação com o banco de dados. Deve
-	 * ser usado para que os dados sejam gravados no banco de dados.
-	 */
-	public void commit();
-	
-	/**
-	 * Fecha a conexão criada
-	 */
-	public void fechaConexao();
+	public DbDAO<?, ?> atualiza(T objeto);
 }

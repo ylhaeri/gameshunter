@@ -13,7 +13,7 @@ import br.com.gameshunter.model.Endereco;
  *
  * @since 0.0.1
  */
-public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
+public class EnderecoDAO implements DbDAO<Endereco, Integer> {
 
 	private EntityManager manager;
 
@@ -28,8 +28,9 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	}
 
 	@Override
-	public void salva(Endereco endereco) {
+	public EnderecoDAO salva(Endereco endereco) {
 		manager.persist(endereco);
+		return this;
 	}
 
 	@Override
@@ -38,30 +39,32 @@ public class EnderecoDAO implements DatabaseDAO<Endereco, Integer> {
 	}
 
 	@Override
-	public void remove(Endereco endereco) {
+	public EnderecoDAO remove(Endereco endereco) {
 		manager.merge(endereco);
 		manager.remove(endereco);
+		return this;
 	}
 
 	@Override
-	public void atualiza(Endereco endereco) {
+	public EnderecoDAO atualiza(Endereco endereco) {
 		manager.merge(endereco);
+		return this;
 	}
 
 	@Override
-	public void iniciaTransaction() {
+	public EnderecoDAO iniciaTransaction() {
 		manager.getTransaction().begin();
+		return this;
 	}
 
 	@Override
-	public void commit() {
+	public EnderecoDAO commit() {
 		manager.getTransaction().commit();
+		return this;
 	}
 
 	@Override
-	public void fechaConexao() {
+	public void close() {
 		this.manager.close();
-
 	}
-
 }

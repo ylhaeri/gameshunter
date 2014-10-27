@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 
-public class CidadeDAO {
+public class CidadeDAO implements BasicDbDAO {
 
 	EntityManager manager;
 
@@ -29,4 +29,25 @@ public class CidadeDAO {
 		this.manager.close();
 	}
 
+	
+	public Cidade pega(Integer id) {
+		return manager.find(Cidade.class, id);
+	}
+
+	@Override
+	public CidadeDAO iniciaTransaction() {
+		manager.getTransaction().begin();
+		return this;
+	}
+
+	@Override
+	public CidadeDAO commit() {
+		manager.getTransaction().commit();
+		return this;
+	}
+
+	@Override
+	public void close() {
+		manager.close();
+	}
 }

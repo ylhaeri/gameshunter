@@ -27,6 +27,5 @@ public class EstadoDAO {
 
 	public void fechaConexao() {
 		this.manager.close();
-
 	}
 }

@@ -17,14 +17,20 @@ import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 
+/**
+ * Precisa dar um jeito aqui, tá esquisito terem 2 métodos para salvar.
+ *
+ */
 public class EnderecoDAOTest {
 
 	private EntityManager manager;
-	private static EnderecoDAO eDao;
+	private static EnderecoDAO enDao;
 	private Endereco endereco;
 	private static int id;
 	private static EnderecoFactory eFactory;
-	
+	private Pais pais;
+	private Estado estado;
+	private Cidade cidade;
 
 	@BeforeClass
 	public static void globalSetUp() {
@@ -37,8 +43,12 @@ public class EnderecoDAOTest {
 	public void inicia() {
 		endereco = eFactory.repetido();
 		manager = new JPAUtil().getEntityManager();
-		eDao = new EnderecoDAO(manager);
+		enDao = new EnderecoDAO(manager);
 		manager.getTransaction().begin();
+
+		estado = endereco.getEstado();
+		cidade = endereco.getCidade();
+		pais = endereco.getPais();
 	}
 
 	@After
@@ -48,78 +58,170 @@ public class EnderecoDAOTest {
 	}
 
 	@Test
+	public void deveAdicioanrUmEnderecoComCidadePaisEEstado() {
+
+		Pais pais = new Pais();
+		pais.setNome("Brasil");
+		pais.setSigla("BR");
+
+		Estado estado = new Estado();
+		estado.setNome("São Paulo");
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		Cidade cidade = new Cidade();
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
+
+		Endereco endereco = new Endereco();
+
+		endereco.setPais(pais);
+		endereco.setEstado(estado);
+		endereco.setCidade(cidade);
+
+		persist(pais);
+		persist(estado);
+		persist(cidade);
+		salva(endereco);
+
+		Endereco resultado = enDao.pega(id);
+
+		assertThat(enDao.conta(), equalTo(1l));
+		assertThat(resultado, equalTo(endereco));
+		assertThat(resultado.getPais(), equalTo(pais));
+		assertThat(resultado.getEstado(), equalTo(estado));
+		assertThat(resultado.getCidade(), equalTo(cidade));
+	}
+
+	@Test
 	public void deveAdicionarUmEndereco() {
+
+		pais = new Pais();
+		pais.setNome("Brasil");
+		pais.setSigla("BR");
+
+		estado = new Estado();
+		estado.setNome("São Paulo");
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		cidade = new Cidade();
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
 
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua paranaue");
 		endereco.setNumero(123);
 		endereco.setBairro("Parque Br");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("SP");
+		endereco.setCidade(cidade);
+		endereco.setEstado(estado);
 		endereco.setCep("31456892");
 		endereco.setComplemento("Conj B");
-		endereco.setPais("Brasil");
+		endereco.setPais(pais);
 
+		persist(pais);
+		persist(estado);
+		persist(cidade);
 		salva(endereco);
 
-		Endereco resultado = eDao.pega(id);
-		Long contagem = eDao.conta();
+		Endereco resultado = enDao.pega(id);
 
-		assertThat(contagem, equalTo(1l));
+		assertThat(enDao.conta(), equalTo(1l));
 		assertThat(resultado, equalTo(endereco));
 	}
 
 	@Test
-	public void atualizaEndereco() {
+	public void deveAtualizarEndereco() {
 
 		salva(endereco);
+
+		assertThat(enDao.pega(id), equalTo(endereco));
 
 		endereco.setLogradouro("Rua Nova Lua");
 
-		eDao.atualiza(endereco);
+		persist(pais);
+		persist(estado);
+		persist(cidade);
+		enDao.atualiza(endereco);
 
-		Endereco resultado = eDao.pega(id);
-		Long contagem = eDao.conta();
+		Endereco resultado = enDao.pega(id);
 
-		assertThat(contagem, equalTo(1l));
+		assertThat(enDao.conta(), equalTo(1l));
 		assertThat(resultado, equalTo(endereco));
-
 	}
 
 	@Test
-	public void removeEndereco() {
+	public void deveRemoverEndereco() {
 
-		endereco.setCidade("Osasco");
-
+		persist(pais);
+		persist(estado);
+		persist(cidade);
 		salva(endereco);
 
-		assertThat(eDao.pega(id), equalTo(endereco));
+		assertThat(enDao.pega(id), equalTo(endereco));
 
-		eDao.remove(endereco);
+		enDao.remove(endereco);
 
-		Endereco resultado = eDao.pega(id);
-		Long contagem = eDao.conta();
+		Endereco resultado = enDao.pega(id);
 
-		assertThat(contagem, equalTo(0l));
+		assertThat(enDao.conta(), equalTo(0l));
 		assertNull(resultado);
 	}
 
 	@Test
-	public void quantidadeDeEnderecos() {
+	public void deveConterAQuantidadeCorretaDeEnderecos() {
 
+		persist(pais);
+		persist(estado);
+		persist(cidade);
 		salva(endereco);
 
 		Endereco end2 = new Endereco();
 		end2.setBairro("paranaue");
 		salva(end2);
 
-		assertThat(eDao.conta(), equalTo(2L));
+		assertThat(enDao.conta(), equalTo(2L));
+	}
+
+	@Test
+	public void deveSaberIniciarTransactionECommitarCorretamente() {
+
+		this.manager.close();
+		manager = new JPAUtil().getEntityManager();
+
+		enDao = new EnderecoDAO(manager);
+
+		persist(pais);
+		persist(estado);
+		persist(cidade);
+		enDao.iniciaTransaction().salva(endereco).commit().close();
+		id++;
+		Indice.contaEndereco();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		enDao = new EnderecoDAO(manager);
+
+		Endereco encontrado = enDao.pega(id);
+		Long contagem = enDao.conta();
+
+		enDao.remove(encontrado).commit().close();
+
+		manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		enDao = new EnderecoDAO(manager);
+
+		assertThat(contagem, equalTo(1l));
+		assertThat(encontrado, equalTo(endereco));
 	}
 
 	private void salva(Endereco end) {
 		id++;
-		eDao.salva(end);
+		enDao.salva(end);
 		Indice.contaEndereco();
 	}
 
+	private void persist(Object o) {
+		manager.persist(o);
+	}
 }

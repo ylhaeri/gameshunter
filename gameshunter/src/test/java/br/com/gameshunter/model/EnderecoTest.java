@@ -17,77 +17,36 @@ public class EnderecoTest {
 	}
 
 	@Test
-	public void deveCadastrarCepCorretamente() {
+	public void deveCadastrarDadosCorretamente() {
 
-		String cep = "11111-111";
-
-		endereco.setCep(cep);
-
-		assertThat(endereco.getCep(), equalTo(cep));
-	}
-
-	@Test
-	public void deveCadastrarLogradouroCorretamente() {
-
+		Integer id = 1;
 		String logradouro = "Avenida Barreilinhos Churimplante";
-
-		endereco.setLogradouro(logradouro);
-
-		assertThat(endereco.getLogradouro(), equalTo(logradouro));
-	}
-
-	@Test
-	public void deveCadastrarNumeroCorretamente() {
-
 		Integer numero = 2763;
-
-		endereco.setNumero(numero);
-
-		assertThat(endereco.getNumero(), equalTo(numero));
-	}
-
-	@Test
-	public void deveCadastrarComplementoCorretamente() {
-
+		String cep = "11111-111";
 		String complemento = "Apto 302, Bloco 2";
-		endereco.setComplemento(complemento);
-		assertThat(endereco.getComplemento(), equalTo(complemento));
-	}
-
-	@Test
-	public void deveCadastrarBairroCorretamente() {
-
 		String bairro = "Paralelepipedo";
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
 
+		endereco.setId(id);
+		endereco.setLogradouro(logradouro);
+		endereco.setNumero(numero);
+		endereco.setCep(cep);
+		endereco.setComplemento(complemento);
 		endereco.setBairro(bairro);
-
-		assertThat(endereco.getBairro(), equalTo(bairro));
-	}
-
-	@Test
-	public void deveCadastrarCidadeCorretamente() {
-
-		String cidade = "São Paulo";
-
 		endereco.setCidade(cidade);
-		assertThat(endereco.getCidade(), equalTo(cidade));
-	}
-
-	@Test
-	public void deveCadastrarEstadoCorretamente() {
-
-		String estado = "São Paulo";
-
 		endereco.setEstado(estado);
-		assertThat(endereco.getEstado(), equalTo(estado));
-	}
-
-	@Test
-	public void deveCadastrarPaisCorretamente() {
-
-		String pais = "Brasil";
-
 		endereco.setPais(pais);
+
+		assertThat(endereco.getId(), equalTo(id));
+		assertThat(endereco.getLogradouro(), equalTo(logradouro));
+		assertThat(endereco.getNumero(), equalTo(numero));
+		assertThat(endereco.getCep(), equalTo(cep));
+		assertThat(endereco.getComplemento(), equalTo(complemento));
+		assertThat(endereco.getBairro(), equalTo(bairro));
+		assertThat(endereco.getCidade(), equalTo(cidade));
+		assertThat(endereco.getEstado(), equalTo(estado));
 		assertThat(endereco.getPais(), equalTo(pais));
 	}
 
@@ -98,22 +57,47 @@ public class EnderecoTest {
 
 	@Test
 	public void deveFormatarEnderecoSemComplementoCorretamente() {
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
+
+		pais.setNome("Brasil");
+
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
+
 		Endereco endereco = new Endereco("Rua Vergueiro", 18,
-				"Apto 103, Bloco 2", "Sanola", "São Paulo", "SP", "11111-111",
-				"Brasil");
-		String formatado = "Rua Vergueiro, 18, Apto 103, Bloco 2 - Bairro Sanola - "
-				+ "11111-111 - São Paulo, SP - Brasil";
+				"Apto 103, Bloco 2", "Sanola", cidade, estado, "11111-111",
+				pais);
+
+		String formatado = "Rua Vergueiro, N.°18 - Apto 103, Bloco 2 - Bairro Sanola "
+				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}
-	
+
 	@Test
 	public void deveFormatarEnderecoComComplementoCorretamente() {
-		Endereco endereco = new Endereco("Rua Vergueiro", 18,
-				"", "Sanola", "São Paulo", "SP", "11111-111",
-				"Brasil");
-		String formatado = "Rua Vergueiro, 18 - Bairro Sanola - "
-				+ "11111-111 - São Paulo, SP - Brasil";
+		Cidade cidade = new Cidade();
+		Estado estado = new Estado();
+		Pais pais = new Pais();
+
+		pais.setNome("Brasil");
+
+		estado.setUf("SP");
+		estado.setPais(pais);
+
+		cidade.setNome("São Paulo");
+		cidade.setEstado(estado);
+
+		Endereco endereco = new Endereco("Rua Vergueiro", 18, "", "Sanola",
+				cidade, estado, "11111-111", pais);
+
+		String formatado = "Rua Vergueiro, N.°18 - Bairro Sanola "
+				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}
