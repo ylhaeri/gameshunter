@@ -20,14 +20,14 @@ import br.com.gameshunter.model.Pais;
 
 public class InsercaoEnderecoDAOTest {
 
-	private EntityManager manager;
+	private static EntityManager manager;
 	private final static String txtCidade = "Cidade.txt";
 	private final static String txtEstado = "Estado.txt";
 	private final static String txtPais = "Pais.txt";
 	private static String infoCidade;
 	private static String infoEstado;
 	private static String infoPais;
-	private CidadeDAO cDao;
+	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
 	private List<Pais> paises;
