@@ -14,16 +14,14 @@ import br.com.gameshunter.model.Sexo;
 public class CadastrarUsuarioAction {
 
 	private Sexo[] sexo = Sexo.values();
-	private List<Integer> dias = new ArrayList<>();
 	private List<String> meses = new ArrayList<>();
 	private List<Integer> anos = new ArrayList<>();
 	private List<Pais> paises = new ArrayList<>();
 
 	@Action(value = "cadastrar-usuario", results = {
 
-	@Result(name = "ok", location = "../../cadastrar-usuario.jsp") })
+	@Result(name = "ok", location = "cadastrar-usuario.jsp") })
 	public String execute() {
-		adicionaDias();
 		adicionaMeses();
 		adicionaAnos();
 		adicionaPaises();
@@ -42,14 +40,6 @@ public class CadastrarUsuarioAction {
 
 	public void setSexo(Sexo[] sexo) {
 		this.sexo = sexo;
-	}
-
-	public List<Integer> getDias() {
-		return dias;
-	}
-
-	public void setDias(List<Integer> dias) {
-		this.dias = dias;
 	}
 
 	public List<String> getMeses() {
@@ -74,11 +64,6 @@ public class CadastrarUsuarioAction {
 
 	public void setPaises(List<Pais> paises) {
 		this.paises = paises;
-	}
-
-	public void adicionaDias() {
-		for (int a = 1; a <= 31; a++)
-			dias.add(a);
 	}
 
 	private void adicionaAnos() {

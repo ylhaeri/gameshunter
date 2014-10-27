@@ -48,7 +48,7 @@
 		<br />
 		<select id="diabox" name="nascDia">
 			<option selected="selected">Dia</option>
-			<c:forEach var="dia" items="${dias}">
+			<c:forEach var="dia" begin="1" end="31">
 				<option>${dia}</option>
 			</c:forEach>
 		</select><select id="mesbox" name="nascMes">

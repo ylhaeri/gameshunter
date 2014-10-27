@@ -93,10 +93,10 @@ public class EnderecoTest {
 		cidade.setNome("São Paulo");
 		cidade.setEstado(estado);
 
-		Endereco endereco = new Endereco("Rua Vergueiro", 18, "Casa", "Sanola",
+		Endereco endereco = new Endereco("Rua Vergueiro", 18, "", "Sanola",
 				cidade, estado, "11111-111", pais);
 
-		String formatado = "Rua Vergueiro, N.°18 - Casa - Bairro Sanola "
+		String formatado = "Rua Vergueiro, N.°18 - Bairro Sanola "
 				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));

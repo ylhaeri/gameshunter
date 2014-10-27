@@ -18,7 +18,7 @@ import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 
 /**
- * Precisa dar um jeito aqui, tá esquisita
+ * Precisa dar um jeito aqui, tá esquisito terem 2 métodos para salvar.
  *
  */
 public class EnderecoDAOTest {

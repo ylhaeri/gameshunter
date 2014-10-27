@@ -112,9 +112,9 @@ public class Endereco {
 	}
 
 	public String formatado() {
-		if (complemento.isEmpty())
+		if (complemento.equals(""))
 			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro
-					+ " - " + cidade.getNome() + "/" + estado.getUf()
+					+ " " + cidade.getNome() + "/" + estado.getUf()
 					+ " CEP: " + cep;
 		else
 			return logradouro + ", N.°" + numero + " - " + complemento + " - "

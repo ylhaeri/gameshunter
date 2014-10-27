@@ -11,7 +11,7 @@ name="endereco.complemento">
 <br />
 <label for="bairrot">Bairro</label><input type="text" id="bairrot" name="endereco.bairro">
 <br />
-<label id="pais">País</label><select name="endereco.pais">
+<label id="pais">País</label><select name="endereco.pais" onchange="funcao()">
 	<option selected="selected">Selecione um país</option>
 	<c:forEach var="pais" items="${paises}" varStatus="status">
 		<option value="${status.index}">${pais.nome}</option>
