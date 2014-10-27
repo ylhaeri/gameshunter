@@ -37,7 +37,14 @@ public class InsercaoEnderecoDAOTest {
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
 		new JPAUtil();
+		manager = new JPAUtil().getEntityManager();
+		cDao = new CidadeDAO(manager);
+
 		infoCidade = new InsercaoEnderecoDAOTest().carregaDados(txtCidade);
+		while (infoCidade != null) {
+
+		}
+
 		infoEstado = new InsercaoEnderecoDAOTest().carregaDados(txtEstado);
 		infoPais = new InsercaoEnderecoDAOTest().carregaDados(txtPais);
 	}
@@ -45,11 +52,9 @@ public class InsercaoEnderecoDAOTest {
 	@Before
 	public void inicia() {
 
-		manager = new JPAUtil().getEntityManager();
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
-
 		manager.getTransaction().begin();
 	}
 
@@ -60,8 +65,13 @@ public class InsercaoEnderecoDAOTest {
 	}
 
 	@Test
+	public void inseriPaises() {
+
+	}
+
+	@Test
 	public void inserirPiasEstadoCidade() {
-		
+
 	}
 
 	public Cidade formataCidade(String s) {
