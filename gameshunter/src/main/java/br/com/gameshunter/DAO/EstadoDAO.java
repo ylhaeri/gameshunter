@@ -17,7 +17,7 @@ public class EstadoDAO {
 	}
 
 	public List<Estado> pega(Pais pais){
-		Query query = this.manager.createQuery("select e from Estado as e "
+		Query query = this.manager.createQuery("select e from Estado e "
 				+ "where e.pais= :pPais");
 		query.setParameter("pPais", pais);
 		@SuppressWarnings("unchecked")
