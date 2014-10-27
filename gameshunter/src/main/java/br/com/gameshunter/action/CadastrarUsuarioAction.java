@@ -18,8 +18,6 @@ public class CadastrarUsuarioAction {
 	private List<String> meses = new ArrayList<>();
 	private List<Integer> anos = new ArrayList<>();
 	private List<Pais> paises = new ArrayList<>();
-	private List<String> states = Arrays.asList("Arara", "Trinta");
-	private List<String> districts = Arrays.asList("Pinto", "Grande");
 
 	@Action(value = "cadastrar-usuario", results = {
 
@@ -94,21 +92,5 @@ public class CadastrarUsuarioAction {
 		teste.adicionaPaises();
 		List<Pais> paises = teste.getPaises();
 		System.out.println(paises.size() + "      " + paises.get(0).getNome());
-	}
-
-	public List<String> getStates() {
-		return states;
-	}
-
-	public void setStates(List<String> states) {
-		this.states = states;
-	}
-
-	public List<String> getDistricts() {
-		return districts;
-	}
-
-	public void setDistricts(List<String> districts) {
-		this.districts = districts;
 	}
 }
