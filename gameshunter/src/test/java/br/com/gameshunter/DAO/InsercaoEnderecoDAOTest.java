@@ -9,6 +9,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import org.apache.struts2.views.jsp.ui.FormTag;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,14 +25,11 @@ import br.com.gameshunter.model.Pais;
 
 public class InsercaoEnderecoDAOTest {
 
-	private EntityManager manager;
+	private static EntityManager manager;
 	private final static String txtCidade = "Cidade.txt";
 	private final static String txtEstado = "Estado.txt";
 	private final static String txtPais = "Pais.txt";
-	private static String infoCidade;
-	private static String infoEstado;
-	private static String infoPais;
-	private CidadeDAO cDao;
+	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
 	private List<Pais> paises;
@@ -38,20 +40,11 @@ public class InsercaoEnderecoDAOTest {
 	public static void globalSetUp() throws IOException {
 		new JPAUtil();
 		manager = new JPAUtil().getEntityManager();
-		cDao = new CidadeDAO(manager);
-
-		infoCidade = new InsercaoEnderecoDAOTest().carregaDados(txtCidade);
-		while (infoCidade != null) {
-
-		}
-
-		infoEstado = new InsercaoEnderecoDAOTest().carregaDados(txtEstado);
-		infoPais = new InsercaoEnderecoDAOTest().carregaDados(txtPais);
+		new InsercaoEnderecoDAOTest().carregaDados();
 	}
 
 	@Before
 	public void inicia() {
-
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
@@ -65,13 +58,13 @@ public class InsercaoEnderecoDAOTest {
 	}
 
 	@Test
-	public void inseriPaises() {
-
-	}
-
-	@Test
-	public void inserirPiasEstadoCidade() {
-
+	public void pegaPaises(){
+		
+		List<Pais> paises = pDao.pegaTodos();
+		
+		System.out.println(paises);
+		
+		assertThat(2, equalTo(paises.size()));
 	}
 
 	public Cidade formataCidade(String s) {
@@ -199,12 +192,19 @@ public class InsercaoEnderecoDAOTest {
 		return pais;
 	}
 
-	public String carregaDados(String info) throws IOException {
-		InputStream is = new FileInputStream(info);
+	public void carregaDados() throws IOException {
+
+		InputStream is = new FileInputStream(txtPais);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 		String resultado = br.readLine();
-		return resultado;
+
+		while (resultado != null) {
+			Pais pais = new InsercaoEnderecoDAOTest().formataPais(resultado);
+			manager.persist(pais);
+			resultado = br.readLine();
+		}
+		
 	}
 
 }
