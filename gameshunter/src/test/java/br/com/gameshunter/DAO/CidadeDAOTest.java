@@ -43,6 +43,8 @@ public class CidadeDAOTest {
 
 	@Test
 	public void pegaTodasCidadesDeUmEstado() {
+		
+		
 		cidades = cDAO.pega(estado);
 		assertThat(102, equalTo(cidades.size()));
 	}
