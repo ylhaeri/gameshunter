@@ -16,8 +16,8 @@ public class CidadeDAO implements BasicDbDAO {
 		this.manager = manager;
 	}
 
-	public List<Cidade> pega(Estado estado) {
-		Query query = manager.createQuery("Select c from Cidade as c "
+	public List<Cidade> pegaTodos(Estado estado) {
+		Query query = manager.createQuery("Select c from Cidade c "
 				+ "where c.estado= :pEstado");
 		query.setParameter("pEstado", estado);
 		@SuppressWarnings("unchecked")

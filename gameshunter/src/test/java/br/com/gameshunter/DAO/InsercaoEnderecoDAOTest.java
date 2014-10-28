@@ -67,6 +67,14 @@ public class InsercaoEnderecoDAOTest {
 
 		assertThat(estados.size(), equalTo(27));
 	}
+	
+	@Test
+	public void devePegarTodasAsCidades() {
+		
+		List<Cidade> cidades = cDao.pegaTodos(manager.find(Estado.class, 2));
+		
+		assertThat(cidades.size(), equalTo(102));
+	}
 
 	private Cidade formataCidade(String s) {
 

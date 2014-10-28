@@ -44,7 +44,7 @@ public class CidadeDAOTest {
 	public void pegaTodasCidadesDeUmEstado() {
 		
 		
-		cidades = cDAO.pega(estado);
+		cidades = cDAO.pegaTodos(estado);
 		assertThat(102, equalTo(cidades.size()));
 	}
 }
