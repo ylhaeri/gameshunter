@@ -22,11 +22,6 @@ public class PaisDAO implements BasicDbDAO {
 		return paises;
 	}
 
-	public void fechaConexao() {
-		this.manager.close();
-
-	}
-
 	public Pais pega(Integer id) {
 		return manager.find(Pais.class, id);
 	}

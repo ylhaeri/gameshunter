@@ -2,7 +2,6 @@ package br.com.gameshunter.DAO;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,10 +10,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-import org.apache.struts2.views.jsp.ui.FormTag;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -30,9 +27,6 @@ public class InsercaoEnderecoDAOTest {
 	private final static String txtCidade = "Cidade.txt";
 	private final static String txtEstado = "Estado.txt";
 	private final static String txtPais = "Pais.txt";
-	private static String infoCidade;
-	private static String infoEstado;
-	private static String infoPais;
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
@@ -51,12 +45,12 @@ public class InsercaoEnderecoDAOTest {
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
+		manager.getTransaction().begin();
 	}
 
 	@After
 	public void finaliza() {
 		manager.getTransaction().rollback();
-		manager.close();
 	}
 
 	@Test
@@ -64,10 +58,7 @@ public class InsercaoEnderecoDAOTest {
 
 		List<Pais> paises = pDao.pegaTodos();
 
-		System.out.println(paises);
-
 		assertThat(paises.size(), equalTo(2));
-
 	}
 
 	@Test
@@ -104,7 +95,6 @@ public class InsercaoEnderecoDAOTest {
 							builder.delete(0, builder.length());
 						} else if (j == 3) {
 							cod_estado = Integer.parseInt(builder.toString());
-							System.out.println(cod_estado);
 							builder.delete(0, builder.length());
 						}
 
@@ -113,11 +103,9 @@ public class InsercaoEnderecoDAOTest {
 					}
 
 					builder.append(s.charAt(i));
-
 				}
 			}
 		}
-
 		return cidade;
 	}
 
@@ -155,11 +143,9 @@ public class InsercaoEnderecoDAOTest {
 					}
 
 					builder.append(s.charAt(i));
-
 				}
 			}
 		}
-
 		return estado;
 	}
 
@@ -197,13 +183,10 @@ public class InsercaoEnderecoDAOTest {
 						j++;
 						continue;
 					}
-
 					builder.append(s.charAt(i));
-
 				}
 			}
 		}
-
 		return pais;
 	}
 
@@ -258,23 +241,17 @@ public class InsercaoEnderecoDAOTest {
 		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtCidade);
 		String cidades = br.readLine();
 
-		System.out.println("Chega aqui");
-
 		while (cidades != null) {
 			Cidade cidade = new InsercaoEnderecoDAOTest()
 					.formataCidade(cidades);
-
-			/*
-			 * cidade.setEstado(manager.find(Estado.class, cod_estado));
-			 * System.out.println(cidade); manager.persist(cidade); cidades =
-			 * br.readLine();
-			 */
+			cidade.setEstado(manager.find(Estado.class, cod_estado));
+			manager.persist(cidade);
+			cidades = br.readLine();
 		}
 
 		manager.getTransaction().commit();
-
+		manager.close();
 		br.close();
-
 	}
 
 	private BufferedReader carregaArquivo(String informacao) throws IOException {
@@ -283,5 +260,4 @@ public class InsercaoEnderecoDAOTest {
 		BufferedReader br = new BufferedReader(isr);
 		return br;
 	}
-
 }

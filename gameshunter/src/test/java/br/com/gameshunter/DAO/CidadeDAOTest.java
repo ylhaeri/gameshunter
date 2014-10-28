@@ -1,8 +1,7 @@
-/*package br.com.gameshunter.DAO;
+package br.com.gameshunter.DAO;
 
 import java.util.List;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import javax.persistence.EntityManager;
 
@@ -48,4 +47,4 @@ public class CidadeDAOTest {
 		cidades = cDAO.pega(estado);
 		assertThat(102, equalTo(cidades.size()));
 	}
-}*/
+}
