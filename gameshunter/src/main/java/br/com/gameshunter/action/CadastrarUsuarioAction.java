@@ -1,6 +1,7 @@
 package br.com.gameshunter.action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -86,10 +87,23 @@ public class CadastrarUsuarioAction {
 		meses.add("Dezembro");
 	}
 
-	public static void main(String[] args) {
-		CadastrarUsuarioAction teste = new CadastrarUsuarioAction();
-		teste.adicionaPaises();
-		List<Pais> paises = teste.getPaises();
-		System.out.println(paises.size() + "      " + paises.get(0).getNome());
+	private Integer itens;
+
+	public Integer getItens() {
+		return itens;
+	}
+
+	public void setItens(Integer itens) {
+		this.itens = itens;
+	}
+
+	public List<Integer> getArara() {
+		List<Integer> lista1 = Arrays.asList(1, 2, 3);
+		List<Integer> lista2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		System.out.println(itens);
+		if (itens < 10)
+			return lista1;
+		else
+			return lista2;
 	}
 }

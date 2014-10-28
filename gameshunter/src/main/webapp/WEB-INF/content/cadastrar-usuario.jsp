@@ -11,6 +11,19 @@
 <link rel="stylesheet" href="resources/css/gameshunter.css">
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
 <title>Cadastro - Games Hunter</title>
+<script src="resources/js/jquery-2.1.1.js"></script>
+<script>
+	function funcaoTeste() {
+		$.post("cadastrar-usuario", {
+			itens : 10
+		}, function() {
+			<c:forEach var="teste" items="${arara}">
+			$("#dpest").append("<option>${teste}</option>");
+			console.log("${teste}");
+			</c:forEach>
+		});
+	}
+</script>
 </head>
 <body class="container">
 	<h1 id="titulo">Cadastre-se</h1>
@@ -38,7 +51,7 @@
 		<label for="rg">RG</label><input type="text" id="rg" name="usuario.rg">
 		<br />
 		<label id="sexo" for="gndbx">Sexo</label><select name="usuario.sexo">
-			<option>---Selecione---</option>
+			<option selected="selected">---Selecione---</option>
 			<c:forEach var="sexo" items="${sexo}">
 				<option>${sexo}</option>
 			</c:forEach>
@@ -53,8 +66,8 @@
 			</c:forEach>
 		</select><select id="mesbox" name="nascMes">
 			<option selected="selected">Mês</option>
-			<c:forEach var="mes" items="${meses}" varStatus="status">
-				<option value="${status.index}">${mes}</option>
+			<c:forEach var="mes" items="${meses}">
+				<option>${mes}</option>
 			</c:forEach>
 		</select><select id="anobox" name="nascAno">
 			<option selected="selected">Ano</option>

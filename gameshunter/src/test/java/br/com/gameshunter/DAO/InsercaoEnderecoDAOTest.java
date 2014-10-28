@@ -30,6 +30,9 @@ public class InsercaoEnderecoDAOTest {
 	private final static String txtCidade = "Cidade.txt";
 	private final static String txtEstado = "Estado.txt";
 	private final static String txtPais = "Pais.txt";
+	private static String infoCidade;
+	private static String infoEstado;
+	private static String infoPais;
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
@@ -64,6 +67,7 @@ public class InsercaoEnderecoDAOTest {
 		System.out.println(paises);
 
 		assertThat(paises.size(), equalTo(2));
+
 	}
 
 	@Test
@@ -73,7 +77,7 @@ public class InsercaoEnderecoDAOTest {
 
 		assertThat(estados.size(), equalTo(27));
 	}
-	
+
 	private Cidade formataCidade(String s) {
 
 		Cidade cidade = new Cidade();
@@ -210,9 +214,7 @@ public class InsercaoEnderecoDAOTest {
 		BufferedReader br = new InsercaoEnderecoDAOTest()
 				.carregaArquivo(txtPais);
 		String paises = br.readLine();
-		
-		
-		
+
 		manager.getTransaction().begin();
 
 		while (paises != null) {
@@ -228,7 +230,7 @@ public class InsercaoEnderecoDAOTest {
 		br.close();
 
 		manager.getTransaction().begin();
-		
+
 		BufferedReader br1 = new InsercaoEnderecoDAOTest()
 				.carregaArquivo(txtEstado);
 		String estados = br1.readLine();
@@ -247,34 +249,32 @@ public class InsercaoEnderecoDAOTest {
 
 		br1.close();
 
-		for(int i = 1; i<28; i++){
-			
+		for (int i = 1; i < 28; i++) {
+
 		}
-		
-		
+
 		manager.getTransaction().begin();
-		
+
 		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtCidade);
 		String cidades = br.readLine();
 
 		System.out.println("Chega aqui");
-		
+
 		while (cidades != null) {
 			Cidade cidade = new InsercaoEnderecoDAOTest()
 					.formataCidade(cidades);
-			
-			/*cidade.setEstado(manager.find(Estado.class, cod_estado));
-			System.out.println(cidade);
-			manager.persist(cidade);
-			cidades = br.readLine();*/
+
+			/*
+			 * cidade.setEstado(manager.find(Estado.class, cod_estado));
+			 * System.out.println(cidade); manager.persist(cidade); cidades =
+			 * br.readLine();
+			 */
 		}
 
 		manager.getTransaction().commit();
-		
+
 		br.close();
 
-		
-		
 	}
 
 	private BufferedReader carregaArquivo(String informacao) throws IOException {
