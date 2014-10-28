@@ -1,38 +1,44 @@
 package br.com.gameshunter.action;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import br.com.gameshunter.DAO.EstadoDAO;
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
-public class CadastrarUsuarioAction {
+public class EstadoAction {
 
 	private Sexo[] sexo = Sexo.values();
 	private List<String> meses = new ArrayList<>();
 	private List<Integer> anos = new ArrayList<>();
 	private List<Pais> paises = new ArrayList<>();
+	private List<Estado> estados = new ArrayList<>();
 
-	@Action(value = "cadastrar-usuario", results = {
+	@Action(value = "carregaEstado", results = {
 
 	@Result(name = "ok", location = "cadastrar-usuario.jsp") })
 	public String execute() {
-		adicionaMeses();
-		adicionaAnos();
-		adicionaPaises();
+
+		adicionaEstado();
+
 		return "ok";
 	}
 
-	private void adicionaPaises() {
-		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
-		this.paises = pDao.pegaTodos();
-		pDao.close();
+	private void adicionaEstado() {
+		Pais p = new Pais();
+		p.setId(1);
+
+		EstadoDAO pDao = new EstadoDAO(new JPAUtil().getEntityManager());
+		this.estados = pDao.pegaTodos(p);
+		pDao.fechaConexao();
 	}
 
 	public Sexo[] getSexo() {
@@ -67,40 +73,12 @@ public class CadastrarUsuarioAction {
 		this.paises = paises;
 	}
 
-	private void adicionaAnos() {
-		for (int a = 2004; a >= 1900; a--)
-			anos.add(a);
+	public List<Estado> getEstados() {
+		return estados;
 	}
 
-	private void adicionaMeses() {
-		meses.add("Janeiro");
-		meses.add("Fevereiro");
-		meses.add("Março");
-		meses.add("Abril");
-		meses.add("Maio");
-		meses.add("Junho");
-		meses.add("Julho");
-		meses.add("Agosto");
-		meses.add("Setembro");
-		meses.add("Outubro");
-		meses.add("Novembro");
-		meses.add("Dezembro");
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
 	}
 
-	private Integer itens;
-
-	public Integer getItens() {
-		return itens;
-	}
-
-	public void setItens(Integer itens) {
-		this.itens = itens;
-	}
-
-	public List<Integer> getArara() {
-		List<Integer> lista1 = Arrays.asList(1, 2, 3);
-		List<Integer> lista2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		System.out.println(itens);
-		return lista2;
-	}
 }

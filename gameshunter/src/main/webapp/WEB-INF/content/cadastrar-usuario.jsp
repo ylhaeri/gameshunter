@@ -18,10 +18,17 @@
 			itens : 10
 		}, function() {
 			<c:forEach var="teste" items="${arara}">
-			$("#dpest").append("<option>${teste}</option>");
+			$("#dpest").append("<option  >${teste}</option>");
 			console.log("${teste}");
 			</c:forEach>
 		});
+	}
+	
+	
+	function testeEstado(){
+		document.forms[0].action = "carregaEstado";
+		document.forms[0].submit();
+		
 	}
 </script>
 </head>
