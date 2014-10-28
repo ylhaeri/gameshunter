@@ -62,4 +62,11 @@ public class Pais {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return " " + id + " " + nome + " " + sigla;
+	}
+	
+	
 }

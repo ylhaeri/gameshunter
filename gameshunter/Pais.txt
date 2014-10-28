@@ -1,1 +1,2 @@
-(1, 'Brasil', 'BR')
+(1, 'Brasil', 'BR'),
+(2, 'Estados Unidos', 'US');

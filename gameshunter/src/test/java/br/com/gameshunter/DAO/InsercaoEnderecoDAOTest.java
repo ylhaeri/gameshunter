@@ -2,6 +2,7 @@ package br.com.gameshunter.DAO;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,9 +33,7 @@ public class InsercaoEnderecoDAOTest {
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
-	private List<Pais> paises;
-	private List<Estado> estados;
-	private List<Cidade> cidades;
+	private static int cod_estado;
 
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
@@ -45,10 +44,10 @@ public class InsercaoEnderecoDAOTest {
 
 	@Before
 	public void inicia() {
+
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
-		manager.getTransaction().begin();
 	}
 
 	@After
@@ -58,16 +57,24 @@ public class InsercaoEnderecoDAOTest {
 	}
 
 	@Test
-	public void pegaPaises(){
-		
+	public void pegaPaises() {
+
 		List<Pais> paises = pDao.pegaTodos();
-		
+
 		System.out.println(paises);
-		
-		assertThat(2, equalTo(paises.size()));
+
+		assertThat(paises.size(), equalTo(2));
 	}
 
-	public Cidade formataCidade(String s) {
+	@Test
+	public void pegaEstado() {
+
+		List<Estado> estados = eDao.pegaTodos(manager.find(Pais.class, 1));
+
+		assertThat(estados.size(), equalTo(27));
+	}
+	
+	private Cidade formataCidade(String s) {
 
 		Cidade cidade = new Cidade();
 		StringBuilder builder = new StringBuilder();
@@ -91,6 +98,10 @@ public class InsercaoEnderecoDAOTest {
 						else if (j == 2) {
 							cidade.setNome(builder.toString());
 							builder.delete(0, builder.length());
+						} else if (j == 3) {
+							cod_estado = Integer.parseInt(builder.toString());
+							System.out.println(cod_estado);
+							builder.delete(0, builder.length());
 						}
 
 						j++;
@@ -106,7 +117,7 @@ public class InsercaoEnderecoDAOTest {
 		return cidade;
 	}
 
-	public Estado formataEstado(String s) {
+	private Estado formataEstado(String s) {
 
 		Estado estado = new Estado();
 		StringBuilder builder = new StringBuilder();
@@ -148,7 +159,7 @@ public class InsercaoEnderecoDAOTest {
 		return estado;
 	}
 
-	public Pais formataPais(String s) {
+	private Pais formataPais(String s) {
 
 		Pais pais = new Pais();
 		StringBuilder builder = new StringBuilder();
@@ -192,19 +203,85 @@ public class InsercaoEnderecoDAOTest {
 		return pais;
 	}
 
-	public void carregaDados() throws IOException {
+	private void carregaDados() throws IOException {
 
-		InputStream is = new FileInputStream(txtPais);
-		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		String resultado = br.readLine();
+		EntityManager manager = new JPAUtil().getEntityManager();
 
-		while (resultado != null) {
-			Pais pais = new InsercaoEnderecoDAOTest().formataPais(resultado);
+		BufferedReader br = new InsercaoEnderecoDAOTest()
+				.carregaArquivo(txtPais);
+		String paises = br.readLine();
+		
+		
+		
+		manager.getTransaction().begin();
+
+		while (paises != null) {
+			Pais pais = new InsercaoEnderecoDAOTest().formataPais(paises);
+
 			manager.persist(pais);
-			resultado = br.readLine();
+
+			paises = br.readLine();
+		}
+
+		manager.getTransaction().commit();
+
+		br.close();
+
+		manager.getTransaction().begin();
+		
+		BufferedReader br1 = new InsercaoEnderecoDAOTest()
+				.carregaArquivo(txtEstado);
+		String estados = br1.readLine();
+
+		while (estados != null) {
+			Estado estado = new InsercaoEnderecoDAOTest()
+					.formataEstado(estados);
+			estado.setPais(manager.find(Pais.class, 1));
+
+			manager.persist(estado);
+
+			estados = br1.readLine();
+		}
+
+		manager.getTransaction().commit();
+
+		br1.close();
+
+		for(int i = 1; i<28; i++){
+			
 		}
 		
+		
+		manager.getTransaction().begin();
+		
+		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtCidade);
+		String cidades = br.readLine();
+
+		System.out.println("Chega aqui");
+		
+		while (cidades != null) {
+			Cidade cidade = new InsercaoEnderecoDAOTest()
+					.formataCidade(cidades);
+			
+			/*cidade.setEstado(manager.find(Estado.class, cod_estado));
+			System.out.println(cidade);
+			manager.persist(cidade);
+			cidades = br.readLine();*/
+		}
+
+		manager.getTransaction().commit();
+		
+		br.close();
+
+		
+		
+	}
+
+	private BufferedReader carregaArquivo(String informacao) throws IOException {
+		InputStream is = new FileInputStream(informacao);
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		return br;
 	}
 
 }

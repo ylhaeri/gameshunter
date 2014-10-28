@@ -45,7 +45,7 @@ public class EstadoDAOTest {
 	
 	@Test
 	public void pegaTodosEstadosDeUmPais() {
-		estados = eDAO.pega(pais);
+		estados = eDAO.pegaTodos(pais);
 		assertThat(27, equalTo(estados.size()));
 		
 	}
