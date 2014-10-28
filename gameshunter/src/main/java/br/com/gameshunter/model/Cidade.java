@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Cidade {
 
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -69,5 +71,10 @@ public class Cidade {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "" + id + " " + nome + " " + estado;
 	}
 }

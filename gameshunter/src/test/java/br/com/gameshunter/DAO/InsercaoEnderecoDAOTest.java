@@ -36,7 +36,7 @@ public class InsercaoEnderecoDAOTest {
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
-	private static int cod_estado;
+	private static Integer cod_estado;
 
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
@@ -47,7 +47,7 @@ public class InsercaoEnderecoDAOTest {
 
 	@Before
 	public void inicia() {
-
+		manager.getTransaction().begin();
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
@@ -56,15 +56,13 @@ public class InsercaoEnderecoDAOTest {
 	@After
 	public void finaliza() {
 		manager.getTransaction().rollback();
-		manager.close();
+		
 	}
 
 	@Test
 	public void pegaPaises() {
 
 		List<Pais> paises = pDao.pegaTodos();
-
-		System.out.println(paises);
 
 		assertThat(paises.size(), equalTo(2));
 
@@ -101,10 +99,11 @@ public class InsercaoEnderecoDAOTest {
 							builder.delete(0, builder.length());
 						else if (j == 2) {
 							cidade.setNome(builder.toString());
+
 							builder.delete(0, builder.length());
 						} else if (j == 3) {
 							cod_estado = Integer.parseInt(builder.toString());
-							System.out.println(cod_estado);
+
 							builder.delete(0, builder.length());
 						}
 
@@ -258,17 +257,12 @@ public class InsercaoEnderecoDAOTest {
 		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtCidade);
 		String cidades = br.readLine();
 
-		System.out.println("Chega aqui");
-
 		while (cidades != null) {
 			Cidade cidade = new InsercaoEnderecoDAOTest()
 					.formataCidade(cidades);
-
-			/*
-			 * cidade.setEstado(manager.find(Estado.class, cod_estado));
-			 * System.out.println(cidade); manager.persist(cidade); cidades =
-			 * br.readLine();
-			 */
+			cidade.setEstado(manager.find(Estado.class, cod_estado));
+			manager.persist(cidade);
+			cidades = br.readLine();
 		}
 
 		manager.getTransaction().commit();
