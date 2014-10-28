@@ -56,7 +56,7 @@ public class InsercaoEnderecoDAOTest {
 	@After
 	public void finaliza() {
 		manager.getTransaction().rollback();
-		
+
 	}
 
 	@Test
@@ -230,9 +230,8 @@ public class InsercaoEnderecoDAOTest {
 
 		manager.getTransaction().begin();
 
-		BufferedReader br1 = new InsercaoEnderecoDAOTest()
-				.carregaArquivo(txtEstado);
-		String estados = br1.readLine();
+		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtEstado);
+		String estados = br.readLine();
 
 		while (estados != null) {
 			Estado estado = new InsercaoEnderecoDAOTest()
@@ -241,16 +240,12 @@ public class InsercaoEnderecoDAOTest {
 
 			manager.persist(estado);
 
-			estados = br1.readLine();
+			estados = br.readLine();
 		}
 
 		manager.getTransaction().commit();
 
-		br1.close();
-
-		for (int i = 1; i < 28; i++) {
-
-		}
+		br.close();
 
 		manager.getTransaction().begin();
 
