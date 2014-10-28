@@ -14,7 +14,14 @@
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script>
 	function funcaoTeste() {
-		$.get("cadastrar-usuario");
+		$.post("cadastrar-usuario", {
+			itens : 10
+		}, function() {
+			<c:forEach var="teste" items="${arara}">
+			$("#dpest").append("<option>${teste}</option>");
+			console.log("${teste}");
+			</c:forEach>
+		});
 	}
 </script>
 </head>
@@ -59,8 +66,8 @@
 			</c:forEach>
 		</select><select id="mesbox" name="nascMes">
 			<option selected="selected">Mês</option>
-			<c:forEach var="mes" items="${meses}" varStatus="status">
-				<option value="${status.index}">${mes}</option>
+			<c:forEach var="mes" items="${meses}">
+				<option>${mes}</option>
 			</c:forEach>
 		</select><select id="anobox" name="nascAno">
 			<option selected="selected">Ano</option>

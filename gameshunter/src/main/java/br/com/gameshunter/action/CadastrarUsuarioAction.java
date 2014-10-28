@@ -28,7 +28,7 @@ public class CadastrarUsuarioAction {
 		adicionaPaises();
 		return "ok";
 	}
-	
+
 	private void adicionaPaises() {
 		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
 		this.paises = pDao.pegaTodos();
@@ -87,10 +87,23 @@ public class CadastrarUsuarioAction {
 		meses.add("Dezembro");
 	}
 
-	public static void main(String[] args) {
-		CadastrarUsuarioAction teste = new CadastrarUsuarioAction();
-		teste.adicionaPaises();
-		List<Pais> paises = teste.getPaises();
-		System.out.println(paises.size() + "      " + paises.get(0).getNome());
+	private Integer itens;
+
+	public Integer getItens() {
+		return itens;
+	}
+
+	public void setItens(Integer itens) {
+		this.itens = itens;
+	}
+
+	public List<Integer> getArara() {
+		List<Integer> lista1 = Arrays.asList(1, 2, 3);
+		List<Integer> lista2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		System.out.println(itens);
+		if (itens < 10)
+			return lista1;
+		else
+			return lista2;
 	}
 }
