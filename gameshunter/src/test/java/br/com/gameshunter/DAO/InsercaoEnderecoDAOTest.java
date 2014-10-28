@@ -30,7 +30,7 @@ public class InsercaoEnderecoDAOTest {
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
-	private static int cod_estado;
+	private static Integer cod_estado;
 
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
@@ -41,7 +41,6 @@ public class InsercaoEnderecoDAOTest {
 
 	@Before
 	public void inicia() {
-
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
@@ -92,6 +91,7 @@ public class InsercaoEnderecoDAOTest {
 							builder.delete(0, builder.length());
 						else if (j == 2) {
 							cidade.setNome(builder.toString());
+
 							builder.delete(0, builder.length());
 						} else if (j == 3) {
 							cod_estado = Integer.parseInt(builder.toString());
@@ -214,9 +214,8 @@ public class InsercaoEnderecoDAOTest {
 
 		manager.getTransaction().begin();
 
-		BufferedReader br1 = new InsercaoEnderecoDAOTest()
-				.carregaArquivo(txtEstado);
-		String estados = br1.readLine();
+		br = new InsercaoEnderecoDAOTest().carregaArquivo(txtEstado);
+		String estados = br.readLine();
 
 		while (estados != null) {
 			Estado estado = new InsercaoEnderecoDAOTest()
@@ -225,16 +224,12 @@ public class InsercaoEnderecoDAOTest {
 
 			manager.persist(estado);
 
-			estados = br1.readLine();
+			estados = br.readLine();
 		}
 
 		manager.getTransaction().commit();
 
-		br1.close();
-
-		for (int i = 1; i < 28; i++) {
-
-		}
+		br.close();
 
 		manager.getTransaction().begin();
 
