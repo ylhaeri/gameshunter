@@ -1,14 +1,15 @@
 package br.com.gameshunter.action;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import br.com.gameshunter.DAO.EstadoDAO;
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
@@ -86,24 +87,19 @@ public class CadastrarUsuarioAction {
 		meses.add("Novembro");
 		meses.add("Dezembro");
 	}
-
-	private Integer itens;
-
-	public Integer getItens() {
-		return itens;
+	
+	private Integer idPais = 0;
+	public List<Estado> getEstados() {
+		System.out.println(idPais);
+		Pais pais = new PaisDAO(new JPAUtil().getEntityManager()).pega(idPais);
+		return new EstadoDAO(new JPAUtil().getEntityManager()).pegaTodos(pais);
 	}
 
-	public void setItens(Integer itens) {
-		this.itens = itens;
+	public Integer getIdPais() {
+		return idPais;
 	}
 
-	public List<Integer> getArara() {
-		List<Integer> lista1 = Arrays.asList(1, 2, 3);
-		List<Integer> lista2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		System.out.println(itens);
-		if (itens < 10)
-			return lista1;
-		else
-			return lista2;
+	public void setIdPais(Integer idPais) {
+		this.idPais = idPais;
 	}
 }

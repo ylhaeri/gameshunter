@@ -15,10 +15,10 @@
 <script>
 	function funcaoTeste() {
 		$.post("cadastrar-usuario", {
-			itens : 10
+			idPais : 1
 		}, function() {
-			<c:forEach var="teste" items="${arara}">
-			$("#dpest").append("<option>${teste}</option>");
+			<c:forEach var="estado" items="${estados}">
+			$("#dpest").append("<option>${estado.nome}</option>");
 			console.log("${teste}");
 			</c:forEach>
 		});

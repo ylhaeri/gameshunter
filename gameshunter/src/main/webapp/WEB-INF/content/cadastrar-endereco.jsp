@@ -20,9 +20,6 @@ name="endereco.complemento">
 </select>
 <label id="estado">Estado</label><select id="dpest" name="endereco.estado">
 	<option selected="selected">Selecione um estado</option>
-	<c:forEach var="estado" items="${estados}">
-		<option>${estado.nome}</option>
-	</c:forEach>
 </select>
 <label id="cidade">Cidade</label><select name="endereco.cidade">
 	<option selected="selected">Selecione uma cidade</option>
