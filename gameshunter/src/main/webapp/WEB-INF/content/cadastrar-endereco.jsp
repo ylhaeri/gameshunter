@@ -12,13 +12,13 @@ name="endereco.complemento">
 <br />
 <label for="bairrot">Bairro</label><input type="text" id="bairrot" name="endereco.bairro">
 <br />
-<label id="pais">País</label><select name="endereco.pais" onchange="funcaoTeste()">
+<label id="pais">País</label><select name="endereco.pais" id="dpais" onchange="crEst()">
 	<option selected="selected">Selecione um país</option>
-	<c:forEach var="pais" items="${paises}" varStatus="status">
+	<c:forEach var="pais" items="${paises}">
 		<option value="${pais.id}">${pais.nome}</option>
 	</c:forEach>
 </select>
-<label id="estado">Estado</label><select id="dpest" name="endereco.estado" onchange="teste()">
+<label id="estado">Estado</label><select id="dpest" name="endereco.estado" onchange="crCid()">
 	<option selected="selected">Selecione um estado</option>
 </select>
 <label id="cidade">Cidade</label><select name="endereco.cidade" id="dpcid">

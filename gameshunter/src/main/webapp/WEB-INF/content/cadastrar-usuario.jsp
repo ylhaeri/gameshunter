@@ -13,54 +13,30 @@
 <title>Cadastro - Games Hunter</title>
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script>
-	function funcaoTeste() {
-		<c:forEach var="estado" items="${estados}">
-		$("#dpest").append("<option>${estado.nome}</option>");
-		</c:forEach>
-		<c:forEach var="teste" items="${testeOsvaldinho}">
-		$("#sexo").append("<h1>${teste.nome}</h1>")
-		</c:forEach>
+	function crEst() {
+		var pais = document.querySelector("#dpais");
+		var pid = pais.options[pais.selectedIndex].value;
+		$.get("carregaEstado", {
+			idP : pid
+		}, function() {
+			$("#dpest").html(
+					"<option selected='selected'>"
+							+ "Selecione um estado</option>");
+			<c:forEach var="estado" items="${estDP}">
+			$("#dpest").append(
+					"<option value=${estado.id}>${estado.nome}</option>");
+			</c:forEach>
+		})
 	}
 
-	function teste() {
-		var select = document.getElementById("dpest");
-		var opcao = select.options[select.selectedIndex].text;
-		if (opcao == "Acre") {
-			$("#dpcid").html(
-					"<option selected='selected'>Selecione uma"
-							+ " cidade</option>");
-			<c:forEach var="cidade" items="${cidadesAcre}">
-			$("#dpcid").append("<option>${cidade.nome}</option>")
-			</c:forEach>
-		} else if (opcao == "Alagoas") {
-			$("#dpcid").html(
-					"<option selected='selected'>Selecione uma"
-							+ " cidade</option>");
-			<c:forEach var="cidade" items="${cidadesAlagoas}">
-			$("#dpcid").append("<option>${cidade.nome}</option>")
-			</c:forEach>
-		} else if (opcao == "Amazonas") {
-			$("#dpcid").html(
-					"<option selected='selected'>Selecione uma"
-							+ " cidade</option>");
-			<c:forEach var="cidade" items="${cidadesAmazonas}">
-			$("#dpcid").append("<option>${cidade.nome}</option>")
-			</c:forEach>
-		} else if (opcao == "Amapá") {
-			$("#dpcid").html(
-					"<option selected='selected'>Selecione uma"
-							+ " cidade</option>");
-			<c:forEach var="cidade" items="${cidadesAmapa}">
-			$("#dpcid").append("<option>${cidade.nome}</option>")
-			</c:forEach>
-		} else if (opcao == "Bahia") {
-			$("#dpcid").html(
-					"<option selected='selected'>Selecione uma"
-							+ " cidade</option>");
-			<c:forEach var="cidade" items="${cidadesBahia}">
-			$("#dpcid").append("<option>${cidade.nome}</option>")
-			</c:forEach>
-		}
+	function crCid() {
+		var estado = document.querySelector("#dpest");
+		var eid = estado.options[estado.selectedIndex].value;
+		$.get("carregaCidade", {
+			idE : eid
+		}, function() {
+			$("#dpcid").html("<option>teste</option>")
+		})
 	}
 
 	function testeEstado() {
