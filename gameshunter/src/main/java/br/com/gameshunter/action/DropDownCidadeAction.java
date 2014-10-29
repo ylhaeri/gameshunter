@@ -1,7 +1,19 @@
 package br.com.gameshunter.action;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+
+import br.com.gameshunter.DAO.CidadeDAO;
+import br.com.gameshunter.DAO.EstadoDAO;
+import br.com.gameshunter.DAO.JPAUtil;
+import br.com.gameshunter.model.Cidade;
+import br.com.gameshunter.model.Estado;
+
+import com.opensymphony.xwork2.ActionContext;
 
 public class DropDownCidadeAction {
 
@@ -17,7 +29,13 @@ public class DropDownCidadeAction {
 	}
 
 	private void carregaCidades() {
-		System.out.println("Carregando " + idE);
+		EntityManager manager = new JPAUtil().getEntityManager();
+		EstadoDAO eDao = new EstadoDAO(manager);
+		Estado estado = eDao.pega(idE);
+		CidadeDAO cDao = new CidadeDAO(manager);
+		List<Cidade> cidades = cDao.pegaTodos(estado);
+		ActionContext.getContext().getSession().put("cidDP", cidades);
+		manager.close();
 	}
 
 	public Integer getIdE() {

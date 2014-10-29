@@ -16,7 +16,7 @@
 	function crEst() {
 		var pais = document.querySelector("#dpais");
 		var pid = pais.options[pais.selectedIndex].value;
-		$.get("carregaEstado", {
+		$.post("carregaEstado", {
 			idP : pid
 		}, function() {
 			$("#dpest").html(
@@ -32,10 +32,16 @@
 	function crCid() {
 		var estado = document.querySelector("#dpest");
 		var eid = estado.options[estado.selectedIndex].value;
-		$.get("carregaCidade", {
+		$.post("carregaCidade", {
 			idE : eid
 		}, function() {
-			$("#dpcid").html("<option>teste</option>")
+			$("#dpcid").html(
+					"<option selected='selected'>"
+							+ "Selecione uma cidade</option>");
+			<c:forEach var="cidade" items="${cidDP}">
+			$("#dpcid").append(
+					"<option value=${cidade.id}>${cidade.nome}</option>")
+			</c:forEach>
 		})
 	}
 
