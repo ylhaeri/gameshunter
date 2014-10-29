@@ -8,6 +8,9 @@
 	<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>
 	</welcome-file-list>
+	<listener>
+		<listener-class>br.com.gameshunter.listener.ContextListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

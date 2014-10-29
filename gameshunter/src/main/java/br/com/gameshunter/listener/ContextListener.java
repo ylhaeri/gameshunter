@@ -7,8 +7,7 @@ public class ContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out
-				.println("Listener iniciado!!!! hueuhehuehueuehuehueehueu brbrbrbrbrbrbbrbrbrbasdjsaadsids asfasd");
+		System.out.println("Huehuehuheumeuseseprecisar");
 	}
 
 	@Override
