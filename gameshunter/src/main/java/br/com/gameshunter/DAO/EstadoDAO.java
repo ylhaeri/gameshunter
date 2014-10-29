@@ -28,4 +28,8 @@ public class EstadoDAO {
 	public void fechaConexao() {
 		this.manager.close();
 	}
+
+	public Estado pega(Integer id) {
+		return manager.find(Estado.class, id);
+	}
 }
