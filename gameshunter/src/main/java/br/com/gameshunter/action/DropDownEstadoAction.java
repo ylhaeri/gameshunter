@@ -2,6 +2,8 @@ package br.com.gameshunter.action;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -22,12 +24,18 @@ public class DropDownEstadoAction {
 	@Result(name = "ok", type = "json") })
 	public String execute() {
 
+		pegaEstados();
+		return "ok";
+	}
+
+	private void pegaEstados() {
+		EntityManager manager = new JPAUtil().getEntityManager();
+
 		Pais pais = new Pais();
 		pais.setId(idP);
 
-		estados = new EstadoDAO(new JPAUtil().getEntityManager())
-				.pegaTodos(pais);
-		return "ok";
+		estados = new EstadoDAO(manager).pegaTodos(pais);
+		manager.close();
 	}
 
 	public List<Estado> getEstados() {

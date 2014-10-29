@@ -1,8 +1,11 @@
 @CHARSET "ISO-8859-1";
 
+.cadastro *:not(select):not(option) {
+	display: inline-block;
+}
+
 .cadastro * {
 	margin-bottom: 1%;
-	display: inline-block;
 }
 
 .cadastro label input {
@@ -41,7 +44,6 @@
 #mesbox, #anobox {
 	margin-right: 1%;
 	margin-left: 1%;
-	width: auto;
 }
 
 .endereco {

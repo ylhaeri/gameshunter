@@ -9,7 +9,6 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.DAO.CidadeDAO;
-import br.com.gameshunter.DAO.EstadoDAO;
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
@@ -31,10 +30,11 @@ public class DropDownCidadeAction {
 
 	private void carregaCidades() {
 		EntityManager manager = new JPAUtil().getEntityManager();
-		EstadoDAO eDao = new EstadoDAO(manager);
-		Estado estado = eDao.pega(idE);
-		CidadeDAO cDao = new CidadeDAO(manager);
-		cidades = cDao.pegaTodos(estado);
+
+		Estado estado = new Estado();
+		estado.setId(idE);
+
+		cidades = new CidadeDAO(manager).pegaTodos(estado);
 		manager.close();
 	}
 

@@ -50,6 +50,7 @@
 		<br />
 		<select id="diabox" name="nascDia">
 			<option selected="selected">Dia</option>
+			<br>
 			<c:forEach var="dia" begin="1" end="31">
 				<option>${dia}</option>
 			</c:forEach>
