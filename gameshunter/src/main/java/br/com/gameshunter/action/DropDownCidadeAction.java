@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.DAO.CidadeDAO;
@@ -13,15 +14,15 @@ import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 
-import com.opensymphony.xwork2.ActionContext;
-
+@ParentPackage("json-default")
 public class DropDownCidadeAction {
 
 	private Integer idE;
-	
+	private List<Cidade> cidades;
+
 	@Action(value = "carregaCidade", results = {
 
-	@Result(name = "ok", type = "httpheader", params = { "status", "200" }) })
+	@Result(name = "ok", type = "json") })
 	public String cidades() {
 
 		carregaCidades();
@@ -33,16 +34,15 @@ public class DropDownCidadeAction {
 		EstadoDAO eDao = new EstadoDAO(manager);
 		Estado estado = eDao.pega(idE);
 		CidadeDAO cDao = new CidadeDAO(manager);
-		List<Cidade> cidades = cDao.pegaTodos(estado);
-		ActionContext.getContext().getSession().put("cidDP", cidades);
+		cidades = cDao.pegaTodos(estado);
 		manager.close();
-	}
-
-	public Integer getIdE() {
-		return idE;
 	}
 
 	public void setIdE(Integer idE) {
 		this.idE = idE;
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
 }

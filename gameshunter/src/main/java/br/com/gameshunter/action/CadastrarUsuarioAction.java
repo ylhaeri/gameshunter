@@ -1,22 +1,26 @@
 package br.com.gameshunter.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.model.Cidade;
+import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
-public class CadastrarUsuarioAction {
+public class CadastrarUsuarioAction extends CatalogoDeEstados {
 
 	private Sexo[] sexo = Sexo.values();
 	private List<String> meses = new ArrayList<>();
 	private List<Integer> anos = new ArrayList<>();
-	private List<Pais> paises = new ArrayList<>();
+	private Map<String, Pais> paises = new HashMap<>();
 
 	@Action(value = "cadastrar-usuario", results = {
 
@@ -30,8 +34,12 @@ public class CadastrarUsuarioAction {
 
 	private void adicionaPaises() {
 		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
-		this.paises = pDao.pegaTodos();
+		List<Pais> listaPaises = pDao.pegaTodos();
 		pDao.close();
+		for (Pais pais : listaPaises) {
+			
+			this.paises.put(pais.getSigla(), pais);
+		}
 	}
 
 	public Sexo[] getSexo() {
@@ -58,12 +66,8 @@ public class CadastrarUsuarioAction {
 		this.anos = anos;
 	}
 
-	public List<Pais> getPaises() {
+	public Map<String, Pais> getPaises() {
 		return paises;
-	}
-
-	public void setPaises(List<Pais> paises) {
-		this.paises = paises;
 	}
 
 	private void adicionaAnos() {
@@ -84,5 +88,9 @@ public class CadastrarUsuarioAction {
 		meses.add("Outubro");
 		meses.add("Novembro");
 		meses.add("Dezembro");
+	}
+	
+	public List<Estado> getEstadosBrasil() {
+		return new CatalogoDeEstados().getEstados(paises.get("BR"));
 	}
 }

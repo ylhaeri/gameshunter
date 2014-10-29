@@ -12,44 +12,7 @@
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
 <title>Cadastro - Games Hunter</title>
 <script src="resources/js/jquery-2.1.1.js"></script>
-<script>
-	function crEst() {
-		var pais = document.querySelector("#dpais");
-		var pid = pais.options[pais.selectedIndex].value;
-		$.post("carregaEstado", {
-			idP : pid
-		}, function() {
-			$("#dpest").html(
-					"<option selected='selected'>"
-							+ "Selecione um estado</option>");
-			<c:forEach var="estado" items="${estDP}">
-			$("#dpest").append(
-					"<option value=${estado.id}>${estado.nome}</option>");
-			</c:forEach>
-		})
-	}
-
-	function crCid() {
-		var estado = document.querySelector("#dpest");
-		var eid = estado.options[estado.selectedIndex].value;
-		$.post("carregaCidade", {
-			idE : eid
-		}, function() {
-			$("#dpcid").html(
-					"<option selected='selected'>"
-							+ "Selecione uma cidade</option>");
-			<c:forEach var="cidade" items="${cidDP}">
-			$("#dpcid").append(
-					"<option value=${cidade.id}>${cidade.nome}</option>")
-			</c:forEach>
-		})
-	}
-
-	function testeEstado() {
-		document.forms[0].action = "carregaEstado";
-		document.forms[0].submit();
-	}
-</script>
+<script src="resources/js/cadastrar-endereco.js"></script>
 </head>
 <body class="container">
 	<h1 id="titulo">Cadastre-se</h1>

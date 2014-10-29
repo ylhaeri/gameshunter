@@ -15,7 +15,7 @@ name="endereco.complemento">
 <label id="pais">País</label><select name="endereco.pais" id="dpais" onchange="crEst()">
 	<option selected="selected">Selecione um país</option>
 	<c:forEach var="pais" items="${paises}">
-		<option value="${pais.id}">${pais.nome}</option>
+		<option value="${pais.value.id}">${pais.value.nome}</option>
 	</c:forEach>
 </select>
 <label id="estado">Estado</label><select id="dpest" name="endereco.estado" onchange="crCid()">
