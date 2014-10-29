@@ -35,7 +35,6 @@ public class EstadoAction {
 	private void adicionaEstado() {
 		Pais p = new Pais();
 		p.setId(1);
-
 		EstadoDAO pDao = new EstadoDAO(new JPAUtil().getEntityManager());
 		this.estados = pDao.pegaTodos(p);
 		pDao.fechaConexao();
