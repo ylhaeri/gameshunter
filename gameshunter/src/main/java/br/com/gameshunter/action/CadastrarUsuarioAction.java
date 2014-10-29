@@ -6,9 +6,11 @@ import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import br.com.gameshunter.DAO.CidadeDAO;
 import br.com.gameshunter.DAO.EstadoDAO;
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
@@ -87,19 +89,39 @@ public class CadastrarUsuarioAction {
 		meses.add("Novembro");
 		meses.add("Dezembro");
 	}
-	
-	private Integer idPais = 0;
+
+	private List<Estado> estados;
+
 	public List<Estado> getEstados() {
-		System.out.println(idPais);
-		Pais pais = new PaisDAO(new JPAUtil().getEntityManager()).pega(idPais);
-		return new EstadoDAO(new JPAUtil().getEntityManager()).pegaTodos(pais);
+		Pais pais = new PaisDAO(new JPAUtil().getEntityManager()).pega(1);
+		estados = new EstadoDAO(new JPAUtil().getEntityManager())
+				.pegaTodos(pais);
+		return estados;
 	}
 
-	public Integer getIdPais() {
-		return idPais;
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
 	}
 
-	public void setIdPais(Integer idPais) {
-		this.idPais = idPais;
+	public List<Cidade> getCidadesAcre() {
+		return new CidadeDAO(new JPAUtil().getEntityManager())
+				.pegaTodos(estados.get(0));
+	}
+
+	public List<Cidade> getCidadesAlagoas() {
+		return new CidadeDAO(new JPAUtil().getEntityManager())
+				.pegaTodos(estados.get(1));
+	}
+	public List<Cidade> getCidadesAmazonas() {
+		return new CidadeDAO(new JPAUtil().getEntityManager())
+		.pegaTodos(estados.get(2));
+	}
+	public List<Cidade> getCidadesAmapa() {
+		return new CidadeDAO(new JPAUtil().getEntityManager())
+		.pegaTodos(estados.get(3));
+	}
+	public List<Cidade> getCidadesBahia() {
+		return new CidadeDAO(new JPAUtil().getEntityManager())
+		.pegaTodos(estados.get(4));
 	}
 }

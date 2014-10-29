@@ -14,14 +14,58 @@
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script>
 	function funcaoTeste() {
-		$.post("cadastrar-usuario", {
-			idPais : 1
-		}, function() {
-			<c:forEach var="estado" items="${estados}">
-			$("#dpest").append("<option>${estado.nome}</option>");
-			console.log("${teste}");
+		<c:forEach var="estado" items="${estados}">
+		$("#dpest").append("<option>${estado.nome}</option>");
+		</c:forEach>
+		<c:forEach var="teste" items="${testeOsvaldinho}">
+		$("#sexo").append("<h1>${teste.nome}</h1>")
+		</c:forEach>
+	}
+
+	function teste() {
+		var select = document.getElementById("dpest");
+		var opcao = select.options[select.selectedIndex].text;
+		if (opcao == "Acre") {
+			$("#dpcid").html(
+					"<option selected='selected'>Selecione uma"
+							+ " cidade</option>");
+			<c:forEach var="cidade" items="${cidadesAcre}">
+			$("#dpcid").append("<option>${cidade.nome}</option>")
 			</c:forEach>
-		});
+		} else if (opcao == "Alagoas") {
+			$("#dpcid").html(
+					"<option selected='selected'>Selecione uma"
+							+ " cidade</option>");
+			<c:forEach var="cidade" items="${cidadesAlagoas}">
+			$("#dpcid").append("<option>${cidade.nome}</option>")
+			</c:forEach>
+		} else if (opcao == "Amazonas") {
+			$("#dpcid").html(
+					"<option selected='selected'>Selecione uma"
+							+ " cidade</option>");
+			<c:forEach var="cidade" items="${cidadesAmazonas}">
+			$("#dpcid").append("<option>${cidade.nome}</option>")
+			</c:forEach>
+		} else if (opcao == "Amapá") {
+			$("#dpcid").html(
+					"<option selected='selected'>Selecione uma"
+							+ " cidade</option>");
+			<c:forEach var="cidade" items="${cidadesAmapa}">
+			$("#dpcid").append("<option>${cidade.nome}</option>")
+			</c:forEach>
+		} else if (opcao == "Bahia") {
+			$("#dpcid").html(
+					"<option selected='selected'>Selecione uma"
+							+ " cidade</option>");
+			<c:forEach var="cidade" items="${cidadesBahia}">
+			$("#dpcid").append("<option>${cidade.nome}</option>")
+			</c:forEach>
+		}
+	}
+
+	function testeEstado() {
+		document.forms[0].action = "carregaEstado";
+		document.forms[0].submit();
 	}
 </script>
 </head>
