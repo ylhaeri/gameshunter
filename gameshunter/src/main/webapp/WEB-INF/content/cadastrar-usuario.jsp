@@ -56,8 +56,8 @@
 			</c:forEach>
 		</select><select id="mesbox" name="nascMes">
 			<option selected="selected">Mês</option>
-			<c:forEach var="mes" items="${meses}">
-				<option>${mes}</option>
+			<c:forEach var="mes" items="${meses}" varStatus="valor">
+				<option value="${valor.index}">${mes}</option>
 			</c:forEach>
 		</select><select id="anobox" name="nascAno">
 			<option selected="selected">Ano</option>

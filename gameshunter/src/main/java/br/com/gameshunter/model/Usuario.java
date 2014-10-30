@@ -1,5 +1,7 @@
 package br.com.gameshunter.model;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -182,6 +184,37 @@ public class Usuario {
 
 		removeEndereco(numero);
 		adicionaEndereco(alterado);
+	}
+
+	/**
+	 * Gera hash de senha
+	 */
+	public void geraHashedSenha() {
+		this.senha = encrypt(this.senha);
+	}
+
+	public String encrypt(String string) {
+		MessageDigest digester;
+		try {
+			digester = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException();
+		}
+		digester.update(string.getBytes());
+		byte[] hash = digester.digest();
+		return codigo(hash);
+	}
+
+	private String codigo(byte[] hash) {
+		StringBuffer hexString = new StringBuffer();
+		for (int i = 0; i < hash.length; i++) {
+			if ((0xff & hash[i]) < 0x10) {
+				hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
+			} else {
+				hexString.append(Integer.toHexString(0xFF & hash[i]));
+			}
+		}
+		return hexString.toString();
 	}
 
 	/**

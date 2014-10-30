@@ -57,7 +57,7 @@ public class InsercaoEnderecoDAOTest {
 
 		List<Pais> paises = pDao.pegaTodos();
 
-		assertThat(paises.size(), equalTo(2));
+		assertThat(paises.size(), equalTo(1));
 	}
 
 	@Test
@@ -72,7 +72,6 @@ public class InsercaoEnderecoDAOTest {
 	public void devePegarTodasAsCidades() {
 		
 		List<Cidade> cidades = cDao.pegaTodos(manager.find(Estado.class, 2));
-		
 		assertThat(cidades.size(), equalTo(102));
 	}
 

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import br.com.gameshunter.DAO.JPAUtil;
+import br.com.gameshunter.DAO.UsuarioDAO;
 import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Usuario;
 
@@ -24,7 +26,9 @@ public class NovoUsuarioAction {
 		Calendar dataNasc = Calendar.getInstance();
 		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
 		usuario.setDataNascimento(dataNasc);
-		System.out.println(endereco.getPais());
+		usuario.geraHashedSenha();
+		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction().salva(usuario)
+				.commit().close();
 		return "ok";
 	}
 
