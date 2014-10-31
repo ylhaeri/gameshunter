@@ -10,12 +10,11 @@ import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.PaisDAO;
-import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
-public class CadastrarUsuarioAction extends CatalogoDeEstados {
+public class CadastrarUsuarioAction {
 
 	private Sexo[] sexo = Sexo.values();
 	private List<String> meses = new ArrayList<>();
