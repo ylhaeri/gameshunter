@@ -79,10 +79,10 @@
 <script type="text/javascript">
 	$("#cpf").mask("999.999.999-99")
 	$("#tel").mask("?(99)99999-9999")
-	$("#enviar").click(function() {
+/* 	$("#enviar").click(function() {
 		var teste = $("#anobox").val()
 		if (teste.indexOf("no"))
 			alert("Sim")
-	})
+	}) */
 </script>
 </html>

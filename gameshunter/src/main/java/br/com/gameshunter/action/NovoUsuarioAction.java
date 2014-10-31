@@ -5,12 +5,18 @@ import java.util.Calendar;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.UsuarioDAO;
 import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Usuario;
 
-public class NovoUsuarioAction {
+@Validations(stringLengthFields = { @StringLengthFieldValidator(fieldName = "usuario.nome", maxLength = "5") }, requiredStrings = { @RequiredStringValidator(fieldName = "usuario.nome", message = "araraerro") })
+public class NovoUsuarioAction extends ActionSupport {
 
 	private Usuario usuario;
 	private Endereco endereco;
@@ -20,7 +26,8 @@ public class NovoUsuarioAction {
 
 	@Action(value = "novoUsuario", results = {
 
-	@Result(name = "ok", location = "usuario-adicionado.jsp")})
+	@Result(name = "ok", location = "usuario-adicionado.jsp"),
+			@Result(name = "input", location = "cadastrar-usuario.jsp") })
 	public String execute() {
 		Calendar dataNasc = Calendar.getInstance();
 		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
