@@ -8,9 +8,8 @@ import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
-import br.com.gameshunter.DAO.JPAUtil;
-import br.com.gameshunter.DAO.PaisDAO;
-import br.com.gameshunter.model.Estado;
+import com.opensymphony.xwork2.ActionContext;
+
 import br.com.gameshunter.model.Pais;
 import br.com.gameshunter.model.Sexo;
 
@@ -27,18 +26,8 @@ public class CadastrarUsuarioAction {
 	public String execute() {
 		adicionaMeses();
 		adicionaAnos();
-		adicionaPaises();
+		ActionContext.getContext().getSession().put("Osvaldo", 1340);
 		return "ok";
-	}
-
-	private void adicionaPaises() {
-		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
-		List<Pais> listaPaises = pDao.pegaTodos();
-		pDao.close();
-		for (Pais pais : listaPaises) {
-			
-			this.paises.put(pais.getSigla(), pais);
-		}
 	}
 
 	public Sexo[] getSexo() {
@@ -87,9 +76,5 @@ public class CadastrarUsuarioAction {
 		meses.add("Outubro");
 		meses.add("Novembro");
 		meses.add("Dezembro");
-	}
-	
-	public List<Estado> getEstadosBrasil() {
-		return new CatalogoDeEstados().getEstados(paises.get("BR"));
 	}
 }

@@ -1,11 +1,10 @@
-package br.com.gameshunter.action;
+package br.com.gameshunter.dependency.action;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.DAO.CidadeDAO;
@@ -13,7 +12,6 @@ import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 
-@ParentPackage("json-default")
 public class DropDownCidadeAction {
 
 	private Integer idE;

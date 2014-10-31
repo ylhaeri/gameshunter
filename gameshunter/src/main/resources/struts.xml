@@ -4,6 +4,7 @@
   "http://struts.apache.org/dtds/struts-2.3.dtd">
  
 <struts>
+	<constant name="struts.custom.i18n.resources" value="messages"></constant>
 	<package name="default" extends="struts-default">
 		<interceptors>
 			

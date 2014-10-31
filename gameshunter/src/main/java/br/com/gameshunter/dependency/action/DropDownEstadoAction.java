@@ -1,4 +1,4 @@
-package br.com.gameshunter.action;
+package br.com.gameshunter.dependency.action;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 
-@ParentPackage("json-default")
 public class DropDownEstadoAction {
 
 	private List<Estado> estados;
