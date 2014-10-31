@@ -20,15 +20,15 @@ public class NovoUsuarioAction {
 
 	@Action(value = "novoUsuario", results = {
 
-	@Result(name = "ok", location = "usuario-adicionado.jsp") })
+	@Result(name = "ok", location = "usuario-adicionado.jsp")})
 	public String execute() {
-
 		Calendar dataNasc = Calendar.getInstance();
 		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
 		usuario.setDataNascimento(dataNasc);
 		usuario.geraHashedSenha();
-		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction().salva(usuario)
-				.commit().close();
+		System.out.println("Chega aqui?");
+		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction()
+				.salva(usuario).commit().close();
 		return "ok";
 	}
 

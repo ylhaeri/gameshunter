@@ -1,7 +1,6 @@
 package br.com.gameshunter.action;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,14 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CadastrarUsuarioActionTest {
-
 	@Test
 	public void main() {
-
 		WebDriver driver = new FirefoxDriver();
-
 		driver.get("http://localhost:8080/gameshunter/cadastrar-usuario");
-
 		WebElement nome = driver.findElement(By.name("usuario.nome"));
 		WebElement apelido = driver.findElement(By.name("usuario.apelido"));
 		WebElement email = driver.findElement(By.name("usuario.email"));
@@ -45,7 +40,6 @@ public class CadastrarUsuarioActionTest {
 		Select dpCidade = new Select(driver.findElement(By
 				.name("endereco.cidade")));
 		WebElement botaoEnviar = driver.findElement(By.id("enviar"));
-
 		nome.sendKeys("Osvaldo Chaprau");
 		apelido.sendKeys("Osvaldin");
 		email.sendKeys("osvaldo@valdin.com");
@@ -72,15 +66,11 @@ public class CadastrarUsuarioActionTest {
 				.textToBePresentInElementLocated(By.name("endereco.cidade"),
 						"São Paulo"));
 		dpCidade.selectByVisibleText("São Paulo");
-
 		botaoEnviar.submit();
-
 		Boolean foiCadastrado = new WebDriverWait(driver, 20)
 				.until(ExpectedConditions.textToBePresentInElementLocated(
 						By.tagName("h1"), "Adicionado com sucesso"));
-
 		driver.close();
-
 		assertTrue(foiCadastrado);
 	}
 }
