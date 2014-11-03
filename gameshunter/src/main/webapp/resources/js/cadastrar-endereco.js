@@ -1,3 +1,5 @@
+$("#cept").mask("99999-999")
+
 $(document).ready(
 		function() {
 			$.get("pegaPaises", function(info) {

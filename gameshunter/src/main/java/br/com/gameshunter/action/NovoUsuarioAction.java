@@ -15,7 +15,6 @@ import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Usuario;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
@@ -42,8 +41,6 @@ public class NovoUsuarioAction extends ActionSupport {
 		criaSenha();
 		adicionaEndereco();
 
-		System.out.println(ActionContext.getContext().getSession()
-				.get("Osvaldo"));
 		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction()
 				.salva(usuario).commit().close();
 		return "ok";

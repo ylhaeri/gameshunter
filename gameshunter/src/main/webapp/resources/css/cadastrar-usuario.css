@@ -4,6 +4,15 @@
 	display: inline-block;
 }
 
+.ssuc {
+	background-image: url("../img/Stop.png");
+	background-size: 100%;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	top: 123px;
+}
+
 .cadastro * {
 	margin-bottom: 1%;
 }
@@ -25,6 +34,14 @@
 .cadastro input {
 	margin-left: 1%;
 	margin-right: 1%;
+}
+
+.positivo {
+	color: green;
+}
+
+.negativo {
+	color: red;
 }
 
 #sexo {

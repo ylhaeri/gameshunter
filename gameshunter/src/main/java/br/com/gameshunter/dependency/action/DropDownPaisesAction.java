@@ -18,7 +18,6 @@ public class DropDownPaisesAction {
 	@Result(name = "ok", type = "json") })
 	public String execute() {
 		adicionaPaises();
-		System.out.println("Eu");
 		return "ok";
 	}
 

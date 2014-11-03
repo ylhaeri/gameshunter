@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Gabriel D">
 <link rel="stylesheet" href="resources/css/reset.css">
 <link rel="stylesheet" href="resources/css/gameshunter.css">
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
@@ -39,13 +40,11 @@
 			name="usuario.telefone" value="${usuario.telefone}">
 		<br />
 		<label for="rg">RG</label><input type="text" id="rg" name="usuario.rg"
-			value="${usuario.rg}">
+			value="${usuario.rg}" maxlength="9">
 		<br />
-		<label id="sexo" for="gndbx">Sexo</label><select name="usuario.sexo">
+		<label id="sexo" for="gndbx">Sexo</label><select name="usuario.sexo"
+			id="dpsexo">
 			<option selected="selected">---Selecione---</option>
-			<c:forEach var="sexo" items="${sexo}">
-				<option>${sexo}</option>
-			</c:forEach>
 		</select>
 		<br />
 		<label id="dtnasc" for="diabox">Data de Nascimento</label>
@@ -76,27 +75,4 @@
 </body>
 <script src="resources/js/cadastrar-usuario.js"></script>
 <script src="resources/js/cadastrar-endereco.js"></script>
-<script type="text/javascript">
-	$("#cpf").mask("999.999.999-99")
-	$("#tel").mask("?(99)99999-9999")
-	console.log($("#recS").val())
-
-	setTimeout(function() {
-		var dia = parseInt($("#recD").val())
-		if (dia > 0)
-			$("#diabox").val(dia)
-	}, 1)
-
-	setTimeout(function() {
-		var mes = parseInt($("#recM").val())
-		if (mes > 0)
-			$("#mesbox").val(mes)
-	}, 1)
-
-	setTimeout(function() {
-		var ano = parseInt($("#recA").val())
-		if (ano > 0)
-			$("#anobox").val(ano)
-	}, 1)
-</script>
 </html>

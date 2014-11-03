@@ -21,6 +21,6 @@ name="endereco.complemento">
 <label id="cidade">Cidade</label><select name="idCidade" id="dpcid">
 	<option selected="selected">Selecione uma cidade</option>
 </select>
- <input	type="hidden" id="recP" value="${idPais}">
- <input type="hidden" id="recE" value="${idEstado}">
- <input type="hidden" id="recC" value="${idCidade}">
+<input	type="hidden" id="recP" value="${idPais}">
+<input type="hidden" id="recE" value="${idEstado}">
+<input type="hidden" id="recC" value="${idCidade}">
