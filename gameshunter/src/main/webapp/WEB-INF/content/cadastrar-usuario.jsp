@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="resources/css/gameshunter.css">
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
 <title>Cadastro - Games Hunter</title>
+<link
+	href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic'
+	rel='stylesheet' type='text/css'>
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script src="resources/js/jquery-masked-input-1.4.0.js"></script>
 </head>
@@ -72,7 +75,7 @@
 			type="hidden" id="recM" value="${nascMes}"> <input
 			type="hidden" id="recA" value="${nascAno}">
 	</form>
+	<script src="resources/js/cadastrar-usuario.js"></script>
+	<script src="resources/js/cadastrar-endereco.js"></script>
 </body>
-<script src="resources/js/cadastrar-usuario.js"></script>
-<script src="resources/js/cadastrar-endereco.js"></script>
 </html>

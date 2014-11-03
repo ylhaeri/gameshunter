@@ -87,14 +87,15 @@ $("#mail")
 $("#confirmasenha").blur(function() {
 	var senha1 = $("#senha").val()
 	var senha2 = $("#confirmasenha").val()
-	if ($("#senhafeed").val() == undefined)
-		$("<span id='senhafeed'></span>").insertAfter("#confirmasenha")
-	if (senha1 == senha2) {
-		$("#senhafeed").removeClass('sfail')
-		$("#senhafeed").addClass('ssuc')
-	}
-	else {
-		$("#senhafeed").removeClass('ssuc')
-		$("#senhafeed").addClass('sfail')
+	if (senha1.length >= 6) {
+		if ($("#senhafeed").val() == undefined)
+			$("<span id='senhafeed'></span>").insertAfter("#confirmasenha")
+		if (senha1 == senha2) {
+			$("#senhafeed").removeClass('sfail')
+			$("#senhafeed").addClass('ssuc')
+		} else {
+			$("#senhafeed").removeClass('ssuc')
+			$("#senhafeed").addClass('sfail')
+		}
 	}
 })
