@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="author" content="Gabriel D">
 <link rel="stylesheet" href="resources/css/reset.css">
 <link rel="stylesheet" href="resources/css/gameshunter.css">
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
@@ -47,7 +46,7 @@
 			name="usuario.telefone" value="${usuario.telefone}">
 		<s:fielderror fieldName="usuario.telefone"></s:fielderror>
 		<br />
-		<label id="sexo" for="gndbx">Sexo</label><select name="usuario.sexo"
+		<label id="sexo" for="dpsexo">Sexo</label><select name="usuario.sexo"
 			id="dpsexo">
 			<option selected="selected">---Selecione---</option>
 		</select>
@@ -76,11 +75,7 @@
 			<s:include value="cadastrar-endereco.jsp"></s:include>
 		</fieldset>
 		<br />
-		<input type="submit" value="Enviar" id="enviar"> <input
-			type="hidden" id="recS" value="${usuario.sexo}"> <input
-			type="hidden" id="recD" value="${nascDia}"> <input
-			type="hidden" id="recM" value="${nascMes}"> <input
-			type="hidden" id="recA" value="${nascAno}">
+		<input type="submit" value="Enviar" id="enviar">
 	</form>
 	<script src="resources/js/cadastrar-usuario.js"></script>
 	<script src="resources/js/cadastrar-endereco.js"></script>

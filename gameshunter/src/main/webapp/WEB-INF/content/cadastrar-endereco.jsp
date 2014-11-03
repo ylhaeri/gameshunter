@@ -1,21 +1,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <label for="cept">CEP</label>
-<input type="text" name="endereco.cep" id="cept">
+<input type="text" name="endereco.cep" value="${endereco.cep}" id="cept">
 <s:fielderror fieldName="endereco.cep"></s:fielderror>
 <br />
 <label for="logt">Logradouro</label>
-<input type="text" id="logt" name="endereco.logradouro">
+<input type="text" id="logt" name="endereco.logradouro"
+	value="${endereco.logradouro}">
 <label id="num" for="numt">Nº</label>
-<input type="text" id="numt" name="endereco.numero">
+<input type="text" id="numt" name="endereco.numero"
+	value="${endereco.numero}">
 <s:fielderror fieldName="endereco.logradouro"></s:fielderror>
 <s:fielderror fieldName="endereco.numero"></s:fielderror>
 <br />
 <label for="comt">Complemento</label>
-<input type="text" id="comt" name="endereco.complemento">
+<input type="text" id="comt" name="endereco.complemento"
+	value="${endereco.complemento}">
 <br />
 <label for="bairrot">Bairro</label>
-<input type="text" id="bairrot" name="endereco.bairro">
+<input type="text" id="bairrot" name="endereco.bairro"  value="${endereco.bairro}">
 <s:fielderror fieldName="endereco.bairro"></s:fielderror>
 <br />
 <label id="pais">País</label>

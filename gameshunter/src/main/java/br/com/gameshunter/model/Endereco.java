@@ -59,7 +59,7 @@ public class Endereco {
 		return numero;
 	}
 
-	@RequiredStringValidator(key="endereco.numero.vazio")
+	@RequiredFieldValidator(key="endereco.numero.vazio")
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}

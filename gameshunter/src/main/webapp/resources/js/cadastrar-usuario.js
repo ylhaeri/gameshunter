@@ -24,7 +24,7 @@ setTimeout(function() {
 			$("#dpsexo").append("<option>" + sexo + "</option>")
 		})
 	})
-}, 100)
+}, 200)
 
 setTimeout(function() {
 	var sexo = $("#recS").val()
