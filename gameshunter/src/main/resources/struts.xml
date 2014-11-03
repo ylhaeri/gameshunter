@@ -2,19 +2,20 @@
 <!DOCTYPE struts PUBLIC
   "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
   "http://struts.apache.org/dtds/struts-2.3.dtd">
- 
+
 <struts>
+	<constant name="struts.custom.i18n.resources" value="messages"></constant>
 	<package name="default" extends="struts-default">
 		<interceptors>
-			
-			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/>-->
-			
+
+			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/> -->
+
 			<interceptor-stack name="seguranca">
-				
-				<!-- <interceptor-ref name="autorizador" />-->
-				
+
+				<!-- <interceptor-ref name="autorizador" /> -->
+
 				<interceptor-ref name="defaultStack" />
-				
+
 			</interceptor-stack>
 		</interceptors>
 	</package>

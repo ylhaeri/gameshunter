@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+
 /**
  * A classe {@code Usuario} representa os usuários do sistema.
  * 
@@ -19,6 +22,7 @@ import javax.persistence.TemporalType;
  * 
  * @since 0.0.1
  */
+@Validations
 @Entity
 public class Usuario {
 
@@ -53,6 +57,7 @@ public class Usuario {
 	}
 
 	/** @param nome */
+	@RequiredStringValidator(key = "usuario.nome.vazio")
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
