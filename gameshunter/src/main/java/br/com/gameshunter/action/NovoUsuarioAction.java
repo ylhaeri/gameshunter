@@ -62,6 +62,12 @@ public class NovoUsuarioAction extends ActionSupport {
 		manager.close();
 	}
 
+	@Override
+	public void validate() {
+		if (idCidade == null)
+			super.addFieldError("idCidade", "usuario.cidade.vazio");
+	}
+
 	private void criaSenha() {
 		usuario.geraHashedSenha();
 	}
