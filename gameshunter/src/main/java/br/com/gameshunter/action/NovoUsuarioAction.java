@@ -85,6 +85,7 @@ public class NovoUsuarioAction extends ActionSupport {
 		return endereco;
 	}
 
+	@VisitorFieldValidator
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}

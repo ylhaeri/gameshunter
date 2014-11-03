@@ -8,6 +8,10 @@ input {
 	padding: 7px 0;
 }
 
+input, select {
+	border: solid #404040 1px;
+}
+
 .ssuc {
 	background-image: url("../img/Imagem1.png");
 	background-size: 100%;
