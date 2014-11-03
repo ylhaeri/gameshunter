@@ -33,7 +33,6 @@ public class NovoUsuarioAction extends ActionSupport {
 		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
 		usuario.setDataNascimento(dataNasc);
 		usuario.geraHashedSenha();
-		System.out.println("Chega aqui?");
 		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction()
 				.salva(usuario).commit().close();
 		return "ok";
