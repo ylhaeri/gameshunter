@@ -29,7 +29,6 @@ public class CidadeDAO implements BasicDbDAO {
 		this.manager.close();
 	}
 
-	
 	public Cidade pega(Integer id) {
 		return manager.find(Cidade.class, id);
 	}
