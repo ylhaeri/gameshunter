@@ -89,6 +89,12 @@ $("#confirmasenha").blur(function() {
 	var senha2 = $("#confirmasenha").val()
 	if ($("#senhafeed").val() == undefined)
 		$("<span id='senhafeed'></span>").insertAfter("#confirmasenha")
-	if (senha1 == senha2)
-		$("#senhafeed").replaceWith("<span id='senhafeed' class='ssuc'>&nbsp;</span>")
+	if (senha1 == senha2) {
+		$("#senhafeed").removeClass('sfail')
+		$("#senhafeed").addClass('ssuc')
+	}
+	else {
+		$("#senhafeed").removeClass('ssuc')
+		$("#senhafeed").addClass('sfail')
+	}
 })
