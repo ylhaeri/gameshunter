@@ -51,7 +51,6 @@ public class UsuarioTest {
 		String email = "joaomachado@gmail.com";
 		String telefone = "(11) 1111-1111";
 		String cpf = "000.000.000-00";
-		String rg = "1234567-890";
 		Endereco endereco = enderecoFactory.repetido();
 
 		joao.setNome(nome);
@@ -62,7 +61,7 @@ public class UsuarioTest {
 		joao.setEmail(email);
 		joao.setTelefone(telefone);
 		joao.setCpf(cpf);
-		joao.setRg(rg);
+
 		joao.adicionaEndereco(endereco);
 
 		assertThat(joao.getSexo(), equalTo(sexo));
@@ -74,7 +73,7 @@ public class UsuarioTest {
 		assertThat(joao.getEmail(), equalTo(email));
 		assertThat(joao.getTelefone(), equalTo(telefone));
 		assertThat(joao.getCpf(), equalTo(cpf));
-		assertThat(joao.getRg(), equalTo(rg));
+
 		assertThat(enderecos, hasItem(endereco));
 	}
 

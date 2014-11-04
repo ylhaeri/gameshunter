@@ -77,7 +77,6 @@ public class UsuarioDAOTest {
 		String email = "joao@gmail.com";
 		String telefone = "(11) 1111-1111";
 		String cpf = "000.000.000-00";
-		String rg = "1234567-890";
 		Endereco endereco = eFac.repetido();
 
 		joao.setNome(nome);
@@ -88,7 +87,6 @@ public class UsuarioDAOTest {
 		joao.setEmail(email);
 		joao.setTelefone(telefone);
 		joao.setCpf(cpf);
-		joao.setRg(rg);
 		joao.adicionaEndereco(endereco);
 
 		uDao.salva(joao);
@@ -109,7 +107,6 @@ public class UsuarioDAOTest {
 		assertThat(joana.getEmail(), equalTo(email));
 		assertThat(joana.getTelefone(), equalTo(telefone));
 		assertThat(joana.getCpf(), equalTo(cpf));
-		assertThat(joana.getRg(), equalTo(rg));
 		assertThat(joana.pegaEndereco(0), equalTo(endereco));
 	}
 
