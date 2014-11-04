@@ -16,28 +16,27 @@ import org.junit.Test;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
-import br.com.gameshunter.util.Arquivo;
+import br.com.gameshunter.util.CidadeUtil;
+import br.com.gameshunter.util.EstadoUtil;
+import br.com.gameshunter.util.PaisUtil;
 
 public class InsercaoEnderecoDAOTest {
 
 	private static EntityManager manager;
-	private final static String txtCidade = "Cidade.txt";
-	private final static String txtEstado = "Estado.txt";
-	private final static String txtPais = "Pais.txt";
 	private static CidadeDAO cDao;
 	private EstadoDAO eDao;
 	private PaisDAO pDao;
-	private static Integer cod_estado;
 
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
 
 		new JPAUtil();
+
 		manager = new JPAUtil().getEntityManager();
 
 		manager.getTransaction().begin();
 
-		for (Pais pais : new Arquivo().lerPais()) {
+		for (Pais pais : new PaisUtil().lerPais()) {
 			manager.persist(pais);
 		}
 
@@ -45,7 +44,7 @@ public class InsercaoEnderecoDAOTest {
 
 		manager.getTransaction().begin();
 
-		for (Estado estado : new Arquivo().lerEstado()) {
+		for (Estado estado : new EstadoUtil().lerEstado()) {
 			estado.setPais(manager.find(Pais.class, 1));
 			manager.persist(estado);
 		}
@@ -54,13 +53,12 @@ public class InsercaoEnderecoDAOTest {
 
 		manager.getTransaction().begin();
 
-		for (Cidade cidade : new Arquivo().lerCidade()) {
-			cidade.setEstado(manager.find(Estado.class, 1));
+		for (Cidade cidade : new CidadeUtil().lerCidade()) {
 			manager.persist(cidade);
 		}
 
 		manager.getTransaction().commit();
-		
+
 		manager.close();
 
 	}
@@ -84,8 +82,6 @@ public class InsercaoEnderecoDAOTest {
 
 		List<Pais> paises = pDao.pegaTodos();
 
-		System.out.println(paises);
-		
 		assertThat(paises.size(), equalTo(1));
 	}
 
@@ -93,17 +89,64 @@ public class InsercaoEnderecoDAOTest {
 	public void pegaEstado() {
 
 		List<Estado> estados = eDao.pegaTodos(pDao.pega(1));
-		
-		System.out.println(estados);
-		
+
 		assertThat(estados.size(), equalTo(27));
 	}
 
 	@Test
 	public void devePegarTodasAsCidades() {
 
-		List<Cidade> cidades = cDao.pegaTodos(manager.find(Estado.class, 1));
-		assertThat(cidades.size(), equalTo(5564));
+		List<Cidade> cidades = cDao.pegaTodos(eDao.pega(8));
+
+		assertThat(cidades.size(), equalTo(78));
+
 	}
 
+	@Test
+	public void verificaPrimeiroUltimoEstado() {
+
+		Estado primeiro = eDao.pega(1);
+
+		Estado esperadoPrimeiro = new Estado();
+		esperadoPrimeiro.setNome("Acre");
+		esperadoPrimeiro.setId(1);
+		esperadoPrimeiro.setUf("AC");
+		esperadoPrimeiro.setPais(pDao.pega(1));
+
+		assertThat(primeiro, equalTo(esperadoPrimeiro));
+
+		Estado ultimo = eDao.pega(27);
+
+		Estado esperadoUltimo = new Estado();
+		esperadoUltimo.setNome("Tocantins");
+		esperadoUltimo.setId(27);
+		esperadoUltimo.setUf("TO");
+		esperadoUltimo.setPais(pDao.pega(1));
+
+		assertThat(ultimo, equalTo(esperadoUltimo));
+
+	}
+
+	@Test
+	public void verificaPrimeraUltimaCidade() {
+
+		Cidade primeira = cDao.pega(1);
+
+		Cidade esperadaPrimeira = new Cidade();
+
+		esperadaPrimeira.setNome("Afonso Cláudio");
+		esperadaPrimeira.setId(1);
+		esperadaPrimeira.setEstado(eDao.pega(8));
+
+		assertThat(primeira, equalTo(esperadaPrimeira));
+
+		Cidade ultima = cDao.pega(5564);
+
+		Cidade esperadaUltima = new Cidade();
+		esperadaUltima.setNome("Xambioá");
+		esperadaUltima.setId(5564);
+		esperadaUltima.setEstado(eDao.pega(27));
+
+		assertThat(ultima, equalTo(esperadaUltima));
+	}
 }
