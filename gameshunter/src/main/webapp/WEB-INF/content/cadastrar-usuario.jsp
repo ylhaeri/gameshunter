@@ -75,7 +75,11 @@
 			<s:include value="cadastrar-endereco.jsp"></s:include>
 		</fieldset>
 		<br />
-		<input type="submit" value="Enviar" id="enviar">
+		<input type="hidden" id="recS" value="${usuario.sexo}"> <input
+			type="hidden" id="recD" value="${nascDia}"> <input
+			type="hidden" id="recM" value="${nascMes}"> <input
+			type="hidden" id="recA" value="${nascAno}"> <input
+			type="submit" value="Enviar" id="enviar">
 	</form>
 	<script src="resources/js/cadastrar-usuario.js"></script>
 	<script src="resources/js/cadastrar-endereco.js"></script>
