@@ -6,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+
+@Validations
 @Entity
 public class Endereco {
 
@@ -36,6 +41,7 @@ public class Endereco {
 		return cep;
 	}
 
+	@RequiredStringValidator(key="endereco.cep.vazio")
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
@@ -44,6 +50,7 @@ public class Endereco {
 		return logradouro;
 	}
 
+	@RequiredStringValidator(key="endereco.logradouro.vazio")
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
@@ -52,6 +59,7 @@ public class Endereco {
 		return numero;
 	}
 
+	@RequiredFieldValidator(key="endereco.numero.vazio")
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
@@ -68,6 +76,7 @@ public class Endereco {
 		return bairro;
 	}
 
+	@RequiredStringValidator(key="endereco.bairro.vazio")
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}

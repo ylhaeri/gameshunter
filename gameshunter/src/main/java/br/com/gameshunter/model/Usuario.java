@@ -39,7 +39,6 @@ public class Usuario {
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private String telefone;
-	private String rg;
 
 	/** @return O e-mail */
 	public String getEmail() {
@@ -47,6 +46,7 @@ public class Usuario {
 	}
 
 	/** @param email */
+	@RequiredStringValidator(key = "usuario.email.vazio")
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -68,6 +68,7 @@ public class Usuario {
 	}
 
 	/** @param apelido */
+	@RequiredStringValidator(key = "usuario.apelido.vazio")
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
@@ -78,6 +79,7 @@ public class Usuario {
 	}
 
 	/** @param cpf */
+	@RequiredStringValidator(key = "usuario.cpf.vazio")
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
@@ -98,18 +100,9 @@ public class Usuario {
 	}
 
 	/** @param telefone */
+	@RequiredStringValidator(key = "usuario.telefone.vazio")
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	/** @return o RG */
-	public String getRg() {
-		return rg;
-	}
-
-	/** @param rg */
-	public void setRg(String rg) {
-		this.rg = rg;
 	}
 
 	/** @return Lista de endereços */
@@ -138,6 +131,7 @@ public class Usuario {
 	}
 
 	/** @param senha */
+	@RequiredStringValidator(key = "usuario.senha.vazia")
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -253,7 +247,7 @@ public class Usuario {
 	 */
 	public Usuario(String email, String nome, String apelido, String senha,
 			Sexo sexo, String cpf, Calendar dataNascimento,
-			List<Endereco> enderecos, String telefone, String rg) {
+			List<Endereco> enderecos, String telefone) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
@@ -263,6 +257,5 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.enderecos = enderecos;
 		this.telefone = telefone;
-		this.rg = rg;
 	}
 }
