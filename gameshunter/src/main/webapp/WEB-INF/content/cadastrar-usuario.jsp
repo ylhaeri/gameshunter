@@ -19,35 +19,30 @@
 </head>
 <body class="container">
 	<h1 id="titulo">Cadastre-se</h1>
-	<form method="post" class="cadastro" action="novoUsuario">
-		<label for="nome">Nome</label><input type="text" id="nome"
-			name="usuario.nome" value="${usuario.nome}">
-		<s:fielderror fieldName="usuario.nome"></s:fielderror>
-		<br />
-		<label for="ape">Apelido</label><input type="text"
-			name="usuario.apelido" id="ape" value="${usuario.apelido}">
-		<s:fielderror fieldName="usuario.apelido"></s:fielderror>
-		<br />
-		<label for="mail">E-mail</label><input type="text"
-			name="usuario.email" id="mail" value="${usuario.email}">
-		<s:fielderror fieldName="usuario.email"></s:fielderror>
-		<br />
-		<label for="senha">Senha</label><input type="password" id="senha">
-		<br />
-		<label for="confirmasenha">Confirme sua senha</label><input
-			type="password" id="confirmasenha" name="usuario.senha">
-		<s:fielderror fieldName="usuario.senha"></s:fielderror>
-		<br />
-		<label for="cpf">CPF</label><input type="text" id="cpf"
-			name="usuario.cpf" value="${usuario.cpf}">
-		<s:fielderror fieldName="usuario.cpf"></s:fielderror>
-		<br />
-		<label for="tel">Telefone</label><input type="text" id="tel"
-			name="usuario.telefone" value="${usuario.telefone}">
-		<s:fielderror fieldName="usuario.telefone"></s:fielderror>
-		<br />
-		<label id="sexo" for="dpsexo">Sexo</label><select name="usuario.sexo"
-			id="dpsexo">
+	<s:form method="post" class="cadastro" action="novoUsuario">
+		<s:textfield label="Nome" labelposition="top" labelSeparator=""
+			id="nome" name="usuario.nome" value="%{usuario.nome}"
+			errorPosition="bottom"></s:textfield>
+		<s:textfield label="Apelido" labelposition="top" labelSeparator=""
+			id="ape" name="usuario.apelido" value="%{usuario.apelido}"
+			errorPosition="bottom"></s:textfield>
+		<s:textfield label="E-mail" labelposition="top" labelSeparator=""
+			id="mail" name="usuario." value="%{usuario.email}"
+			errorPosition="bottom"></s:textfield>
+		<s:textfield label="Senha" labelposition="top" labelSeparator=""
+			id="senha" name="usuario.senha"></s:textfield>
+		<s:textfield label="Confirme sua senha" labelposition="top"
+			labelSeparator="" id="confirmasenha" name="usuario.senha"
+			value="%{usuario.senha}" errorPosition="bottom"></s:textfield>
+		<s:textfield label="CPF" labelposition="top" labelSeparator=""
+			id="cpf" name="usuario.cpf" value="%{usuario.cpf}"
+			errorPosition="bottom"></s:textfield>
+		<s:textfield label="Telefone" labelposition="top" labelSeparator=""
+			id="tel" name="usuario.telefone" value="%{usuario.telefone}"
+			errorPosition="bottom"></s:textfield>
+		<s:select list="sexo" label="Osvaldo"></s:select>
+		<label id="sexo" for="dpsexo">Sexo</label>
+		<select name="usuario.sexo" id="dpsexo">
 			<option selected="selected">---Selecione---</option>
 		</select>
 		<s:fielderror fieldName="usuario.sexo"></s:fielderror>
@@ -59,9 +54,11 @@
 			<c:forEach var="dia" begin="1" end="31">
 				<option>${dia}</option>
 			</c:forEach>
-		</select><select id="mesbox" name="nascMes">
+		</select>
+		<select id="mesbox" name="nascMes">
 			<option selected="selected">Mês</option>
-		</select><select id="anobox" name="nascAno">
+		</select>
+		<select id="anobox" name="nascAno">
 			<option selected="selected">Ano</option>
 		</select>
 		<br />
@@ -75,12 +72,12 @@
 			<s:include value="cadastrar-endereco.jsp"></s:include>
 		</fieldset>
 		<br />
-		<input type="hidden" id="recS" value="${usuario.sexo}"> <input
-			type="hidden" id="recD" value="${nascDia}"> <input
-			type="hidden" id="recM" value="${nascMes}"> <input
-			type="hidden" id="recA" value="${nascAno}"> <input
-			type="submit" value="Enviar" id="enviar">
-	</form>
+		<input type="hidden" id="recS" value="${usuario.sexo}">
+		<input type="hidden" id="recD" value="${nascDia}">
+		<input type="hidden" id="recM" value="${nascMes}">
+		<input type="hidden" id="recA" value="${nascAno}">
+		<input type="submit" value="Enviar" id="enviar">
+	</s:form>
 	<script src="resources/js/cadastrar-usuario.js"></script>
 	<script src="resources/js/cadastrar-endereco.js"></script>
 </body>
