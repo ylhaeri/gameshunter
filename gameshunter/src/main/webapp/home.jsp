@@ -12,7 +12,7 @@
 </head>
 <body class="container">
 
-	<img src="resources/img/logo.png" />
+	<c:import url="cabecalho.jsp" />
 
 	<h1>Bem Vindo</h1>
 
@@ -27,5 +27,7 @@
 	<div>
 		<a href="cadastrar-usuario.jsp">Cadastra-se</a>
 	</div>
+	
+	<c:import url="rodape.jsp" />
 </body>
 </html>

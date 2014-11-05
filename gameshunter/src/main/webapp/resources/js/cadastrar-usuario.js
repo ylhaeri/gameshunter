@@ -92,7 +92,7 @@ $("#confirmasenha")
 				})
 
 $("form").submit(function(event) {
-	if (senhaValida())
+	if (!senhaValida())
 		event.preventDefault()
 })
 

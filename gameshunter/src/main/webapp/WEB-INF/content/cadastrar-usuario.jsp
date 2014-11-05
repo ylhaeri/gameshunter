@@ -17,7 +17,11 @@
 <script src="resources/js/jquery-masked-input-1.4.0.js"></script>
 <title>Cadastro - Games Hunter</title>
 </head>
-<body class="container">
+<body>
+	<header>
+		<s:include value="cabecalho.jsp" />
+	</header>
+	<main class="container">
 	<h1 id="titulo">Cadastre-se</h1>
 	<s:form method="post" class="cadastro" action="novoUsuario">
 		<s:textfield label="Nome" labelposition="top" labelSeparator=""
@@ -58,8 +62,12 @@
 		<s:include value="cadastrar-endereco.jsp"></s:include>
 		<tr><td class="separador"></td></tr>
 		<input type="hidden" id="recS" value="${usuario.sexo}">
-		<s:submit value="Enviar" id="cadastrar"/>
-	</s:form>
+		<s:submit value="Enviar" id="cadastrar" />
+	</s:form> </main>
+	<footer>
+		<s:include value="rodape.jsp" />
+	</footer>
 	<script src="resources/js/cadastrar-usuario.js"></script>
+	<script src="resources/js/cadastrar-endereco.js"></script>
 </body>
 </html>

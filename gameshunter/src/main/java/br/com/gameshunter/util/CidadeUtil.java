@@ -19,7 +19,7 @@ public class CidadeUtil {
 	private static final String txtCidade = "Cidade.txt";
 	private Cidade cidade;
 	private Estado estado;
-
+	
 	/**
 	 * lê todas as cidade de um arquivo .txt
 	 * 

@@ -12,11 +12,16 @@ public class JPAUtil {
 		EMF = Persistence.createEntityManagerFactory("gameshunter");
 	}
 
-	public EntityManager getEntityManager() {
+	public static void restartFactory(){
+		EMF = Persistence.createEntityManagerFactory("gameshunter");
+	}
+	
+	public static EntityManager getEntityManager() {
 		return EMF.createEntityManager();
 	}
 
 	public static void closeFactory() {
 		EMF.close();
 	}
+
 }

@@ -3,12 +3,22 @@
 body {
 	font-family: lato, Calibri, sans-serif;
 	font-size: 105%;
+	background-color: #dbdbdb;
+}
+
+header {
+	width: 100%;
+	border-bottom: 15px solid black;
 }
 
 .container {
-	width: 80%;
+	width: 70%;
 	margin: 0 auto;
-	background-color: #dbdbdb;
+}
+
+footer {
+	border-top: 15px solid black;
+	width: 100%;
 }
 
 .errorMessage {
