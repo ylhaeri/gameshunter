@@ -19,69 +19,47 @@
 </head>
 <body class="container">
 	<h1 id="titulo">Cadastre-se</h1>
-	<form method="post" class="cadastro" action="novoUsuario">
-		<label for="nome">Nome</label><input type="text" id="nome"
-			name="usuario.nome" value="${usuario.nome}">
-		<s:fielderror fieldName="usuario.nome"></s:fielderror>
-		<br />
-		<label for="ape">Apelido</label><input type="text"
-			name="usuario.apelido" id="ape" value="${usuario.apelido}">
-		<s:fielderror fieldName="usuario.apelido"></s:fielderror>
-		<br />
-		<label for="mail">E-mail</label><input type="text"
-			name="usuario.email" id="mail" value="${usuario.email}">
-		<s:fielderror fieldName="usuario.email"></s:fielderror>
-		<br />
-		<label for="senha">Senha</label><input type="password" id="senha">
-		<br />
-		<label for="confirmasenha">Confirme sua senha</label><input
-			type="password" id="confirmasenha" name="usuario.senha">
-		<s:fielderror fieldName="usuario.senha"></s:fielderror>
-		<br />
-		<label for="cpf">CPF</label><input type="text" id="cpf"
-			name="usuario.cpf" value="${usuario.cpf}">
-		<s:fielderror fieldName="usuario.cpf"></s:fielderror>
-		<br />
-		<label for="tel">Telefone</label><input type="text" id="tel"
-			name="usuario.telefone" value="${usuario.telefone}">
-		<s:fielderror fieldName="usuario.telefone"></s:fielderror>
-		<br />
-		<label id="sexo" for="dpsexo">Sexo</label><select name="usuario.sexo"
-			id="dpsexo">
-			<option selected="selected">---Selecione---</option>
-		</select>
-		<s:fielderror fieldName="usuario.sexo"></s:fielderror>
-		<br />
-		<label id="dtnasc" for="diabox">Data de Nascimento</label>
-		<br />
-		<select id="diabox" name="nascDia">
-			<option selected="selected">Dia</option>
-			<c:forEach var="dia" begin="1" end="31">
-				<option>${dia}</option>
-			</c:forEach>
-		</select><select id="mesbox" name="nascMes">
-			<option selected="selected">Mês</option>
-		</select><select id="anobox" name="nascAno">
-			<option selected="selected">Ano</option>
-		</select>
-		<br />
-		<s:fielderror fieldName="nascDia"></s:fielderror>
-		<s:fielderror fieldName="nascMes"></s:fielderror>
-		<s:fielderror fieldName="nascAno"></s:fielderror>
-		<br />
-		<fieldset class="endereco">
-			<h2 id="ende">Endereço</h2>
-			<br />
-			<s:include value="cadastrar-endereco.jsp"></s:include>
-		</fieldset>
-		<br />
-		<input type="hidden" id="recS" value="${usuario.sexo}"> <input
-			type="hidden" id="recD" value="${nascDia}"> <input
-			type="hidden" id="recM" value="${nascMes}"> <input
-			type="hidden" id="recA" value="${nascAno}"> <input
-			type="submit" value="Enviar" id="enviar">
-	</form>
+	<s:form method="post" class="cadastro" action="novoUsuario">
+		<s:textfield label="Nome" labelposition="top" labelSeparator=""
+			id="nome" name="usuario.nome" value="%{usuario.nome}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:textfield label="Apelido" labelposition="top" labelSeparator=""
+			id="ape" name="usuario.apelido" value="%{usuario.apelido}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:textfield label="E-mail" labelposition="top" labelSeparator=""
+			id="mail" name="usuario.email" value="%{usuario.email}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:password label="Senha" labelposition="top" labelSeparator=""
+			id="senha" />
+		<s:password label="Confirme sua senha" labelposition="top"
+			labelSeparator="" id="confirmasenha" name="usuario.senha"
+			errorPosition="bottom" />
+		<tr><td class="separador" id="sepSenha"></td></tr>
+		<s:textfield label="CPF" labelposition="top" labelSeparator=""
+			id="cpf" name="usuario.cpf" value="%{usuario.cpf}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:textfield label="Telefone" labelposition="top" labelSeparator=""
+			id="tel" name="usuario.telefone" value="%{usuario.telefone}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:select label="Sexo" labelposition="top" labelSeparator=""
+			id="dpsexo" headerValue="Selecione" headerKey="Selecione"
+			name="usuario.sexo" list="sexo" errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:textfield label="Data de Nascimento" labelposition="top"
+			labelSeparator="" id="dataNasc" name="dataNasc" value="%{dataNasc}"
+			errorPosition="bottom" />
+		<tr><td class="separador"></td></tr>
+		<s:label label="Endereço" labelposition="top" labelSeparator="" />
+		<s:include value="cadastrar-endereco.jsp"></s:include>
+		<tr><td class="separador"></td></tr>
+		<input type="hidden" id="recS" value="${usuario.sexo}">
+		<s:submit value="Enviar" id="cadastrar"/>
+	</s:form>
 	<script src="resources/js/cadastrar-usuario.js"></script>
-	<script src="resources/js/cadastrar-endereco.js"></script>
 </body>
 </html>
