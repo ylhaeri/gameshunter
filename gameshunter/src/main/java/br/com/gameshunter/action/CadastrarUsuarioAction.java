@@ -13,7 +13,7 @@ public class CadastrarUsuarioAction {
 	public String execute() {
 		return "ok";
 	}
-	
+
 	public Sexo[] getSexo() {
 		return Sexo.values();
 	}

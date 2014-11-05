@@ -1,15 +1,16 @@
 @CHARSET "ISO-8859-1";
 
-.cadastro *:not(select):not(option) {
-	display: inline-block;
-}
-
-input {
+input[type="password"], input[type="text"]{
 	padding: 7px 0;
+	width: 300px;
 }
 
 input, select {
 	border: solid #404040 1px;
+}
+
+div {
+	margin-bottom: 30px;
 }
 
 .ssuc {
@@ -26,78 +27,4 @@ input, select {
 	width: 32px;
 	height: 32px;
 	position: absolute;
-}
-
-.cadastro * {
-	margin-bottom: 1%;
-}
-
-.cadastro label input {
-	display: inline-block;
-}
-
-.cadastro label {
-	width: 15%;
-	text-align: right;
-}
-
-.cadastro label+input {
-	width: 30%;
-	margin: 0 2% 1% 1%;
-}
-
-.cadastro input {
-	margin-left: 1%;
-	margin-right: 1%;
-}
-
-.positivo {
-	color: green;
-}
-
-.negativo {
-	color: red;
-}
-
-#sexo {
-	margin-right: 1%;
-}
-
-#dtnasc {
-	width: 15%;
-	text-align: right;
-}
-
-#diabox {
-	mardin-right: 1%;
-	margin-left: 16%;
-}
-
-#mesbox, #anobox {
-	margin-right: 1%;
-	margin-left: 1%;
-}
-
-.endereco {
-	width: 100%;
-}
-
-#num {
-	width: auto;
-	margin-right: 1%;
-}
-
-#numt {
-	width: 5%;
-}
-
-#pais {
-	width: 15%;
-	margin-right: 1%;
-}
-
-#estado, #cidade {
-	width: auto;
-	margin-right: 1%;
-	margin-left: 1%;
 }

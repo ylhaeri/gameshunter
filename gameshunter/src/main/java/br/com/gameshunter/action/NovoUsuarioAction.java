@@ -13,6 +13,7 @@ import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.DAO.UsuarioDAO;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -62,12 +63,6 @@ public class NovoUsuarioAction extends ActionSupport {
 		manager.close();
 	}
 
-	@Override
-	public void validate() {
-		if (idCidade == null)
-			super.addFieldError("idCidade", "usuario.cidade.vazio");
-	}
-
 	private void criaSenha() {
 		usuario.geraHashedSenha();
 	}
@@ -78,13 +73,13 @@ public class NovoUsuarioAction extends ActionSupport {
 		usuario.setDataNascimento(dataNasc);
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
 	@VisitorFieldValidator
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
 	}
 
 	public Endereco getEndereco() {
@@ -142,5 +137,9 @@ public class NovoUsuarioAction extends ActionSupport {
 
 	public void setIdCidade(Integer idCidade) {
 		this.idCidade = idCidade;
+	}
+
+	public Sexo[] getSexo() {
+		return Sexo.values();
 	}
 }
