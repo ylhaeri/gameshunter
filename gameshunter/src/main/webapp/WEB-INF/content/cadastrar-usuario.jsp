@@ -18,6 +18,9 @@
 <title>Cadastro - Games Hunter</title>
 </head>
 <body class="container">
+
+	<c:import url="cabecalho.jsp" />
+
 	<h1 id="titulo">Cadastre-se</h1>
 	<form method="post" class="cadastro" action="novoUsuario">
 		<label for="nome">Nome</label><input type="text" id="nome"
@@ -79,5 +82,8 @@
 	</form>
 	<script src="resources/js/cadastrar-usuario.js"></script>
 	<script src="resources/js/cadastrar-endereco.js"></script>
+	
+	<c:import url="rodape.jsp" />
+	
 </body>
 </html>
