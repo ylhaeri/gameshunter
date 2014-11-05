@@ -10,6 +10,7 @@ setTimeout(function() {
 	$.get("pegaMeses", function(info) {
 		var meses = info.meses
 		meses.forEach(function(mes, index) {
+			index++;
 			$("#mesbox").append(
 					"<option value=" + index + ">" + mes + "</option>")
 		})
@@ -30,25 +31,25 @@ setTimeout(function() {
 	var sexo = $("#recS").val()
 	if (sexo != "")
 		$("#dpsexo").val(sexo)
-}, 200)
+}, 300)
 
 setTimeout(function() {
 	var dia = parseInt($("#recD").val())
 	if (dia > 0)
 		$("#diabox").val(dia)
-}, 100)
+}, 200)
 
 setTimeout(function() {
 	var mes = parseInt($("#recM").val())
 	if (mes > 0)
 		$("#mesbox").val(mes)
-}, 100)
+}, 200)
 
 setTimeout(function() {
 	var ano = parseInt($("#recA").val())
 	if (ano > 0)
 		$("#anobox").val(ano)
-}, 100)
+}, 200)
 
 $("#mail")
 		.blur(

@@ -61,7 +61,6 @@ public class UsuarioTest {
 		joao.setEmail(email);
 		joao.setTelefone(telefone);
 		joao.setCpf(cpf);
-
 		joao.adicionaEndereco(endereco);
 
 		assertThat(joao.getSexo(), equalTo(sexo));
@@ -73,7 +72,6 @@ public class UsuarioTest {
 		assertThat(joao.getEmail(), equalTo(email));
 		assertThat(joao.getTelefone(), equalTo(telefone));
 		assertThat(joao.getCpf(), equalTo(cpf));
-
 		assertThat(enderecos, hasItem(endereco));
 	}
 
