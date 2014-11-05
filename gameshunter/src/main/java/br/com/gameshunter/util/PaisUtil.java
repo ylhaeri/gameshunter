@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional.TxType;
+
 import br.com.gameshunter.model.Pais;
 
 /**
@@ -15,6 +17,10 @@ import br.com.gameshunter.model.Pais;
 public class PaisUtil {
 
 	private final String txtPais = "Pais.txt";
+
+	public static void main(String[] args) throws IOException {
+		System.out.println(new PaisUtil().lerPais());
+	}
 
 	/**
 	 * lê todos os países de um arquivo .txt

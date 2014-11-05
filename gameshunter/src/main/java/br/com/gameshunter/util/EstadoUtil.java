@@ -16,6 +16,10 @@ public class EstadoUtil {
 
 	private final String txtEstado = "Estado.txt";
 
+	public static void main (String[] args) throws IOException{
+		System.out.println(new EstadoUtil().lerEstado());
+	}
+	
 	/**
 	 * lê todos os estados de um arquivo .txt
 	 * 
