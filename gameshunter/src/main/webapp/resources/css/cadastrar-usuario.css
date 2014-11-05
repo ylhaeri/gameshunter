@@ -1,8 +1,16 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
-input[type="password"], input[type="text"]{
+input[type="password"], input[type="text"] {
 	padding: 7px 0;
 	width: 300px;
+}
+
+td {
+	text-align: left;
+}
+
+.separador {
+	padding-bottom: 10px;
 }
 
 input, select {

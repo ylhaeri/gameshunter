@@ -42,18 +42,70 @@ $("#mail")
 								"<span id='mailfeed'></span>")
 				})
 
-$("#confirmasenha").blur(function() {
+$("#confirmasenha")
+		.blur(
+				function() {
+					var senha1 = $("#senha").val()
+					var senha2 = $("#confirmasenha").val()
+					if ($("#senha1feed").val() == undefined)
+						$("<span id='senha1feed'></span>")
+								.insertAfter("#senha")
+					if ($("#senha2feed").val() == undefined)
+						$("<span id='senha2feed'></span>").insertAfter(
+								"#confirmasenha")
+					$("#sepSenha").html("")
+					if (tamanhoSenha(senha1)) {
+						$("#senha1feed").removeClass('sfail')
+						$("#senha1feed").addClass('ssuc')
+						$("#senha").css("border", "2px solid green")
+						if (senhasIguais(senha1, senha2)) {
+							$("#confirmasenha")
+									.css("border", "2px solid green")
+							$("#senha2feed").removeClass('sfail')
+							$("#senha2feed").addClass('ssuc')
+						} else {
+							$("#confirmasenha").css("border", "2px solid red")
+							$("#senha2feed").removeClass('ssuc')
+							$("#senha2feed").addClass('sfail')
+							$("#sepSenha")
+									.html(
+											"<span class='errorMessage'>Senhas não conferem</span>")
+						}
+					} else if (senha1.length > 0 && senha1.length < 6) {
+						$("#senha").css("border", "2px solid red")
+						$("#sepSenha").html(
+								"<span class='errorMessage'>Mínimo de "
+										+ "6 caracteres</span>")
+						$("#senha1feed").removeClass('ssuc')
+						$("#senha1feed").addClass('sfail')
+						$("#confirmasenha").css("border", "1px solid black")
+						$("#senha2feed").removeClass('ssuc')
+						$("#senha2feed").removeClass('sfail')
+					} else {
+						$("#senha").css("border", "1px solid black")
+						$("#confirmasenha").css("border", "1px solid black")
+						$("#senha1feed").removeClass('ssuc')
+						$("#senha1feed").removeClass('sfail')
+						$("#senha2feed").removeClass('ssuc')
+						$("#senha2feed").removeClass('sfail')
+					}
+				})
+
+$("form").submit(function(event) {
+	if (senhaValida())
+		event.preventDefault()
+})
+
+function tamanhoSenha(senha) {
+	return senha.length >= 6;
+}
+
+function senhasIguais(senha1, senha2) {
+	return $("#senha").val() == $("#confirmasenha").val()
+}
+
+function senhaValida() {
 	var senha1 = $("#senha").val()
 	var senha2 = $("#confirmasenha").val()
-	if (senha1.length >= 6) {
-		if ($("#senhafeed").val() == undefined)
-			$("<span id='senhafeed'></span>").insertAfter("#confirmasenha")
-		if (senha1 == senha2) {
-			$("#senhafeed").removeClass('sfail')
-			$("#senhafeed").addClass('ssuc')
-		} else {
-			$("#senhafeed").removeClass('ssuc')
-			$("#senhafeed").addClass('sfail')
-		}
-	}
-})
+	return tamanhoSenha(senha1) && senhasIguais(senha1, senha2)
+}
