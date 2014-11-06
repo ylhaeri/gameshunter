@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -33,6 +35,7 @@ public class Usuario {
 	private String nome;
 	private String apelido;
 	private String senha;
+	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	private String cpf;
 	@Convert(converter = ConversorLocalDateDB.class)

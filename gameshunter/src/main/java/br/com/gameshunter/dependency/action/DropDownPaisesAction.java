@@ -22,7 +22,7 @@ public class DropDownPaisesAction {
 	}
 
 	private void adicionaPaises() {
-		PaisDAO pDao = new PaisDAO(new JPAUtil().getEntityManager());
+		PaisDAO pDao = new PaisDAO(JPAUtil.getEntityManager());
 		paises = pDao.pegaTodos();
 		pDao.close();
 	}

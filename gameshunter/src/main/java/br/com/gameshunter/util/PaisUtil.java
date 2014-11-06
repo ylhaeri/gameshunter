@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional.TxType;
-
 import br.com.gameshunter.model.Pais;
 
 /**

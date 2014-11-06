@@ -4,6 +4,7 @@ $(document).ready(
 		function() {
 			$.get("pegaPaises", function(info) {
 				var paises = info.paises;
+				alert(paises)
 				paises.forEach(function(pais) {
 
 					$("#dpais").append(

@@ -27,7 +27,7 @@ public class DropDownCidadeAction {
 	}
 
 	private void carregaCidades() {
-		EntityManager manager = new JPAUtil().getEntityManager();
+		EntityManager manager = JPAUtil.getEntityManager();
 
 		Estado estado = new Estado();
 		estado.setId(idE);

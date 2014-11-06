@@ -20,7 +20,7 @@ public class VerificaEmailAction {
 	}
 
 	private void existeEmail() {
-		UsuarioDAO uDao = new UsuarioDAO(new JPAUtil().getEntityManager());
+		UsuarioDAO uDao = new UsuarioDAO(JPAUtil.getEntityManager());
 		Usuario usuario = uDao.pega(email);
 		uDao.close();
 		if (usuario == null)

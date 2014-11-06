@@ -27,7 +27,7 @@ public class DropDownEstadoAction {
 	}
 
 	private void pegaEstados() {
-		EntityManager manager = new JPAUtil().getEntityManager();
+		EntityManager manager = JPAUtil.getEntityManager();
 
 		Pais pais = new Pais();
 		pais.setId(idP);
