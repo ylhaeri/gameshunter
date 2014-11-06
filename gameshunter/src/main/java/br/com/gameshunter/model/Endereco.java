@@ -24,10 +24,6 @@ public class Endereco {
 	private String bairro;
 	@ManyToOne
 	private Cidade cidade;
-	@ManyToOne
-	private Estado estado;
-	@ManyToOne
-	private Pais pais;
 
 	public Integer getId() {
 		return id;
@@ -90,45 +86,43 @@ public class Endereco {
 	}
 
 	public Estado getEstado() {
-		return estado;
+		return cidade.getEstado();
 	}
 
 	public void setEstado(Estado estado) {
-		this.estado = estado;
+		cidade.setEstado(estado);
 	}
 
 	public Pais getPais() {
-		return pais;
+		return getEstado().getPais();
 	}
 
 	public void setPais(Pais pais) {
-		this.pais = pais;
+		getEstado().setPais(pais);
 	}
 
 	public Endereco() {
 	}
 
 	public Endereco(String rua, Integer numero, String complemento,
-			String bairro, Cidade cidade, Estado estado, String cep, Pais pais) {
+			String bairro, Cidade cidade, String cep) {
 		this.logradouro = rua;
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.numero = numero;
 		this.cidade = cidade;
-		this.estado = estado;
 		this.cep = cep;
-		this.pais = pais;
 	}
 
 	public String formatado() {
 		if (complemento.equals(""))
 			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro
-					+ " " + cidade.getNome() + "/" + estado.getUf() + " CEP: "
-					+ cep;
+					+ " " + cidade.getNome() + "/" + getEstado().getUf()
+					+ " CEP: " + cep;
 		else
 			return logradouro + ", N.°" + numero + " - " + complemento + " - "
 					+ "Bairro " + bairro + " " + cidade.getNome() + "/"
-					+ estado.getUf() + " CEP: " + cep;
+					+ getEstado().getUf() + " CEP: " + cep;
 	}
 
 	@Override
@@ -140,11 +134,10 @@ public class Endereco {
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result
 				+ ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-		result = prime * result + ((pais == null) ? 0 : pais.hashCode());
 		return result;
 	}
 
@@ -177,10 +170,10 @@ public class Endereco {
 				return false;
 		} else if (!complemento.equals(other.complemento))
 			return false;
-		if (estado == null) {
-			if (other.estado != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!estado.equals(other.estado))
+		} else if (!id.equals(other.id))
 			return false;
 		if (logradouro == null) {
 			if (other.logradouro != null)
@@ -191,11 +184,6 @@ public class Endereco {
 			if (other.numero != null)
 				return false;
 		} else if (!numero.equals(other.numero))
-			return false;
-		if (pais == null) {
-			if (other.pais != null)
-				return false;
-		} else if (!pais.equals(other.pais))
 			return false;
 		return true;
 	}

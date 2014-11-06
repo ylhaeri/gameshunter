@@ -1,4 +1,4 @@
-package br.com.gameshunter.DAO;
+/*package br.com.gameshunter.DAO;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
@@ -148,4 +148,4 @@ public class InsercaoEnderecoDAOTest {
 		assertThat(ultima, equalTo(esperadaUltima));
 	}
 
-}
+}*/
