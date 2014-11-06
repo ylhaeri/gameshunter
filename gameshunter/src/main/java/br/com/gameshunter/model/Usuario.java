@@ -2,15 +2,16 @@ package br.com.gameshunter.model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import br.com.gameshunter.util.ConversorLocalDateDB;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -34,8 +35,8 @@ public class Usuario {
 	private String senha;
 	private Sexo sexo;
 	private String cpf;
-	@Temporal(TemporalType.DATE)
-	private Calendar dataNascimento;
+	@Convert(converter = ConversorLocalDateDB.class)
+	private LocalDate dataNascimento;
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private String telefone;
@@ -85,12 +86,12 @@ public class Usuario {
 	}
 
 	/** @return A data de nascimento */
-	public Calendar getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
 	/** @param dataNascimento */
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -246,7 +247,7 @@ public class Usuario {
 	 * @param telefone
 	 */
 	public Usuario(String email, String nome, String apelido, String senha,
-			Sexo sexo, String cpf, Calendar dataNascimento,
+			Sexo sexo, String cpf, LocalDate dataNascimento,
 			List<Endereco> enderecos, String telefone) {
 		this.email = email;
 		this.nome = nome;

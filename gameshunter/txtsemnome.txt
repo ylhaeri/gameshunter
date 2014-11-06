@@ -1,0 +1,12 @@
+Página de cadastrar usuário
+	Títulos com estilo zoado.
+	Posicionamento do botão de enviar.
+	Fazer o campo de data funcionar.
+	
+Reestruturar Usuário
+	Retirar Estado e País.
+	Concertar testes.
+	Trocar Calendar por LocalDate.
+	
+Concertar testes de DAO
+	Tornar os testes independentes.

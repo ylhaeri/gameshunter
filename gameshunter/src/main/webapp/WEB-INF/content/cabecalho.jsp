@@ -2,5 +2,4 @@
 	pageEncoding="UTF-8"%>
 <html>
 <img src="resources/img/logo.png" />
-<hr />
 </html>

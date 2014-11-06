@@ -1,12 +1,35 @@
 @CHARSET "UTF-8";
 
+td {
+	text-align: left;
+}
+
+#dpLocal td {
+	padding-right: 30px;
+}
+
+.cadastro {
+	margin-left: 4%;
+}
+
 input[type="password"], input[type="text"] {
 	padding: 7px 0;
 	width: 300px;
 }
 
-td {
-	text-align: left;
+#titulo {
+	font-size: 30px;
+	margin-left: 2%;
+	margin-bottom: 30px;
+}
+
+#endereco {
+	font-size: 25px;
+	margin-left: -2%;
+}
+
+.separadorGrande {
+	padding: 15px 0;
 }
 
 .separador {
@@ -17,22 +40,6 @@ input, select {
 	border: solid #404040 1px;
 }
 
-div {
-	margin-bottom: 30px;
-}
-
-.ssuc {
-	background-image: url("../img/Imagem1.png");
-	background-size: 100%;
-	width: 32px;
-	height: 32px;
-	position: absolute;
-}
-
-.sfail {
-	background-image: url("../img/Stop.png");
-	background-size: 100%;
-	width: 32px;
-	height: 32px;
-	position: absolute;
+div submit {
+	align: left;
 }

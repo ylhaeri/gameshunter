@@ -2,12 +2,6 @@ $("#cpf").mask("999.999.999-99")
 $("#tel").mask("?(99)99999-9999")
 $("#dataNasc").mask("99/99/9999")
 
-setTimeout(function() {
-	var sexo = $("#recS").val()
-	if (sexo != "")
-		$("#dpsexo").val(sexo)
-}, 300)
-
 $("#mail")
 		.blur(
 				function() {
@@ -53,6 +47,7 @@ $("#confirmasenha")
 					if ($("#senha2feed").val() == undefined)
 						$("<span id='senha2feed'></span>").insertAfter(
 								"#confirmasenha")
+					$("#sepConSenha").html("")
 					$("#sepSenha").html("")
 					if (tamanhoSenha(senha1)) {
 						$("#senha1feed").removeClass('sfail')
@@ -67,7 +62,7 @@ $("#confirmasenha")
 							$("#confirmasenha").css("border", "2px solid red")
 							$("#senha2feed").removeClass('ssuc')
 							$("#senha2feed").addClass('sfail')
-							$("#sepSenha")
+							$("#sepConSenha")
 									.html(
 											"<span class='errorMessage'>Senhas não conferem</span>")
 						}
@@ -91,7 +86,7 @@ $("#confirmasenha")
 					}
 				})
 
-$("form").submit(function(event) {
+$(".cadastro").submit(function(event) {
 	if (!senhaValida())
 		event.preventDefault()
 })

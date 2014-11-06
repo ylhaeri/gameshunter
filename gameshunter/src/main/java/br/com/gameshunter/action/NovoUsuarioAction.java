@@ -1,6 +1,8 @@
 package br.com.gameshunter.action;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 import javax.persistence.EntityManager;
 
@@ -26,9 +28,7 @@ public class NovoUsuarioAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private Endereco endereco;
-	private Integer nascDia;
-	private Integer nascMes;
-	private Integer nascAno;
+	private String dataNasc;
 	private Integer idPais;
 	private Integer idEstado;
 	private Integer idCidade;
@@ -42,13 +42,13 @@ public class NovoUsuarioAction extends ActionSupport {
 		criaSenha();
 		adicionaEndereco();
 
-		new UsuarioDAO(new JPAUtil().getEntityManager()).iniciaTransaction()
+		new UsuarioDAO(JPAUtil.getEntityManager()).iniciaTransaction()
 				.salva(usuario).commit().close();
 		return "ok";
 	}
 
 	private void adicionaEndereco() {
-		EntityManager manager = new JPAUtil().getEntityManager();
+		EntityManager manager = JPAUtil.getEntityManager();
 		CidadeDAO cDao = new CidadeDAO(manager);
 		EnderecoDAO eDao = new EnderecoDAO(manager);
 
@@ -68,9 +68,10 @@ public class NovoUsuarioAction extends ActionSupport {
 	}
 
 	private void dataNasc() {
-		Calendar dataNasc = Calendar.getInstance();
-		dataNasc.set(nascAno, nascMes, nascDia, 0, 0, 0);
-		usuario.setDataNascimento(dataNasc);
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		TemporalAccessor temporal = fmt.parse(dataNasc);
+		LocalDate data = LocalDate.from(temporal);
+		usuario.setDataNascimento(data);
 	}
 
 	public Usuario getUsuario() {
@@ -91,28 +92,12 @@ public class NovoUsuarioAction extends ActionSupport {
 		this.endereco = endereco;
 	}
 
-	public Integer getNascDia() {
-		return nascDia;
+	public String getDataNasc() {
+		return dataNasc;
 	}
 
-	public void setNascDia(Integer nascDia) {
-		this.nascDia = nascDia;
-	}
-
-	public Integer getNascMes() {
-		return nascMes;
-	}
-
-	public void setNascMes(Integer nascMes) {
-		this.nascMes = nascMes;
-	}
-
-	public Integer getNascAno() {
-		return nascAno;
-	}
-
-	public void setNascAno(Integer nascAno) {
-		this.nascAno = nascAno;
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = dataNasc;
 	}
 
 	public Integer getIdPais() {
