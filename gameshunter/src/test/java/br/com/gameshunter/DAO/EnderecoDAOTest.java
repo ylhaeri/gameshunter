@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import javax.persistence.EntityManager;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +35,8 @@ public class EnderecoDAOTest {
 
 	@BeforeClass
 	public static void globalSetUp() {
-		new JPAUtil();
+		JPAUtil.restartFactory();
+
 		id = Indice.pegaEndereco();
 		eFactory = new EnderecoFactory();
 	}
@@ -42,7 +44,7 @@ public class EnderecoDAOTest {
 	@Before
 	public void inicia() {
 		endereco = eFactory.repetido();
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		enDao = new EnderecoDAO(manager);
 		manager.getTransaction().begin();
 
@@ -55,6 +57,11 @@ public class EnderecoDAOTest {
 	public void finaliza() {
 		manager.getTransaction().rollback();
 		manager.close();
+	}
+
+	@AfterClass
+	public static void encerraBanco() {
+		JPAUtil.closeFactory();
 	}
 
 	@Test
@@ -187,7 +194,7 @@ public class EnderecoDAOTest {
 	public void deveSaberIniciarTransactionECommitarCorretamente() {
 
 		this.manager.close();
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 
 		enDao = new EnderecoDAO(manager);
 
@@ -198,7 +205,7 @@ public class EnderecoDAOTest {
 		id++;
 		Indice.contaEndereco();
 
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		enDao = new EnderecoDAO(manager);
 
@@ -207,7 +214,7 @@ public class EnderecoDAOTest {
 
 		enDao.remove(encontrado).commit().close();
 
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		enDao = new EnderecoDAO(manager);
 

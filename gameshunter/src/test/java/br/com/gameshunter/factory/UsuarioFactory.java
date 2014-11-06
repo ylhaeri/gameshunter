@@ -1,7 +1,7 @@
 package br.com.gameshunter.factory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gameshunter.model.Endereco;
@@ -9,13 +9,6 @@ import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 
 public class UsuarioFactory {
-
-	private static Calendar c;
-
-	static {
-		c = Calendar.getInstance();
-		c.set(1990, 1, 1, 12, 0, 0);
-	}
 
 	/**
 	 * Método para criar um usuário repetido.
@@ -26,7 +19,8 @@ public class UsuarioFactory {
 		List<Endereco> enderecos = new ArrayList<>();
 		return new Usuario("ronaldoplosra@hotmail.com", "Ronaldo Plosra Silva",
 				"Rosnaldin", "senhadoronaldo", Sexo.Masculino,
-				"111.111.111-11", c, enderecos, "(11) 1111-1111");
+				"111.111.111-11", LocalDate.of(1990, 01, 01), enderecos,
+				"(11) 1111-1111");
 	}
 
 	/**
@@ -37,8 +31,8 @@ public class UsuarioFactory {
 	public Usuario comEmailSemEndereco(String email) {
 		List<Endereco> enderecos = new ArrayList<>();
 		return new Usuario(email, "Ronaldo Plosra Silva", "Rosnaldin",
-				"senhadoronaldo", Sexo.Masculino, "111.111.111-11", c,
-				enderecos, "(11) 1111-1111");
+				"senhadoronaldo", Sexo.Masculino, "111.111.111-11",
+				LocalDate.of(1990, 01, 01), enderecos, "(11) 1111-1111");
 	}
 
 	/**
@@ -53,7 +47,8 @@ public class UsuarioFactory {
 		enderecos.add(new EnderecoFactory().comLogradouro("Avenida Muranha"));
 		return new Usuario("ronaldoplosra@hotmail.com", "Ronaldo Plosra Silva",
 				"Rosnaldin", "senhadoronaldo", Sexo.Masculino,
-				"111.111.111-11", c, enderecos, "(11) 1111-1111");
+				"111.111.111-11", LocalDate.of(1990, 01, 01), enderecos,
+				"(11) 1111-1111");
 	}
 
 	/**
@@ -67,8 +62,8 @@ public class UsuarioFactory {
 		enderecos.add(new EnderecoFactory().comLogradouro("Rua Guadalupe"));
 		enderecos.add(new EnderecoFactory().comLogradouro("Avenida Muranha"));
 		return new Usuario(email, "Ronaldo Plosra Silva", "Rosnaldin",
-				"senhadoronaldo", Sexo.Masculino, "111.111.111-11", c,
-				enderecos, "(11) 1111-1111");
+				"senhadoronaldo", Sexo.Masculino, "111.111.111-11",
+				LocalDate.of(1990, 01, 01), enderecos, "(11) 1111-1111");
 	}
 
 	/**

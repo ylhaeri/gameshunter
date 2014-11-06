@@ -5,8 +5,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,8 +46,7 @@ public class UsuarioTest {
 		String apelido = "PikachuIluminado";
 		String senha = "ararinhaPumbapulma";
 		Sexo sexo = Sexo.Masculino;
-		Calendar dataNasc = Calendar.getInstance();
-		dataNasc.set(1990, 1, 1, 12, 0, 0);
+		LocalDate dataNasc = LocalDate.now();
 		String email = "joaomachado@gmail.com";
 		String telefone = "(11) 1111-1111";
 		String cpf = "000.000.000-00";
@@ -67,8 +66,7 @@ public class UsuarioTest {
 		assertThat(joao.getNome(), equalTo(nome));
 		assertThat(joao.getApelido(), equalTo(apelido));
 		assertThat(joao.getSenha(), equalTo(senha));
-		assertThat(joao.getDataNascimento().getTime(),
-				equalTo(dataNasc.getTime()));
+		assertThat(joao.getDataNascimento(), equalTo(dataNasc));
 		assertThat(joao.getEmail(), equalTo(email));
 		assertThat(joao.getTelefone(), equalTo(telefone));
 		assertThat(joao.getCpf(), equalTo(cpf));

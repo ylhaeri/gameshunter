@@ -5,40 +5,53 @@ import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
 
+import org.junit.Rule;
 import org.junit.Test;
-
-import com.opensymphony.xwork2.interceptor.annotations.Before;
+import org.junit.rules.ExpectedException;
 
 public class JPAUtilTest {
 
-	@Before
-	public void reiniciaConexao(){
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+
+	@Test
+	public void deveCriarEntityManagerCorretamente() {
+
 		JPAUtil.restartFactory();
-	}
-	
-	@Test (expected = IllegalStateException.class)
-	public void verificaConexao() {
 
 		EntityManager manager = JPAUtil.getEntityManager();
 
 		assertNotNull(manager);
-		
+		assertTrue(manager.isOpen());
+
 		JPAUtil.closeFactory();
-		
-		EntityManager manager2 = JPAUtil.getEntityManager();
-		
 	}
 
 	@Test
-	public void verificaPermanenciaConexao() {
-
-		JPAUtil.closeFactory();
+	public void deveSaberFecharConexao() {
 
 		JPAUtil.restartFactory();
-		
+
+		exception.expect(IllegalStateException.class);
+		exception.expectMessage("EntityManagerFactory is closed");
+
+		JPAUtil.closeFactory();
+		JPAUtil.getEntityManager();
+	}
+
+	@Test
+	public void deveSaberReiniciarConexao() {
+
+		JPAUtil.restartFactory();
+
+		JPAUtil.closeFactory();
+		JPAUtil.restartFactory();
+
 		EntityManager manager = JPAUtil.getEntityManager();
 
+		assertNotNull(manager);
 		assertTrue(manager.isOpen());
 
+		JPAUtil.closeFactory();
 	}
 }

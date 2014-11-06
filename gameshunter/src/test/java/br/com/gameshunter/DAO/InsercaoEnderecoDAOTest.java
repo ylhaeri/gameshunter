@@ -1,7 +1,7 @@
 package br.com.gameshunter.DAO;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,9 +31,9 @@ public class InsercaoEnderecoDAOTest {
 	@BeforeClass
 	public static void globalSetUp() throws IOException {
 
-		new JPAUtil();
+		JPAUtil.restartFactory();
 
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 
 		manager.getTransaction().begin();
 
@@ -40,18 +41,10 @@ public class InsercaoEnderecoDAOTest {
 			manager.persist(pais);
 		}
 
-		manager.getTransaction().commit();
-
-		manager.getTransaction().begin();
-
 		for (Estado estado : new EstadoUtil().lerEstado()) {
 			estado.setPais(manager.find(Pais.class, 1));
 			manager.persist(estado);
 		}
-
-		manager.getTransaction().commit();
-
-		manager.getTransaction().begin();
 
 		for (Cidade cidade : new CidadeUtil().lerCidade()) {
 			manager.persist(cidade);
@@ -65,7 +58,7 @@ public class InsercaoEnderecoDAOTest {
 
 	@Before
 	public void inicia() {
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		cDao = new CidadeDAO(manager);
 		eDao = new EstadoDAO(manager);
 		pDao = new PaisDAO(manager);
@@ -75,6 +68,11 @@ public class InsercaoEnderecoDAOTest {
 	@After
 	public void finaliza() {
 		manager.getTransaction().rollback();
+	}
+
+	@AfterClass
+	public static void encerraBanco() {
+		JPAUtil.closeFactory();
 	}
 
 	@Test
@@ -149,4 +147,5 @@ public class InsercaoEnderecoDAOTest {
 
 		assertThat(ultima, equalTo(esperadaUltima));
 	}
+
 }

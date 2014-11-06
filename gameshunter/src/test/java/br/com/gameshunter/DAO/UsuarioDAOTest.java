@@ -4,12 +4,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class UsuarioDAOTest {
 
 	@BeforeClass
 	public static void globalSetUp() {
-		new JPAUtil();
+		JPAUtil.restartFactory();
 		uFac = new UsuarioFactory();
 		eFac = new EnderecoFactory();
 	}
@@ -42,7 +43,7 @@ public class UsuarioDAOTest {
 	public void inicia() {
 		joao = uFac.comEmailSemEndereco(email);
 		enderecos = joao.getEnderecos();
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		uDao = new UsuarioDAO(manager);
 		eDao = new EnderecoDAO(manager);
 		manager.getTransaction().begin();
@@ -52,6 +53,11 @@ public class UsuarioDAOTest {
 	public void finaliza() {
 		manager.getTransaction().rollback();
 		manager.close();
+	}
+	
+	@AfterClass
+	public static void encerraBanco() {
+		JPAUtil.closeFactory();
 	}
 
 	@Test
@@ -72,8 +78,7 @@ public class UsuarioDAOTest {
 		String apelido = "Pikachu Iluminado";
 		Sexo sexo = Sexo.Masculino;
 		String senha = "aranhaBolao";
-		Calendar dataNascimento = Calendar.getInstance();
-		dataNascimento.set(1990, 1, 12, 12, 0, 0);
+		LocalDate dataNascimento = LocalDate.of(1990, 01, 01);
 		String email = "joao@gmail.com";
 		String telefone = "(11) 1111-1111";
 		String cpf = "000.000.000-00";
@@ -102,8 +107,7 @@ public class UsuarioDAOTest {
 		assertThat(joana.getApelido(), equalTo(apelido));
 		assertThat(joana.getSexo(), equalTo(sexo));
 		assertThat(joana.getSenha(), equalTo(senha));
-		assertThat(joana.getDataNascimento().getTime(),
-				equalTo(dataNascimento.getTime()));
+		assertThat(joana.getDataNascimento(), equalTo(dataNascimento));
 		assertThat(joana.getEmail(), equalTo(email));
 		assertThat(joana.getTelefone(), equalTo(telefone));
 		assertThat(joana.getCpf(), equalTo(cpf));
@@ -287,13 +291,13 @@ public class UsuarioDAOTest {
 	public void deveSaberIniciarTransactionECommitarCorretamente() {
 
 		this.manager.close();
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 
 		uDao = new UsuarioDAO(manager);
 
 		uDao.iniciaTransaction().salva(joao).commit().close();
 
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		uDao = new UsuarioDAO(manager);
 
@@ -301,7 +305,7 @@ public class UsuarioDAOTest {
 		joao = uDao.pega(email);
 		uDao.remove(joao).commit().close();
 
-		manager = new JPAUtil().getEntityManager();
+		manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		uDao = new UsuarioDAO(manager);
 
