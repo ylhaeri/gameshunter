@@ -36,7 +36,7 @@ public class EnderecoFactory {
 
 		return new Endereco(logradouro, 18,
 				"Apto 598, Bloco 367, Praça do Geraldo", "Jazui", cidade,
-				estado, "11111-111", pais);
+				"11111-111");
 	}
 
 	/**
@@ -66,7 +66,6 @@ public class EnderecoFactory {
 
 		return new Endereco("Rua Amaricano Chamumblenho", 18,
 				"Apto 598, Bloco 367, Praça do Geraldo", "Jazui", cidade,
-				estado, "11111-111", pais);
+				"11111-111");
 	}
-
 }

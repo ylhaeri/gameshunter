@@ -55,8 +55,6 @@ public class NovoUsuarioAction extends ActionSupport {
 		Cidade cidade = cDao.pega(idCidade);
 
 		endereco.setCidade(cidade);
-		endereco.setEstado(cidade.getEstado());
-		endereco.setPais(cidade.getEstado().getPais());
 		usuario.adicionaEndereco(endereco);
 
 		eDao.iniciaTransaction().salva(endereco).commit();

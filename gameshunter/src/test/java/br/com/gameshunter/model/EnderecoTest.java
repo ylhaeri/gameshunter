@@ -2,6 +2,7 @@ package br.com.gameshunter.model;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +26,13 @@ public class EnderecoTest {
 		String cep = "11111-111";
 		String complemento = "Apto 302, Bloco 2";
 		String bairro = "Paralelepipedo";
+
 		Cidade cidade = new Cidade();
 		Estado estado = new Estado();
 		Pais pais = new Pais();
+
+		estado.setPais(pais);
+		cidade.setEstado(estado);
 
 		endereco.setId(id);
 		endereco.setLogradouro(logradouro);
@@ -36,8 +41,6 @@ public class EnderecoTest {
 		endereco.setComplemento(complemento);
 		endereco.setBairro(bairro);
 		endereco.setCidade(cidade);
-		endereco.setEstado(estado);
-		endereco.setPais(pais);
 
 		assertThat(endereco.getId(), equalTo(id));
 		assertThat(endereco.getLogradouro(), equalTo(logradouro));
@@ -70,8 +73,7 @@ public class EnderecoTest {
 		cidade.setEstado(estado);
 
 		Endereco endereco = new Endereco("Rua Vergueiro", 18,
-				"Apto 103, Bloco 2", "Sanola", cidade, estado, "11111-111",
-				pais);
+				"Apto 103, Bloco 2", "Sanola", cidade, "11111-111");
 
 		String formatado = "Rua Vergueiro, N.°18 - Apto 103, Bloco 2 - Bairro Sanola "
 				+ "São Paulo/SP CEP: 11111-111";
@@ -94,11 +96,34 @@ public class EnderecoTest {
 		cidade.setEstado(estado);
 
 		Endereco endereco = new Endereco("Rua Vergueiro", 18, "", "Sanola",
-				cidade, estado, "11111-111", pais);
+				cidade, "11111-111");
 
 		String formatado = "Rua Vergueiro, N.°18 - Bairro Sanola "
 				+ "São Paulo/SP CEP: 11111-111";
 
 		assertThat(endereco.formatado(), equalTo(formatado));
+	}
+
+	@Test
+	public void deveAlterarEstadoEPais() {
+		Pais pais = new Pais();
+		Estado estado = new Estado();
+		Cidade cidade = new Cidade();
+
+		estado.setPais(pais);
+		cidade.setEstado(estado);
+
+		endereco.setCidade(cidade);
+
+		Pais pais2 = new Pais();
+		Estado estado2 = new Estado();
+		pais2.setNome("Brasil");
+		estado2.setNome("São Paulo");
+		endereco.troca(pais2);
+		endereco.troca(estado2);
+
+		assertThat(endereco.getPais(), not(equalTo(pais)));
+		assertThat(endereco.getEstado(), not(equalTo(estado)));
+		assertThat(endereco.getCidade(), equalTo(cidade));
 	}
 }

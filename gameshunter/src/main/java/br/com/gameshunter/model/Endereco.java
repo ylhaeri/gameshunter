@@ -89,7 +89,7 @@ public class Endereco {
 		return cidade.getEstado();
 	}
 
-	public void setEstado(Estado estado) {
+	public void troca(Estado estado) {
 		cidade.setEstado(estado);
 	}
 
@@ -97,7 +97,7 @@ public class Endereco {
 		return getEstado().getPais();
 	}
 
-	public void setPais(Pais pais) {
+	public void troca(Pais pais) {
 		getEstado().setPais(pais);
 	}
 

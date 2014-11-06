@@ -54,7 +54,7 @@ public class UsuarioDAOTest {
 		manager.getTransaction().rollback();
 		manager.close();
 	}
-	
+
 	@AfterClass
 	public static void encerraBanco() {
 		JPAUtil.closeFactory();
@@ -71,7 +71,7 @@ public class UsuarioDAOTest {
 	}
 
 	@Test
-	public void deveConterUsuarioComCamposCorretos() {
+	public void deveRegistrarDadosCorretamente() {
 
 		Usuario joao = new Usuario();
 		String nome = "João da Silva Machado";
@@ -225,53 +225,6 @@ public class UsuarioDAOTest {
 		assertThat(joao.getEnderecos(), hasItem(endereco1));
 		assertThat(ronaldo.getEnderecos(), hasItem(endereco2));
 		assertThat(jamelao.getEnderecos(), hasItem(endereco3));
-	}
-
-	@Test
-	public void deveAlterarEnderecoDoUsuario() {
-
-		Endereco endereco = eFac.comLogradouro("Rua Chalompa");
-
-		joao.adicionaEndereco(endereco);
-
-		salva(endereco);
-		uDao.salva(joao);
-
-		Usuario joana = uDao.pega(email);
-		joana.pegaEndereco(0)
-				.setLogradouro("Bairro da Joana do coraçãozinhos2");
-
-		uDao.atualiza(joana);
-
-		joao = uDao.pega(email);
-
-		Endereco enderedoAtualizado = eFac
-				.comLogradouro("Bairro da Joana do coraçãozinhos2");
-		Long contagem = eDao.conta();
-
-		assertThat(contagem, equalTo(1l));
-		assertThat(enderecos.size(), equalTo(1));
-		assertThat(enderecos, hasItem(enderedoAtualizado));
-	}
-
-	@Test
-	public void deveRemoverEnderecoJuntoDoUsuario() {
-
-		joao = uFac.comEmailEEnderecos("renatinho@hotmail.com");
-
-		enderecos = joao.getEnderecos();
-
-		enderecos.forEach(e -> salva(e));
-		uDao.salva(joao);
-
-		uDao.remove(joao);
-
-		Long uContagem = uDao.conta();
-		Long eContagem = eDao.conta();
-
-		assertThat(uContagem, equalTo(0l));
-		assertThat(eContagem, equalTo(0l));
-		assertThat(enderecos.size(), equalTo(3));
 	}
 
 	@Test

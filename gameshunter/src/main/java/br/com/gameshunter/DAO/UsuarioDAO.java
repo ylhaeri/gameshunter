@@ -1,11 +1,8 @@
 package br.com.gameshunter.DAO;
 
-import java.util.function.Consumer;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.gameshunter.model.Endereco;
 import br.com.gameshunter.model.Usuario;
 
 /**
@@ -49,21 +46,8 @@ public class UsuarioDAO implements DbDAO<Usuario, String> {
 		return this;
 	}
 
-	/*
-	 * Precisa dar um jeito nesse foreach pra conseguir usar lambda.
-	 * Aparentemente é problema com o tomcat. Assim que coloca lambda, ele não
-	 * inicializa mais.
-	 */
 	@Override
 	public UsuarioDAO remove(Usuario usuario) {
-		if (usuario.getEnderecos() != null)
-			usuario.getEnderecos().forEach(new Consumer<Endereco>() {
-
-				@Override
-				public void accept(Endereco e) {
-					new EnderecoDAO(manager).remove(e);
-				}
-			});
 		manager.merge(usuario);
 		manager.remove(usuario);
 		return this;

@@ -1,8 +1,7 @@
 package br.com.gameshunter.DAO;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
 
@@ -48,9 +47,9 @@ public class EnderecoDAOTest {
 		enDao = new EnderecoDAO(manager);
 		manager.getTransaction().begin();
 
+		pais = endereco.getPais();
 		estado = endereco.getEstado();
 		cidade = endereco.getCidade();
-		pais = endereco.getPais();
 	}
 
 	@After
@@ -65,7 +64,7 @@ public class EnderecoDAOTest {
 	}
 
 	@Test
-	public void deveAdicioanrUmEnderecoComCidadePaisEEstado() {
+	public void deveAdicionarUmEnderecoComCidadePaisEEstado() {
 
 		Pais pais = new Pais();
 		pais.setNome("Brasil");
@@ -82,8 +81,6 @@ public class EnderecoDAOTest {
 
 		Endereco endereco = new Endereco();
 
-		endereco.setPais(pais);
-		endereco.setEstado(estado);
 		endereco.setCidade(cidade);
 
 		persist(pais);
@@ -121,10 +118,8 @@ public class EnderecoDAOTest {
 		endereco.setNumero(123);
 		endereco.setBairro("Parque Br");
 		endereco.setCidade(cidade);
-		endereco.setEstado(estado);
 		endereco.setCep("31456892");
 		endereco.setComplemento("Conj B");
-		endereco.setPais(pais);
 
 		persist(pais);
 		persist(estado);
@@ -135,6 +130,7 @@ public class EnderecoDAOTest {
 
 		assertThat(enDao.conta(), equalTo(1l));
 		assertThat(resultado, equalTo(endereco));
+		assertNotNull(resultado.getPais());
 	}
 
 	@Test
