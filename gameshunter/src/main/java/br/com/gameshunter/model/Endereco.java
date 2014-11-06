@@ -41,7 +41,7 @@ public class Endereco {
 		return cep;
 	}
 
-	@RequiredStringValidator(key="endereco.cep.vazio")
+	@RequiredStringValidator(key = "endereco.cep.vazio")
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
@@ -50,7 +50,7 @@ public class Endereco {
 		return logradouro;
 	}
 
-	@RequiredStringValidator(key="endereco.logradouro.vazio")
+	@RequiredStringValidator(key = "endereco.logradouro.vazio")
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
@@ -59,7 +59,7 @@ public class Endereco {
 		return numero;
 	}
 
-	@RequiredFieldValidator(key="endereco.numero.vazio")
+	@RequiredFieldValidator(key = "endereco.numero.vazio")
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
@@ -76,7 +76,7 @@ public class Endereco {
 		return bairro;
 	}
 
-	@RequiredStringValidator(key="endereco.bairro.vazio")
+	@RequiredStringValidator(key = "endereco.bairro.vazio")
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
@@ -123,8 +123,8 @@ public class Endereco {
 	public String formatado() {
 		if (complemento.equals(""))
 			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro
-					+ " " + cidade.getNome() + "/" + estado.getUf()
-					+ " CEP: " + cep;
+					+ " " + cidade.getNome() + "/" + estado.getUf() + " CEP: "
+					+ cep;
 		else
 			return logradouro + ", N.°" + numero + " - " + complemento + " - "
 					+ "Bairro " + bairro + " " + cidade.getNome() + "/"
