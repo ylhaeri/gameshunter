@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+tr + td{
+	background-color: black;
+}
+
 td {
 	text-align: left;
 }
