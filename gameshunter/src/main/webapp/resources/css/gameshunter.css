@@ -15,7 +15,7 @@ header {
 .container {
 	width: 60%;
 	margin: 0 auto;
-	padding-bottom: 15px;
+	padding: 15px;
 	border-left: 5px solid red;
 	border-right: 5px solid red;
 }
@@ -34,12 +34,24 @@ header, footer {
 	background-color: black;
 }
 
+.feedSuccess {
+	border: 2px solid green;
+}
+
+.feedError {
+	border: 2px solid red;
+}
+
+.successMessage {
+	color: green;
+}
+
 .errorMessage {
 	color: red;
 	margin-right: 1%;
 }
 
-.ssuc {
+.feedImgSuccess {
 	background-image: url("../img/success.png");
 	background-size: 100%;
 	width: 32px;
@@ -47,7 +59,7 @@ header, footer {
 	position: absolute;
 }
 
-.sfail {
+.feedImgError {
 	background-image: url("../img/error.png");
 	background-size: 100%;
 	width: 32px;

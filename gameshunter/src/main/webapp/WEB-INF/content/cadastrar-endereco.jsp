@@ -13,8 +13,8 @@
 	<tr><td class="separador"></td></tr>
 	<s:textfield label="Número" labelposition="top" labelSeparator=""
 		id="numt" name="endereco.numero" value="%{endereco.numero}"
-		errorPosition="bottom" maxLength="6" type="number" />
-	<tr><td class="separador"></td></tr>
+		errorPosition="bottom" maxLength="6" />
+	<tr><td class="separador" id="numfeed"></td></tr>
 	<s:textfield label="Complemento" labelposition="top" labelSeparator=""
 		id="comt" name="endereco.complemento" value="%{endereco.complemento}"
 		errorPosition="bottom" />

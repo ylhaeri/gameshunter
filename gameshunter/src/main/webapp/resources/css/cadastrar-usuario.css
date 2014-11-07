@@ -1,11 +1,8 @@
 @CHARSET "UTF-8";
 
-tr + td{
-	background-color: black;
-}
-
 td {
 	text-align: left;
+	padding-bottom: 5px;
 }
 
 #dpLocal td {
@@ -25,6 +22,7 @@ input[type="password"], input[type="text"] {
 	font-size: 30px;
 	margin-left: 2%;
 	margin-bottom: 30px;
+	margin-left: 2%;
 }
 
 #endereco {
@@ -32,8 +30,12 @@ input[type="password"], input[type="text"] {
 	margin-left: -2%;
 }
 
+#numt {
+	width: 20%;
+}
+
 .separadorGrande {
-	padding: 15px 0;
+	padding-bottom: 25px;
 }
 
 .separador {

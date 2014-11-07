@@ -10,43 +10,35 @@ import br.com.gameshunter.model.Usuario;
 public class VerificaEmailAction {
 
 	private String email;
-	private String mensagem;
+	private boolean disponivel;
 
 	@Action(value = "verificaEmail", results = { @Result(name = "ok", type = "json") })
 	public String execute() {
 
-		existeEmail();
+		estaDisponivel();
 		return "ok";
 	}
 
-	private void existeEmail() {
+	private void estaDisponivel() {
 		UsuarioDAO uDao = new UsuarioDAO(JPAUtil.getEntityManager());
 		Usuario usuario = uDao.pega(email);
 		uDao.close();
 		if (usuario == null)
-			setMensagem("E-mail disponível", "positivo");
+			this.disponivel = true;
 		else
-			setMensagem("E-mail já cadastrado", "negativo");
+			this.disponivel = false;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getMensagem() {
-		return mensagem;
+	public boolean isDisponivel() {
+		return disponivel;
 	}
 
-	public void setMensagem(String mensagem, String classe) {
-		// FIXME
-		this.mensagem = "<span id='mailfeed' class=" + classe + ">" + mensagem
-				+ "</span>";
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 
-	public static void main(String[] args) {
-
-		VerificaEmailAction verifica = new VerificaEmailAction();
-		verifica.setMensagem("Osvaldo", "Pinto");
-		System.out.println(verifica.getMensagem());
-	}
 }

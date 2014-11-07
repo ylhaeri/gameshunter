@@ -36,14 +36,14 @@
 			<s:textfield label="E-mail" labelposition="top" labelSeparator=""
 				id="mail" name="usuario.email" value="%{usuario.email}"
 				errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr><td class="separador" id="mailfeed"></td></tr>
 			<s:password label="Senha" labelposition="top" labelSeparator=""
 				id="senha" />
-			<tr><td id="sepSenha"></td></tr>
+			<tr><td class="separador"></td></tr>
 			<s:password label="Confirme sua senha" labelposition="top"
-				labelSeparator="" id="confirmasenha" name="usuario.senha"
+				labelSeparator="" id="confirmaSenha" name="usuario.senha"
 				errorPosition="bottom" />
-			<tr><td class="separador" id="sepConSenha"></td></tr>
+			<tr><td class="separador" id="feedConSenha"></td></tr>
 			<s:textfield label="CPF" labelposition="top" labelSeparator=""
 				id="cpf" name="usuario.cpf" value="%{usuario.cpf}"
 				errorPosition="bottom" />

@@ -4,7 +4,6 @@ $(document).ready(
 		function() {
 			$.get("pegaPaises", function(info) {
 				var paises = info.paises;
-				alert(paises)
 				paises.forEach(function(pais) {
 
 					$("#dpais").append(
@@ -84,3 +83,9 @@ setTimeout(function() {
 	if (cid > 0)
 		$("#dpcid").val(cid)
 }, 300);
+
+$("#numt").keypress(function(event) {
+	var regex = /[0-9]/;
+	if (!regex.test(String.fromCharCode(event.keyCode)))
+		event.preventDefault()
+})
