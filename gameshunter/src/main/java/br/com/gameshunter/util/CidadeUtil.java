@@ -7,7 +7,6 @@ import java.util.List;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 
-
 /**
  * Métodos de utilização da class Cidade
  * 
@@ -19,13 +18,14 @@ public class CidadeUtil {
 	private static final String txtCidade = "Cidade.txt";
 	private Cidade cidade;
 	private Estado estado;
-	
+
 	/**
 	 * lê todas as cidade de um arquivo .txt
 	 * 
-	 * @return lista de todas as cidades 
+	 * @return lista de todas as cidades
 	 * 
-	 * @throws IOException caso não houver o arquivo .txt
+	 * @throws IOException
+	 *             caso não houver o arquivo .txt
 	 */
 	public List<Cidade> lerCidade() throws IOException {
 
@@ -37,14 +37,14 @@ public class CidadeUtil {
 
 			cidade = new Cidade();
 			estado = new Estado();
-			
+
 			informacoes = linha.split(",");
 
-			//extrai e atribui a informação que contém o nome da cidade
+			// extrai e atribui a informação que contém o nome da cidade
 			String nomeCidade = informacoes[1].replace("\'", "")
 					.replace(";", "").replace("(", "").replace(")", "").trim();
-			
-			//extrair e atribui a informação do id do estado
+
+			// extrair e atribui a informação do id do estado
 			Integer idEstado = Integer.parseInt(informacoes[2]
 					.replace("\'", "").replace(";", "").replace("(", "")
 					.replace(")", "").trim());
@@ -54,7 +54,6 @@ public class CidadeUtil {
 			cidade.setEstado(estado);
 
 			cidades.add(cidade);
-
 		}
 
 		return cidades;

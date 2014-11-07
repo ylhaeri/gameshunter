@@ -25,85 +25,106 @@ public class Endereco {
 	@ManyToOne
 	private Cidade cidade;
 
+	/** @return o id */
 	public Integer getId() {
 		return id;
 	}
 
+	/** @param id */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/** @return o cep */
 	public String getCep() {
 		return cep;
 	}
 
+	/** @param cep */
 	@RequiredStringValidator(key = "endereco.cep.vazio")
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
+	/** @return o logradouro */
 	public String getLogradouro() {
 		return logradouro;
 	}
 
+	/** @param logradouro */
 	@RequiredStringValidator(key = "endereco.logradouro.vazio")
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
 
+	/** @return o número */
 	public Integer getNumero() {
 		return numero;
 	}
 
+	/** @param numero */
 	@RequiredFieldValidator(key = "endereco.numero.vazio")
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
+	/** @return o complemento */
 	public String getComplemento() {
 		return complemento;
 	}
 
+	/** @param complemento */
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
 
+	/** @return O bairro */
 	public String getBairro() {
 		return bairro;
 	}
 
+	/** @param bairro */
 	@RequiredStringValidator(key = "endereco.bairro.vazio")
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
 
+	/** @return a cidade */
 	public Cidade getCidade() {
 		return cidade;
 	}
 
+	/** @param cidade */
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
+	/** @return o estado */
 	public Estado getEstado() {
 		return cidade.getEstado();
 	}
 
-	public void troca(Estado estado) {
-		cidade.setEstado(estado);
-	}
-
+	/** @return o país */
 	public Pais getPais() {
 		return getEstado().getPais();
 	}
 
-	public void troca(Pais pais) {
-		getEstado().setPais(pais);
-	}
-
+	/**
+	 * Construtor padrão de endereço.
+	 */
 	public Endereco() {
 	}
 
+	/**
+	 * Construtor completo de endereço.
+	 * 
+	 * @param rua
+	 * @param numero
+	 * @param complemento
+	 * @param bairro
+	 * @param cidade
+	 * @param cep
+	 */
 	public Endereco(String rua, Integer numero, String complemento,
 			String bairro, Cidade cidade, String cep) {
 		this.logradouro = rua;
@@ -114,6 +135,11 @@ public class Endereco {
 		this.cep = cep;
 	}
 
+	/**
+	 * Formata o endereço
+	 * 
+	 * @return String com o endereço formatado
+	 */
 	public String formatado() {
 		if (complemento.equals(""))
 			return logradouro + ", N.°" + numero + " - " + "Bairro " + bairro

@@ -190,13 +190,22 @@ public class Usuario {
 	}
 
 	/**
-	 * Gera hash de senha
+	 * Gera hash da senha do usuário
 	 */
 	public void geraHashedSenha() {
+		// FIXME
 		this.senha = encrypt(this.senha);
 	}
 
-	public String encrypt(String string) {
+	/**
+	 * Gera o hash code e criptografa uma String
+	 * 
+	 * @param string
+	 *            string que deve ser ser criptografada
+	 * @return string criptografada
+	 */
+	private String encrypt(String string) {
+		// FIXME
 		MessageDigest digester;
 		try {
 			digester = MessageDigest.getInstance("SHA-256");
@@ -205,10 +214,18 @@ public class Usuario {
 		}
 		digester.update(string.getBytes());
 		byte[] hash = digester.digest();
-		return codigo(hash);
+		return codificador(hash);
 	}
 
-	private String codigo(byte[] hash) {
+	/**
+	 * Realiza a criptografia dos bytes recebidos
+	 * 
+	 * @param hash
+	 *            bytes que defem ser codificados.
+	 * @return string codificada.
+	 */
+	private String codificador(byte[] hash) {
+		// FIXME
 		StringBuffer hexString = new StringBuffer();
 		for (int i = 0; i < hash.length; i++) {
 			if ((0xff & hash[i]) < 0x10) {
@@ -224,7 +241,7 @@ public class Usuario {
 	 * Verifica se o endereço pode ou não ser adicionado
 	 * 
 	 * @param endereco
-	 *            Endereço que deve passar pela verificação.
+	 *            Endereço que que será analisado.
 	 * 
 	 * @return verdadeiro caso possa ser adicionado, falso caso não.
 	 */

@@ -103,27 +103,4 @@ public class EnderecoTest {
 
 		assertThat(endereco.formatado(), equalTo(formatado));
 	}
-
-	@Test
-	public void deveAlterarEstadoEPais() {
-		Pais pais = new Pais();
-		Estado estado = new Estado();
-		Cidade cidade = new Cidade();
-
-		estado.setPais(pais);
-		cidade.setEstado(estado);
-
-		endereco.setCidade(cidade);
-
-		Pais pais2 = new Pais();
-		Estado estado2 = new Estado();
-		pais2.setNome("Brasil");
-		estado2.setNome("São Paulo");
-		endereco.troca(pais2);
-		endereco.troca(estado2);
-
-		assertThat(endereco.getPais(), not(equalTo(pais)));
-		assertThat(endereco.getEstado(), not(equalTo(estado)));
-		assertThat(endereco.getCidade(), equalTo(cidade));
-	}
 }
