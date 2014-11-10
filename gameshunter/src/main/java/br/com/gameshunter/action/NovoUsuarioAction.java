@@ -38,8 +38,8 @@ public class NovoUsuarioAction extends ActionSupport {
 	@Result(name = "ok", location = "usuario-adicionado.jsp"),
 			@Result(name = "input", location = "cadastrar-usuario.jsp") })
 	public String execute() {
-		dataNasc();
-		criaSenha();
+		criaDataNasc();
+		criaHashDaSenha();
 		adicionaEndereco();
 
 		new UsuarioDAO(JPAUtil.getEntityManager()).iniciaTransaction()
@@ -61,11 +61,11 @@ public class NovoUsuarioAction extends ActionSupport {
 		manager.close();
 	}
 
-	private void criaSenha() {
-		usuario.geraHashedSenha();
+	private void criaHashDaSenha() {
+		usuario.geraHashDeSenha();
 	}
 
-	private void dataNasc() {
+	private void criaDataNasc() {
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		TemporalAccessor temporal = fmt.parse(dataNasc);
 		LocalDate data = LocalDate.from(temporal);

@@ -1,8 +1,13 @@
 package br.com.gameshunter.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 /**
  * Representa uma cidade
@@ -10,9 +15,12 @@ import javax.persistence.ManyToOne;
  * @author Alex
  */
 @Entity
+@XStreamAlias("cidade")
 public class Cidade {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@XStreamOmitField
 	private Integer id;
 	private String nome;
 	@ManyToOne

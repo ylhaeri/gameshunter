@@ -149,9 +149,9 @@ public class UsuarioTest {
 		joao.adicionaEndereco(enviado3);
 
 		assertThat(enderecos.size(), equalTo(3));
-		assertThat(joao.pegaEndereco(0), equalTo(esperado1));
-		assertThat(joao.pegaEndereco(1), equalTo(esperado2));
-		assertThat(joao.pegaEndereco(2), equalTo(esperado3));
+		assertThat(joao.pegaEndereco(1), equalTo(esperado1));
+		assertThat(joao.pegaEndereco(2), equalTo(esperado2));
+		assertThat(joao.pegaEndereco(3), equalTo(esperado3));
 	}
 
 	@Test
@@ -162,7 +162,7 @@ public class UsuarioTest {
 
 		joao.adicionaEndereco(endereco);
 
-		joao.removeEndereco(0);
+		joao.removeEndereco(1);
 
 		assertThat(enderecos.size(), equalTo(0));
 	}
@@ -174,8 +174,8 @@ public class UsuarioTest {
 		Endereco alterado = enderecoFactory.repetido();
 
 		joao.adicionaEndereco(endereco);
-		joao.alteraEndereco(0, alterado);
+		joao.alteraEndereco(1, alterado);
 
-		assertThat(joao.pegaEndereco(0), equalTo(alterado));
+		assertThat(joao.pegaEndereco(1), equalTo(alterado));
 	}
 }

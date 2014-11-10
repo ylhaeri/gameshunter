@@ -1,7 +1,5 @@
 package br.com.gameshunter.model;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import br.com.gameshunter.util.ConversorLocalDateDB;
+import br.com.gameshunter.util.HashFactory;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -184,8 +183,10 @@ public class Usuario {
 	 *            Indice real do endereço na lista
 	 */
 	public void removeEndereco(Integer numero) {
-
-		enderecos.remove(pegaEndereco(numero));
+		if (numero < 1)
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
+		enderecos.remove(numero - 1);
 	}
 
 	/**
@@ -195,57 +196,14 @@ public class Usuario {
 	 *            Endereço alterado para que a troca seja feita
 	 */
 	public void alteraEndereco(Integer numero, Endereco alterado) {
-
+		// FIXME
 		removeEndereco(numero);
 		adicionaEndereco(alterado);
 	}
 
-	/**
-	 * Gera hash da senha do usuário
-	 */
-	public void geraHashedSenha() {
-		// FIXME
-		this.senha = encrypt(this.senha);
-	}
-
-	/**
-	 * Gera o hash code e criptografa uma String
-	 * 
-	 * @param string
-	 *            string que deve ser ser criptografada
-	 * @return string criptografada
-	 */
-	private String encrypt(String string) {
-		// FIXME
-		MessageDigest digester;
-		try {
-			digester = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException();
-		}
-		digester.update(string.getBytes());
-		byte[] hash = digester.digest();
-		return codificador(hash);
-	}
-
-	/**
-	 * Realiza a criptografia dos bytes recebidos
-	 * 
-	 * @param hash
-	 *            bytes que defem ser codificados.
-	 * @return string codificada.
-	 */
-	private String codificador(byte[] hash) {
-		// FIXME
-		StringBuffer hexString = new StringBuffer();
-		for (int i = 0; i < hash.length; i++) {
-			if ((0xff & hash[i]) < 0x10) {
-				hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
-			} else {
-				hexString.append(Integer.toHexString(0xFF & hash[i]));
-			}
-		}
-		return hexString.toString();
+	/** Gera o Hash da senha do usuário. */
+	public void geraHashDeSenha() {
+		this.senha = new HashFactory().geraHashString(this.senha);
 	}
 
 	/** Construtor padrão */
@@ -276,5 +234,78 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.enderecos = enderecos;
 		this.telefone = telefone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result
+				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((enderecos == null) ? 0 : enderecos.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		result = prime * result
+				+ ((telefone == null) ? 0 : telefone.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (apelido == null) {
+			if (other.apelido != null)
+				return false;
+		} else if (!apelido.equals(other.apelido))
+			return false;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (enderecos == null) {
+			if (other.enderecos != null)
+				return false;
+		} else if (!enderecos.equals(other.enderecos))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (sexo != other.sexo)
+			return false;
+		if (telefone == null) {
+			if (other.telefone != null)
+				return false;
+		} else if (!telefone.equals(other.telefone))
+			return false;
+		return true;
 	}
 }
