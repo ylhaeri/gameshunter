@@ -32,7 +32,7 @@ public class DropDownCidadeAction {
 		Estado estado = new Estado();
 		estado.setId(idE);
 
-		cidades = new CidadeDAO(manager).pegaTodos(estado);
+		cidades = new CidadeDAO(manager).pegaTodosDo(estado);
 		manager.close();
 	}
 

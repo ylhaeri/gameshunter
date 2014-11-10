@@ -3,7 +3,7 @@ package br.com.gameshunter.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
@@ -16,13 +16,18 @@ public class CidadeDAO implements BasicDbDAO {
 		this.manager = manager;
 	}
 
-	public List<Cidade> pegaTodos(Estado estado) {
-		Query query = manager.createQuery("Select c from Cidade c "
-				+ "where c.estado= :pEstado");
+	public List<Cidade> pegaTodos() {
+		TypedQuery<Cidade> query = manager.createQuery("Select c from Cidade c",
+				Cidade.class);
+		return query.getResultList();
+	}
+
+	public List<Cidade> pegaTodosDo(Estado estado) {
+		TypedQuery<Cidade> query = manager.createQuery(
+				"Select c from Cidade c " + "where c.estado= :pEstado",
+				Cidade.class);
 		query.setParameter("pEstado", estado);
-		@SuppressWarnings("unchecked")
-		List<Cidade> cidades = query.getResultList();
-		return cidades;
+		return query.getResultList();
 	}
 
 	public void fechaConexao() {

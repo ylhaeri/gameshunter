@@ -3,7 +3,7 @@ package br.com.gameshunter.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
@@ -16,13 +16,18 @@ public class EstadoDAO {
 		this.manager = manager;
 	}
 
-	public List<Estado> pegaTodos(Pais pais){
-		Query query = this.manager.createQuery("select e from Estado as e "
-				+ "where e.pais= :pPais");
+	public List<Estado> pegaTodos() {
+		TypedQuery<Estado> query = manager.createQuery("select e from Estado e",
+				Estado.class);
+		return query.getResultList();
+	}
+
+	public List<Estado> pegaTodosDo(Pais pais) {
+		TypedQuery<Estado> query = manager.createQuery(
+				"select e from Estado as e " + "where e.pais= :pPais",
+				Estado.class);
 		query.setParameter("pPais", pais);
-		@SuppressWarnings("unchecked")
-		List<Estado> estados = query.getResultList();
-		return estados;
+		return query.getResultList();
 	}
 
 	public void fechaConexao() {
