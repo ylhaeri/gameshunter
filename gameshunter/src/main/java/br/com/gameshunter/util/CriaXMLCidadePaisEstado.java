@@ -46,11 +46,9 @@ public class CriaXMLCidadePaisEstado {
 			List<Estado> estados = new EstadoDAO(manager).pegaTodos(pais);
 			for (Estado estado : estados) {
 				List<Cidade> cidades = new CidadeDAO(manager).pegaTodos(estado);
-				for (Cidade cidade : cidades) {
-					todasCidades.add(cidade);
-				}
-				todosEstados.add(estado);
+				todasCidades.addAll(cidades);
 			}
+			todosEstados.addAll(estados);
 		}
 
 		paisPS.println(xstream.toXML(paises));

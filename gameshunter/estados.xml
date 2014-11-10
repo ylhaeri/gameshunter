@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estados>
+<list>
+  <estado>
+    <nome>Acre</nome>
+    <uf>AC</uf>
+    <pais>
+      <nome>Brasil</nome>
+      <sigla>BR</sigla>
+    </pais>
+  </estado>
+  <estado>
+    <nome>Alagoas</nome>
+    <uf>AL</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Amazonas</nome>
+    <uf>AM</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Amapá</nome>
+    <uf>AP</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Bahia</nome>
+    <uf>BA</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Ceará</nome>
+    <uf>CE</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Distrito Federal</nome>
+    <uf>DF</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Espírito Santo</nome>
+    <uf>ES</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Goiás</nome>
+    <uf>GO</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Maranhão</nome>
+    <uf>MA</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Minas Gerais</nome>
+    <uf>MG</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Mato Grosso do Sul</nome>
+    <uf>MS</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Mato Grosso</nome>
+    <uf>MT</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Pará</nome>
+    <uf>PA</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Paraíba</nome>
+    <uf>PB</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Pernambuco</nome>
+    <uf>PE</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Piauí</nome>
+    <uf>PI</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Paraná</nome>
+    <uf>PR</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Rio de Janeiro</nome>
+    <uf>RJ</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Rio Grande do Norte</nome>
+    <uf>RN</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Rondônia</nome>
+    <uf>RO</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Roraima</nome>
+    <uf>RR</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Rio Grande do Sul</nome>
+    <uf>RS</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Santa Catarina</nome>
+    <uf>SC</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Sergipe</nome>
+    <uf>SE</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>São Paulo</nome>
+    <uf>SP</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+  <estado>
+    <nome>Tocantins</nome>
+    <uf>TO</uf>
+    <pais reference="/list/estado/pais"/>
+  </estado>
+</list>
+</estados>
