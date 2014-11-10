@@ -1,43 +1,56 @@
 package br.com.gameshunter.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * Representa uma cidade
+ * 
+ * @author Alex
+ */
 @Entity
 public class Cidade {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	@ManyToOne
 	private Estado estado;
 
+	/** @return o id */
 	public Integer getId() {
 		return id;
 	}
 
+	/** @param id */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/** @return o nome da cidade */
 	public String getNome() {
 		return nome;
 	}
 
+	/** @param nome */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/** @return o estado da cidade */
 	public Estado getEstado() {
 		return estado;
 	}
 
+	/** @param estado */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	/** @return o pais da cidade */
+	public Pais getPais() {
+		return estado.getPais();
 	}
 
 	@Override

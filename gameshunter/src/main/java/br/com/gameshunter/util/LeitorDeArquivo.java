@@ -14,7 +14,7 @@ import java.util.List;
  * @author Alex
  *
  */
-public class Arquivo {
+public class LeitorDeArquivo {
 
 	/**
 	 * 
@@ -27,18 +27,23 @@ public class Arquivo {
 	 *             caso não houver o arquivo .txt
 	 * 
 	 */
-	public List<String> pega(String arquivo) throws IOException {
+	public List<String> pega(String arquivo) {
 		List<String> texto = new ArrayList<String>();
-		BufferedReader br = lerArquivo(arquivo);
-		String linha = br.readLine();
+		try {
+			BufferedReader br = lerArquivo(arquivo);
+			String linha = br.readLine();
 
-		while (linha != null) {
-			texto.add(linha);
-			linha = br.readLine();
+			while (linha != null) {
+				texto.add(linha);
+				linha = br.readLine();
+			}
+
+			br.close();
+		} catch (IOException e) {
+			System.out.println("Não foi possível encontrar o arquivo: "
+					+ arquivo);
+			e.printStackTrace();
 		}
-
-		br.close();
-		
 		return texto;
 	}
 
@@ -58,5 +63,4 @@ public class Arquivo {
 		BufferedReader br = new BufferedReader(isr);
 		return br;
 	}
-
 }

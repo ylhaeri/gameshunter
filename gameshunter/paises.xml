@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paises>
+<list>
+  <br.com.gameshunter.model.Pais>
+    <id>1</id>
+    <nome>Brasil</nome>
+    <sigla>BR</sigla>
+  </br.com.gameshunter.model.Pais>
+</list>
+</paises>

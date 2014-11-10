@@ -1,39 +1,47 @@
 package br.com.gameshunter.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Representa um país
+ * 
+ * @author Alex
+ */
 @Entity
 public class Pais {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String sigla;
 
+	/** @return o id */
 	public Integer getId() {
 		return id;
 	}
 
+	/** @param id */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/** @return o nome */
 	public String getNome() {
 		return nome;
 	}
 
+	/** @param nome */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/** @return a sigla */
 	public String getSigla() {
 		return sigla;
 	}
 
+	/** @param sigla */
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
@@ -67,6 +75,5 @@ public class Pais {
 	public String toString() {
 		return " " + id + " " + nome + " " + sigla;
 	}
-	
-	
+
 }

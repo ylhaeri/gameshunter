@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estados>
+<list>
+  <br.com.gameshunter.model.Estado>
+    <id>1</id>
+    <nome>Acre</nome>
+    <uf>AC</uf>
+    <pais>
+      <id>1</id>
+      <nome>Brasil</nome>
+      <sigla>BR</sigla>
+    </pais>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>2</id>
+    <nome>Alagoas</nome>
+    <uf>AL</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>3</id>
+    <nome>Amazonas</nome>
+    <uf>AM</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>4</id>
+    <nome>Amapá</nome>
+    <uf>AP</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>5</id>
+    <nome>Bahia</nome>
+    <uf>BA</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>6</id>
+    <nome>Ceará</nome>
+    <uf>CE</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>7</id>
+    <nome>Distrito Federal</nome>
+    <uf>DF</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>8</id>
+    <nome>Espírito Santo</nome>
+    <uf>ES</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>9</id>
+    <nome>Goiás</nome>
+    <uf>GO</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>10</id>
+    <nome>Maranhão</nome>
+    <uf>MA</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>11</id>
+    <nome>Minas Gerais</nome>
+    <uf>MG</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>12</id>
+    <nome>Mato Grosso do Sul</nome>
+    <uf>MS</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>13</id>
+    <nome>Mato Grosso</nome>
+    <uf>MT</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>14</id>
+    <nome>Pará</nome>
+    <uf>PA</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>15</id>
+    <nome>Paraíba</nome>
+    <uf>PB</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>16</id>
+    <nome>Pernambuco</nome>
+    <uf>PE</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>17</id>
+    <nome>Piauí</nome>
+    <uf>PI</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>18</id>
+    <nome>Paraná</nome>
+    <uf>PR</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>19</id>
+    <nome>Rio de Janeiro</nome>
+    <uf>RJ</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>20</id>
+    <nome>Rio Grande do Norte</nome>
+    <uf>RN</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>21</id>
+    <nome>Rondônia</nome>
+    <uf>RO</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>22</id>
+    <nome>Roraima</nome>
+    <uf>RR</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>23</id>
+    <nome>Rio Grande do Sul</nome>
+    <uf>RS</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>24</id>
+    <nome>Santa Catarina</nome>
+    <uf>SC</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>25</id>
+    <nome>Sergipe</nome>
+    <uf>SE</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>26</id>
+    <nome>São Paulo</nome>
+    <uf>SP</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+  <br.com.gameshunter.model.Estado>
+    <id>27</id>
+    <nome>Tocantins</nome>
+    <uf>TO</uf>
+    <pais reference="../../br.com.gameshunter.model.Estado/pais"/>
+  </br.com.gameshunter.model.Estado>
+</list>
+</estados>
