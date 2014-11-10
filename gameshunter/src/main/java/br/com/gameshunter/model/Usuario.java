@@ -19,17 +19,14 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
 /**
- * A classe {@code Usuario} representa os usuários do sistema.
+ * Representa um usário
  * 
  * @author Myho
- * 
- * @since 0.0.1
  */
 @Validations
 @Entity
 public class Usuario {
 
-	/** Chave principal do banco */
 	@Id
 	private String email;
 	private String nome;
@@ -148,27 +145,43 @@ public class Usuario {
 	 */
 	public void adicionaEndereco(Endereco endereco) {
 
-		if (podeAdicionarEndereco(endereco))
+		if (podeAdicionar(endereco))
 			this.enderecos.add(endereco);
+	}
+
+	/**
+	 * Verifica se o endereço pode ser adicionado
+	 * 
+	 * @param endereco
+	 *            Endereço que que será analisado.
+	 * 
+	 * @return verdadeiro caso possa ser adicionado, falso caso não.
+	 */
+	private boolean podeAdicionar(Endereco endereco) {
+		return enderecos.isEmpty()
+				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
 	 * Responsável por pegar o endereço desejado da lista
 	 * 
 	 * @param numero
-	 *            Indice do endereço na lista
+	 *            Indice real do endereço na lista
 	 * @return Endereço
 	 */
 	public Endereco pegaEndereco(Integer numero) {
 
-		return enderecos.get(numero);
+		if (numero < 1)
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
+		return enderecos.get(numero - 1);
 	}
 
 	/**
 	 * Remove o endereço desejado da lista
 	 * 
 	 * @param enviado
-	 *            Indice do endereço na lista
+	 *            Indice real do endereço na lista
 	 */
 	public void removeEndereco(Integer numero) {
 
@@ -176,10 +189,8 @@ public class Usuario {
 	}
 
 	/**
-	 * Altera o endereço desejado pelo endereço passado como argumento
+	 * Altera um endereço pelo endereço passado
 	 * 
-	 * @param numero
-	 *            Indice do endereço na lista
 	 * @param alterado
 	 *            Endereço alterado para que a troca seja feita
 	 */
@@ -235,19 +246,6 @@ public class Usuario {
 			}
 		}
 		return hexString.toString();
-	}
-
-	/**
-	 * Verifica se o endereço pode ou não ser adicionado
-	 * 
-	 * @param endereco
-	 *            Endereço que que será analisado.
-	 * 
-	 * @return verdadeiro caso possa ser adicionado, falso caso não.
-	 */
-	private boolean podeAdicionarEndereco(Endereco endereco) {
-		return enderecos.isEmpty()
-				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/** Construtor padrão */

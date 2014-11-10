@@ -10,6 +10,11 @@ import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
+/**
+ * Representa um endereço
+ * 
+ * @author Myho
+ */
 @Validations
 @Entity
 public class Endereco {
@@ -106,7 +111,7 @@ public class Endereco {
 
 	/** @return o país */
 	public Pais getPais() {
-		return getEstado().getPais();
+		return cidade.getPais();
 	}
 
 	/**
