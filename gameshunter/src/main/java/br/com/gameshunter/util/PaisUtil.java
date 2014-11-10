@@ -31,7 +31,9 @@ public class PaisUtil {
 				.criaObjetos();
 
 		manager.getTransaction().begin();
-		paises.forEach(p -> manager.persist(p));
+		for (Pais pais : paises) {
+			manager.persist(pais);
+		}
 		manager.getTransaction().commit();
 
 		manager.close();
