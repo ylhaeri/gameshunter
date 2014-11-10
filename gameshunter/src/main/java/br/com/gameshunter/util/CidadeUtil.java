@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 
 /**
@@ -40,11 +39,5 @@ public class CidadeUtil {
 		manager.getTransaction().commit();
 
 		manager.close();
-	}
-
-	public static void main(String[] args) {
-		new PaisUtil(JPAUtil.getEntityManager()).populaPais();
-		new EstadoUtil(JPAUtil.getEntityManager()).populaEstado();
-		new CidadeUtil(JPAUtil.getEntityManager()).populaCidade();
 	}
 }
