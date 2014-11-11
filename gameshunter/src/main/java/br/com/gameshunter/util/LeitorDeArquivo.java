@@ -12,11 +12,11 @@ import java.util.List;
  * leitura de arquivos .txt
  * 
  * @author Alex
- *
  */
 public class LeitorDeArquivo {
 
 	/**
+	 * pega o conteúdo de um arquivo
 	 * 
 	 * @param arquivo
 	 *            diretório do arquivo que deve ser lido
@@ -25,7 +25,6 @@ public class LeitorDeArquivo {
 	 * 
 	 * @throws IOException
 	 *             caso não houver o arquivo .txt
-	 * 
 	 */
 	public List<String> pega(String arquivo) {
 		List<String> texto = new ArrayList<String>();
@@ -37,8 +36,8 @@ public class LeitorDeArquivo {
 				texto.add(linha);
 				linha = br.readLine();
 			}
-
 			br.close();
+			return texto;
 		} catch (IOException e) {
 			System.out.println("Não foi possível encontrar o arquivo: "
 					+ arquivo);
@@ -48,6 +47,7 @@ public class LeitorDeArquivo {
 	}
 
 	/**
+	 * Faz a leitura de um arquivo
 	 * 
 	 * @param arquivo
 	 *            diretório do arquivo que deve ser lido

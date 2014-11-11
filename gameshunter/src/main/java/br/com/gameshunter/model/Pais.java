@@ -5,21 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 /**
  * Representa um país
  * 
  * @author Alex
  */
 @Entity
-@XStreamAlias(value="país")
 public class Pais {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@XStreamOmitField
 	private Integer id;
 	private String nome;
 	private String sigla;

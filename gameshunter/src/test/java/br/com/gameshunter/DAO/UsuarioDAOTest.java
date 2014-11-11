@@ -111,7 +111,7 @@ public class UsuarioDAOTest {
 		assertThat(joana.getEmail(), equalTo(email));
 		assertThat(joana.getTelefone(), equalTo(telefone));
 		assertThat(joana.getCpf(), equalTo(cpf));
-		assertThat(joana.pegaEndereco(0), equalTo(endereco));
+		assertThat(joana.pegaEndereco(1), equalTo(endereco));
 	}
 
 	@Test
@@ -161,7 +161,7 @@ public class UsuarioDAOTest {
 		Long eContagem = eDao.conta();
 
 		Usuario joana = uDao.pega(email);
-		Endereco enderecoDaJoana = joana.pegaEndereco(0);
+		Endereco enderecoDaJoana = joana.pegaEndereco(1);
 
 		assertThat(eContagem, equalTo(1l));
 		assertThat(uContagem, equalTo(1l));

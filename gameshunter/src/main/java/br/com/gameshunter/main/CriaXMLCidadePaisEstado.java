@@ -23,13 +23,13 @@ public class CriaXMLCidadePaisEstado {
 		List<Estado> estados = new EstadoDAO(manager).pegaTodos();
 		List<Cidade> cidades = new CidadeDAO(manager).pegaTodos();
 
-		new EscritorXML("paises.xml", "paises").comAnotacoesDa(Pais.class)
-				.from(paises).grava();
-		new EscritorXML("estados.xml", "estados").from(estados)
-				.comAnotacoesDa(Estado.class).grava();
-		new EscritorXML("cidades.xml", "cidades").comAnotacoesDa(Cidade.class)
-				.from(cidades).grava();
-
+		new EscritorXML("paises.xml").comAlias("país", Pais.class)
+				.omitindoCampo(Pais.class, "id").from(paises).grava();
+		new EscritorXML("estados.xml").comAlias("estado", Estado.class)
+				.omitindoCampo(Estado.class, "id").from(estados).grava();
+		new EscritorXML("cidades.xml").from(cidades)
+				.comAlias("cidade", Cidade.class)
+				.omitindoCampo(Cidade.class, "id").grava();
 		manager.close();
 		JPAUtil.closeFactory();
 	}

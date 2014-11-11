@@ -16,6 +16,8 @@ public class PaisUtil {
 	private EntityManager manager;
 
 	/**
+	 * Constructor padrão
+	 * 
 	 * @param manager
 	 *            EntityManager
 	 */
@@ -23,19 +25,18 @@ public class PaisUtil {
 		this.manager = manager;
 	}
 
-	/** Popula o banco com todos os Países através de um arquivo .xml */
+	/** Popula o banco com todos os Países */
 	public void populaPais() {
 
 		@SuppressWarnings("unchecked")
-		List<Pais> paises = (List<Pais>) new LeitorDeXML().pega("paises.xml")
-				.criaObjetos();
+		List<Pais> paises = (List<Pais>) new LeitorXML("paises.xml")
+				.comAlias("país", Pais.class).omitindoCampo(Pais.class, "id")
+				.processa();
 
 		manager.getTransaction().begin();
 		for (Pais pais : paises) {
 			manager.persist(pais);
 		}
 		manager.getTransaction().commit();
-
-		manager.close();
 	}
 }

@@ -6,21 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 /**
  * Representa um estado
  * 
  * @author Alex
  */
 @Entity
-@XStreamAlias("estado")
 public class Estado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@XStreamOmitField
 	private Integer id;
 	private String nome;
 	private String uf;

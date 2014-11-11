@@ -15,7 +15,7 @@ public class HashFactory {
 	 * 
 	 * @return hash da String
 	 */
-	public String geraHashString(String string) {
+	public String geraHashedString(String string) {
 		return processaHash(string, "SHA-256");
 	}
 
@@ -35,7 +35,7 @@ public class HashFactory {
 		}
 		digester.update(string.getBytes());
 		byte[] hash = digester.digest();
-		return codificador(hash);
+		return codifica(hash);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class HashFactory {
 	 * 
 	 * @return string codificada.
 	 */
-	private String codificador(byte[] hash) {
+	private String codifica(byte[] hash) {
 		StringBuffer hexString = new StringBuffer();
 		for (int i = 0; i < hash.length; i++) {
 			if ((0xff & hash[i]) < 0x10) {

@@ -203,7 +203,7 @@ public class Usuario {
 
 	/** Gera o Hash da senha do usuário. */
 	public void geraHashDeSenha() {
-		this.senha = new HashFactory().geraHashString(this.senha);
+		this.senha = new HashFactory().geraHashedString(this.senha);
 	}
 
 	/** Construtor padrão */

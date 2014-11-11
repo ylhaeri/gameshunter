@@ -16,6 +16,8 @@ public class CidadeUtil {
 	private EntityManager manager;
 
 	/**
+	 * Constructor padrão
+	 * 
 	 * @param manager
 	 *            EntityManager
 	 */
@@ -23,21 +25,18 @@ public class CidadeUtil {
 		this.manager = manager;
 	}
 
-	/**
-	 * Popula o banco com todos as Cidades através de um arquivo .xml
-	 */
+	/** Popula o banco com todas as Cidades */
 	public void populaCidade() {
 
 		@SuppressWarnings("unchecked")
-		List<Cidade> cidades = (List<Cidade>) new LeitorDeXML().pega(
-				"cidades.xml").criaObjetos();
+		List<Cidade> cidades = (List<Cidade>) new LeitorXML("cidades.xml")
+				.comAlias("cidade", Cidade.class)
+				.omitindoCampo(Cidade.class, "id").processa();
 
 		manager.getTransaction().begin();
 		for (Cidade cidade : cidades) {
 			manager.persist(cidade);
 		}
 		manager.getTransaction().commit();
-
-		manager.close();
 	}
 }

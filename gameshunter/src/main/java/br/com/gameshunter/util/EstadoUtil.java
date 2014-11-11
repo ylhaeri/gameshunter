@@ -16,6 +16,8 @@ public class EstadoUtil {
 	private EntityManager manager;
 
 	/**
+	 * Constructor padrão
+	 * 
 	 * @param manager
 	 *            EntityManager
 	 */
@@ -23,19 +25,18 @@ public class EstadoUtil {
 		this.manager = manager;
 	}
 
-	/** Popula o banco com todos os Estados através de um arquivo .xml */
+	/** Popula o banco com todos os Estados */
 	public void populaEstado() {
 
 		@SuppressWarnings("unchecked")
-		List<Estado> estados = (List<Estado>) new LeitorDeXML().pega(
-				"estados.xml").criaObjetos();
+		List<Estado> estados = (List<Estado>) new LeitorXML("estados.xml")
+				.comAlias("estado", Estado.class)
+				.omitindoCampo(Estado.class, "id").processa();
 
 		manager.getTransaction().begin();
 		for (Estado estado : estados) {
 			manager.persist(estado);
 		}
 		manager.getTransaction().commit();
-		
-		manager.close();
 	}
 }
