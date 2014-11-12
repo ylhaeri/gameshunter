@@ -1,10 +1,12 @@
 package br.com.gameshunter.util;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import br.com.gameshunter.model.Pais;
+import br.com.gameshunter.system.Arquivo;
 
 /**
  * Realiza ações complementares para a classe Pais
@@ -28,8 +30,9 @@ public class PaisUtil {
 	/** Popula o banco com todos os Países */
 	public void populaPais() {
 
+		File arqPaises = Arquivo.noDiretorioPadrao("\\xml\\paises.xml");
 		@SuppressWarnings("unchecked")
-		List<Pais> paises = (List<Pais>) new LeitorXML("paises.xml")
+		List<Pais> paises = (List<Pais>) new LeitorXML(arqPaises)
 				.comAlias("país", Pais.class).omitindoCampo(Pais.class, "id")
 				.processa();
 

@@ -20,6 +20,7 @@
 <body>
 	<header>
 		<s:include value="cabecalho.jsp" />
+		<button id="criaXml" class="admbutton">Testestes</button>
 	</header>
 	<main class="container">
 	<h1 id="titulo">Cadastre-se</h1>

@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;
 
-public class EstadoDAO {
+public class EstadoDAO implements BasicDbDAO {
 
 	private EntityManager manager;
 
@@ -17,8 +17,8 @@ public class EstadoDAO {
 	}
 
 	public List<Estado> pegaTodos() {
-		TypedQuery<Estado> query = manager.createQuery("select e from Estado e",
-				Estado.class);
+		TypedQuery<Estado> query = manager.createQuery(
+				"select e from Estado e", Estado.class);
 		return query.getResultList();
 	}
 
@@ -30,11 +30,32 @@ public class EstadoDAO {
 		return query.getResultList();
 	}
 
-	public void fechaConexao() {
-		this.manager.close();
-	}
-
 	public Estado pega(Integer id) {
 		return manager.find(Estado.class, id);
+	}
+
+	@Override
+	public BasicDbDAO iniciaTransaction() {
+		manager.getTransaction().begin();
+		return this;
+	}
+
+	@Override
+	public BasicDbDAO commit() {
+		manager.getTransaction().commit();
+		return this;
+	}
+
+	@Override
+	public void close() {
+		manager.close();
+
+	}
+
+	@Override
+	public Long conta() {
+		TypedQuery<Long> query = manager.createQuery(
+				"select count(e) from Estado e", Long.class);
+		return query.getSingleResult();
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.gameshunter.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +27,7 @@ public class LeitorDeArquivo {
 	 * @throws IOException
 	 *             caso não houver o arquivo .txt
 	 */
-	public List<String> pega(String arquivo) {
+	public List<String> pega(File arquivo) {
 		List<String> texto = new ArrayList<String>();
 		try {
 			BufferedReader br = lerArquivo(arquivo);
@@ -57,7 +58,7 @@ public class LeitorDeArquivo {
 	 * @throws IOException
 	 *             caso não houver o arquivo .txt
 	 */
-	private BufferedReader lerArquivo(String arquivo) throws IOException {
+	private BufferedReader lerArquivo(File arquivo) throws IOException {
 		InputStream is = new FileInputStream(arquivo);
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);

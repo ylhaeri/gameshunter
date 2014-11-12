@@ -1,5 +1,6 @@
 package br.com.gameshunter.util;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
@@ -11,7 +12,7 @@ import com.thoughtworks.xstream.XStream;
  * 
  * Pode ser utilizado através das ordens:<br>
  * .comAnotacoesDa(classe).from(objeto).grava()<br>
- * .comAlias(Alias).from(objeto).grava()<br>
+ * .from(objeto).comAlias(Alias).grava()<br>
  * .comAlias(Alias).comModo(2).from(objeto).grava()<br>
  * Ou derivados, desde que possua um objeto para trabalhar e seja invocado o
  * método grava no fim.
@@ -31,7 +32,7 @@ public class EscritorXML {
 	 * @param rootTag
 	 *            nome da tag principal do arquivo
 	 */
-	public EscritorXML(String arquivo) {
+	public EscritorXML(File arquivo) {
 		criaPs(arquivo);
 	}
 
@@ -117,7 +118,7 @@ public class EscritorXML {
 	 * 
 	 * @return ele mesmo
 	 */
-	public void grava() {
+	public void salva() {
 		xStream.toXML(objeto, ps);
 		ps.close();
 	}
@@ -128,7 +129,7 @@ public class EscritorXML {
 	 * @param arquivo
 	 *            nome do arquivo
 	 */
-	private void criaPs(String arquivo) {
+	private void criaPs(File arquivo) {
 		try {
 			ps = new PrintStream(arquivo);
 			ps.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");

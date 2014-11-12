@@ -16,22 +16,29 @@ public class CidadeDAO implements BasicDbDAO {
 		this.manager = manager;
 	}
 
+	/**
+	 * Pega todas as cidades cadastradas
+	 * 
+	 * @return As cidades cadastradas
+	 */
 	public List<Cidade> pegaTodos() {
-		TypedQuery<Cidade> query = manager.createQuery("Select c from Cidade c",
-				Cidade.class);
+		TypedQuery<Cidade> query = manager.createQuery(
+				"Select c from Cidade c", Cidade.class);
 		return query.getResultList();
 	}
 
+	/**
+	 * Pega todas as cidades de um estado
+	 * 
+	 * @param estado
+	 * @return As cidades do estado
+	 */
 	public List<Cidade> pegaTodosDo(Estado estado) {
 		TypedQuery<Cidade> query = manager.createQuery(
 				"Select c from Cidade c " + "where c.estado= :pEstado",
 				Cidade.class);
 		query.setParameter("pEstado", estado);
 		return query.getResultList();
-	}
-
-	public void fechaConexao() {
-		this.manager.close();
 	}
 
 	public Cidade pega(Integer id) {
@@ -53,5 +60,12 @@ public class CidadeDAO implements BasicDbDAO {
 	@Override
 	public void close() {
 		manager.close();
+	}
+
+	@Override
+	public Long conta() {
+		TypedQuery<Long> query = manager.createQuery(
+				"select count(c) from Cidade c", Long.class);
+		return query.getSingleResult();
 	}
 }

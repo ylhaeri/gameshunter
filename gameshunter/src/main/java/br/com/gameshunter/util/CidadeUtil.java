@@ -1,10 +1,12 @@
 package br.com.gameshunter.util;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import br.com.gameshunter.model.Cidade;
+import br.com.gameshunter.system.Arquivo;
 
 /**
  * Realiza ações complementares para a classe Cidade
@@ -28,8 +30,9 @@ public class CidadeUtil {
 	/** Popula o banco com todas as Cidades */
 	public void populaCidade() {
 
+		File arqCidades = Arquivo.noDiretorioPadrao("\\xml\\cidades.xml");
 		@SuppressWarnings("unchecked")
-		List<Cidade> cidades = (List<Cidade>) new LeitorXML("cidades.xml")
+		List<Cidade> cidades = (List<Cidade>) new LeitorXML(arqCidades)
 				.comAlias("cidade", Cidade.class)
 				.omitindoCampo(Cidade.class, "id").processa();
 
