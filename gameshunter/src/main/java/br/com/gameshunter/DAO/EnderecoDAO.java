@@ -1,7 +1,7 @@
 package br.com.gameshunter.DAO;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.gameshunter.model.Endereco;
 
@@ -23,8 +23,9 @@ public class EnderecoDAO implements DbDAO<Endereco, Integer> {
 
 	@Override
 	public Long conta() {
-		Query query = manager.createQuery("select count(e) from Endereco e");
-		return (Long) query.getSingleResult();
+		TypedQuery<Long> query = manager.createQuery(
+				"select count(e) from Endereco e", Long.class);
+		return query.getSingleResult();
 	}
 
 	@Override

@@ -1,10 +1,12 @@
 package br.com.gameshunter.util;
 
+import java.io.File;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import br.com.gameshunter.model.Estado;
+import br.com.gameshunter.system.Arquivo;
 
 /**
  * Realiza ações complementares para a classe Estado
@@ -28,8 +30,9 @@ public class EstadoUtil {
 	/** Popula o banco com todos os Estados */
 	public void populaEstado() {
 
+		File arqEstados = Arquivo.noDiretorioPadrao("\\xml\\estados.xml");
 		@SuppressWarnings("unchecked")
-		List<Estado> estados = (List<Estado>) new LeitorXML("estados.xml")
+		List<Estado> estados = (List<Estado>) new LeitorXML(arqEstados)
 				.comAlias("estado", Estado.class)
 				.omitindoCampo(Estado.class, "id").processa();
 

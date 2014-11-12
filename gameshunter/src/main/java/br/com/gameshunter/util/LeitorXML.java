@@ -19,8 +19,8 @@ public class LeitorXML {
 	 * 
 	 * @param arquivo
 	 */
-	public LeitorXML(String arquivo) {
-		this.arquivo = new File(arquivo);
+	public LeitorXML(File arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	/**

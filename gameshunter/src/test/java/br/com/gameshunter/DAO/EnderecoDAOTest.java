@@ -22,7 +22,6 @@ import br.com.gameshunter.model.Pais;
  *
  */
 public class EnderecoDAOTest {
-
 	private EntityManager manager;
 	private static EnderecoDAO enDao;
 	private Endereco endereco;

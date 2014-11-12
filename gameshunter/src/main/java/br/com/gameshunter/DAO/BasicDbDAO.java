@@ -23,4 +23,11 @@ public interface BasicDbDAO {
 	 * transação com o DAO.
 	 */
 	public void close();
+
+	/**
+	 * Retorna a quantidade de objetos existentes na tabela do banco.
+	 * 
+	 * @return Quantidade de objetos da tabela.
+	 */
+	public Long conta();
 }

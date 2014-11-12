@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import br.com.gameshunter.model.Pais;
 
@@ -46,5 +47,12 @@ public class PaisDAO implements BasicDbDAO {
 	@Override
 	public void close() {
 		manager.close();
+	}
+
+	@Override
+	public Long conta() {
+		TypedQuery<Long> query = manager.createQuery(
+				"select count (p) from Pais p", Long.class);
+		return query.getSingleResult();
 	}
 }

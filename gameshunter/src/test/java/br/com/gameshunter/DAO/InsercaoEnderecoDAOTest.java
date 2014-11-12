@@ -33,24 +33,12 @@
 //
 //		JPAUtil.restartFactory();
 //
-//		manager = JPAUtil.getEntityManager();
+//		EntityManager manager = JPAUtil.getEntityManager();
 //
-//		manager.getTransaction().begin();
+//		new PaisUtil(manager).populaPais();
+//		new EstadoUtil(manager).populaEstado();
+//		new CidadeUtil(manager).populaCidade();
 //
-//		for (Pais pais : new PaisUtil().lerPais()) {
-//			manager.persist(pais);
-//		}
-//
-//		for (Estado estado : new EstadoUtil().lerEstado()) {
-//			estado.setPais(manager.find(Pais.class, 1));
-//			manager.persist(estado);
-//		}
-//
-//		for (Cidade cidade : new CidadeUtil().lerCidade()) {
-//			manager.persist(cidade);
-//		}
-//
-//		manager.getTransaction().commit();
 //		manager.close();
 //	}
 //
@@ -76,73 +64,73 @@
 //	@Test
 //	public void pegaPaises() {
 //
-//		// List<Pais> paises = pDao.pegaTodos();
-//		//
-//		// assertThat(paises.size(), equalTo(1));
+//		List<Pais> paises = pDao.pegaTodos();
+//
+//		assertThat(paises.size(), equalTo(1));
 //	}
 //
-//	// @Test
-//	// public void pegaEstado() {
-//	//
-//	// List<Estado> estados = eDao.pegaTodos(pDao.pega(1));
-//	//
-//	// assertThat(estados.size(), equalTo(27));
-//	// }
-//	//
-//	// @Test
-//	// public void devePegarTodasAsCidades() {
-//	//
-//	// List<Cidade> cidades = cDao.pegaTodos(eDao.pega(8));
-//	//
-//	// assertThat(cidades.size(), equalTo(78));
-//	//
-//	// }
-//	//
-//	// @Test
-//	// public void verificaPrimeiroUltimoEstado() {
-//	//
-//	// Estado primeiro = eDao.pega(1);
-//	//
-//	// Estado esperadoPrimeiro = new Estado();
-//	// esperadoPrimeiro.setNome("Acre");
-//	// esperadoPrimeiro.setId(1);
-//	// esperadoPrimeiro.setUf("AC");
-//	// esperadoPrimeiro.setPais(pDao.pega(1));
-//	//
-//	// assertThat(primeiro, equalTo(esperadoPrimeiro));
-//	//
-//	// Estado ultimo = eDao.pega(27);
-//	//
-//	// Estado esperadoUltimo = new Estado();
-//	// esperadoUltimo.setNome("Tocantins");
-//	// esperadoUltimo.setId(27);
-//	// esperadoUltimo.setUf("TO");
-//	// esperadoUltimo.setPais(pDao.pega(1));
-//	//
-//	// assertThat(ultimo, equalTo(esperadoUltimo));
-//	//
-//	// }
-//	//
-//	// @Test
-//	// public void verificaPrimeraUltimaCidade() {
-//	//
-//	// Cidade primeira = cDao.pega(1);
-//	//
-//	// Cidade esperadaPrimeira = new Cidade();
-//	//
-//	// esperadaPrimeira.setNome("Afonso Cláudio");
-//	// esperadaPrimeira.setId(1);
-//	// esperadaPrimeira.setEstado(eDao.pega(8));
-//	//
-//	// assertThat(primeira, equalTo(esperadaPrimeira));
-//	//
-//	// Cidade ultima = cDao.pega(5564);
-//	//
-//	// Cidade esperadaUltima = new Cidade();
-//	// esperadaUltima.setNome("Xambioá");
-//	// esperadaUltima.setId(5564);
-//	// esperadaUltima.setEstado(eDao.pega(27));
-//	//
-//	// assertThat(ultima, equalTo(esperadaUltima));
-//	// }
-//}
+//	@Test
+//	public void pegaEstado() {
+//
+//		List<Estado> estados = eDao.pegaTodosDo(pDao.pega(1));
+//
+//		assertThat(estados.size(), equalTo(27));
+//	}
+//
+//	@Test
+//	public void devePegarTodasAsCidades() {
+//
+//		List<Cidade> cidades = cDao.pegaTodosDo(eDao.pega(8));
+//
+//		assertThat(cidades.size(), equalTo(78));
+//
+//	}
+//
+//	@Test
+//	public void verificaPrimeiroUltimoEstado() {
+//
+//		Estado primeiro = eDao.pega(1);
+//
+//		Estado esperadoPrimeiro = new Estado();
+//		esperadoPrimeiro.setNome("Acre");
+//		esperadoPrimeiro.setId(1);
+//		esperadoPrimeiro.setUf("AC");
+//		esperadoPrimeiro.setPais(pDao.pega(1));
+//
+//		assertThat(primeiro, equalTo(esperadoPrimeiro));
+//
+//		Estado ultimo = eDao.pega(27);
+//
+//		Estado esperadoUltimo = new Estado();
+//		esperadoUltimo.setNome("Tocantins");
+//		esperadoUltimo.setId(27);
+//		esperadoUltimo.setUf("TO");
+//		esperadoUltimo.setPais(pDao.pega(1));
+//
+//		assertThat(ultimo, equalTo(esperadoUltimo));
+//
+//	}
+//
+//	@Test
+//	public void verificaPrimeraUltimaCidade() {
+//
+//		Cidade primeira = cDao.pega(1);
+//
+//		Cidade esperadaPrimeira = new Cidade();
+//
+//		esperadaPrimeira.setNome("Afonso Cláudio");
+//		esperadaPrimeira.setId(1);
+//		esperadaPrimeira.setEstado(eDao.pega(8));
+//
+//		assertThat(primeira, equalTo(esperadaPrimeira));
+//
+//		Cidade ultima = cDao.pega(5564);
+//
+//		Cidade esperadaUltima = new Cidade();
+//		esperadaUltima.setNome("Xambioá");
+//		esperadaUltima.setId(5564);
+//		esperadaUltima.setEstado(eDao.pega(27));
+//
+//		assertThat(ultima, equalTo(esperadaUltima));
+//	}
+// }
