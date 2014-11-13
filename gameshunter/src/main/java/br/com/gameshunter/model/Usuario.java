@@ -30,7 +30,7 @@ public class Usuario {
 	private String email;
 	private String nome;
 	private String apelido;
-	private String senha;
+	private String senhaaaawe;
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	private String cpf;
@@ -127,13 +127,13 @@ public class Usuario {
 
 	/** @return A senha */
 	public String getSenha() {
-		return senha;
+		return senhaaaawe;
 	}
 
 	/** @param senha */
 	@RequiredStringValidator(key = "usuario.senha.vazia")
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senhaaaawe = senha;
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class Usuario {
 
 	/** Gera o Hash da senha do usuário. */
 	public void geraHashDeSenha() {
-		this.senha = new HashFactory().geraHashedString(this.senha);
+		this.senhaaaawe = new HashFactory().geraHashedString(this.senhaaaawe);
 	}
 
 	/** Construtor padrão */
@@ -228,7 +228,7 @@ public class Usuario {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
-		this.senha = senha;
+		this.senhaaaawe = senha;
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
@@ -248,7 +248,8 @@ public class Usuario {
 		result = prime * result
 				+ ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result
+				+ ((senhaaaawe == null) ? 0 : senhaaaawe.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		result = prime * result
 				+ ((telefone == null) ? 0 : telefone.hashCode());
@@ -294,10 +295,10 @@ public class Usuario {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
+		if (senhaaaawe == null) {
+			if (other.senhaaaawe != null)
 				return false;
-		} else if (!senha.equals(other.senha))
+		} else if (!senhaaaawe.equals(other.senhaaaawe))
 			return false;
 		if (sexo != other.sexo)
 			return false;

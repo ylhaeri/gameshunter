@@ -11,17 +11,16 @@ public class PopulaCidadePaisEstadoDb {
 
 	public static void main(String[] args) {
 		double inicio = System.currentTimeMillis();
-		new PopulaCidadePaisEstadoDb().executa();
+		PopulaCidadePaisEstadoDb.popula();
 		double fim = System.currentTimeMillis();
 		System.out.println(fim - inicio);
 	}
 
-	public void executa() {
+	public static void popula() {
 		EntityManager manager = JPAUtil.getEntityManager();
 		new PaisUtil(manager).populaPais();
 		new EstadoUtil(manager).populaEstado();
 		new CidadeUtil(manager).populaCidade();
 		manager.close();
-		JPAUtil.closeFactory();
 	}
 }

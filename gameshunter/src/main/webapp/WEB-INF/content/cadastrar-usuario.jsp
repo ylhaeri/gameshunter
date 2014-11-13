@@ -20,7 +20,8 @@
 <body>
 	<header>
 		<s:include value="cabecalho.jsp" />
-		<button id="criaXml" class="admbutton">Testestes</button>
+		<button id="criaXml" class="admbutton">Cria XML</button>
+		<button id="populaBanco" class="admbutton">Popula Banco</button>
 	</header>
 	<main class="container">
 	<h1 id="titulo">Cadastre-se</h1>
@@ -73,6 +74,7 @@
 	<footer>
 		<s:include value="rodape.jsp" />
 	</footer>
+	<script src="resources/js/aindasemlugar.js"></script>
 	<script src="resources/js/cadastrar-usuario.js"></script>
 	<script src="resources/js/cadastrar-endereco.js"></script>
 </body>
