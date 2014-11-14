@@ -8,7 +8,7 @@ import br.com.gameshunter.DAO.CidadeDAO;
 import br.com.gameshunter.DAO.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 
-public class Pinto {
+public class Pindorama {
 
 	public static void main(String[] args) throws InterruptedException {
 
