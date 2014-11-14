@@ -22,8 +22,10 @@ public class CidadeDAO implements BasicDbDAO {
 	 * @return As cidades cadastradas
 	 */
 	public List<Cidade> pegaTodos() {
-		TypedQuery<Cidade> query = manager.createQuery(
-				"Select c from Cidade c", Cidade.class);
+		TypedQuery<Cidade> query = manager
+				.createQuery(
+						"Select c from Cidade c join fetch c.estado e join fetch e.pais",
+						Cidade.class);
 		return query.getResultList();
 	}
 
