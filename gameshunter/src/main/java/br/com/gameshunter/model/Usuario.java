@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
 /**
- * Representa um usário
+ * Representa um usuário
  * 
  * @author Myho
  */
