@@ -1,10 +1,8 @@
 $("#cpf").mask("999.999.999-99")
-$("#tel").mask("?(99)99999-9999")
+$("#tel").mask("?(99)9999-9999")
 $("#dataNasc").mask("99/99/9999")
 
-$("#mail").blur(validaSenha());
-
-function validaSenha() {
+$("#mail").blur(function() {
 	criaFeedNaMesmaLinha("feedImgMail", "mail")
 	var feedImgMail = pegaFeedId("feedImgMail")
 	var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -37,7 +35,7 @@ function validaSenha() {
 			$("#mailfeed").html("<span class='errorMessage'>E-mail inválido</span>")
 		}
 	}
-}
+})
 
 $("#confirmaSenha").blur(function() {
 		criaFeedNaMesmaLinha("imagemSenhaFeed", "senha")
@@ -55,7 +53,7 @@ $("#confirmaSenha").blur(function() {
 		if(senha.val().length >= 6) {
 			feedImgSenha.addClass("feedImgSuccess")
 			senha.addClass("feedSuccess")
-			if (senha.val().length == conSenha.val().length) {
+			if (senha.val() == conSenha.val()) {
 				conSenha.addClass("feedSuccess")
 				feedImgConSenha.addClass("feedImgSuccess")
 			}
@@ -75,11 +73,10 @@ $("#confirmaSenha").blur(function() {
 
 $(".cadastro").submit(function(event) {
 	if (!senhaValida()) {
-		event.preventDefault()
-		validaSenha()
 		if($("#senha").val().length == 0)
 			$("#feedConSenha").html("<span class='errorMessage'>" +
-					"Insira uma senha.</span>")
+			"Insira uma senha.</span>")
+			event.preventDefault()
 	}
 })
 

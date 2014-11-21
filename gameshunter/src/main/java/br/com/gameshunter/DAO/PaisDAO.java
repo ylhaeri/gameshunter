@@ -27,9 +27,8 @@ public class PaisDAO implements BasicDbDAO {
 		return manager.find(Pais.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Pais> pegaTodos() {
-		return manager.createQuery("select p from Pais p").getResultList();
+		return manager.createQuery("select p from Pais p", Pais.class).getResultList();
 	}
 
 	@Override

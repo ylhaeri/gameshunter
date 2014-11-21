@@ -2,27 +2,39 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <table>
-	<tr><td class="separadorGrande"></td></tr>
+	<tr>
+		<td class="separadorGrande"></td>
+	</tr>
 	<s:textfield label="CEP" labelposition="top" labelSeparator=""
 		id="cept" name="endereco.cep" value="%{endereco.cep}"
 		errorPosition="bottom" />
-	<tr><td class="separador"></td></tr>
+	<tr>
+		<td class="separador"></td>
+	</tr>
 	<s:textfield label="Logradouro" labelposition="top" labelSeparator=""
 		id="logt" name="endereco.logradouro" value="%{endereco.logradouro}"
-		errorPosition="bottom" />
-	<tr><td class="separador"></td></tr>
+		errorPosition="bottom" disabled="true" />
+	<tr>
+		<td class="separador"></td>
+	</tr>
 	<s:textfield label="Número" labelposition="top" labelSeparator=""
 		id="numt" name="endereco.numero" value="%{endereco.numero}"
 		errorPosition="bottom" maxLength="6" />
-	<tr><td class="separador" id="numfeed"></td></tr>
+	<tr>
+		<td class="separador" id="numfeed"></td>
+	</tr>
 	<s:textfield label="Complemento" labelposition="top" labelSeparator=""
 		id="comt" name="endereco.complemento" value="%{endereco.complemento}"
 		errorPosition="bottom" />
-	<tr><td class="separador"></td></tr>
+	<tr>
+		<td class="separador"></td>
+	</tr>
 	<s:textfield label="Bairro" labelposition="top" labelSeparator=""
 		id="bairrot" name="endereco.bairro" value="%{endereco.bairro}"
-		errorPosition="bottom" />
-	<tr><td class="separador"></td></tr>
+		errorPosition="bottom" disabled="true" />
+	<tr>
+		<td class="separador"></td>
+	</tr>
 </table>
 <table>
 	<tr>

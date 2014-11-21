@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,44 +28,66 @@
 			<s:textfield label="Nome" labelposition="top" labelSeparator=""
 				id="nome" name="usuario.nome" value="%{usuario.nome}"
 				errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:textfield label="Apelido" labelposition="top" labelSeparator=""
 				id="ape" name="usuario.apelido" value="%{usuario.apelido}"
 				errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:textfield label="E-mail" labelposition="top" labelSeparator=""
 				id="mail" name="usuario.email" value="%{usuario.email}"
 				errorPosition="bottom" />
-			<tr><td class="separador" id="mailfeed"></td></tr>
+			<tr>
+				<td class="separador" id="mailfeed"></td>
+			</tr>
 			<s:password label="Senha" labelposition="top" labelSeparator=""
 				id="senha" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:password label="Confirme sua senha" labelposition="top"
 				labelSeparator="" id="confirmaSenha" name="usuario.senha"
 				errorPosition="bottom" />
-			<tr><td class="separador" id="feedConSenha"></td></tr>
+			<tr>
+				<td class="separador" id="feedConSenha"></td>
+			</tr>
 			<s:textfield label="CPF" labelposition="top" labelSeparator=""
 				id="cpf" name="usuario.cpf" value="%{usuario.cpf}"
 				errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:textfield label="Telefone" labelposition="top" labelSeparator=""
 				id="tel" name="usuario.telefone" value="%{usuario.telefone}"
 				errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:select label="Sexo" labelposition="top" labelSeparator=""
 				id="dpsexo" headerValue="Selecione" headerKey="Selecione"
 				name="usuario.sexo" list="sexo" errorPosition="bottom" />
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 			<s:textfield label="Data de Nascimento" labelposition="top"
 				labelSeparator="" id="dataNasc" name="dataNasc" value="%{dataNasc}"
 				errorPosition="bottom" />
-			<tr><td class="separadorGrande"></td></tr>
+			<tr>
+				<td class="separadorGrande"></td>
+			</tr>
 		</table>
 		<label id="endereco">Endereço</label>
 		<s:include value="cadastrar-endereco.jsp"></s:include>
 		<table>
-			<tr><td class="separador"></td></tr>
-			<tr><td class="separador"></td></tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
+			<tr>
+				<td class="separador"></td>
+			</tr>
 		</table>
 		<input type="submit" value="Enviar" id="cadastrar" />
 	</s:form> </main>

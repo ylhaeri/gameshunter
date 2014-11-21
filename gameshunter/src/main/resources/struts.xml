@@ -10,7 +10,7 @@
 
 			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/> -->
 
-			<interceptor-stack name="seguranca">
+			<interceptor-stack name="teste">
 
 				<!-- <interceptor-ref name="autorizador" /> -->
 
