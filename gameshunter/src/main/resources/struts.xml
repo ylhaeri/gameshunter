@@ -5,18 +5,17 @@
 
 <struts>
 	<constant name="struts.custom.i18n.resources" value="messages"></constant>
-	<package name="default" extends="struts-default">
+	<package name="GHCore" extends="struts-default">
 		<interceptors>
 
-			<!-- <interceptor name="autorizador" class="br.com.caelum.tarefas.interceptor.AutorizadorInterceptor"/> -->
+			<interceptor name="persistence"
+				class="br.com.gameshunter.interceptor.PersistenceInterceptor" />
 
-			<interceptor-stack name="teste">
-
-				<!-- <interceptor-ref name="autorizador" /> -->
-
+			<interceptor-stack name="GHDefault">
+				<interceptor-ref name="persistence" />
 				<interceptor-ref name="defaultStack" />
-
 			</interceptor-stack>
+
 		</interceptors>
 	</package>
 </struts>

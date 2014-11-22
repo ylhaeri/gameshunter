@@ -1,10 +1,13 @@
 package br.com.gameshunter.action;
 
 import org.apache.struts2.convention.annotation.Action;
+
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 
 import br.com.gameshunter.model.Sexo;
 
+@InterceptorRef("GHDefault")
 public class CadastrarUsuarioAction {
 
 	@Action(value = "cadastrar-usuario", results = {

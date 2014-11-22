@@ -95,6 +95,7 @@ public class Estado {
 
 	@Override
 	public String toString() {
-		return "" + id + " " + nome + " " + uf + " " + pais;
+		return "Estado [id=" + id + ", nome=" + nome + ", uf=" + uf + ", pais="
+				+ pais + "]";
 	}
 }
