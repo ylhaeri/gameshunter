@@ -79,7 +79,15 @@ public class Bairro {
 
 	@Override
 	public String toString() {
-		return " Bairro [id=" + id + ", nome=" + nome + ", cidade=" + cidade
-				+ "]";
+		return "Bairro [id = " + id + ", nome = " + nome + ", cidade = "
+				+ cidade + "]";
+	}
+
+	public Estado getEstado() {
+		return cidade.getEstado();
+	}
+
+	public Pais getPais() {
+		return cidade.getPais();
 	}
 }

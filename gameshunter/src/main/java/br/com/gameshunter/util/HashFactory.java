@@ -15,8 +15,32 @@ public class HashFactory {
 	 * 
 	 * @return hash da String
 	 */
-	public String geraHashedString(String string) {
-		return processaHash(string, "SHA-256");
+	public String hashStringCodified(String string) {
+		return processaHash(string, "SHA-512");
+	}
+
+	public String hashStringUncodified(String string) {
+		return processaHash(string, "SHA-384");
+	}
+
+	public static void main(String[] args) {
+		String string = new HashFactory()
+				.hashStringCodified("Gabriel Diniz Oliveira gabriel.dinizo@hotmail.com");
+		System.out.println("Começou");
+		int iguais = 0;
+		int diferentes = 0;
+		System.out.println(string);
+		for (int i = 0; i < 1000000000; i++) {
+
+			if (!string
+					.equals("a9eb65c9537a1e5e4d925a0e98d9c2d73422a9147917ed947c133bfd95215722")) {
+
+				diferentes++;
+			} else {
+				iguais++;
+			}
+		}
+		System.out.println("Iguais: " + iguais + "\nDiferentes: " + diferentes);
 	}
 
 	/**
@@ -31,6 +55,7 @@ public class HashFactory {
 		try {
 			digester = MessageDigest.getInstance(algoritimo);
 		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 		digester.update(string.getBytes());

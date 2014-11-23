@@ -12,6 +12,8 @@
 		<class>br.com.gameshunter.model.Cidade</class>
 		<class>br.com.gameshunter.model.Estado</class>
 		<class>br.com.gameshunter.model.Pais</class>
+		<class>br.com.gameshunter.model.Bairro</class>
+		<class>br.com.gameshunter.model.Logradouro</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />

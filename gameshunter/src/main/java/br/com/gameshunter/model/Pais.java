@@ -81,6 +81,7 @@ public class Pais {
 
 	@Override
 	public String toString() {
-		return "Pais [id=" + id + ", nome=" + nome + ", sigla=" + sigla + "]";
+		return "Pais [id = " + id + ", nome = " + nome + ", sigla = " + sigla
+				+ "]";
 	}
 }

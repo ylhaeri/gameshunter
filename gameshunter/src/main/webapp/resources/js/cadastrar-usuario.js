@@ -73,10 +73,8 @@ $("#confirmaSenha").blur(function() {
 
 $(".cadastro").submit(function(event) {
 	if (!senhaValida()) {
-		if($("#senha").val().length == 0)
-			$("#feedConSenha").html("<span class='errorMessage'>" +
-			"Insira uma senha.</span>")
-			event.preventDefault()
+		alert("what")
+		event.preventDefault()
 	}
 })
 

@@ -1,9 +1,11 @@
 package br.com.gameshunter.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,13 +26,14 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
  */
 @Validations
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
 	private String nome;
 	private String apelido;
-	private String senha;
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	private String cpf;
@@ -39,6 +42,12 @@ public class Usuario {
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private String telefone;
+	private String cod;
+
+	@PostConstruct
+	void contruiu() {
+		System.out.println("Usuario feito");
+	}
 
 	/** @return O e-mail */
 	public String getEmail() {
@@ -125,17 +134,6 @@ public class Usuario {
 		this.sexo = sexo;
 	}
 
-	/** @return A senha */
-	public String getSenha() {
-		return senha;
-	}
-
-	/** @param senha */
-	@RequiredStringValidator(key = "usuario.senha.vazia")
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	/**
 	 * Responsável por adicionar novos endereços.
 	 * 
@@ -201,9 +199,10 @@ public class Usuario {
 		adicionaEndereco(alterado);
 	}
 
-	/** Gera o Hash da senha do usuário. */
-	public void geraHashDeSenha() {
-		this.senha = new HashFactory().geraHashedString(this.senha);
+	/** Gera o código do usuário */
+	public void geraCod() {
+		this.cod = new HashFactory().hashStringUncodified(this.nome
+				+ this.email);
 	}
 
 	/** Construtor padrão */
@@ -222,13 +221,12 @@ public class Usuario {
 	 * @param enderecos
 	 * @param telefone
 	 */
-	public Usuario(String email, String nome, String apelido, String senha,
-			Sexo sexo, String cpf, LocalDate dataNascimento,
-			List<Endereco> enderecos, String telefone) {
+	public Usuario(String email, String nome, String apelido, Sexo sexo,
+			String cpf, LocalDate dataNascimento, List<Endereco> enderecos,
+			String telefone) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
-		this.senha = senha;
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
@@ -241,6 +239,7 @@ public class Usuario {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
+		result = prime * result + ((cod == null) ? 0 : cod.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result
 				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
@@ -248,7 +247,6 @@ public class Usuario {
 		result = prime * result
 				+ ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		result = prime * result
 				+ ((telefone == null) ? 0 : telefone.hashCode());
@@ -268,6 +266,11 @@ public class Usuario {
 			if (other.apelido != null)
 				return false;
 		} else if (!apelido.equals(other.apelido))
+			return false;
+		if (cod == null) {
+			if (other.cod != null)
+				return false;
+		} else if (!cod.equals(other.cod))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
@@ -294,11 +297,6 @@ public class Usuario {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
 		if (sexo != other.sexo)
 			return false;
 		if (telefone == null) {
@@ -307,5 +305,13 @@ public class Usuario {
 		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
+	}
+
+	public String getCod() {
+		return cod;
+	}
+
+	public void setCod(String cod) {
+		this.cod = cod;
 	}
 }

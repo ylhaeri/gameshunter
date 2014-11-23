@@ -89,7 +89,7 @@ public class Cidade {
 
 	@Override
 	public String toString() {
-		return " Cidade [id=" + id + ", nome=" + nome + ", estado=" + estado
-				+ "]";
+		return "Cidade [id = " + id + ", nome = " + nome + ", estado = "
+				+ estado + "]";
 	}
 }

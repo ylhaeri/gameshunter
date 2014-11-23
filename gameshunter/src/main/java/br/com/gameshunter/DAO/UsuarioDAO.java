@@ -69,10 +69,4 @@ public class UsuarioDAO implements DbDAO<Usuario, String> {
 	public void close() {
 		manager.close();
 	}
-
-	public static void main(String[] args) {
-		Usuario usuario = new UsuarioDAO(JPAUtil.getEntityManager())
-				.pega("gabriel.arara");
-		System.out.println(usuario.getEmail());
-	}
 }

@@ -122,8 +122,20 @@ public class Logradouro {
 
 	@Override
 	public String toString() {
-		return "Logradouro [id=" + id + ", nome=" + nome + ", bairro=" + bairro
-				+ ", tipo=" + tipo + ", cep=" + cep + ", logradouro="
-				+ logradouro + "]";
+		return "Logradouro [id = " + id + ", nome = " + nome + ", bairro = "
+				+ bairro + ", tipo = " + tipo + ", cep = " + cep
+				+ ", logradouro = " + logradouro + "]";
+	}
+
+	public Cidade getCidade() {
+		return bairro.getCidade();
+	}
+
+	public Estado getEstado() {
+		return bairro.getEstado();
+	}
+
+	public Pais getPais() {
+		return bairro.getPais();
 	}
 }

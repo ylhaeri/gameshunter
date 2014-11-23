@@ -24,6 +24,7 @@
 	<main class="container">
 	<h1 id="titulo">Cadastre-se</h1>
 	<s:form method="post" cssClass="cadastro" action="novoUsuario">
+		<s:fielderror></s:fielderror>
 		<table>
 			<s:textfield label="Nome" labelposition="top" labelSeparator=""
 				id="nome" name="usuario.nome" value="%{usuario.nome}"
@@ -49,7 +50,7 @@
 				<td class="separador"></td>
 			</tr>
 			<s:password label="Confirme sua senha" labelposition="top"
-				labelSeparator="" id="confirmaSenha" name="usuario.senha"
+				labelSeparator="" id="confirmaSenha" name="senha"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador" id="feedConSenha"></td>

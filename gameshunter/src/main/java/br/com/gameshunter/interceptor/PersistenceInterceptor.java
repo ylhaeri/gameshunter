@@ -1,5 +1,7 @@
 package br.com.gameshunter.interceptor;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
@@ -18,6 +20,7 @@ public class PersistenceInterceptor implements Interceptor {
 	}
 
 	@Override
+	@Transactional
 	public String intercept(ActionInvocation invocation) throws Exception {
 
 		// Executa o request
