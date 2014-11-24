@@ -65,6 +65,6 @@ public class Teste {
 		// GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
 		// gerador.geraPDF(Arquivo.noDiretorioPadrao("/boleto/boletoteste.pdf"));
 
-		System.out.println(HashFactory.sha512("25a17a86a8"));
+		System.out.println(HashFactory.sha512("aranhazuzu"));
 	}
 }
