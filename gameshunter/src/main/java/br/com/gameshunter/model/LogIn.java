@@ -41,7 +41,7 @@ public class LogIn implements Serializable {
 	 * @param senha
 	 */
 	public void geraSenha(String senha) {
-		this.senha = new HashFactory().hashStringCodified(senha);
+		this.senha = new HashFactory().sha512(senha);
 	}
 
 	@Override

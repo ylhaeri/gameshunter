@@ -201,8 +201,7 @@ public class Usuario implements Serializable {
 
 	/** Gera o código do usuário */
 	public void geraCod() {
-		this.cod = new HashFactory().hashStringUncodified(this.nome
-				+ this.email);
+		this.cod = new HashFactory().sha384(this.nome + this.email);
 	}
 
 	/** Construtor padrão */

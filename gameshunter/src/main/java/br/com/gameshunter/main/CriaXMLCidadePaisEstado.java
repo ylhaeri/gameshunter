@@ -18,9 +18,9 @@ import br.com.gameshunter.util.EscritorXML;
 public class CriaXMLCidadePaisEstado {
 
 	public static void criaArquivos() {
-		File arqPais = Arquivo.noDiretorioPadrao("\\xml\\paises.xml");
-		File arqEstado = Arquivo.noDiretorioPadrao("\\xml\\estados.xml");
-		File arqCidade = Arquivo.noDiretorioPadrao("\\xml\\cidades.xml");
+		File arqPais = Arquivo.noDiretorioPadrao("/xml/paises.xml");
+		File arqEstado = Arquivo.noDiretorioPadrao("/xml/estados.xml");
+		File arqCidade = Arquivo.noDiretorioPadrao("/xml/cidades.xml");
 
 		if (!arqPais.exists() || !arqEstado.exists() || !arqCidade.exists()) {
 			EntityManager manager = JPAUtil.getEntityManager();

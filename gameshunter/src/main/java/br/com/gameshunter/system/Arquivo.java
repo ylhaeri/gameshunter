@@ -6,7 +6,7 @@ public class Arquivo {
 
 	public static File noDiretorioPadrao(String string) {
 		File arquivo = new File(System.getProperty("user.home")
-				+ "\\gameshunter" + string);
+				+ "/gameshunter" + string);
 		return arquivo;
 	}
 }
