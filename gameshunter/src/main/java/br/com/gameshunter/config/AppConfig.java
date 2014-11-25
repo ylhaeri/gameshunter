@@ -18,19 +18,21 @@ import br.com.gameshunter.schedule.Arara;
 @ComponentScan(basePackages = "br.com.gameshunter.service")
 public class AppConfig {
 
-	@Bean
+	@Bean(initMethod = "init")
+	@Scope("prototype")
 	public Usuario usuario() {
 		return new Usuario();
 	}
 
 	@Bean(initMethod = "init")
+	@Scope("prototype")
 	public Endereco endereco() {
 		return new Endereco();
 	}
 
-	@Bean
+	@Bean(initMethod = "init")
 	@Scope("prototype")
-	public Login logIn() {
+	public Login login() {
 		return new Login();
 	}
 

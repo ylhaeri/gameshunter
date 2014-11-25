@@ -28,6 +28,10 @@ public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public void init() {
+		System.out.println("Novo usuario");
+	}
+
 	@Id
 	private String email;
 	private String nome;

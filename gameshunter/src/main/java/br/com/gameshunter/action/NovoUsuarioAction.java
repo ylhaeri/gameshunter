@@ -23,22 +23,17 @@ import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 
 @Validations
 @Controller
-// @InterceptorRef(value = "GHDefault")
 public class NovoUsuarioAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private Endereco endereco;
-	@Autowired
 	private Login login;
 	@Autowired
 	private LoginService loginService;
 	private String dataNasc;
-	private String cep;
 	private Logradouro logradouro;
-	private String senha;
 
-	@SuppressWarnings("deprecation")
 	@Action(value = "novoUsuario", results = {
 
 	@Result(name = "ok", location = "usuario-adicionado.jsp"),
@@ -48,9 +43,7 @@ public class NovoUsuarioAction extends ActionSupport {
 		adicionaEndereco();
 
 		login.setUsuario(usuario);
-		login.setSenha(senha);
-		// enderecoService.add(usuario.getEnderecos());
-		// usuarioService.add(usuario);
+
 		loginService.add(login);
 		return "ok";
 	}
@@ -101,14 +94,6 @@ public class NovoUsuarioAction extends ActionSupport {
 		return Sexo.values();
 	}
 
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
 	public void setLogradouro(Logradouro logradouro) {
 		this.logradouro = logradouro;
 	}
@@ -117,11 +102,7 @@ public class NovoUsuarioAction extends ActionSupport {
 		return logradouro;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 }

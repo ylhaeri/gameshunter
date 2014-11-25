@@ -7,6 +7,6 @@
 <title>Adicionado</title>
 </head>
 <body>
-	<h1>Usuário ${usuario.email} adicionado com sucesso!</h1>
+	<h1>Usuário adicionado com sucesso!</h1>
 </body>
 </html>

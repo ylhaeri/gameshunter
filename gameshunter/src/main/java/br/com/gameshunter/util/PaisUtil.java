@@ -30,7 +30,7 @@ public class PaisUtil {
 	/** Popula o banco com todos os Países */
 	public void populaPais() {
 
-		File arqPaises = Arquivo.noDiretorioPadrao("\\xml\\paises.xml");
+		File arqPaises = Arquivo.defaultPath("\\xml\\paises.xml");
 		@SuppressWarnings("unchecked")
 		List<Pais> paises = (List<Pais>) new LeitorXML(arqPaises)
 				.comAlias("país", Pais.class).omitindoCampo(Pais.class, "id")

@@ -1,0 +1,8 @@
+<!DOCTYPE etl SYSTEM "http://scriptella.javaforge.com/dtd/etl.dtd">
+<etl>
+	<connection url="jdbc:mysql://localhost:3306/gameshunter" user="root" password="" classpath="mysql-connector-java-5.1.7-bin.jar"/>
+	<script>
+		<include href="gameshunter_logradouro.sql"/>
+		-- And/or directly insert SQL statements here
+	</script>
+</etl>

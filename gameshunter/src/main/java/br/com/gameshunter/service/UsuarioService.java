@@ -20,11 +20,9 @@ public class UsuarioService {
 	@Transactional(value = "GamesHunterManager")
 	public void add(Usuario usuario) {
 		// place holder do envio de e-mail
-
 		for (Endereco endereco : usuario.getEnderecos()) {
 			enderecoService.add(endereco);
 		}
-
 		dao.add(usuario);
 	}
 

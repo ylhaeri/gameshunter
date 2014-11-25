@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Arquivo {
 
-	public static File noDiretorioPadrao(String string) {
+	public static File defaultPath(String string) {
 		File arquivo = new File(System.getProperty("user.home")
 				+ "/gameshunter" + string);
 		return arquivo;

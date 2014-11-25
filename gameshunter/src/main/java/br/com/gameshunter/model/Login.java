@@ -14,6 +14,11 @@ import br.com.gameshunter.util.HashFactory;
 public class Login implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public void init() {
+		System.out.println("Novo login");
+	}
+
 	@Id
 	@OneToOne
 	private Usuario usuario;

@@ -132,7 +132,6 @@
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

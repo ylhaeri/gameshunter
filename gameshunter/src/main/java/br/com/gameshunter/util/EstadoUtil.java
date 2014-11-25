@@ -30,7 +30,7 @@ public class EstadoUtil {
 	/** Popula o banco com todos os Estados */
 	public void populaEstado() {
 
-		File arqEstados = Arquivo.noDiretorioPadrao("\\xml\\estados.xml");
+		File arqEstados = Arquivo.defaultPath("\\xml\\estados.xml");
 		@SuppressWarnings("unchecked")
 		List<Estado> estados = (List<Estado>) new LeitorXML(arqEstados)
 				.comAlias("estado", Estado.class)

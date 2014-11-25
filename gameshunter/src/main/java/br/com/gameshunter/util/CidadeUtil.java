@@ -30,7 +30,7 @@ public class CidadeUtil {
 	/** Popula o banco com todas as Cidades */
 	public void populaCidade() {
 
-		File arqCidades = Arquivo.noDiretorioPadrao("\\xml\\cidades.xml");
+		File arqCidades = Arquivo.defaultPath("\\xml\\cidades.xml");
 		@SuppressWarnings("unchecked")
 		List<Cidade> cidades = (List<Cidade>) new LeitorXML(arqCidades)
 				.comAlias("cidade", Cidade.class)

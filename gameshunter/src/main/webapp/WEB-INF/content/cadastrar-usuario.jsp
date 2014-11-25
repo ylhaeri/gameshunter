@@ -50,7 +50,7 @@
 				<td class="separador"></td>
 			</tr>
 			<s:password label="Confirme sua senha" labelposition="top"
-				labelSeparator="" id="confirmaSenha" name="senha"
+				labelSeparator="" id="confirmaSenha" name="login.senha"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador" id="feedConSenha"></td>
