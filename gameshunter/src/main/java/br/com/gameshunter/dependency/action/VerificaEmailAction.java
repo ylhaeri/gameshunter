@@ -2,15 +2,17 @@ package br.com.gameshunter.dependency.action;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.gameshunter.DAO.JPAUtil;
-import br.com.gameshunter.DAO.UsuarioDAO;
 import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.service.UsuarioService;
 
 public class VerificaEmailAction {
 
 	private String email;
 	private boolean disponivel;
+	@Autowired
+	UsuarioService usuarioService;
 
 	@Action(value = "verificaEmail", results = { @Result(name = "ok", type = "json") })
 	public String execute() {
@@ -20,9 +22,7 @@ public class VerificaEmailAction {
 	}
 
 	private void estaDisponivel() {
-		UsuarioDAO uDao = new UsuarioDAO(JPAUtil.getEntityManager());
-		Usuario usuario = uDao.pega(email);
-		uDao.close();
+		Usuario usuario = usuarioService.find(email);
 		if (usuario == null)
 			this.disponivel = true;
 		else

@@ -1,4 +1,4 @@
-package br.com.gameshunter.DAO;
+package br.com.gameshunter.dao;
 
 public interface DbDAO<T, PK> extends BasicDbDAO {
 

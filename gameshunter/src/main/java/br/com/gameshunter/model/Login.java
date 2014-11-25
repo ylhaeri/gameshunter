@@ -6,24 +6,28 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import br.com.gameshunter.util.HashFactory;
 
 @Entity
-public class LogIn implements Serializable {
+public class Login implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@OneToOne
 	private Usuario usuario;
 	private String senha;
+	private String code;
+	private String salt;
 	private boolean confirmado = false;
 
 	public String getSenha() {
 		return senha;
 	}
 
-	@SuppressWarnings("unused")
-	private void setSenha(String senha) {
+	@Deprecated
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
@@ -40,8 +44,16 @@ public class LogIn implements Serializable {
 	 * 
 	 * @param senha
 	 */
-	public void geraSenha(String senha) {
-		this.senha = new HashFactory().sha512(senha);
+	public void geraSenha() {
+		this.salt = RandomStringUtils.randomAscii(20);
+		String hash = HashFactory.sha384(this.senha);
+		this.senha = HashFactory.sha512(hash + this.salt);
+	}
+
+	/** Gera o código do usuário */
+	public void geraCod() {
+		this.code = HashFactory.sha384(this.usuario.getNome()
+				+ this.usuario.getEmail());
 	}
 
 	@Override
@@ -61,7 +73,7 @@ public class LogIn implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LogIn other = (LogIn) obj;
+		Login other = (Login) obj;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -86,5 +98,21 @@ public class LogIn implements Serializable {
 
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

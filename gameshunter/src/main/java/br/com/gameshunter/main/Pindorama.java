@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.gameshunter.DAO.CidadeDAO;
-import br.com.gameshunter.DAO.JPAUtil;
+import br.com.gameshunter.dao.CidadeDAO;
+import br.com.gameshunter.dao.JPAUtil;
 import br.com.gameshunter.model.Cidade;
 
 public class Pindorama {

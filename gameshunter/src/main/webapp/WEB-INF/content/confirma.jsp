@@ -7,7 +7,7 @@
 <title>Confirma</title>
 </head>
 <body>
-	<h1>O e-mail ${usuario.email} do usuário ${usuario.nome} foi
-		confirmado.</h1>
+	<h1>O e-mail ${login.usuario.email} do usuário
+		${login.usuario.nome} foi confirmado com sucesso.</h1>
 </body>
 </html>

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import br.com.gameshunter.util.ConversorLocalDateDB;
-import br.com.gameshunter.util.HashFactory;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -42,12 +40,6 @@ public class Usuario implements Serializable {
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private String telefone;
-	private String cod;
-
-	@PostConstruct
-	void contruiu() {
-		System.out.println("Usuario feito");
-	}
 
 	/** @return O e-mail */
 	public String getEmail() {
@@ -199,11 +191,6 @@ public class Usuario implements Serializable {
 		adicionaEndereco(alterado);
 	}
 
-	/** Gera o código do usuário */
-	public void geraCod() {
-		this.cod = new HashFactory().sha384(this.nome + this.email);
-	}
-
 	/** Construtor padrão */
 	public Usuario() {
 	}
@@ -238,7 +225,6 @@ public class Usuario implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
-		result = prime * result + ((cod == null) ? 0 : cod.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result
 				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
@@ -265,11 +251,6 @@ public class Usuario implements Serializable {
 			if (other.apelido != null)
 				return false;
 		} else if (!apelido.equals(other.apelido))
-			return false;
-		if (cod == null) {
-			if (other.cod != null)
-				return false;
-		} else if (!cod.equals(other.cod))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
@@ -304,13 +285,5 @@ public class Usuario implements Serializable {
 		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
-	}
-
-	public String getCod() {
-		return cod;
-	}
-
-	public void setCod(String cod) {
-		this.cod = cod;
 	}
 }

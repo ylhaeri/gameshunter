@@ -2,7 +2,7 @@ package br.com.gameshunter.main;
 
 import javax.persistence.EntityManager;
 
-import br.com.gameshunter.DAO.JPAUtil;
+import br.com.gameshunter.dao.JPAUtil;
 import br.com.gameshunter.util.CidadeUtil;
 import br.com.gameshunter.util.EstadoUtil;
 import br.com.gameshunter.util.PaisUtil;

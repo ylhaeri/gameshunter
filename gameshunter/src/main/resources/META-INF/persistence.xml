@@ -7,7 +7,7 @@
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>br.com.gameshunter.model.LogIn</class>
+		<class>br.com.gameshunter.model.Login</class>
 		<class>br.com.gameshunter.model.Usuario</class>
 		<class>br.com.gameshunter.model.Endereco</class>
 		<class>br.com.gameshunter.model.Cidade</class>
@@ -17,14 +17,32 @@
 		<class>br.com.gameshunter.model.Logradouro</class>
 
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gameshunter" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.user" value="gameshunter" />
+			<property name="javax.persistence.jdbc.password" value="iSW`3,WSp*$TjlaKK68Awd_mtD3=zP" />
 
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+		</properties>
+	</persistence-unit>
+	<persistence-unit name="security" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<class>br.com.gameshunter.model.Login</class>
+		<class>br.com.gameshunter.model.Usuario</class>
+		<class>br.com.gameshunter.model.Endereco</class>
+		<class>br.com.gameshunter.model.Cidade</class>
+		<class>br.com.gameshunter.model.Estado</class>
+		<class>br.com.gameshunter.model.Pais</class>
+		<class>br.com.gameshunter.model.Bairro</class>
+		<class>br.com.gameshunter.model.Logradouro</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.user" value="ricardao" />
+			<property name="javax.persistence.jdbc.password"
+				value=":juP-Sm$XH\-mZ)yOG|hIX9@4`WQX'" />
+
+<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 		</properties>
 	</persistence-unit>

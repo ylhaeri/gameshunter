@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.gameshunter.DAO.CidadeDAO;
-import br.com.gameshunter.DAO.EstadoDAO;
-import br.com.gameshunter.DAO.JPAUtil;
-import br.com.gameshunter.DAO.PaisDAO;
+import br.com.gameshunter.dao.CidadeDAO;
+import br.com.gameshunter.dao.EstadoDAO;
+import br.com.gameshunter.dao.JPAUtil;
+import br.com.gameshunter.dao.PaisDAO;
 import br.com.gameshunter.model.Cidade;
 import br.com.gameshunter.model.Estado;
 import br.com.gameshunter.model.Pais;

@@ -3,19 +3,22 @@ package br.com.gameshunter.dependency.action;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
-import br.com.gameshunter.DAO.JPAUtil;
+import com.opensymphony.xwork2.ActionContext;
+
 import br.com.gameshunter.model.Logradouro;
 
 public class TesteAction {
 
 	private String cep;
 	private Logradouro logradouro;
-	private EntityManager manager = JPAUtil.getEntityManager();
+	@PersistenceContext(unitName = "GamesHunter")
+	private EntityManager manager;
 	private boolean existe;
 
 	@Action(value = "teste", results = {
@@ -28,6 +31,7 @@ public class TesteAction {
 	}
 
 	private Logradouro pegaCep() {
+		ActionContext.getContext().getSession().remove("cep");
 		TypedQuery<Logradouro> query = manager.createQuery(
 				"select l from Logradouro l where l.cep like :pCep",
 				Logradouro.class);
@@ -35,6 +39,7 @@ public class TesteAction {
 		List<Logradouro> pesquisa = query.getResultList();
 		if (!pesquisa.isEmpty()) {
 			existe = true;
+			ActionContext.getContext().getSession().put("cep", pesquisa.get(0));
 			return pesquisa.get(0);
 		} else {
 			existe = false;

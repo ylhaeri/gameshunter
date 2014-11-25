@@ -20,13 +20,13 @@ public class PersistenceInterceptor implements Interceptor {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(value = "GamesHunterManager")
 	public String intercept(ActionInvocation invocation) throws Exception {
 
 		// Executa o request
 		String result = invocation.invoke();
 
-		// Entrega o request para o browser
+		// Entrega a response para o browser
 		return result;
 	}
 }

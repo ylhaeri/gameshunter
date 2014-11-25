@@ -3,7 +3,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.scheduling.annotation.Scheduled;
 
+import br.com.gameshunter.dao.JPAUtil;
 import br.com.gameshunter.util.HashFactory;
 
 public class Teste {
@@ -64,7 +67,7 @@ public class Teste {
 		//
 		// GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);
 		// gerador.geraPDF(Arquivo.noDiretorioPadrao("/boleto/boletoteste.pdf"));
-
-		System.out.println(HashFactory.sha512("aranhazuzu"));
+		//
+		// System.out.println(RandomStringUtils.randomAscii(20));
 	}
 }

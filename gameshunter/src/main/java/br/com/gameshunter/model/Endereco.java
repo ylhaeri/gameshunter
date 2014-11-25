@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
 /**
@@ -18,6 +17,10 @@ import com.opensymphony.xwork2.validator.annotations.Validations;
 @Validations
 @Entity
 public class Endereco {
+
+	public void init() {
+		System.out.println("Novo Endereço");
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

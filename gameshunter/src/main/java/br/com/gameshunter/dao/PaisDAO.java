@@ -1,4 +1,4 @@
-package br.com.gameshunter.DAO;
+package br.com.gameshunter.dao;
 
 import java.util.List;
 
