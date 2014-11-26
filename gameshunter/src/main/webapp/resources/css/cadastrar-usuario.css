@@ -1,8 +1,11 @@
 @CHARSET "UTF-8";
 
-td {
-	text-align: left;
-	padding-bottom: 5px;
+.table {
+	width: auto;
+}
+
+.table td {
+	text-align: right;
 }
 
 #dpLocal td {

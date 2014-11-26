@@ -5,7 +5,7 @@ function pegaCep() {
 	cept.removeClass()
 	if (cep != "") {
 		if (regex.test(cep)) {
-			$.get("teste", {
+			$.get("buscaCep", {
 				cep : cep
 			}, function(data) {
 				if (data.existe) {

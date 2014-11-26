@@ -33,6 +33,7 @@ public class NovoUsuarioAction extends ActionSupport {
 	private LoginService loginService;
 	private String dataNasc;
 	private Logradouro logradouro;
+	private String cep;
 
 	@Action(value = "novoUsuario", results = {
 
@@ -104,5 +105,13 @@ public class NovoUsuarioAction extends ActionSupport {
 
 	public void setLogin(Login login) {
 		this.login = login;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 }

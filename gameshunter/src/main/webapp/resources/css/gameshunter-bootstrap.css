@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.container-fluid {
+	max-width: 1024px;
+	margin: 0 auto;
+}
+
+.active a {
+	background-color: #fff;
+}

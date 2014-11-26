@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 import br.com.gameshunter.model.Logradouro;
 
-public class TesteAction {
+public class CepAction {
 
 	private String cep;
 	private Logradouro logradouro;
@@ -21,7 +21,7 @@ public class TesteAction {
 	private EntityManager manager;
 	private boolean existe;
 
-	@Action(value = "teste", results = {
+	@Action(value = "buscaCep", results = {
 
 	@Result(name = "ok", type = "json") })
 	public String execute() {

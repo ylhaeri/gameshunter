@@ -3,15 +3,26 @@ package br.com.gameshunter.dependency.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DropDownMesAction {
+
+	@Autowired
+	private Email email;
 
 	private List<String> meses = new ArrayList<>();
 
 	@Action(value = "pegaMeses", results = { @Result(name = "ok", type = "json") })
-	public String execute() {
+	public String execute() throws EmailException {
+		System.out.println(email == null);
+		email.setSubject("Teste rápido");
+		email.setMsg("Ois, mensagem básiquinha procê");
+		email.addTo("gabriel.dinizo@hotmail.com");
+		email.send();
 		pegaMeses();
 		return "ok";
 	}

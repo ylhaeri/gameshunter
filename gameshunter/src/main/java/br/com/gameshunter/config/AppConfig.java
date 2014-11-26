@@ -1,5 +1,8 @@
 package br.com.gameshunter.config;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +42,23 @@ public class AppConfig {
 	@Bean
 	public Arara arara() {
 		return new Arara();
+	}
+
+	@Bean
+	@Scope("prototype")
+	public SimpleEmail simpleEmail() {
+		SimpleEmail email = new SimpleEmail();
+		email.setHostName("smtp.googlemail.com");
+		email.setSmtpPort(465);
+		email.setAuthenticator(new DefaultAuthenticator(
+				"testeghunter@gmail.com", "xbifexbacon"));
+		email.setSSLOnConnect(true);
+		try {
+			email.setFrom("testeghunter@gmail.com", "GamesHunter");
+		} catch (EmailException e) {
+			System.out.println("E-mail inválido");
+		}
+		return email;
 	}
 
 	@Bean(name = "GamesHunter")

@@ -6,92 +6,74 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/reset.css">
-<link rel="stylesheet" href="resources/css/gameshunter.css">
+<link rel="stylesheet" href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="resources/css/gameshunter-bootstrap.css">
 <link rel="stylesheet" href="resources/css/cadastrar-usuario.css">
-<link
-	href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic'
-	rel='stylesheet' type='text/css'>
 <script src="resources/js/jquery-2.1.1.js"></script>
 <script src="resources/js/jquery-masked-input-1.4.0.js"></script>
 <title>Cadastro - Games Hunter</title>
 </head>
 <body>
-	<header>
-		<s:include value="cabecalho.jsp" />
-		<button id="criaXml" class="admbutton">Cria XML</button>
-		<button id="populaBanco" class="admbutton">Popula Banco</button>
-	</header>
-	<main class="container">
+	<s:include value="cabecalho.jsp" />
+	<main>
 	<h1 id="titulo">Cadastre-se</h1>
-	<s:form method="post" cssClass="cadastro" action="novoUsuario">
-		<s:fielderror></s:fielderror>
-		<table>
-			<s:textfield label="Nome" labelposition="top" labelSeparator=""
-				id="nome" name="usuario.nome" value="%{usuario.nome}"
-				errorPosition="bottom" />
+	<form method="post" action="novoUsuario">
+		<table class="table">
+			<s:textfield label="Nome" labelposition="left" labelSeparator=""
+				cssClass="form-control arara" id="nome" name="usuario.nome"
+				value="%{usuario.nome}" errorPosition="bottom" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:textfield label="Apelido" labelposition="top" labelSeparator=""
+			<s:textfield label="Apelido" labelposition="left" labelSeparator=""
 				id="ape" name="usuario.apelido" value="%{usuario.apelido}"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:textfield label="E-mail" labelposition="top" labelSeparator=""
+			<s:textfield label="E-mail" labelposition="left" labelSeparator=""
 				id="mail" name="usuario.email" value="%{usuario.email}"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador" id="mailfeed"></td>
 			</tr>
-			<s:password label="Senha" labelposition="top" labelSeparator=""
+			<s:password label="Senha" labelposition="left" labelSeparator=""
 				id="senha" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:password label="Confirme sua senha" labelposition="top"
+			<s:password label="Confirme sua senha" labelposition="left"
 				labelSeparator="" id="confirmaSenha" name="login.senha"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador" id="feedConSenha"></td>
 			</tr>
-			<s:textfield label="CPF" labelposition="top" labelSeparator=""
+			<s:textfield label="CPF" labelposition="left" labelSeparator=""
 				id="cpf" name="usuario.cpf" value="%{usuario.cpf}"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:textfield label="Telefone" labelposition="top" labelSeparator=""
+			<s:textfield label="Telefone" labelposition="left" labelSeparator=""
 				id="tel" name="usuario.telefone" value="%{usuario.telefone}"
 				errorPosition="bottom" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:select label="Sexo" labelposition="top" labelSeparator=""
+			<s:select label="Sexo" labelposition="left" labelSeparator=""
 				id="dpsexo" headerValue="Selecione" headerKey="Selecione"
 				name="usuario.sexo" list="sexo" errorPosition="bottom" />
 			<tr>
 				<td class="separador"></td>
 			</tr>
-			<s:textfield label="Data de Nascimento" labelposition="top"
+			<s:textfield label="Data de Nascimento" labelposition="left"
 				labelSeparator="" id="dataNasc" name="dataNasc" value="%{dataNasc}"
 				errorPosition="bottom" />
-			<tr>
-				<td class="separadorGrande"></td>
-			</tr>
 		</table>
-		<label id="endereco">Endereço</label>
-		<s:include value="cadastrar-endereco.jsp"></s:include>
-		<table>
-			<tr>
-				<td class="separador"></td>
-			</tr>
-			<tr>
-				<td class="separador"></td>
-			</tr>
-		</table>
-		<input type="submit" value="Enviar" id="cadastrar" />
-	</s:form> </main>
+		<input class="btn btn-main" type="submit" value="Enviar"
+			id="cadastrar" />
+	</form>
+	</main>
 	<footer>
 		<s:include value="rodape.jsp" />
 	</footer>
