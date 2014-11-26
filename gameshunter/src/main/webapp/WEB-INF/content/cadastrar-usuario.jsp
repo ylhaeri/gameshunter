@@ -70,7 +70,22 @@
 				labelSeparator="" id="dataNasc" name="dataNasc" value="%{dataNasc}"
 				errorPosition="bottom" />
 		</table>
-		<input class="btn btn-main" type="submit" value="Enviar"
+		<input type="submit" value="Cadastrar" id="cadastrar" /> <input
+			class="btn btn-default" type="submit" value="Cadastrar"
+			id="cadastrar" /> <input class="btn btn-primary" type="submit"
+			value="Cadastrar" id="cadastrar" /> <input class="btn btn-success"
+			type="submit" value="Cadastrar" id="cadastrar" /> <input
+			class="btn btn-info" type="submit" value="Cadastrar" id="cadastrar" />
+		<input class="btn btn-warning" type="submit" value="Cadastrar"
+			id="cadastrar" /> <input class="btn btn-danger" type="submit"
+			value="Cadastrar" id="cadastrar" /> <input class="btn btn-link"
+			type="submit" value="Cadastrar" id="cadastrar" /> <input
+			class="btn btn-lg" type="submit" value="Cadastrar" id="cadastrar" />
+		<input class="btn btn-sm" type="submit" value="Cadastrar"
+			id="cadastrar" /> <input class="btn btn-xs" type="submit"
+			value="Cadastrar" id="cadastrar" /> <input class="btn btn-block"
+			type="submit" value="Cadastrar" id="cadastrar" /> <input
+			class="btn btn-toolbar" type="submit" value="Cadastrar"
 			id="cadastrar" />
 	</form>
 	</main>

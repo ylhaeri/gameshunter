@@ -1,10 +1,43 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
 .container-fluid {
 	max-width: 1024px;
-	margin: 0 auto;
 }
 
 .active a {
 	background-color: #fff;
+}
+
+.navbar-inverse {
+	border-top: 5px solid #0099FF;
+	border-bottom: 3px solid #222;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover,
+	.navbar-inverse .navbar-nav>.active>a:focus {
+	background-color: #09F;
+}
+
+.pull-right a {
+	text-transform: uppercase;
+}
+
+.pull-right a {
+	
+}
+
+.navbar-brand {
+	padding: 20px;
+}
+
+@media ( min-width : 768px) {
+	.navbar {
+		border-radius: 0px;
+	}
+}
+
+@media ( min-width : 768px) {
+	.navbar-nav>li>a {
+		padding: 20px;
+	}
 }
