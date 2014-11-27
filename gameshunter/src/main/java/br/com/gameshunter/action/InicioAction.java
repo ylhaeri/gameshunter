@@ -6,7 +6,15 @@ import org.apache.struts2.convention.annotation.Result;
 
 @Actions(value = {
 
+@Action(value = "/", results = {
+
+@Result(name = "ok", location = "home.jsp") }),
+
 @Action(value = "home", results = {
+
+@Result(name = "ok", location = "home.jsp") }),
+
+@Action(value = "inicio", results = {
 
 @Result(name = "ok", location = "home.jsp") }) })
 public class InicioAction {

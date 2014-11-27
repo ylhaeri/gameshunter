@@ -10,7 +10,7 @@ import br.com.gameshunter.model.Login;
 @Repository
 public class LoginDAO {
 
-	@PersistenceContext(unitName="Security")
+	@PersistenceContext
 	private EntityManager manager;
 
 	public void add(Login login) {

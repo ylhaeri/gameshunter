@@ -17,7 +17,7 @@ public class UsuarioService {
 	@Autowired
 	private EnderecoService enderecoService;
 
-	@Transactional(value = "GamesHunterManager")
+	@Transactional
 	public void add(Usuario usuario) {
 		// place holder do envio de e-mail
 		for (Endereco endereco : usuario.getEnderecos()) {

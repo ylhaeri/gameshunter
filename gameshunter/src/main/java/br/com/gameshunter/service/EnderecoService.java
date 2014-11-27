@@ -13,7 +13,7 @@ public class EnderecoService {
 	@Autowired
 	private EnderecoDAO dao;
 
-	@Transactional(value = "GamesHunterManager")
+	@Transactional
 	public void add(Endereco endereco) {
 		dao.add(endereco);
 	}

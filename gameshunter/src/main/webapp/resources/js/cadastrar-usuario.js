@@ -1,6 +1,9 @@
+$(document).ready(function() {
 $("#cpf").mask("999.999.999-99")
 $("#tel").mask("?(99)9999-9999")
 $("#dataNasc").mask("99/99/9999")
+
+$("#table-cadastro tr td:first-child").addClass("td-label")
 
 $("#mail").blur(function() {
 	criaFeedNaMesmaLinha("feedImgMail", "mail")
@@ -71,10 +74,12 @@ $("#confirmaSenha").blur(function() {
 		}
 })
 
-$(".cadastro").submit(function(event) {
+$("#form-cadastro").submit(function(event) {
+	var form = $(this)
 	if (!senhaValida()) {
-		alert("what")
 		event.preventDefault()
+	} else {
+		form.find("input[type='image'],input[type='submit']").attr("disabled", "true");
 	}
 })
 
@@ -101,3 +106,4 @@ function criaFeedNaMesmaLinha(id, campo) {
 function pegaFeedId(id) {
 	return $("#"+id)
 }
+})

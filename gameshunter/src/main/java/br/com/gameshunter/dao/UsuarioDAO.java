@@ -18,7 +18,7 @@ import br.com.gameshunter.model.Usuario;
 @Repository
 public class UsuarioDAO {
 
-	@PersistenceContext(unitName = "GamesHunter")
+	@PersistenceContext
 	private EntityManager manager;
 
 	public void add(Usuario usuario) {

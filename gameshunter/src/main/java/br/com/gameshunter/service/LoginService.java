@@ -15,7 +15,7 @@ public class LoginService {
 	@Autowired
 	private LoginDAO dao;
 
-	@Transactional(value = "SecurityManager")
+	@Transactional
 	public void add(Login login) {
 		usuarioService.add(login.getUsuario());
 		login.geraCod();

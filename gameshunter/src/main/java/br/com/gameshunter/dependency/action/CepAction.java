@@ -25,6 +25,7 @@ public class CepAction {
 
 	@Result(name = "ok", type = "json") })
 	public String execute() {
+		System.out.println(cep);
 		this.logradouro = pegaCep();
 		manager.close();
 		return "ok";

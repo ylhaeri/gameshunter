@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 
 @Validations
 @Controller
+@Namespace(value = "/usuario")
 public class NovoUsuarioAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
@@ -35,7 +37,7 @@ public class NovoUsuarioAction extends ActionSupport {
 	private Logradouro logradouro;
 	private String cep;
 
-	@Action(value = "novoUsuario", results = {
+	@Action(value = "novo", results = {
 
 	@Result(name = "ok", location = "usuario-adicionado.jsp"),
 			@Result(name = "input", location = "cadastrar-usuario.jsp") })

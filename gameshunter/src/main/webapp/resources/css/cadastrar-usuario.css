@@ -1,54 +1,9 @@
 @CHARSET "UTF-8";
 
-.table {
-	width: auto;
-}
-
-.table td {
+.td-label {
 	text-align: right;
 }
 
-#dpLocal td {
-	padding-right: 30px;
-}
-
-.cadastro {
-	margin-left: 4%;
-}
-
-input[type="password"], input[type="text"] {
-	padding: 7px 0;
-	width: 300px;
-}
-
-#titulo {
-	font-size: 30px;
-	margin-left: 2%;
-	margin-bottom: 30px;
-	margin-left: 2%;
-}
-
-#endereco {
-	font-size: 25px;
-	margin-left: -2%;
-}
-
-#numt {
-	width: 20%;
-}
-
-.separadorGrande {
-	padding-bottom: 25px;
-}
-
-.separador {
-	padding-bottom: 10px;
-}
-
-input, select {
-	border: solid #404040 1px;
-}
-
-div submit {
-	align: left;
+.table>tbody>tr>.td-label {
+	padding-top: 13px;
 }

@@ -74,18 +74,4 @@ public class AppConfig {
 		gamesHunterTransactionManager.setPersistenceUnitName("gameshunter");
 		return gamesHunterTransactionManager;
 	}
-
-	@Bean(name = "Security")
-	public LocalEntityManagerFactoryBean securityFactory() {
-		LocalEntityManagerFactoryBean gamesHunterFactoryBean = new LocalEntityManagerFactoryBean();
-		gamesHunterFactoryBean.setPersistenceUnitName("security");
-		return gamesHunterFactoryBean;
-	}
-
-	@Bean(name = "SecurityManager")
-	public JpaTransactionManager secutiryManager() {
-		JpaTransactionManager gamesHunterTransactionManager = new JpaTransactionManager();
-		gamesHunterTransactionManager.setPersistenceUnitName("security");
-		return gamesHunterTransactionManager;
-	}
 }

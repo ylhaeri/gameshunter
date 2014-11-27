@@ -18,7 +18,7 @@ import br.com.gameshunter.model.Endereco;
 @Repository
 public class EnderecoDAO {
 
-	@PersistenceContext(unitName = "GamesHunter")
+	@PersistenceContext
 	private EntityManager manager;
 
 	public EntityManager getManager() {
