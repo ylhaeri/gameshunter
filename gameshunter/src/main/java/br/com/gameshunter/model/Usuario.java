@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import br.com.gameshunter.util.ConversorLocalDateDB;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 
@@ -115,17 +116,13 @@ public class Usuario implements Serializable {
 		return enderecos;
 	}
 
-	/** @param enderecos */
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
 	/** @return O sexo */
 	public Sexo getSexo() {
 		return sexo;
 	}
 
 	/** @param sexo */
+	@RequiredFieldValidator(key = "usuario.sexo.vazio")
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}

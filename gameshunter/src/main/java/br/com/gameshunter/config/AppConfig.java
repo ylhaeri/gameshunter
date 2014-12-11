@@ -18,7 +18,7 @@ import br.com.gameshunter.schedule.Arara;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "br.com.gameshunter.service")
+@ComponentScan(basePackages = { "br.com.gameshunter" })
 public class AppConfig {
 
 	@Bean(initMethod = "init")

@@ -1,5 +1,10 @@
 package br.com.gameshunter.action;
 
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -26,11 +31,15 @@ public class CadastrarUsuarioAction {
 		return "ok";
 	}
 
-	public String getCode() {
-		return "123";
-	}
-
 	public Sexo[] getSexo() {
 		return Sexo.values();
+	}
+
+	public List<String> getMes() {
+		List<String> meses = new ArrayList<>(
+				Arrays.asList(new DateFormatSymbols().getMonths()));
+		if (meses.size() == 13)
+			meses.remove(meses.size() - 1);
+		return meses;
 	}
 }

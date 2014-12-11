@@ -1,20 +1,6 @@
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import br.com.gameshunter.dao.JPAUtil;
-import br.com.gameshunter.util.HashFactory;
-
 public class Teste {
 
-	private static MessageDigest digest;
-
-	public static void main(String[] args) throws NoSuchAlgorithmException,
-			UnsupportedEncodingException {
+	public static void main(String[] args) {
 
 		// Formatter formatter = new CPFFormatter();
 		// String cpf = formatter.format("12345612345");

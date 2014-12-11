@@ -17,11 +17,8 @@
 	<context:component-scan base-package="br.com.gameshunter" />
 	<context:annotation-config />
 	<context:load-time-weaver />
-	<tx:annotation-driven mode="aspectj"
-		transaction-manager="GamesHunterManager" />
-	<tx:annotation-driven mode="aspectj"
-		transaction-manager="SecurityManager" />
-	<task:annotation-driven />
+	<task:annotation-driven/>
+	<tx:annotation-driven mode="aspectj" transaction-manager="GamesHunterManager"/>
 	<!-- <bean id="usuario" class="br.com.gameshunter.model.Usuario" /> <bean 
 		id="userSpringAction" class="br.com.gameshunter.action.CadastrarUsuarioAction"> 
 		<property name="usuario" ref="usuario" /> </bean> -->

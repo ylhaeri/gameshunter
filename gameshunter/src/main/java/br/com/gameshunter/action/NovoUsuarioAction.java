@@ -33,7 +33,7 @@ public class NovoUsuarioAction extends ActionSupport {
 	private Login login;
 	@Autowired
 	private LoginService loginService;
-	private String dataNasc;
+	private String dataNascimento;
 	private Logradouro logradouro;
 	private String cep;
 
@@ -44,6 +44,7 @@ public class NovoUsuarioAction extends ActionSupport {
 	public String execute() {
 		criaDataNasc();
 		adicionaEndereco();
+		System.out.println(usuario.getSexo());
 
 		login.setUsuario(usuario);
 
@@ -62,7 +63,7 @@ public class NovoUsuarioAction extends ActionSupport {
 
 	private void criaDataNasc() {
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		TemporalAccessor temporal = fmt.parse(dataNasc);
+		TemporalAccessor temporal = fmt.parse(dataNascimento);
 		LocalDate data = LocalDate.from(temporal);
 		usuario.setDataNascimento(data);
 	}
@@ -85,12 +86,21 @@ public class NovoUsuarioAction extends ActionSupport {
 		this.endereco = endereco;
 	}
 
-	public String getDataNasc() {
-		return dataNasc;
+	public Login getLogin() {
+		return login;
 	}
 
-	public void setDataNasc(String dataNasc) {
-		this.dataNasc = dataNasc;
+	@VisitorFieldValidator
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNasc) {
+		this.dataNascimento = dataNasc;
 	}
 
 	public Sexo[] getSexo() {
@@ -103,10 +113,6 @@ public class NovoUsuarioAction extends ActionSupport {
 
 	public Logradouro getLogradouro() {
 		return logradouro;
-	}
-
-	public void setLogin(Login login) {
-		this.login = login;
 	}
 
 	public String getCep() {

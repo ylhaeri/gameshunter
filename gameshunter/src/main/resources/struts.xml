@@ -5,6 +5,7 @@
 
 <struts>
 	<constant name="struts.custom.i18n.resources" value="messages"></constant>
+
 	<package name="GHCore" extends="struts-default">
 		<interceptors>
 

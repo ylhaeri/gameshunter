@@ -8,8 +8,13 @@ import javax.persistence.OneToOne;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.Validations;
+
 import br.com.gameshunter.util.HashFactory;
 
+@Validations
 @Entity
 public class Login implements Serializable {
 
@@ -32,7 +37,10 @@ public class Login implements Serializable {
 	}
 
 	@Deprecated
+	@RequiredStringValidator(key = "login.senha.vazia")
+	@StringLengthFieldValidator(minLength = "6", maxLength = "60", key = "login.senha.invalida")
 	public void setSenha(String senha) {
+		System.out.println(senha == null);
 		this.senha = senha;
 	}
 
