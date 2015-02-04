@@ -4,6 +4,10 @@ body * {
 	font-size: 100%;
 }
 
+main{
+	padding-top: 100px;
+}
+
 .header {
 	width: 100%;
 	position: absolute;
