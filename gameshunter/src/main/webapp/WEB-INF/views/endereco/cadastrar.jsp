@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <tr>
 	<td class="td-label" id="td-cep-label"><label id="cep-label"
 		class="control-label" for="cep-input">CEP</label></td>
 	<td class="td-input" id="td-cep-input"><input id="cep-input"
 		class="form-control" type="text" name="cep" value="${cep}" /> <br />
-		<s:fielderror fieldName="cep"></s:fielderror></td>
+	</td>
 </tr>
 <tr>
 	<td class="td-label" id="td-logradouro-label"><label
@@ -21,16 +19,14 @@
 		class="control-label" for="numero-input">Número</label></td>
 	<td class="td-input" id="td-numero-input"><input id="numero-input"
 		class="form-control" type="text" name="endereco.numero"
-		value="${endereco.numero}" maxlength="6" /><br /> <s:fielderror
-			fieldName="endereco.numero"></s:fielderror></td>
+		value="${endereco.numero}" maxlength="6" /><br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-complemento-label"><label
 		id="complemento-label" class="control-label" for="complemento-input">Complemento</label></td>
 	<td class="td-input" id="td-complemento-input"><input
 		id="complemento-input" class="form-control" type="text"
-		name="endereco.complemento" value="${endereco.complemento}" /> <br />
-		<s:fielderror fieldName="endereco.complemento"></s:fielderror></td>
+		name="endereco.complemento" value="${endereco.complemento}" /> <br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-bairro-label"><label id="bairro-label"

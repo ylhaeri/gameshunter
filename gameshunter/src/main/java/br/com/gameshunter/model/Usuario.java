@@ -14,16 +14,11 @@ import javax.persistence.OneToMany;
 
 import br.com.gameshunter.util.ConversorLocalDateDB;
 
-import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-
 /**
  * Representa um usuário
  * 
  * @author Myho
  */
-@Validations
 @Entity
 public class Usuario implements Serializable {
 
@@ -52,7 +47,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param email */
-	@RequiredStringValidator(key = "usuario.email.vazio")
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -63,7 +57,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param nome */
-	@RequiredStringValidator(key = "usuario.nome.vazio")
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -74,7 +67,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param apelido */
-	@RequiredStringValidator(key = "usuario.apelido.vazio")
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
@@ -85,7 +77,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param cpf */
-	@RequiredStringValidator(key = "usuario.cpf.vazio")
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
@@ -106,7 +97,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param telefone */
-	@RequiredStringValidator(key = "usuario.telefone.vazio")
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -122,7 +112,6 @@ public class Usuario implements Serializable {
 	}
 
 	/** @param sexo */
-	@RequiredFieldValidator(key = "usuario.sexo.vazio")
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}

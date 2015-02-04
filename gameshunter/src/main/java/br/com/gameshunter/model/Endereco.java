@@ -6,15 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
-import com.opensymphony.xwork2.validator.annotations.Validations;
-
 /**
  * Representa um endereço
  * 
  * @author Myho
  */
-@Validations
 @Entity
 public class Endereco {
 
@@ -61,7 +57,6 @@ public class Endereco {
 	}
 
 	/** @param numero */
-	@RequiredFieldValidator(key = "endereco.numero.vazio")
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}

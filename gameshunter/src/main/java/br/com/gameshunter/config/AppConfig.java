@@ -50,8 +50,7 @@ public class AppConfig {
 		SimpleEmail email = new SimpleEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator(
-				"testeghunter@gmail.com", "xbifexbacon"));
+		email.setAuthenticator(new DefaultAuthenticator("testeghunter@gmail.com", "xbifexbacon"));
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom("testeghunter@gmail.com", "GamesHunter");
@@ -61,7 +60,7 @@ public class AppConfig {
 		return email;
 	}
 
-	@Bean(name = "GamesHunter")
+	@Bean(name = "GamesHunterFactory")
 	public LocalEntityManagerFactoryBean gamesHunterFactory() {
 		LocalEntityManagerFactoryBean gamesHunterFactoryBean = new LocalEntityManagerFactoryBean();
 		gamesHunterFactoryBean.setPersistenceUnitName("gameshunter");
