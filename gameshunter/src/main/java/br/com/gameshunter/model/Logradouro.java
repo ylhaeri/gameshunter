@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Logradouro {
+public class Logradouro implements Cep {
 
 	@Id
 	private Integer id;
@@ -48,6 +48,10 @@ public class Logradouro {
 		this.tipo = tipo;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.gameshunter.model.Cep#getCep()
+	 */
+	@Override
 	public String getCep() {
 		return cep;
 	}

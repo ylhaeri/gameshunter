@@ -25,6 +25,7 @@
 			<div class="form-group">
 				<table id="table-cadastro-usuario" class="table">
 					<c:import url="cadastro.jsp"></c:import>
+					<c:import url="../endereco/cadastro.jsp"></c:import>
 				</table>
 			</div>
 		</form:form>

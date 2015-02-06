@@ -11,8 +11,16 @@ import javax.persistence.ManyToOne;
  * 
  * @author Alex
  */
+/**
+ * @author Myho
+ *
+ */
+/**
+ * @author Myho
+ *
+ */
 @Entity
-public class Cidade {
+public class Cidade implements Cep {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +28,7 @@ public class Cidade {
 	private String nome;
 	@ManyToOne
 	private Estado estado;
+	private String cep;
 
 	/** @return o id */
 	public Integer getId() {
@@ -49,6 +58,19 @@ public class Cidade {
 	/** @param estado */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.gameshunter.model.Cep#getCep()
+	 */
+	@Override
+	public String getCep() {
+		return cep;
+	}
+
+	/** @param cep */
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	/** @return o pais da cidade */
@@ -89,7 +111,6 @@ public class Cidade {
 
 	@Override
 	public String toString() {
-		return "Cidade [id = " + id + ", nome = " + nome + ", estado = "
-				+ estado + "]";
+		return "Cidade [id = " + id + ", nome = " + nome + ", estado = " + estado + "]";
 	}
 }

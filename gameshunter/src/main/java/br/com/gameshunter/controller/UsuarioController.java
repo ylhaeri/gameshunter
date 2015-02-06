@@ -4,9 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("usuario")
 public class UsuarioController {
 
-	@RequestMapping("usuario/novo")
+	@RequestMapping("novo")
 	public String cadastra() {
 		return "usuario/novo";
 	}
