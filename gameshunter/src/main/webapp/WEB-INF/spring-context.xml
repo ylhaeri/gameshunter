@@ -17,9 +17,11 @@
 	http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<mvc:annotation-driven />
-	<context:component-scan base-package="br.com.gameshunter" />
 	<mvc:default-servlet-handler />
+	<context:component-scan base-package="br.com.gameshunter" />
+
 	<task:annotation-driven />
+
 	<tx:annotation-driven transaction-manager="GamesHunterManager" />
 
 	<bean
