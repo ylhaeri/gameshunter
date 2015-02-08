@@ -24,10 +24,10 @@ public class EnderecoController {
 
 		List<Cep> logradouro = manager.createQuery("select l from Logradouro l where l.cep = :cep", Cep.class)
 				.setParameter("cep", cep).getResultList();
-		if (!logradouro.isEmpty()) {
-			System.out.println(logradouro.get(0));
+
+		if (!logradouro.isEmpty())
 			return logradouro.get(0);
-		}
+
 		List<Cep> cidade = manager.createQuery("select c from Cidade c where c.cep = :cep", Cep.class)
 				.setParameter("cep", cep).getResultList();
 		return !cidade.isEmpty() ? cidade.get(0) : null;
