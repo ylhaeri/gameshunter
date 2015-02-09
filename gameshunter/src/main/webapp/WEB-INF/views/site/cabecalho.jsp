@@ -7,10 +7,10 @@
 
 	<div class="login">
 		<form action="#" class="login-form">
-			<div class="text-form-inline-header">Login:</div>
+			<div class="text-form-inline-header">Login</div>
 			<input type="email" placeholder="exemplo@exemplo.com.br" id="email"
 				class="edittext-form">
-			<div class="text-form-inline-header">Senha:</div>
+			<div class="text-form-inline-header">Senha</div>
 			<input type="password" id="senha" class="edittext-form"> <input
 				type="submit" class="button-login" value="Login">
 		</form>

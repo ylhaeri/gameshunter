@@ -18,7 +18,7 @@ body * {
 
 .edittext-form {
 	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+	border-radius: 5px;
 	padding: 2px;
 	border: 0px;
 }
@@ -35,8 +35,9 @@ body * {
 
 .button-login{
 	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border: 1px solid #eeeeee;
+	border-radius: 5px;
+	padding: 1px;
+	border: 1px solid #286090;
 	font-weight: bold;
 	background-color: #286090;
 	color: #eeeeee;
