@@ -1,26 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <tr>
 	<td class="td-label" id="td-nome-label"><label id="nome-label"
 		class="control-label" for="nome-input">Nome</label></td>
 	<td class="td-input" id="td-nome-input"><input id="nome-input"
 		class="form-control" type="text" name="usuario.nome"
-		value="${usuario.nome}"> <br /> </td>
+		value="${usuario.nome}"> <br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-apelido-label"><label
 		id="apelido-label" class="control-label" for="apelido-input">Apelido</label></td>
 	<td class="td-input" id="td-apelido-input"><input
 		id="apelido-input" class="form-control" type="text"
-		name="usuario.apelido" value="${usuario.apelido}"> <br /> </td>
+		name="usuario.apelido" value="${usuario.apelido}"> <br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-email-label"><label id="email-label"
 		class="control-label" for="email-input">E-mail</label></td>
 	<td class="td-input" id="td-email-input"><input id="email-input"
 		class="form-control" type="text" name="usuario.email"
-		value="${usuario.email}"> <br /> </td>
+		value="${usuario.email}"> <br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-senha-label"><label id="senha-label"
@@ -36,7 +37,7 @@
 	<td class="td-input" id="td-confirma-senha-input"><input
 		id="confirma-senha-input" class="form-control" type="password"
 		name="login.senha"><span id="confirma-senha-feed"></span><br />
-		<span id="confirma-senha-describ"></span> </td>
+		<span id="confirma-senha-describ"></span></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-cpf-label"><label id="cpf-label"
@@ -50,7 +51,7 @@
 		id="telefone-label" class="control-label" for="telefone-input">Telefone</label></td>
 	<td class="td-input" id="td-telefone-input"><input
 		id="telefone-input" class="form-control" type="text"
-		name="usuario.telefone" value="${usuario.telefone}"> <br /> </td>
+		name="usuario.telefone" value="${usuario.telefone}"> <br /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-sexo-label"><label id="sexo-label"
@@ -61,7 +62,7 @@
 	<td class="td-label" id="td-data-nascimento-label"><label
 		id="data-nascimento-label" class="control-label"
 		for="dia-nascimento-input">Data de Nascimento</label></td>
-	<td class="td-input" id="td-dia-nascimento-input"> <br /> </td>
-	<td class="td-input" id="td-mes-nascimento-input"> <br /> </td>
-	<td class="td-input" id="td-ano-nascimento-input"> <br /> </td>
+	<td class="td-input" id="td-dia-nascimento-input"></td>
+	<td class="td-input" id="td-mes-nascimento-input"></td>
+	<td class="td-input" id="td-ano-nascimento-input"></td>
 </tr>
