@@ -23,13 +23,12 @@ body * {
 }
 
 .login {
-	position: static;
+	height: 40px;
 	background-color: #222;
 }
 
 .login-form {
-	position: static;
-	padding: 5px;
+	padding: 8px 15px 0;
 }
 
 .button-login {

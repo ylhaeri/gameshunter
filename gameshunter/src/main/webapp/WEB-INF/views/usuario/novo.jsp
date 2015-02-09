@@ -21,10 +21,10 @@
 </head>
 <body>
 	<c:import url="../site/cabecalho.jsp"></c:import>
-	
+
 	<main class="container"> <form:form id="form-cadastro"
 		class="form-inline" method="post" action="cadastrado">
-		
+
 		<div class="form-group">
 			<table id="table-cadastro-usuario" class="table">
 				<c:import url="cadastro.jsp"></c:import>
@@ -33,7 +33,7 @@
 				</tr>
 			</table>
 		</div>
-		
+
 	</form:form></main>
 
 	<c:import url="../site/rodape.jsp"></c:import>

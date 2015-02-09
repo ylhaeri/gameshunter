@@ -6,7 +6,7 @@
 
 
 	<div class="login">
-		<form action="#" class="login-form">
+		<form action="#" class="login-form pull-right">
 			<div class="text-form-inline-header">Login</div>
 			<input type="email" placeholder="exemplo@exemplo.com.br" id="email"
 				class="edittext-form">
