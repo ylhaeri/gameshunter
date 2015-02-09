@@ -11,4 +11,9 @@ public class UsuarioController {
 	public String cadastra() {
 		return "usuario/novo";
 	}
+
+	@RequestMapping("cadastrado")
+	public String cadastrado() {
+		return "usuario/cadastrado";
+	}
 }

@@ -25,8 +25,8 @@
 				<li class="navbar-link active"><a href='<c:url value="/" />'>Home</a></li>
 				<li class="navbar-link"><a
 					href="<c:url value="/usuario/novo" />">Cadastro</a></li>
-				<li class="navbar-link"><a href="<c:url value="#" />">Pedro</a></li>
-				<li class="navbar-link"><a href="<c:url value="#" />">Julio</a></li>
+				<li class="navbar-link"><a href="<c:url value="#" />">Como funciona</a></li>
+				<li class="navbar-link"><a href="<c:url value="#" />">Sobre</a></li>
 			</ul>
 		</div>
 	</nav>

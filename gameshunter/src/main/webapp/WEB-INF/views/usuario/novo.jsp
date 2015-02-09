@@ -8,9 +8,11 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/site/reset.css">
 <link rel="stylesheet" href="../resources/css/bootstrap/bootstrap.css">
-<link rel="stylesheet" href="../resources/css/site/gameshunter-bootstrap.css">
+<link rel="stylesheet"
+	href="../resources/css/site/gameshunter-bootstrap.css">
 <link rel="stylesheet" href="../resources/css/site/gameshunter.css">
-<link rel="stylesheet" href="../resources/css/usuario/cadastrar-usuario.css">
+<link rel="stylesheet"
+	href="../resources/css/usuario/cadastrar-usuario.css">
 <script src="../resources/js/jquery/jquery-2.1.1.js"></script>
 <script src="../resources/js/jquery/jquery-masked-input-1.4.0.js"></script>
 <script src="../resources/js/endereco/cadastrar-endereco.js"></script>
@@ -20,7 +22,7 @@
 <body>
 	<c:import url="../site/cabecalho.jsp"></c:import>
 	<main class="container"> <form:form id="form-cadastro"
-		class="form-inline" method="post">
+		class="form-inline" method="post" action="/usuario/cadastrado">
 		<div class="form-group">
 			<table id="table-cadastro-usuario" class="table">
 				<c:import url="cadastro.jsp"></c:import>
