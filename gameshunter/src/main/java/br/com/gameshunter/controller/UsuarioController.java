@@ -27,8 +27,8 @@ public class UsuarioController {
 		return modelView;
 	}
 
-	@RequestMapping("registrado")
-	public void confirmacao(@ModelAttribute("usuario") Usuario usuario) {
-		System.out.println("a");
+	@RequestMapping("cadastrado")
+	public String cadastrado() {
+		return "usuario/cadastrado";
 	}
 }
