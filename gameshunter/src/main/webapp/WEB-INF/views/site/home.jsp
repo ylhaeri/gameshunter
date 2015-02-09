@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/reset.css">
-<link rel="stylesheet" href="resources/css/bootstrap.css">
-<link rel="stylesheet" href="resources/css/gameshunter-bootstrap.css">
-<link rel="stylesheet" href="resources/css/gameshunter.css">
+<link rel="stylesheet" href="resources/css/site/reset.css">
+<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="resources/css/site/gameshunter-bootstrap.css">
+<link rel="stylesheet" href="resources/css/site/gameshunter.css">
+<link rel="stylesheet" href="resources/css/usuario/cadastrar-usuario.css">
 </head>
 <body>
 	<c:import url="cabecalho.jsp"></c:import>

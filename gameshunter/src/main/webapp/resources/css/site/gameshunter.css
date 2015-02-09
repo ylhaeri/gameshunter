@@ -1,23 +1,59 @@
 @CHARSET "UTF-8";
 
+/* general */
 body * {
 	font-size: 100%;
 }
 
+/* headers */
 .header {
 	width: 100%;
-	position: absolute;
-	top: 0px;
+	position: static;
 }
 
+.text-form-inline-header {
+	color: #eeeeee;
+	display: inline;
+}
+
+.edittext-form {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 2px;
+	border: 0px;
+}
+
+.login {
+	position: static;
+	background-color: #222;
+}
+
+.login-form {
+	position: static;	
+	padding: 5px;
+}
+
+.button-login{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 1px solid #eeeeee;
+	font-weight: bold;
+	background-color: #222;
+	color: #eeeeee;
+}
+
+/* main */
 .container {
 	padding-top: 100px;
 	width: 75%;
 }
 
+/* footers */
 .footer {
 	width: 100%;
 	background-color: #222;
 	color: #eeeeee;
 	padding: 30px 0;
+	position: static;
+	bottom: 0%;
 }
