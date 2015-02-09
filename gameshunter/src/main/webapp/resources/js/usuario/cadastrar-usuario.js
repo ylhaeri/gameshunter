@@ -84,8 +84,8 @@ $("#form-cadastro").submit(function(event) {
 })
 
 function senhaValida() {
-	var senha1 = $("#senha").val()
-	var senha2 = $("#confirmaSenha").val()
+	var senha1 = $("#senha-input").val()
+	var senha2 = $("#confirma-senha-input").val()
 	return senha1.length >= 6 && senha1 == senha2
 }
 

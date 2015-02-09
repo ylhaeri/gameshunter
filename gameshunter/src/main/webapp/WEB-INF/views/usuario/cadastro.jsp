@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <tr>
 	<td class="td-label" id="td-nome-label"><label id="nome-label"
 		class="control-label" for="nome-input">Nome</label></td>
@@ -61,7 +62,7 @@
 	<td class="td-label" id="td-data-nascimento-label"><label
 		id="data-nascimento-label" class="control-label"
 		for="dia-nascimento-input">Data de Nascimento</label></td>
-	<td class="td-input" id="td-dia-nascimento-input"><br /></td>
-	<td class="td-input" id="td-mes-nascimento-input"><br /></td>
-	<td class="td-input" id="td-ano-nascimento-input"><br /></td>
+	<td class="td-input" id="td-dia-nascimento-input"></td>
+	<td class="td-input" id="td-mes-nascimento-input"></td>
+	<td class="td-input" id="td-ano-nascimento-input"></td>
 </tr>
