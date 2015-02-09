@@ -8,7 +8,6 @@ body * {
 /* headers */
 .header {
 	width: 100%;
-	position: static;
 }
 
 .text-form-inline-header {
@@ -29,11 +28,11 @@ body * {
 }
 
 .login-form {
-	position: static;	
+	position: static;
 	padding: 5px;
 }
 
-.button-login{
+.button-login {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border: 1px solid #eeeeee;
@@ -44,8 +43,8 @@ body * {
 
 /* main */
 .container {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	width: 75%;
 }
 
