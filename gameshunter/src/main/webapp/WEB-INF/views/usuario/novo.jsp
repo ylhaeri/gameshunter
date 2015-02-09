@@ -29,6 +29,7 @@
 				<c:import url="../endereco/cadastro.jsp"></c:import>
 			</table>
 		</div>
+		<input type="submit" value="Cadastrar"/>
 	</form:form> </main>
 	<c:import url="../site/rodape.jsp"></c:import>
 </body>
