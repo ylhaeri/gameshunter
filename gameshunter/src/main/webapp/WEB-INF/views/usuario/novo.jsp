@@ -21,20 +21,19 @@
 </head>
 <body>
 	<c:import url="../site/cabecalho.jsp"></c:import>
+	
 	<main class="container"> <form:form id="form-cadastro"
 		class="form-inline" method="post" action="cadastrado">
+		
 		<div class="form-group">
 			<table id="table-cadastro-usuario" class="table">
 				<c:import url="cadastro.jsp"></c:import>
-				<c:import url="../endereco/cadastro.jsp"></c:import>
 				<tr>
-					<td><input type="submit" value="Botão"></td>
+					<td><input type="submit" value="Botão" class="btn btn-primary"></td>
 				</tr>
 			</table>
 		</div>
-
-		<input type="submit" value="Cadastrar" />
-
+		
 	</form:form></main>
 
 	<c:import url="../site/rodape.jsp"></c:import>
