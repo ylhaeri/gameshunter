@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import br.com.gameshunter.util.ConversorLocalDateDB;
+import br.com.gameshunter.conversor.ConversorLocalDateDB;
 
 /**
  * Representa um usuário

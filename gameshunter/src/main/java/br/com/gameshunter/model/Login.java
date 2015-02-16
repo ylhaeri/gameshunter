@@ -33,7 +33,6 @@ public class Login implements Serializable {
 
 	@Deprecated
 	public void setSenha(String senha) {
-		System.out.println(senha == null);
 		this.senha = senha;
 	}
 

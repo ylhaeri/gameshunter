@@ -1,4 +1,4 @@
-package br.com.gameshunter.util;
+package br.com.gameshunter.conversor;
 
 import java.sql.Date;
 import java.time.LocalDate;
