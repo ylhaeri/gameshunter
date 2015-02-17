@@ -18,7 +18,6 @@ public class LoginService {
 	@Transactional
 	public void add(Login login) {
 		usuarioService.add(login.getUsuario());
-		login.geraCod();
 		login.geraSenha();
 		dao.add(login);
 	}

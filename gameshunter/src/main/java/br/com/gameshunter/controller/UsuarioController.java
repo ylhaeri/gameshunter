@@ -10,13 +10,16 @@ import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.gameshunter.model.Login;
 import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 
@@ -49,23 +52,22 @@ public class UsuarioController {
 		ModelAndView mav = new ModelAndView("usuario/novo");
 		mav.addObject("sexoList", Sexo.values());
 		mav.addObject("mesList", meses);
-		
-		System.out.println(session.getAttribute("usuario") == null);
 
 		return mav;
 	}
 
 	@RequestMapping("cadastrado")
-	public ModelAndView cadastrado(Usuario usuario, Login login) {
+	public ModelAndView cadastrado(@Valid Usuario usuario, BindingResult result) {
 		ModelAndView mav = new ModelAndView("usuario/cadastrado");
-		System.out.println(usuario.getNome());
-		System.out.println(login.getSenha());
 		System.out.println(usuario.getSexo());
+		List<ObjectError> erros = result.getAllErrors();
+		erros.forEach(e -> System.out.println(e.getDefaultMessage()));
+
 		return mav;
 	}
-	
+
 	@RequestMapping("login")
-	public String login(@RequestParam("email") String email, @RequestParam("senha")String senha) {
+	public String login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
 		System.out.println(email);
 		System.out.println(senha);
 		return "site/home";

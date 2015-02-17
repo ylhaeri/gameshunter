@@ -11,6 +11,11 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.gameshunter.conversor.ConversorLocalDateDB;
 
@@ -29,17 +34,27 @@ public class Usuario implements Serializable {
 	}
 
 	@Id
+	@Email
+	@NotEmpty
 	private String email;
+	@Size(min = 7, max = 50)
+	@NotEmpty
 	private String nome;
+	@NotEmpty
 	private String apelido;
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
+	@NotEmpty
 	private String cpf;
+	@NotNull
 	@Convert(converter = ConversorLocalDateDB.class)
 	private LocalDate dataNascimento;
+	@NotEmpty
+	@Size(min = 13, max = 13)
+	private String telefone;
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
-	private String telefone;
 
 	/** @return O e-mail */
 	public String getEmail() {
@@ -137,8 +152,7 @@ public class Usuario implements Serializable {
 	 * @return verdadeiro caso possa ser adicionado, falso caso não.
 	 */
 	private boolean podeAdicionar(Endereco endereco) {
-		return enderecos.isEmpty()
-				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
+		return enderecos.isEmpty() || (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
@@ -151,8 +165,7 @@ public class Usuario implements Serializable {
 	public Endereco pegaEndereco(Integer numero) {
 
 		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
+			throw new IllegalArgumentException("Informe o valor real do elemento");
 		return enderecos.get(numero - 1);
 	}
 
@@ -164,8 +177,7 @@ public class Usuario implements Serializable {
 	 */
 	public void removeEndereco(Integer numero) {
 		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
+			throw new IllegalArgumentException("Informe o valor real do elemento");
 		enderecos.remove(numero - 1);
 	}
 
@@ -197,9 +209,8 @@ public class Usuario implements Serializable {
 	 * @param enderecos
 	 * @param telefone
 	 */
-	public Usuario(String email, String nome, String apelido, Sexo sexo,
-			String cpf, LocalDate dataNascimento, List<Endereco> enderecos,
-			String telefone) {
+	public Usuario(String email, String nome, String apelido, Sexo sexo, String cpf, LocalDate dataNascimento,
+			List<Endereco> enderecos, String telefone) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
@@ -216,15 +227,12 @@ public class Usuario implements Serializable {
 		int result = 1;
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result
-				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((enderecos == null) ? 0 : enderecos.hashCode());
+		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
-		result = prime * result
-				+ ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 

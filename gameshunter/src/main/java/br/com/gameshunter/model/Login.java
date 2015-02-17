@@ -23,17 +23,14 @@ public class Login implements Serializable {
 	@OneToOne
 	private Usuario usuario;
 	private String senha;
-	private String code;
 	private String salt;
 	private boolean confirmado = false;
 
-	public String getSenha() {
-		return senha;
-	}
-
-	@Deprecated
-	public void setSenha(String senha) {
-		this.senha = senha;
+	/** Gera a senha do usuário. */
+	public void geraSenha() {
+		this.salt = RandomStringUtils.randomAscii(20);
+		String hash = HashFactory.sha384(this.senha);
+		this.senha = HashFactory.sha512(hash + this.salt);
 	}
 
 	public Usuario getUsuario() {
@@ -44,26 +41,40 @@ public class Login implements Serializable {
 		this.usuario = usuario;
 	}
 
-	/**
-	 * Gera a senha do usuário.
-	 * 
-	 * @param senha
-	 */
-	public void geraSenha() {
-		this.salt = RandomStringUtils.randomAscii(20);
-		String hash = HashFactory.sha384(this.senha);
-		this.senha = HashFactory.sha512(hash + this.salt);
+	public String getSenha() {
+		return senha;
 	}
 
-	/** Gera o código do usuário */
-	public void geraCod() {
-		this.code = HashFactory.sha384(this.usuario.getNome() + this.usuario.getEmail());
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
+	}
+
+	@Override
+	public String toString() {
+		return "LogIn [usuario = " + usuario + ", senha = " + senha + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
@@ -78,6 +89,11 @@ public class Login implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Login other = (Login) obj;
+		if (salt == null) {
+			if (other.salt != null)
+				return false;
+		} else if (!salt.equals(other.salt))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -89,34 +105,5 @@ public class Login implements Serializable {
 		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "LogIn [usuario = " + usuario + ", senha = " + senha + "]";
-	}
-
-	public boolean isConfirmado() {
-		return confirmado;
-	}
-
-	public void setConfirmado(boolean confirmado) {
-		this.confirmado = confirmado;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 }

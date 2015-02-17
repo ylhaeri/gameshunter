@@ -34,8 +34,9 @@
 				<table id="table-cadastro-usuario" class="table">
 					<c:import url="cadastro.jsp"></c:import>
 					<tr>
+						<td></td>
 						<td><input type="submit" value="Botão"
-							class="btn btn-primary"></td>
+							class="btn btn-primary btn-block"></td>
 					</tr>
 				</table>
 			</div>
