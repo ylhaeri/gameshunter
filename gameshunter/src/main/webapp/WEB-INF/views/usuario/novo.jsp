@@ -23,7 +23,7 @@
 	<c:import url="../site/cabecalho.jsp"></c:import>
 
 	<main class="container"> <form:form id="form-cadastro"
-		class="form-inline" method="post" action="cadastrado">
+		class="form-inline" method="post" action="cadastrado" commandName="teste">
 
 		<div class="form-group">
 			<table id="table-cadastro-usuario" class="table">
