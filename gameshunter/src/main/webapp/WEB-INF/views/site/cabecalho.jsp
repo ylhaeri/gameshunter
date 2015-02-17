@@ -6,13 +6,14 @@
 
 
 	<div class="login">
-		<form action="#" class="login-form pull-right">
+		<form action="<c:url value="/usuario/login"></c:url>" method="post"
+			class="login-form pull-right">
 			<div class="text-form-inline-header">Login</div>
-			<input type="email" placeholder="exemplo@exemplo.com.br" id="email"
-				class="edittext-form">
+			<input type="email" placeholder="exemplo@exemplo.com.br"
+				id="usuario.email" class="edittext-form" name="email">
 			<div class="text-form-inline-header">Senha</div>
-			<input type="password" id="senha" class="edittext-form"> <input
-				type="submit" class="button-login" value="Login">
+			<input type="password" id="senha" class="edittext-form" name="senha">
+			<input type="submit" class="button-login" value="Login">
 		</form>
 	</div>
 

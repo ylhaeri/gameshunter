@@ -4,9 +4,9 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,11 +18,10 @@ import br.com.gameshunter.schedule.Arara;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "br.com.gameshunter" })
 public class AppConfig {
 
 	@Bean(initMethod = "init")
-	@Scope("prototype")
+	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public Usuario usuario() {
 		return new Usuario();
 	}

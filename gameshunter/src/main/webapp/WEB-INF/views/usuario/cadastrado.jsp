@@ -5,24 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/site/reset.css">
-<link rel="stylesheet" href="../resources/css/bootstrap/bootstrap.css">
 <link rel="stylesheet"
-	href="../resources/css/site/gameshunter-bootstrap.css">
-<link rel="stylesheet" href="../resources/css/site/gameshunter.css">
+	href="<c:url value="/resources/css/reset.css"></c:url>">
 <link rel="stylesheet"
-	href="../resources/css/usuario/cadastrar-usuario.css">
-<title>Cadastro Efetuado</title>
+	href="<c:url value="/resources/css/bootstrap/bootstrap.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/site-bootstrap.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/site.css"></c:url>">
+<title>Games Hunter</title>
 </head>
 <body>
 
-	<c:import url="../site/cabecalho.jsp"></c:import>
+	<div class="wrapper">
+		<c:import url="../site/cabecalho.jsp"></c:import>
 
-	<main class="container">
-	<h1>Bem vindo</h1>
-	<p>Enviamos um email para ${usuario.email} ativar o seu cadastro.
-		Verifique sua caixa de entrada.
-	</main>
+		<main class="container">
+		<h1>Bem vindo</h1>
+		<p>Enviamos um email para ${usuario.email} ativar o seu cadastro.
+			Verifique sua caixa de entrada.
+		</main>
+	</div>
 
 	<c:import url="../site/rodape.jsp"></c:import>
 </body>

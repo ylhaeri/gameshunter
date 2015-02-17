@@ -1,32 +1,75 @@
 package br.com.gameshunter.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gameshunter.model.Sexo;
+import br.com.gameshunter.model.Usuario;
 
 @Controller
 @RequestMapping("usuario")
 public class UsuarioController {
 
-	@RequestMapping("novo")
-	public ModelAndView cadastra() {
+	private static List<String> meses = new ArrayList<>();
 
-		ModelAndView modelView = new ModelAndView("usuario/novo");
-		Map<String, Sexo> mapa = new HashMap<>();
-		for (Sexo sexo : Sexo.values()) {
-			mapa.put(sexo.name(), sexo);
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+
+		Properties prop = new Properties();
+		prop.load(new FileInputStream("teste.cfg"));
+
+		String property = prop.getProperty("teste");
+		System.out.println(property);
+	}
+
+	static {
+		String[] month = new DateFormatSymbols(Locale.getDefault()).getMonths();
+		for (String string : month) {
+			if (string.equals(month[month.length - 1]))
+				continue;
+			meses.add(string);
 		}
-		modelView.addObject("sexoList", mapa);
-		return modelView;
+	}
+
+	@RequestMapping("novo")
+	public ModelAndView novo(HttpSession session) {
+		ModelAndView mav = new ModelAndView("usuario/novo");
+		mav.addObject("sexoList", Sexo.values());
+		mav.addObject("mesList", meses);
+
+		return mav;
 	}
 
 	@RequestMapping("cadastrado")
-	public String cadastrado() {
-		return "usuario/cadastrado";
+	public ModelAndView cadastrado(@Valid Usuario usuario, BindingResult result) {
+		ModelAndView mav = new ModelAndView("usuario/cadastrado");
+		System.out.println(usuario.getSexo());
+		List<ObjectError> erros = result.getAllErrors();
+		erros.forEach(e -> System.out.println(e.getDefaultMessage()));
+
+		return mav;
+	}
+
+	@RequestMapping("login")
+	public String login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
+		System.out.println(email);
+		System.out.println(senha);
+		return "site/home";
 	}
 }

@@ -5,40 +5,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/site/reset.css">
-<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<title>Games Hunter</title>
 <link rel="stylesheet"
-	href="resources/css/site/gameshunter-bootstrap.css">
-<link rel="stylesheet" href="resources/css/site/gameshunter.css">
+	href="<c:url value="/resources/css/reset.css"></c:url>">
 <link rel="stylesheet"
-	href="resources/css/usuario/cadastrar-usuario.css">
-<link rel="stylesheet" href="resources/css/site/home.css">
+	href="<c:url value="/resources/css/bootstrap/bootstrap.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/site-bootstrap.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/site.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/home.css"></c:url>">
 </head>
 <body>
-	<c:import url="cabecalho.jsp"></c:import>
+	<div class="wrapper">
+		<c:import url="cabecalho.jsp"></c:import>
 
-	<main class="container">
-	<div>
-		<h1>Em busca de novos jogos? Cadastre-se e confira!</h1>
+		<main class="container">
+		<div>
+			<h1>Em busca de novos jogos? Cadastre-se e confira!</h1>
 
-		<a href="<c:url value="/usuario/cadastrado" />">Cadastrado-teste</a>
+			<a href="<c:url value="/usuario/cadastrado" />">Cadastrado-teste</a>
 
-		<p>Coonteúdo para pessoas novas... (CONTEÚDO APENAS PARA PREENCHER
-			O ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM
-			BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
+			<p>Coonteúdo para pessoas novas... (CONTEÚDO APENAS PARA
+				PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO
+				EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
 
-		<h2>Novidades</h2>
-		<p>Conteúdo de novidades... (CONTEÚDO APENAS PARA PREENCHER O
-			ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM
-			BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO
-			APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
+			<h2>Novidades</h2>
+			<p>Conteúdo de novidades... (CONTEÚDO APENAS PARA PREENCHER O
+				ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM
+				BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO
+				APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
 
-		<h2>Precisamos definir o restantes</h2>
+			<h2>Precisamos definir o restantes</h2>
 
+		</div>
+
+
+		</main>
 	</div>
-
-
-	</main>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 </html>

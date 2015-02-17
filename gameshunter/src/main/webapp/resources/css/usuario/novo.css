@@ -7,8 +7,3 @@
 .table>tbody>tr>.td-label {
 	padding-top: 13px;
 }
-
-#td-mes-nascimento-input, #td-ano-nascimento-input {
-	position: relative;
-	right: 125px;
-}
