@@ -26,6 +26,7 @@
 	<div class="wrapper">
 		<c:import url="../site/cabecalho.jsp"></c:import>
 
+
 		<main class="container">
 		<form id="form-cadastro" class="form-inline" method="post"
 			action="cadastrado">
