@@ -31,15 +31,35 @@
 			action="cadastrado">
 
 			<div class="form-group">
+				<h1>Cadastre-se</h1>
 				<table id="table-cadastro-usuario" class="table">
 					<c:import url="cadastro.jsp"></c:import>
 					<tr>
+						<td class="td-label" id="td-novidades-label"><label
+							class="control-label" id="novidades-label">Receber
+								novidades por e-mail</label></td>
+						<td class="td-input" id="td-novidades-input"><label
+							class="radio-inline" id="novidades-label-sim"><input
+								id="novidades-input-sim" type="radio">Sim</label> <label
+							class="radio-inline" id="novidades-label-nao"><input
+								id="novidades-input-nao" type="radio">Não</label></td>
+					</tr>
+					<tr>
+						<td class="td-label" id="td-termos-label"><label
+							class="control-label" id="termos-label">Termos blabla</label></td>
+						<td class="td-input" id="td-termos-input"><div
+								class="checkbox">
+								<label id="termos-label-check"><input id="termos-input"
+									type="checkbox"> Blabla</label>
+							</div></td>
+					</tr>
+					<tr>
 						<td></td>
-						<td><input type="submit" value="Botão"
-							class="btn btn-primary btn-block"></td>
+						<td><input type="submit" value="Enviar"
+							class="btn btn-primary"></td>
 					</tr>
 				</table>
-			</div>
+				<div class="checkbox"></div>
 		</form>
 		</main>
 	</div>

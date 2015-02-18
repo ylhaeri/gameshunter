@@ -1,4 +1,4 @@
-package br.com.gameshunter.conversor;
+package br.com.gameshunter.converter;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class ConversorLocalDateDB implements
+public class LocalDateDBConverter implements
 		AttributeConverter<LocalDate, Date> {
 
 	@Override

@@ -11,7 +11,6 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -58,11 +57,12 @@ public class UsuarioController {
 
 	@RequestMapping("cadastrado")
 	public ModelAndView cadastrado(@Valid Usuario usuario, BindingResult result) {
-		ModelAndView mav = new ModelAndView("usuario/cadastrado");
-		System.out.println(usuario.getSexo());
-		List<ObjectError> erros = result.getAllErrors();
-		erros.forEach(e -> System.out.println(e.getDefaultMessage()));
-
+		ModelAndView mav;
+		if (result.hasErrors()) {
+			mav = new ModelAndView("usuario/novo", "sexoList", Sexo.values());
+			return mav;
+		}
+		mav = new ModelAndView("usuario/cadastrado");
 		return mav;
 	}
 

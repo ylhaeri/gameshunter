@@ -16,8 +16,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import br.com.gameshunter.conversor.ConversorLocalDateDB;
+import br.com.gameshunter.converter.LocalDateDBConverter;
 
 /**
  * Representa um usuário
@@ -35,24 +36,30 @@ public class Usuario implements Serializable {
 
 	@Id
 	@Email
-	@NotEmpty
+	@NotEmpty(message = "{user.email.empty}")
 	private String email;
-	@Size(min = 7, max = 50)
 	@NotEmpty
+	@Size(min = 7, max = 50)
 	private String nome;
 	@NotEmpty
+	@Size(min = 4, max = 20)
 	private String apelido;
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 	@NotEmpty
+	@Size(min = 14, max = 14)
 	private String cpf;
 	@NotNull
-	@Convert(converter = ConversorLocalDateDB.class)
+	@Convert(converter = LocalDateDBConverter.class)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
 	@NotEmpty
 	@Size(min = 13, max = 13)
 	private String telefone;
+	@NotEmpty
+	@Size(min = 13, max = 14)
+	private String celular;
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
 
@@ -114,6 +121,14 @@ public class Usuario implements Serializable {
 	/** @param telefone */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	/** @return Lista de endereços */

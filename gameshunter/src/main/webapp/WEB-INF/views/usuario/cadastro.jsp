@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <tr>
 	<td class="td-label" id="td-nome-label"><label id="nome-label"
 		class="control-label" for="nome-input">Nome completo</label></td>
@@ -12,12 +12,13 @@
 <tr>
 	<td class="td-label" id="td-sexo-label"><label id="sexo-label"
 		class="control-label" for="sexo-input">Sexo</label></td>
-	<td><select name="sexo">
-			<option value="---" selected="selected">Selecione</option>
+	<td><select id="sexo-input" name="sexo">
+			<option selected="selected">Selecione</option>
 			<c:forEach items="${sexoList}" var="sexo">
 				<option>${sexo}</option>
 			</c:forEach>
-	</select></td>
+	</select>
+	<form:errors path="usuario.sexo"></form:errors></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-cpf-label"><label id="cpf-label"
@@ -46,14 +47,15 @@
 		for="dia-nascimento-input">Data de nascimento</label></td>
 	<td class="td-input" id="td-dia-nascimento-input"><input
 		id="nascimento-input" class="form-control" type="text"
-		name="nascimento"></td>
+		name="dataNascimento"></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-email-label"><label id="email-label"
 		class="control-label" for="email-input">E-mail</label></td>
 	<td class="td-input" id="td-email-input"><input id="email-input"
 		class="form-control" type="text" name="email" value="${usuario.email}">
-		<br /></td>
+		<br />
+	<form:errors path="usuario.email"></form:errors></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-apelido-label"><label
@@ -77,10 +79,4 @@
 		id="confirma-senha-input" class="form-control" type="password"
 		name="senha"><span id="confirma-senha-feed"></span><br /> <span
 		id="confirma-senha-describ"></span></td>
-</tr>
-<tr>
-	<td><label class="control-label">Receber novidades por
-			e-mail</label></td>
-	<td><label class="radio-inline"><input type="radio">Sim</label>
-		<label class="radio-inline"><input type="radio">Não</label></td>
 </tr>
