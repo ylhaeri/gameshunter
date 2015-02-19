@@ -28,7 +28,8 @@ public class UsuarioController {
 
 	private static List<String> meses = new ArrayList<>();
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException,
+			IOException {
 
 		Properties prop = new Properties();
 		prop.load(new FileInputStream("teste.cfg"));
@@ -67,9 +68,17 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("login")
-	public String login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
+	public String login(@RequestParam("email") String email,
+			@RequestParam("senha") String senha) {
 		System.out.println(email);
 		System.out.println(senha);
 		return "site/home";
+	}
+
+	@RequestMapping("perfil")
+	public ModelAndView perfil() {
+		ModelAndView mav;
+		mav = new ModelAndView("usuario/perfil");
+		return mav;
 	}
 }

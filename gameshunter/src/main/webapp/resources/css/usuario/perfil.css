@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+.profile {
+	border: 1px solid #286090;
+}
+
+.profile-banner{
+	background-color: #286090;
+	color: white;
+}
+
+.profile-banner h1{
+	float: left;
+}
+
+.profile-banner img{
+	width: 120px;
+	padding: 10px;
+}
+
+.profile-table {
+	float: left;
+}
+
+.profile-table td {
+	padding: 10px 50px 10px 30px;
+	font-size: 120%;
+	text-align: right;
+	font-weight: bold;
+}
+
+.profile-table-information td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 120%;
+	text-align: left;
+}
