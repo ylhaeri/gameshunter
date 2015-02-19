@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.gameshunter.dao.UsuarioDAO;
 import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 
@@ -78,6 +79,7 @@ public class UsuarioController {
 	@RequestMapping("perfil")
 	public ModelAndView perfil() {
 		ModelAndView mav;
+		//Usuario usuario = new UsuarioDAO().find();
 		mav = new ModelAndView("usuario/perfil");
 		return mav;
 	}

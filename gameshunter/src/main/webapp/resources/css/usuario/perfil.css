@@ -1,21 +1,33 @@
 @CHARSET "UTF-8";
 
 .profile {
+	padding: 10px;
 	border: 1px solid #286090;
+	height: 300px;
 }
 
 .profile-banner{
 	background-color: #286090;
+	padding: 30px 30px 30px 30px;
+	height: 180px;
+	width: 100%;
 	color: white;
 }
 
-.profile-banner h1{
+.profile-banner-photo {
+	width: 160px;
+	height: auto;
 	float: left;
 }
 
-.profile-banner img{
+.profile-banner-photo img {
 	width: 120px;
+	height: 120px;	
 	padding: 10px;
+}
+
+.profile-banner-content {
+	float: left;	
 }
 
 .profile-table {
@@ -23,7 +35,7 @@
 }
 
 .profile-table td {
-	padding: 10px 50px 10px 30px;
+	padding: 10px 40px 10px 30px;
 	font-size: 120%;
 	text-align: right;
 	font-weight: bold;

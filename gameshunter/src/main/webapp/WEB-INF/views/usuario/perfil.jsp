@@ -27,22 +27,26 @@
 		<c:import url="../site/cabecalho.jsp"></c:import>
 		<main class="container">
 
-		<div class="profile">
 
-			<div class="profile-banner">
-				<h1>Perfil</h1>
+		<div class="profile-banner">
+
+			<div class="profile-banner-photo">
 				<img alt="foto-padrão-do-perfil"
 					src="<c:url value="/resources/img/photo-default.png"></c:url>"
 					class="img-circle" />
 			</div>
 
+			<div class="profile-banner-content">
+				<h1>Apelido</h1>
+			</div>
+
+		</div>
+
+		<div class="profile">
 
 			<table class="profile-table">
 				<tr>
 					<td>Nome</td>
-				</tr>
-				<tr>
-					<td>Apelido</td>
 				</tr>
 				<tr>
 					<td>Email</td>
@@ -56,32 +60,29 @@
 				<tr>
 					<td>Telefone</td>
 				</tr>
-					<td>Celular</td>
+				<td>Celular</td>
 				<tr>
 				</tr>
 			</table>
 
 			<table class="profile-table-information">
 				<tr>
-					<td>Informações Nome</td>
+					<td>${usuario.nome}</td>
 				</tr>
 				<tr>
-					<td>Informações Apelido</td>
+					<td>${usuario.email}</td>
 				</tr>
 				<tr>
-					<td>Informações Email</td>
+					<td>${usuario.sexo}</td>
 				</tr>
 				<tr>
-					<td>Informações Sexo</td>
+					<td>${usuario.dataNascimento}</td>
 				</tr>
 				<tr>
-					<td>Informações Data de Nascimento</td>
+					<td>${usuario.telefone}</td>
 				</tr>
 				<tr>
-					<td>Informações Telefone</td>
-				</tr>
-				<tr>
-					<td>Informações Celular</td>
+					<td>${usuario.celular}</td>
 				</tr>
 			</table>
 		</div>
