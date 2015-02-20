@@ -1,58 +1,40 @@
 package br.com.gameshunter.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.gameshunter.dao.UsuarioDAO;
 import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.service.UsuarioService;
 
 @Controller
 @RequestMapping("usuario")
 public class UsuarioController {
 
-	private static List<String> meses = new ArrayList<>();
+	private UsuarioService service;
 
-	public static void main(String[] args) throws FileNotFoundException,
-			IOException {
-
-		Properties prop = new Properties();
-		prop.load(new FileInputStream("teste.cfg"));
-
-		String property = prop.getProperty("teste");
-		System.out.println(property);
-	}
-
-	static {
-		String[] month = new DateFormatSymbols(Locale.getDefault()).getMonths();
-		for (String string : month) {
-			if (string.equals(month[month.length - 1]))
-				continue;
-			meses.add(string);
-		}
+	/*
+	 * static { String[] month = new
+	 * DateFormatSymbols(Locale.getDefault()).getMonths(); for (String string :
+	 * month) { if (string.equals(month[month.length - 1])) continue;
+	 * meses.add(string); } }
+	 */
+	@Autowired
+	public UsuarioController(UsuarioService service) {
+		this.service = service;
 	}
 
 	@RequestMapping("novo")
 	public ModelAndView novo(HttpSession session) {
 		ModelAndView mav = new ModelAndView("usuario/novo");
-		mav.addObject("sexoList", Sexo.values());
-		mav.addObject("mesList", meses);
+		mav.addObject("usuario", new Usuario());
 
 		return mav;
 	}
@@ -64,13 +46,13 @@ public class UsuarioController {
 			mav = new ModelAndView("usuario/novo", "sexoList", Sexo.values());
 			return mav;
 		}
+		service.add(usuario);
 		mav = new ModelAndView("usuario/cadastrado");
 		return mav;
 	}
 
 	@RequestMapping("login")
-	public String login(@RequestParam("email") String email,
-			@RequestParam("senha") String senha) {
+	public String login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
 		System.out.println(email);
 		System.out.println(senha);
 		return "site/home";
@@ -79,7 +61,7 @@ public class UsuarioController {
 	@RequestMapping("perfil")
 	public ModelAndView perfil() {
 		ModelAndView mav;
-		//Usuario usuario = new UsuarioDAO().find();
+		// Usuario usuario = new UsuarioDAO().find();
 		mav = new ModelAndView("usuario/perfil");
 		return mav;
 	}

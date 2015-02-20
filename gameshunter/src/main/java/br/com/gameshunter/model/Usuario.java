@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.caelum.stella.bean.validation.CPF;
 import br.com.gameshunter.converter.LocalDateDBConverter;
 
 /**
@@ -38,30 +39,45 @@ public class Usuario implements Serializable {
 	@Email
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
-	@NotEmpty
-	@Size(min = 7, max = 50)
+	@NotEmpty(message = "{user.name.empty}")
+	@Size(min = 3, max = 50, message = "{user.name.size}")
 	private String nome;
-	@NotEmpty
-	@Size(min = 4, max = 20)
+	@NotEmpty(message = "{user.nickname.empty}")
+	@Size(min = 4, max = 20, message = "{user.nickname.size}")
 	private String apelido;
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
-	@NotEmpty
-	@Size(min = 14, max = 14)
+	@NotEmpty(message = "{user.cpf.empty}")
+	@Size(min = 14, max = 14, message = "{user.cpf.size}")
+	@CPF
 	private String cpf;
-	@NotNull
+	@NotNull(message = "{user.birth.null}")
 	@Convert(converter = LocalDateDBConverter.class)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
-	@NotEmpty
-	@Size(min = 13, max = 13)
+	@NotEmpty(message = "{user.phone.empty}")
+	@Size(min = 13, max = 13, message = "{user.phone.size}")
 	private String telefone;
-	@NotEmpty
-	@Size(min = 13, max = 14)
+	// FIXME Devia ser opcional, mas do jeito que tá vai dar problema.
+	@NotEmpty(message = "{user.mobile.empty}")
+	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String celular;
 	@OneToMany
 	private List<Endereco> enderecos = new ArrayList<>(3);
+	// Senha não deve ficar aqui, medida temporária
+	// FIXME
+	@NotEmpty(message = "{user.password.empty}")
+	@Size(min = 6, max = 50, message = "{user.password.size}")
+	private String senha;
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	/** @return O e-mail */
 	public String getEmail() {
