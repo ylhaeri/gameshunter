@@ -61,8 +61,13 @@ public class UsuarioController {
 	@RequestMapping("perfil")
 	public ModelAndView perfil() {
 		ModelAndView mav;
-		// Usuario usuario = new UsuarioDAO().find();
-		mav = new ModelAndView("usuario/perfil");
+		Usuario usuario = new Usuario();
+		try{
+		usuario = new UsuarioService().find("alexfelipevieira@gmail.com");
+		} catch(java.lang.NullPointerException e){
+			System.out.println("hu3");
+		}
+		mav = new ModelAndView("usuario/perfil","teste", usuario);
 		return mav;
 	}
 }
