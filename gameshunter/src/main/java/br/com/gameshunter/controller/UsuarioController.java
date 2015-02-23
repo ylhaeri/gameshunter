@@ -1,16 +1,22 @@
 package br.com.gameshunter.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.gameshunter.model.Sexo;
 import br.com.gameshunter.model.Usuario;
 import br.com.gameshunter.service.UsuarioService;
 
@@ -20,54 +26,72 @@ public class UsuarioController {
 
 	private UsuarioService service;
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
+
 	/*
 	 * static { String[] month = new
 	 * DateFormatSymbols(Locale.getDefault()).getMonths(); for (String string :
 	 * month) { if (string.equals(month[month.length - 1])) continue;
 	 * meses.add(string); } }
 	 */
+
 	@Autowired
 	public UsuarioController(UsuarioService service) {
 		this.service = service;
 	}
 
-	@RequestMapping("novo")
-	public ModelAndView novo(HttpSession session) {
-		ModelAndView mav = new ModelAndView("usuario/novo");
+	@RequestMapping(value = "novo", method = RequestMethod.GET)
+	public ModelAndView novo() {
+		ModelAndView mav = new ModelAndView("/usuario/novo");
 		mav.addObject("usuario", new Usuario());
 
 		return mav;
 	}
 
-	@RequestMapping("cadastrado")
-	public ModelAndView cadastrado(@Valid Usuario usuario, BindingResult result) {
-		ModelAndView mav;
+	@RequestMapping(value = "cadastrado", method = RequestMethod.POST)
+	public String cadastrado(@Valid Usuario usuario, BindingResult result) {
+
 		if (result.hasErrors()) {
-			mav = new ModelAndView("usuario/novo", "sexoList", Sexo.values());
-			return mav;
+
+			usuario.setConcordaTermos(false);
+			return "/usuario/novo";
 		}
 		service.add(usuario);
-		mav = new ModelAndView("usuario/cadastrado");
-		return mav;
+
+		return "/usuario/cadastrado";
 	}
 
-	@RequestMapping("login")
-	public String login(@RequestParam("email") String email, @RequestParam("senha") String senha) {
-		System.out.println(email);
-		System.out.println(senha);
-		return "site/home";
-	}
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public @ResponseBody boolean login(@RequestParam("email") String email, @RequestParam("senha") String senha,
+			HttpSession session) {
 
-	@RequestMapping("perfil")
-	public ModelAndView perfil() {
-		ModelAndView mav;
-		Usuario usuario = new Usuario();
-		try{
-		usuario = new UsuarioService().find("alexfelipevieira@gmail.com");
-		} catch(java.lang.NullPointerException e){
-			System.out.println("hu3");
+		Usuario usuario = service.find(email, senha);
+		if (usuario != null) {
+			session.setAttribute("usuario", usuario);
+			return true;
 		}
-		mav = new ModelAndView("usuario/perfil","teste", usuario);
-		return mav;
+		return false;
+	}
+
+	@RequestMapping(value = "perfil", method = RequestMethod.GET)
+	public String perfil(HttpSession session) {
+		if (session.getAttribute("usuario") == null)
+			return "redirect:/";
+
+		return "/usuario/perfil";
+	}
+
+	@RequestMapping(value = "logout", method = RequestMethod.POST)
+	public @ResponseBody void logout(HttpSession session) {
+
+		session.removeAttribute("usuario");
+	}
+
+	@RequestMapping(value = "teste")
+	public @ResponseBody byte[] teste() throws IOException {
+		return new Usuario().getImagem();
 	}
 }

@@ -15,7 +15,7 @@ public class UsuarioServiceTest {
 
 	@Before
 	public void setUp() {
-		uService = new UsuarioService();
+		uService = new UsuarioService(null, null);
 		cadastraUmUsuarioExemplo();
 	}
 
@@ -33,7 +33,7 @@ public class UsuarioServiceTest {
 
 	@Test
 	public void deveRetornarUmUsuarioDoBanco() {
-		Usuario recuperado = uService.find("alexfelipevieira@gmail.com");
+		Usuario recuperado = uService.find("alexfelipevieira@gmail.com", "senha");
 		assertThat(usuario, equalTo(recuperado));
 	}
 }

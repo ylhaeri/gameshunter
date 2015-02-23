@@ -6,7 +6,7 @@
 	height: 300px;
 }
 
-.profile-banner{
+.profile-banner {
 	background-color: #286090;
 	padding: 30px 30px 30px 30px;
 	height: 180px;
@@ -14,20 +14,14 @@
 	color: white;
 }
 
-.profile-banner-photo {
-	width: 160px;
+#usuario-foto-label {
+	max-width: 120px;
 	height: auto;
 	float: left;
 }
 
-.profile-banner-photo img {
-	width: 120px;
-	height: 120px;	
-	padding: 10px;
-}
-
 .profile-banner-content {
-	float: left;	
+	float: left;
 }
 
 .profile-table {
@@ -41,7 +35,7 @@
 	font-weight: bold;
 }
 
-.profile-table-information td{
+.profile-table-information td {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	font-size: 120%;

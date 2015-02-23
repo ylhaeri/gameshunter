@@ -37,7 +37,7 @@ body>.wrapper {
 }
 
 .login {
-	height: 40px;
+	min-height: 55px;
 	background-color: #222;
 }
 

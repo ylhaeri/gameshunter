@@ -1,16 +1,24 @@
 package br.com.gameshunter.model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -39,6 +47,9 @@ public class Usuario implements Serializable {
 	@Email
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
+	@NotEmpty(message = "{user.password.empty}")
+	@Size(min = 6, max = 50, message = "{user.password.size}")
+	private String senha;
 	@NotEmpty(message = "{user.name.empty}")
 	@Size(min = 3, max = 50, message = "{user.name.size}")
 	private String nome;
@@ -59,17 +70,30 @@ public class Usuario implements Serializable {
 	@NotEmpty(message = "{user.phone.empty}")
 	@Size(min = 13, max = 13, message = "{user.phone.size}")
 	private String telefone;
-	// FIXME Devia ser opcional, mas do jeito que tá vai dar problema.
-	@NotEmpty(message = "{user.mobile.empty}")
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String celular;
-	@OneToMany
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
 	private List<Endereco> enderecos = new ArrayList<>(3);
-	// Senha não deve ficar aqui, medida temporária
-	// FIXME
-	@NotEmpty(message = "{user.password.empty}")
-	@Size(min = 6, max = 50, message = "{user.password.size}")
-	private String senha;
+	private boolean novidadesEmail = true;
+	@AssertTrue(message = "{user.terms_of_service.agreement}")
+	private boolean concordaTermos;
+
+	public static void simNaoValues() {
+		List<Boolean> asList = Arrays.asList(true, false);
+		System.out.println(asList);
+	}
+
+	public static void main(String[] args) {
+		Usuario.simNaoValues();
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getSenha() {
 		return senha;
@@ -79,62 +103,50 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	/** @return O e-mail */
-	public String getEmail() {
-		return email;
-	}
-
-	/** @param email */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/** @return O nome */
 	public String getNome() {
 		return nome;
 	}
 
-	/** @param nome */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/** @return O apelido */
 	public String getApelido() {
 		return apelido;
 	}
 
-	/** @param apelido */
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
 
-	/** @return o CPF */
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
 
-	/** @param cpf */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	/** @return A data de nascimento */
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	/** @param dataNascimento */
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	/** @return O telefone */
 	public String getTelefone() {
 		return telefone;
 	}
 
-	/** @param telefone */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -147,19 +159,49 @@ public class Usuario implements Serializable {
 		this.celular = celular;
 	}
 
-	/** @return Lista de endereços */
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	/** @return O sexo */
-	public Sexo getSexo() {
-		return sexo;
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
-	/** @param sexo */
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
+	public boolean isNovidadesEmail() {
+		return novidadesEmail;
+	}
+
+	public void setNovidadesEmail(boolean novidadesEmail) {
+		this.novidadesEmail = novidadesEmail;
+	}
+
+	public boolean isConcordaTermos() {
+		return concordaTermos;
+	}
+
+	public void setConcordaTermos(boolean concordaTermos) {
+		this.concordaTermos = concordaTermos;
+	}
+
+	public byte[] getImagem() throws IOException {
+		File file = new File("D:/teste.jpg");
+
+		InputStream is = new FileInputStream(file);
+		long length = file.length();
+
+		byte[] bytes = new byte[(int) length];
+		int offset = 0;
+		int numRead = 0;
+		while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+			offset += numRead;
+		}
+		is.close();
+
+		FileOutputStream fos = new FileOutputStream(new File("D:/arara.jpg"));
+		fos.write(bytes);
+		fos.close();
+
+		return bytes;
 	}
 
 	/**
@@ -229,7 +271,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Construtor completo de usuário.
+	 * Construtor completo.
 	 * 
 	 * @param email
 	 * @param nome
@@ -237,19 +279,21 @@ public class Usuario implements Serializable {
 	 * @param sexo
 	 * @param cpf
 	 * @param dataNascimento
-	 * @param enderecos
 	 * @param telefone
+	 * @param celular
+	 * @param enderecos
 	 */
 	public Usuario(String email, String nome, String apelido, Sexo sexo, String cpf, LocalDate dataNascimento,
-			List<Endereco> enderecos, String telefone) {
+			String telefone, String celular, Endereco... enderecos) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
-		this.enderecos = enderecos;
 		this.telefone = telefone;
+		this.celular = celular;
+		this.enderecos = Arrays.asList(enderecos);
 	}
 
 	@Override

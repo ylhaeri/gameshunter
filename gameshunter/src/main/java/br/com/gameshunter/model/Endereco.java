@@ -106,7 +106,10 @@ public class Endereco {
 	 */
 	public Endereco(Logradouro logradouro, Integer numero, String complemento) {
 		this.logradouro = logradouro;
-		this.complemento = complemento;
+		if (complemento == null)
+			this.complemento = "";
+		else
+			this.complemento = complemento;
 		this.numero = numero;
 	}
 
@@ -144,10 +147,8 @@ public class Endereco {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result
-				+ ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		return result;
 	}

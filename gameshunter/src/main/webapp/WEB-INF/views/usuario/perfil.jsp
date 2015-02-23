@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,25 +20,25 @@
 	href="<c:url value="/resources/css/site/home.css"></c:url>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/usuario/perfil.css"></c:url>">
+<script src="<c:url value="/resources/js/jquery/jquery.js"></c:url>"></script>
 </head>
 <body>
-
 
 	<div class="wrapper">
 		<c:import url="../site/cabecalho.jsp"></c:import>
 		<main class="container">
 
-
 		<div class="profile-banner">
+			<input type="file" id="teste" class="hidden"> <label
+				id="usuario-foto-label" for="teste"> <img
+				alt="foto-do-perfil" id="usuario-foto"
+				src="<c:url value="/usuario/teste"></c:url>"
+				class="img-circle img-thumbnail" />
+			</label>
 
-			<div class="profile-banner-photo">
-				<img alt="foto-padrão-do-perfil"
-					src="<c:url value="/resources/img/photo-default.png"></c:url>"
-					class="img-circle" />
-			</div>
 
 			<div class="profile-banner-content">
-				<h1>Apelido</h1>
+				<h1>${sessionScope['usuario'].apelido}</h1>
 			</div>
 
 		</div>
@@ -60,29 +61,29 @@
 				<tr>
 					<td>Telefone</td>
 				</tr>
-				<td>Celular</td>
 				<tr>
+					<td>Celular</td>
 				</tr>
 			</table>
 
 			<table class="profile-table-information">
 				<tr>
-					<td>${usuario.nome}</td>
+					<td>${sessionScope['usuario'].nome}</td>
 				</tr>
 				<tr>
-					<td>${usuario.email}</td>
+					<td>${sessionScope['usuario'].email}</td>
 				</tr>
 				<tr>
-					<td>${usuario.sexo}</td>
+					<td>${sessionScope['usuario'].sexo}</td>
 				</tr>
 				<tr>
-					<td>${usuario.dataNascimento}</td>
+					<td><spring:eval expression="usuario.dataNascimento" /></td>
 				</tr>
 				<tr>
-					<td>${usuario.telefone}</td>
+					<td>${sessionScope['usuario'].telefone}</td>
 				</tr>
 				<tr>
-					<td>${usuario.celular}</td>
+					<td>${sessionScope['usuario'].celular}</td>
 				</tr>
 			</table>
 		</div>

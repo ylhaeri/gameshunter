@@ -16,6 +16,7 @@
 	href="<c:url value="/resources/css/site/site.css"></c:url>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/site/home.css"></c:url>">
+<script src="<c:url value="/resources/js/jquery/jquery.js"></c:url>"></script>
 </head>
 <body>
 	<div class="wrapper">

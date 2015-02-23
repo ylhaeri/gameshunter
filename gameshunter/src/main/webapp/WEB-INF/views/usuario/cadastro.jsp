@@ -14,6 +14,13 @@
 			path="usuario.nome" cssClass="text-danger" /></td>
 </tr>
 <tr>
+	<td class="td-label" id="td-apelido-label"><label
+		id="apelido-label" class="control-label" for="apelido-input">Apelido</label></td>
+	<td class="td-input" id="td-apelido-input"><form:input
+			id="apelido-input" class="form-control" path="usuario.apelido" /> <form:errors
+			path="usuario.apelido" cssClass="text-danger" /></td>
+</tr>
+<tr>
 	<td class="td-label" id="td-sexo-label"><label id="sexo-label"
 		class="control-label" for="sexo-input">Sexo</label></td>
 	<td><form:select id="sexo-input" path="usuario.sexo">
@@ -58,13 +65,6 @@
 	<td class="td-input" id="td-email-input"><form:input
 			id="email-input" class="form-control" path="usuario.email" /> <form:errors
 			path="usuario.email" cssClass="text-danger" /></td>
-</tr>
-<tr>
-	<td class="td-label" id="td-apelido-label"><label
-		id="apelido-label" class="control-label" for="apelido-input">Apelido</label></td>
-	<td class="td-input" id="td-apelido-input"><form:input
-			id="apelido-input" class="form-control" path="usuario.apelido" /> <form:errors
-			path="usuario.apelido" cssClass="text-danger" /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-senha-label"><label id="senha-label"

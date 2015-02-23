@@ -5,9 +5,13 @@
 	<display-name>GamesHunter</display-name>
 
 	<session-config>
-		<session-timeout>1</session-timeout>
+		<session-timeout>30</session-timeout>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error</location>
+	</error-page>
 
 	<servlet>
 		<servlet-name>spring mvc</servlet-name>
@@ -17,10 +21,13 @@
 			<param-value>/WEB-INF/spring-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>500</max-file-size>
+			<max-request-size>1000</max-request-size>
+		</multipart-config>
 	</servlet>
 
 	<filter>
-
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -31,7 +38,6 @@
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
-
 	</filter>
 
 	<servlet-mapping>

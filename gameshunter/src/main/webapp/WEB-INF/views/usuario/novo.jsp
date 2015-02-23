@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,32 +27,34 @@
 	<div class="wrapper">
 		<c:import url="../site/cabecalho.jsp"></c:import>
 
-
 		<main class="container">
-		<form id="form-cadastro" class="form-inline" method="post"
+		<form id="cadastro-form" class="form-inline" method="post"
 			action="cadastrado">
-
 			<div class="form-group">
-				<h1>Cadastre-se</h1>
+				<h1 class="h1">Cadastre-se</h1>
 				<table id="table-cadastro-usuario" class="table">
 					<c:import url="cadastro.jsp"></c:import>
 					<tr>
 						<td class="td-label" id="td-novidades-label"><label
 							class="control-label" id="novidades-label">Receber
 								novidades por e-mail</label></td>
-						<td class="td-input" id="td-novidades-input"><label
-							class="radio-inline" id="novidades-label-sim"><input
-								id="novidades-input-sim" type="radio">Sim</label> <label
-							class="radio-inline" id="novidades-label-nao"><input
-								id="novidades-input-nao" type="radio">Não</label></td>
+						<td class="td-input" id="td-novidades-email-input"><form:radiobutton
+								path="usuario.novidadesEmail" value="true" label="Sim"
+								id="novidades-email-sim" /> <form:radiobutton
+								path="usuario.novidadesEmail" value="false" label="Não"
+								id="novidades-email-nao" /></td>
 					</tr>
 					<tr>
 						<td class="td-label" id="td-termos-label"><label
-							class="control-label" id="termos-label">Termos blabla</label></td>
+							class="control-label" id="termos-label">Termos de uso</label></td>
 						<td class="td-input" id="td-termos-input"><div
 								class="checkbox">
-								<label id="termos-label-check"><input id="termos-input"
-									type="checkbox"> Blabla</label>
+								<form:checkbox path="usuario.concordaTermos" value="true"
+									label="Eu li e concordo com os Termos de uso e a Política de privacidade." />
+								<br />
+								<form:errors path="usuario.concordaTermos"
+									cssClass="text-danger" />
+								<!-- FIXME -->
 							</div></td>
 					</tr>
 					<tr>
@@ -60,7 +63,7 @@
 							class="btn btn-primary"></td>
 					</tr>
 				</table>
-				<div class="checkbox"></div>
+			</div>
 		</form>
 		</main>
 	</div>

@@ -18,7 +18,7 @@ import br.com.gameshunter.schedule.Arara;
 
 @Configuration
 @EnableTransactionManagement
-public class AppConfig {
+public class SpringConfig {
 
 	@Bean(initMethod = "init")
 	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -46,6 +46,7 @@ public class AppConfig {
 	@Bean
 	@Scope("prototype")
 	public SimpleEmail simpleEmail() {
+		// FIXME Ajeitar a configuração, só fiz algo que pega
 		SimpleEmail email = new SimpleEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
