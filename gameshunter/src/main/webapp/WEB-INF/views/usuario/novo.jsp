@@ -22,6 +22,16 @@
 <script
 	src="<c:url value="/resources/js/jquery/jquery-masked-input.js"></c:url>"></script>
 <script src="<c:url value="/resources/js/usuario/novo.js"></c:url>"></script>
+<style type="text/css">
+.asterisk_input:after {
+	content: " *";
+	color: #e32;
+	position: absolute;
+	margin: -5px 0px 0px -20px;
+	font-size: xx-large;
+	padding: 0 5px 0 0;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
