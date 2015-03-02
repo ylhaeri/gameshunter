@@ -28,4 +28,8 @@ public class UsuarioDAO {
 	public Usuario find(String email) {
 		return manager.find(Usuario.class, email);
 	}
+
+	public void update(Usuario usuario) {
+		manager.merge(usuario);
+	}
 }

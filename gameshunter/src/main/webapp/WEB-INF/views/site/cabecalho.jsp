@@ -26,7 +26,7 @@
 		<c:otherwise>
 			<div class="userPanel" style="background-color: #222">
 				<img style="max-width: 80px" alt="foto-padrão-do-perfil"
-					src="<c:url value="/resources/img/photo-default.png"></c:url>"
+					src="<c:url value="/usuario/teste"></c:url>"
 					class="img-circle img-thumbnail" />
 				<div class="pull-right user-btn" style="margin-top: 1.5em">
 					<a id="btn-perfil" href="<c:url value="/usuario/perfil"></c:url>">Perfil</a>

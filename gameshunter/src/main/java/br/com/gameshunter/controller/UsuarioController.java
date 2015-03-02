@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gameshunter.model.Usuario;
@@ -90,8 +91,25 @@ public class UsuarioController {
 		session.removeAttribute("usuario");
 	}
 
-	@RequestMapping(value = "teste")
-	public @ResponseBody byte[] teste() throws IOException {
-		return new Usuario().getImagem();
+	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
+	// apropriado
+	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/jpg")
+	public @ResponseBody byte[] teste(HttpSession session) throws IOException {
+
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+		return usuario.getImagem();
+	}
+
+	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
+	// apropriado
+	@RequestMapping(value = "setFoto", method = RequestMethod.POST)
+	public String setFoto(HttpSession session, @RequestParam("file") MultipartFile file) throws IOException {
+
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		usuario.setImagem(file.getBytes());
+		service.update(usuario);
+
+		return "redirect:/usuario/perfil";
 	}
 }

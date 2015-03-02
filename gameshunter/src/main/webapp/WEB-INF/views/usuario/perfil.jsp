@@ -29,13 +29,14 @@
 		<main class="container">
 
 		<div class="profile-banner">
-			<input type="file" id="teste" class="hidden"> <label
-				id="usuario-foto-label" for="teste"> <img
-				alt="foto-do-perfil" id="usuario-foto"
-				src="<c:url value="/usuario/teste"></c:url>"
-				class="img-circle img-thumbnail" />
-			</label>
-
+			<form action='<c:url value="/usuario/setFoto"></c:url>' method="post"
+				enctype="multipart/form-data">
+				<img alt="foto-do-perfil" id="usuario-foto-label"
+					src="<c:url value="/usuario/teste"></c:url>"
+					class="img-circle img-thumbnail" /><br /> <input type="file"
+					name="file"> <input type="submit" style="color: black">
+				<div id="progressNumber"></div>
+			</form>
 
 			<div class="profile-banner-content">
 				<h1>${sessionScope['usuario'].apelido}</h1>

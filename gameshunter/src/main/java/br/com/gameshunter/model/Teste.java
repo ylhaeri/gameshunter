@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Persistence;
 
-@Entity
 public class Teste {
 
 	@Id
@@ -23,7 +20,6 @@ public class Teste {
 	private Integer id;
 	private String fileName;
 	@Lob
-	@Column(columnDefinition = "bigblob")
 	private byte[] image;
 
 	public Integer getId() {

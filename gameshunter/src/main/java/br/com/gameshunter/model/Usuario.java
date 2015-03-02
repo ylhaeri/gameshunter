@@ -2,7 +2,6 @@ package br.com.gameshunter.model;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -17,17 +16,20 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.io.IOUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.gameshunter.converter.LocalDateDBConverter;
+import br.com.gameshunter.system.FileManager;
 
 /**
  * Representa um usuário
@@ -77,6 +79,8 @@ public class Usuario implements Serializable {
 	private boolean novidadesEmail = true;
 	@AssertTrue(message = "{user.terms_of_service.agreement}")
 	private boolean concordaTermos;
+	@Lob
+	private byte[] imagem;
 
 	public static void simNaoValues() {
 		List<Boolean> asList = Arrays.asList(true, false);
@@ -183,25 +187,25 @@ public class Usuario implements Serializable {
 		this.concordaTermos = concordaTermos;
 	}
 
-	public byte[] getImagem() throws IOException {
-		File file = new File("D:/teste.jpg");
+	public byte[] getImagem() {
 
-		InputStream is = new FileInputStream(file);
-		long length = file.length();
-
-		byte[] bytes = new byte[(int) length];
-		int offset = 0;
-		int numRead = 0;
-		while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
-			offset += numRead;
+		if (this.imagem != null)
+			return this.imagem;
+		else {
+			try {
+				File file = new File(FileManager.defaultPath() + "/img/default-profile-picture.jpg");
+				InputStream is = new FileInputStream(file);
+				return IOUtils.toByteArray(is);
+			} catch (IOException e) {
+				// TODO Alguma bosta
+				e.printStackTrace();
+			}
+			return null;
 		}
-		is.close();
+	}
 
-		FileOutputStream fos = new FileOutputStream(new File("D:/arara.jpg"));
-		fos.write(bytes);
-		fos.close();
-
-		return bytes;
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
 	}
 
 	/**

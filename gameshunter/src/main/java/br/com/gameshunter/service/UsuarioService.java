@@ -50,4 +50,9 @@ public class UsuarioService {
 		return null;
 
 	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void update(Usuario usuario) {
+		dao.update(usuario);
+	}
 }
