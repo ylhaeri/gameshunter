@@ -25,9 +25,9 @@
 
 	<tx:annotation-driven transaction-manager="GamesHunterManager" />
 
-	<mvc:interceptors>
+<!-- 	<mvc:interceptors>
 		<bean class="br.com.gameshunter.interceptor.Teste"></bean>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
