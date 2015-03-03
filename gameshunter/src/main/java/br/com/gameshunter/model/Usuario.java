@@ -61,6 +61,7 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
+	// TODO deve ser uma classe
 	@NotEmpty(message = "{user.cpf.empty}")
 	@Size(min = 14, max = 14, message = "{user.cpf.size}")
 	@CPF
@@ -69,9 +70,11 @@ public class Usuario implements Serializable {
 	@Convert(converter = LocalDateDBConverter.class)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
+	// TODO deve ser uma classe
 	@NotEmpty(message = "{user.phone.empty}")
 	@Size(min = 13, max = 13, message = "{user.phone.size}")
 	private String telefone;
+	// TODO deve ser uma classe
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String celular;
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
@@ -104,6 +107,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setSenha(String senha) {
+		// TODO Ainda não está sendo gerado o hash
 		this.senha = senha;
 	}
 
@@ -197,7 +201,7 @@ public class Usuario implements Serializable {
 				InputStream is = new FileInputStream(file);
 				return IOUtils.toByteArray(is);
 			} catch (IOException e) {
-				// TODO Alguma bosta
+				// TODO Não sei
 				e.printStackTrace();
 			}
 			return null;
@@ -205,6 +209,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setImagem(byte[] imagem) {
+		// TODO Precisamos de uma lista com toda imagem que é adicionada.
 		this.imagem = imagem;
 	}
 
@@ -233,7 +238,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Responsável por pegar o endereço desejado da lista
+	 * Pega o endereço na lista
 	 * 
 	 * @param numero
 	 *            Indice real do endereço na lista
@@ -247,7 +252,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Remove o endereço desejado da lista
+	 * Remove o endereço da lista
 	 * 
 	 * @param enviado
 	 *            Indice real do endereço na lista
@@ -265,7 +270,7 @@ public class Usuario implements Serializable {
 	 *            Endereço alterado para que a troca seja feita
 	 */
 	public void alteraEndereco(Integer numero, Endereco alterado) {
-		// FIXME
+		// FIXME acho que da pra melhorar :x
 		removeEndereco(numero);
 		adicionaEndereco(alterado);
 	}
@@ -275,7 +280,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Construtor completo.
+	 * FIXME Construtor incompleto Construtor completo.
 	 * 
 	 * @param email
 	 * @param nome
@@ -302,6 +307,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public int hashCode() {
+		// FIXME incompleto
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
@@ -317,6 +323,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
+		// FIXME incompleto
 		if (this == obj)
 			return true;
 		if (obj == null)

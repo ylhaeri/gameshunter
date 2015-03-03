@@ -27,6 +27,11 @@ public class UsuarioController {
 
 	private UsuarioService service;
 
+	@Autowired
+	public UsuarioController(UsuarioService service) {
+		this.service = service;
+	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
@@ -38,11 +43,6 @@ public class UsuarioController {
 	 * month) { if (string.equals(month[month.length - 1])) continue;
 	 * meses.add(string); } }
 	 */
-
-	@Autowired
-	public UsuarioController(UsuarioService service) {
-		this.service = service;
-	}
 
 	@RequestMapping(value = "novo", method = RequestMethod.GET)
 	public ModelAndView novo() {
@@ -59,16 +59,18 @@ public class UsuarioController {
 
 			usuario.setConcordaTermos(false);
 			return "/usuario/novo";
-		}
-		service.add(usuario);
+		} else {
+			service.add(usuario);
 
-		return "/usuario/cadastrado";
+			return "/usuario/cadastrado";
+		}
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public @ResponseBody boolean login(@RequestParam("email") String email, @RequestParam("senha") String senha,
 			HttpSession session) {
 
+		// FIXME Tá meio estranho esse find, ver se tem alguma forma melhor
 		Usuario usuario = service.find(email, senha);
 		if (usuario != null) {
 			session.setAttribute("usuario", usuario);
@@ -79,6 +81,7 @@ public class UsuarioController {
 
 	@RequestMapping(value = "perfil", method = RequestMethod.GET)
 	public String perfil(HttpSession session) {
+		// FIXME Parece estranho :x
 		if (session.getAttribute("usuario") == null)
 			return "redirect:/";
 
