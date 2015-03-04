@@ -77,7 +77,8 @@ public class Usuario implements Serializable {
 	// TODO deve ser uma classe
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String celular;
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
+			CascadeType.MERGE })
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private boolean novidadesEmail = true;
 	@AssertTrue(message = "{user.terms_of_service.agreement}")
@@ -197,7 +198,8 @@ public class Usuario implements Serializable {
 			return this.imagem;
 		else {
 			try {
-				File file = new File(FileManager.defaultPath() + "/img/default-profile-picture.jpg");
+				File file = new File(FileManager.defaultPath()
+						+ "/img/default-profile-picture.jpg");
 				InputStream is = new FileInputStream(file);
 				return IOUtils.toByteArray(is);
 			} catch (IOException e) {
@@ -234,7 +236,8 @@ public class Usuario implements Serializable {
 	 * @return verdadeiro caso possa ser adicionado, falso caso não.
 	 */
 	private boolean podeAdicionar(Endereco endereco) {
-		return enderecos.isEmpty() || (enderecos.size() < 3 && !enderecos.contains(endereco));
+		return enderecos.isEmpty()
+				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
@@ -247,7 +250,8 @@ public class Usuario implements Serializable {
 	public Endereco pegaEndereco(Integer numero) {
 
 		if (numero < 1)
-			throw new IllegalArgumentException("Informe o valor real do elemento");
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
 		return enderecos.get(numero - 1);
 	}
 
@@ -259,7 +263,8 @@ public class Usuario implements Serializable {
 	 */
 	public void removeEndereco(Integer numero) {
 		if (numero < 1)
-			throw new IllegalArgumentException("Informe o valor real do elemento");
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
 		enderecos.remove(numero - 1);
 	}
 
@@ -270,9 +275,7 @@ public class Usuario implements Serializable {
 	 *            Endereço alterado para que a troca seja feita
 	 */
 	public void alteraEndereco(Integer numero, Endereco alterado) {
-		// FIXME acho que da pra melhorar :x
-		removeEndereco(numero);
-		adicionaEndereco(alterado);
+		enderecos.set(numero - 1, alterado);
 	}
 
 	/** Construtor padrão */
@@ -292,8 +295,9 @@ public class Usuario implements Serializable {
 	 * @param celular
 	 * @param enderecos
 	 */
-	public Usuario(String email, String nome, String apelido, Sexo sexo, String cpf, LocalDate dataNascimento,
-			String telefone, String celular, Endereco... enderecos) {
+	public Usuario(String email, String nome, String apelido, Sexo sexo,
+			String cpf, LocalDate dataNascimento, String telefone,
+			String celular, Endereco... enderecos) {
 		this.email = email;
 		this.nome = nome;
 		this.apelido = apelido;
@@ -312,12 +316,15 @@ public class Usuario implements Serializable {
 		int result = 1;
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result
+				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
+		result = prime * result
+				+ ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result
+				+ ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 
