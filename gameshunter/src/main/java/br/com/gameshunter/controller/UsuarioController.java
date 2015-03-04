@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.gameshunter.model.Login;
 import br.com.gameshunter.model.Usuario;
 import br.com.gameshunter.service.UsuarioService;
 
@@ -26,6 +28,26 @@ import br.com.gameshunter.service.UsuarioService;
 public class UsuarioController {
 
 	private UsuarioService service;
+
+	// private final RequestMappingHandlerMapping handlerMapping;
+	//
+	// @Autowired
+	// public UsuarioController(RequestMappingHandlerMapping handlerMapping,
+	// UsuarioService service) {
+	// this.handlerMapping = handlerMapping;
+	// this.service = service;
+	// }
+	//
+	// @RequestMapping(value = "/endpointdoc", method = RequestMethod.GET)
+	// public void show(Model model) {
+	// Map<RequestMappingInfo, HandlerMethod> handlerMethods =
+	// handlerMapping.getHandlerMethods();
+	// handlerMethods.forEach((r, h) -> {
+	// System.out.println(r.getPatternsCondition());
+	// System.out.println(h.getMethod());
+	// System.out.println("___________________");
+	// });
+	// }
 
 	@Autowired
 	public UsuarioController(UsuarioService service) {
@@ -52,12 +74,22 @@ public class UsuarioController {
 		return mav;
 	}
 
+	@RequestMapping(value = "novo&{email}", method = RequestMethod.GET)
+	public ModelAndView novo(@PathVariable("email") String email) {
+		ModelAndView mav = new ModelAndView("/usuario/novo");
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		mav.addObject("usuario", usuario);
+
+		return mav;
+	}
+
 	@RequestMapping(value = "cadastrado", method = RequestMethod.POST)
 	public String cadastrado(@Valid Usuario usuario, BindingResult result) {
 
 		if (result.hasErrors()) {
-
 			usuario.setConcordaTermos(false);
+			result.getAllErrors().forEach(System.out::println);
 			return "/usuario/novo";
 		} else {
 			service.add(usuario);
@@ -67,21 +99,42 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public @ResponseBody boolean login(@RequestParam("email") String email, @RequestParam("senha") String senha,
+	public ModelAndView login(@RequestParam("path") String path, @Valid Login login, BindingResult result,
 			HttpSession session) {
 
-		// FIXME Tá meio estranho esse find, ver se tem alguma forma melhor
-		Usuario usuario = service.find(email, senha);
-		if (usuario != null) {
+		// TODO fazer o direcionamento para as páginas corretamente. Decidir se
+		// vai ser estático ou baseado na página onde o usuário estava quando
+		// tentou logar. Creio que o ideal é guardar no login as últimas
+		// visitadas pelo usuário, pra dai decidir onde redirecionar. Passar as
+		// mensagens de erro para o validation messages, mas não consegui
+		// colocar as chaves normalmente, precisa pesquisar como faz, caso não
+		// conseguir precisa ser retirado da classe do sistema, acho que é só
+		// declarar o resource bundle do spring, não tenho certeza
+		if (result.hasErrors())
+			return new ModelAndView("/site/home");
+		Usuario usuario = service.find(login.getEmail());
+		if (usuario == null) {
+			result.rejectValue(
+					"email",
+					null,
+					"Essa conta não existe. Insira outro login ou <a href='/gameshunter/usuario/novo&{email}/' style='text-transform:initial'>cadastre-se.");
+			return new ModelAndView("/site/home", "login", login);
+		} else if (!usuario.getSenha().equals(login.getSenha())) {
+			result.rejectValue("email", null,
+					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
+			return new ModelAndView("/site/home", "login", login);
+		} else {
 			session.setAttribute("usuario", usuario);
-			return true;
+			return new ModelAndView("redirect:" + path);
 		}
-		return false;
 	}
 
 	@RequestMapping(value = "perfil", method = RequestMethod.GET)
 	public String perfil(HttpSession session) {
-		// FIXME Parece estranho :x
+		// FIXME Parece estranho :x Tem que trocar esse if por um interceptor,
+		// vamos ter que filtar esse interceptor todas as páginas que o usuário
+		// não pode entrar sem estar logado, provavelmente resolve o problema de
+		// redirecionamento quando deslogar também.
 		if (session.getAttribute("usuario") == null)
 			return "redirect:/";
 

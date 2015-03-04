@@ -42,11 +42,10 @@ public class UsuarioService {
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.NEVER)
-	public Usuario find(String email, String senha) {
+	public Usuario find(String email) {
 		Usuario usuario = dao.find(email);
 		if (usuario != null)
-			if (usuario.getSenha().equals(senha))
-				return usuario;
+			return usuario;
 		return null;
 
 	}

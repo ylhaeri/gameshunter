@@ -1,27 +1,16 @@
 $(document).ready(function() {
+	if ($("#mensagem-email").text().indexOf('<') > 0) {
+		var t = $("#mensagem-email").text();
+		var email = $("#email-input-login").val();
+		$("#mensagem-email").html(t.replace("{email}", email));
+	}
 
-	$("#btn-login").click(function(event) {
-		var email = $("#email-input-login").val()
-		var senha = $("#senha-input-login").val()
-		$("#usuario-invalido").remove()
-
-		$.post("/gameshunter/usuario/login", {
-			email : email,
-			senha : senha
-		}, function(data) {
-			if (data == true) {
-				window.location.reload()
-			} else {
-				$("#login-form").append("<div id='usuario-invalido'><span class='text-danger'>Usuário ou senha inválida</span></div>")
-			}
-		})
-		event.preventDefault()
-	})
+	$("#path").val(window.location.pathname.replace("/gameshunter", ""))
 
 	$("#btn-logout").click(function() {
+		// FIXME tá bem porco. Precisa tirar o ajax e ajeitar no controller
 		$.post("/gameshunter/usuario/logout", function() {
 			window.location.reload()
 		})
 	})
-
 })

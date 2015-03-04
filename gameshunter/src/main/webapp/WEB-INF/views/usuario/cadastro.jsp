@@ -9,7 +9,7 @@
 <tr>
 	<td class="td-label" id="td-nome-label"><span
 		class="asterisk_input"> </span><label id="nome-label"
-		class="control-label" for="nome-input">Nome completo</label></td>
+		class="control-label" for="nome-input">Nasdome completo</label></td>
 	<td class="td-input" id="td-nome-input"><form:input
 			id="nome-input" class="form-control" path="usuario.nome" /> <form:errors
 			path="usuario.nome" cssClass="text-danger" /></td>

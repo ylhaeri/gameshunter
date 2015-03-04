@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/site/header.css"></c:url>">
@@ -13,13 +14,16 @@
 			<div class="login">
 				<form action="<c:url value="/usuario/login"></c:url>" method="post"
 					class="login-form pull-right" id="login-form">
+					<input type="hidden" id="path" name="path">
 					<div class="text-form-inline-header">Login</div>
 					<input type="email" placeholder="exemplo@exemplo.com.br"
-						id="email-input-login" class="edittext-form" name="email">
+						id="email-input-login" class="edittext-form" name="email" value="${requestScope['login'].email}">
 					<div class="text-form-inline-header">Senha</div>
 					<input type="password" id="senha-input-login" class="edittext-form"
-						name="senha"> <input type="submit" id="btn-login"
-						class="button-login" value="Login">
+						name="senha"> <input type="submit" class="button-login"
+						value="Login"><br />
+					<form:errors path="login.email" id="mensagem-email"
+						cssClass="text-danger" />
 				</form>
 			</div>
 		</c:when>
