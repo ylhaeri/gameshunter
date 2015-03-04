@@ -19,42 +19,6 @@ body>.wrapper {
 	padding-bottom: 80px; /* deve ter a mesma altura do rodapé */
 }
 
-/* headers */
-.header {
-	width: 100%;
-}
-
-.text-form-inline-header {
-	color: #eeeeee;
-	display: inline;
-}
-
-.edittext-form {
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding: 2px;
-	border: 0px;
-}
-
-.login {
-	min-height: 55px;
-	background-color: #222;
-}
-
-.login-form {
-	padding: 8px 15px 0;
-}
-
-.button-login {
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding: 1px;
-	border: 1px solid #286090;
-	font-weight: bold;
-	background-color: #286090;
-	color: #eeeeee;
-}
-
 /* main */
 .container {
 	padding-top: 30px;

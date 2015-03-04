@@ -3,46 +3,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Games Hunter</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/reset.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap/bootstrap.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/site-bootstrap.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/site.css"></c:url>">
+<gameshunter:resources />
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/usuario/novo.css"></c:url>">
-<script src="<c:url value="/resources/js/jquery/jquery.js"></c:url>"></script>
 <script
 	src="<c:url value="/resources/js/jquery/jquery-masked-input.js"></c:url>"></script>
 <script src="<c:url value="/resources/js/usuario/novo.js"></c:url>"></script>
 <style type="text/css">
 .asterisk_input:after {
-	content: " *";
+	content: "*";
 	color: #e32;
 	position: absolute;
-	margin: -5px 0px 0px -20px;
+	margin-top: -5px;
+	margin-left: -20px;
 	font-size: xx-large;
-	padding: 0 5px 0 0;
+}
+
+.teste:after {
+	content: "*";
+	color: #e32;
+	font-size: xx-large;
+	position: absolute;
+	padding-top: 11px;
+	margin-left: -15px;
 }
 </style>
 </head>
 <body>
 	<div class="wrapper">
-		<c:import url="../site/cabecalho.jsp"></c:import>
+		<gameshunter:header />
 
 		<main class="container">
 		<form id="cadastro-form" class="form-inline" method="post"
 			action="cadastrado">
 			<div class="form-group">
-				<h1 class="h1">Cadastre-se</h1>
-				<table id="table-cadastro-usuario" class="table">
+				<h1 class="h1"
+					style="display: inline; margin-right: 10px; margin-bottom: 20px;">Cadastre-se</h1>
+				<span style="margin-left: 15px;"><span class="teste"></span>Campos
+					obrigatórios</span>
+				<table id="table-cadastro-usuario" style="margin-top: 25px;"
+					class="table">
 					<c:import url="cadastro.jsp"></c:import>
 					<tr>
 						<td class="td-label" id="td-novidades-label"><label
@@ -64,7 +70,6 @@
 								<br />
 								<form:errors path="usuario.concordaTermos"
 									cssClass="text-danger" />
-								<!-- FIXME -->
 							</div></td>
 					</tr>
 					<tr>
@@ -77,7 +82,6 @@
 		</form>
 		</main>
 	</div>
-
-	<c:import url="../site/rodape.jsp"></c:import>
+	<gameshunter:footer />
 </body>
 </html>

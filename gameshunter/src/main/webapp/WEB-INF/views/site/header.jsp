@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/header.css"></c:url>">
-<script src="<c:url value="/resources/js/usuario/header.js"></c:url>"></script>
 <html>
 <header class="header">
 
@@ -17,13 +13,14 @@
 					<input type="hidden" id="path" name="path">
 					<div class="text-form-inline-header">Login</div>
 					<input type="email" placeholder="exemplo@exemplo.com.br"
-						id="email-input-login" class="edittext-form" name="email" value="${requestScope['login'].email}">
+						id="email-input-login" class="edittext-form" name="email"
+						value="${requestScope['login'].email}">
 					<div class="text-form-inline-header">Senha</div>
 					<input type="password" id="senha-input-login" class="edittext-form"
 						name="senha"> <input type="submit" class="button-login"
 						value="Login"><br />
 					<form:errors path="login.email" id="mensagem-email"
-						cssClass="text-danger" />
+						cssClass="text-danger" htmlEscape="false" />
 				</form>
 			</div>
 		</c:when>

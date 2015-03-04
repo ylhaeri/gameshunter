@@ -117,7 +117,8 @@ public class UsuarioController {
 			result.rejectValue(
 					"email",
 					null,
-					"Essa conta não existe. Insira outro login ou <a href='/gameshunter/usuario/novo&{email}/' style='text-transform:initial'>cadastre-se.");
+					"Essa conta não existe. Insira outro login ou <a href='/gameshunter/usuario/novo&"
+							+ login.getEmail() + "/' style='text-transform:initial'>cadastre-se</a>.");
 			return new ModelAndView("/site/home", "login", login);
 		} else if (!usuario.getSenha().equals(login.getSenha())) {
 			result.rejectValue("email", null,
