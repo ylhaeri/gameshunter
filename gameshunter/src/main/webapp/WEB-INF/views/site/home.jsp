@@ -7,17 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Games Hunter</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/reset.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap/bootstrap.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/site-bootstrap.css"></c:url>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/site.css"></c:url>">
+<gameshunter:resources />
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/site/home.css"></c:url>">
-<script src="<c:url value="/resources/js/jquery/jquery.js"></c:url>"></script>
 </head>
 <body>
 	<div class="wrapper">

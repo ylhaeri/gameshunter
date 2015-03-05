@@ -14,21 +14,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -127,7 +122,6 @@ public class Usuario implements Serializable {
 	 *            senha do usuário
 	 */
 	public void setPassword(String senha) {
-		// TODO Ainda não está sendo gerado o hash
 		this.password = senha;
 	}
 
@@ -150,7 +144,14 @@ public class Usuario implements Serializable {
 		this.password = saltedPasswordHash(this.password);
 	}
 
-	public boolean checkPassword(String password) {
+	/**
+	 * Confere se a senha informa é igual a senha do usuário
+	 * 
+	 * @param password
+	 *            Senha que vai ser comparada
+	 * @return true se for igual, false se for diferente
+	 */
+	public boolean isPasswordEqual(String password) {
 
 		if (saltedPasswordHash(password).equals(this.password))
 			return true;
@@ -159,7 +160,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Gera o
+	 * Gera a senha com o salt
 	 * 
 	 * @param password
 	 * @return
@@ -167,13 +168,6 @@ public class Usuario implements Serializable {
 	private String saltedPasswordHash(String password) {
 		String passwordHash = HashFactory.sha512(password);
 		return HashFactory.sha512(passwordHash + this.salt);
-	}
-
-	public static void main(String[] args) {
-		EntityManager manager = Persistence.createEntityManagerFactory("gameshunter").createEntityManager();
-		System.out.println("Inicio");
-		Usuario find = manager.find(Usuario.class, "gabriel.haeri@gmail.com");
-		System.out.println(find.getBirthDay());
 	}
 
 	public String getNome() {

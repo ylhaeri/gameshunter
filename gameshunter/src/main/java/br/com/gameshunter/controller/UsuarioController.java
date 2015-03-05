@@ -121,11 +121,9 @@ public class UsuarioController {
 			return new ModelAndView("/site/home");
 		Usuario usuario = service.find(login.getEmail());
 		if (usuario == null) {
-			result.rejectValue(
-					"email",
-					null,
-					"Essa conta não existe. Insira outro login ou <a href='/gameshunter/usuario/novo&"
-							+ login.getEmail() + "/' style='text-transform:initial'>cadastre-se</a>.");
+			result.rejectValue("email", "login.email.not.found", new Object[] { login.getEmail() },
+					"Essa conta não existe. Insira outro login ou cadastre-se.");
+			// FIXME deve pegar a mensagem da validation messages
 			return new ModelAndView("/site/home", "login", login);
 		} else if (!usuario.getPassword().equals(login.getSenha())) {
 			result.rejectValue("email", null,
@@ -157,7 +155,7 @@ public class UsuarioController {
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
 	// apropriado
-	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/jpg")
+	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/png")
 	public @ResponseBody byte[] teste(HttpSession session) throws IOException {
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
