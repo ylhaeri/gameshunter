@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@page import="br.com.gameshunter.model.Sexo"%>
+<%@page import="br.com.gameshunter.model.Gender"%>
 
 <tr>
 	<td class="td-label" id="td-nome-label"><span
@@ -19,17 +19,17 @@
 		class="asterisk_input"> </span><label id="apelido-label"
 		class="control-label" for="apelido-input">Apelido</label></td>
 	<td class="td-input" id="td-apelido-input"><form:input
-			id="apelido-input" class="form-control" path="usuario.apelido" /> <form:errors
-			path="usuario.apelido" cssClass="text-danger" /></td>
+			id="apelido-input" class="form-control" path="usuario.nickname" /> <form:errors
+			path="usuario.nickname" cssClass="text-danger" /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-sexo-label"><span
 		class="asterisk_input"> </span><label id="sexo-label"
 		class="control-label" for="sexo-input">Sexo</label></td>
-	<td><form:select id="sexo-input" path="usuario.sexo">
+	<td><form:select id="sexo-input" path="usuario.gender">
 			<form:option value="Selecione" selected="selected" />
-			<form:options items="<%=Sexo.values()%>" />
-		</form:select> <form:errors path="usuario.sexo" cssClass="text-danger" /></td>
+			<form:options items="<%=Gender.values()%>" />
+		</form:select> <form:errors path="usuario.gender" cssClass="text-danger" /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-cpf-label"><span
@@ -44,15 +44,15 @@
 		class="asterisk_input"> </span><label id="telefone-label"
 		class="control-label" for="telefone-input">Telefone</label></td>
 	<td class="td-input" id="td-telefone-input"><form:input
-			id="telefone-input" class="form-control" path="usuario.telefone" />
-		<form:errors path="usuario.telefone" cssClass="text-danger" /></td>
+			id="telefone-input" class="form-control" path="usuario.phone" />
+		<form:errors path="usuario.phone" cssClass="text-danger" /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-celular-label"><label
 		id="celular-label" class="control-label" for="celular-input">Celular</label></td>
 	<td class="td-input" id="td-celular-input"><form:input
-			id="celular-input" class="form-control" path="usuario.celular" /> <form:errors
-			path="usuario.celular" cssClass="text-danger" /></td>
+			id="celular-input" class="form-control" path="usuario.mobile" /> <form:errors
+			path="usuario.mobile" cssClass="text-danger" /></td>
 </tr>
 <tr>
 	<td class="td-label" id="td-data-nascimento-label"><span
@@ -61,8 +61,8 @@
 			nascimento</label></td>
 	<td class="td-input" id="td-dia-nascimento-input"><form:input
 			id="nascimento-input" class="form-control"
-			path="usuario.dataNascimento" /> <form:errors
-			path="usuario.dataNascimento" cssClass="text-danger" /></td>
+			path="usuario.birthDay" /> <form:errors
+			path="usuario.birthDay" cssClass="text-danger" /></td>
 </tr>
 
 <tr>
@@ -86,6 +86,7 @@
 		class="control-label" for="confirma-senha-input">Confirme sua
 			senha</label></td>
 	<td class="td-input" id="td-confirma-senha-input"><form:password
-			id="confirma-senha-input" class="form-control" path="usuario.senha" />
-		<form:errors path="usuario.senha" cssClass="text-danger" /></td>
+			id="confirma-senha-input" class="form-control"
+			path="usuario.password" /> <form:errors path="usuario.password"
+			cssClass="text-danger" /></td>
 </tr>

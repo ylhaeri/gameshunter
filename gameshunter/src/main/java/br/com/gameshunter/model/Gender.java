@@ -1,5 +1,5 @@
 package br.com.gameshunter.model;
 
-public enum Sexo {
+public enum Gender {
 	Masculino, Feminino, Indefinido;
 }

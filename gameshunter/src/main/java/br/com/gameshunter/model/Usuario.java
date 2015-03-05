@@ -11,18 +11,24 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,6 +36,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.gameshunter.converter.LocalDateDBConverter;
 import br.com.gameshunter.system.FileManager;
+import br.com.gameshunter.util.SaltFactory;
+import br.com.gameshunter.util.HashFactory;
 
 /**
  * Representa um usuário
@@ -49,67 +57,123 @@ public class Usuario implements Serializable {
 	@Email
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
+	@Column(length = 128)
 	@NotEmpty(message = "{user.password.empty}")
-	@Size(min = 6, max = 50, message = "{user.password.size}")
-	private String senha;
+	@Size(min = 6, message = "{user.password.size}")
+	private String password;
+	private String salt;
 	@NotEmpty(message = "{user.name.empty}")
 	@Size(min = 3, max = 50, message = "{user.name.size}")
 	private String nome;
 	@NotEmpty(message = "{user.nickname.empty}")
 	@Size(min = 4, max = 20, message = "{user.nickname.size}")
-	private String apelido;
+	private String nickname;
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
+	private Gender gender;
 	// TODO deve ser uma classe
 	@NotEmpty(message = "{user.cpf.empty}")
 	@Size(min = 14, max = 14, message = "{user.cpf.size}")
 	@CPF
 	private String cpf;
 	@NotNull(message = "{user.birth.null}")
-	@Convert(converter = LocalDateDBConverter.class)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataNascimento;
+	@Convert(converter = LocalDateDBConverter.class)
+	private LocalDate birthDay;
 	// TODO deve ser uma classe
 	@NotEmpty(message = "{user.phone.empty}")
 	@Size(min = 13, max = 13, message = "{user.phone.size}")
-	private String telefone;
+	private String phone;
 	// TODO deve ser uma classe
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
-	private String celular;
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.MERGE })
+	private String mobile;
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
 	private List<Endereco> enderecos = new ArrayList<>(3);
-	private boolean novidadesEmail = true;
+	private boolean newsLetterEmail = true;
 	@AssertTrue(message = "{user.terms_of_service.agreement}")
-	private boolean concordaTermos;
+	private boolean agreeTermsOfService;
 	@Lob
-	private byte[] imagem;
+	private byte[] picture;
 
-	public static void simNaoValues() {
-		List<Boolean> asList = Arrays.asList(true, false);
-		System.out.println(asList);
-	}
-
-	public static void main(String[] args) {
-		Usuario.simNaoValues();
-	}
-
+	/**
+	 * @return email do usuário
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email
+	 *            email do usuário
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	/**
+	 * @return senha do usuário
+	 */
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
+	/**
+	 * Setter para uso exclusivo da JPA
+	 * 
+	 * @deprecated Para settar a senha do usuário, deve-se usar o método
+	 *             {@link #generatePassword}
+	 * 
+	 * @param senha
+	 *            senha do usuário
+	 */
+	public void setPassword(String senha) {
 		// TODO Ainda não está sendo gerado o hash
-		this.senha = senha;
+		this.password = senha;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	@SuppressWarnings("unused")
+	private void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	/**
+	 * Realiza todo o procedimento necessário para garantir maior segurança à
+	 * senha do usuário.
+	 */
+	public void generatePassword() {
+
+		this.salt = SaltFactory.generateSalt();
+		this.password = saltedPasswordHash(this.password);
+	}
+
+	public boolean checkPassword(String password) {
+
+		if (saltedPasswordHash(password).equals(this.password))
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * Gera o
+	 * 
+	 * @param password
+	 * @return
+	 */
+	private String saltedPasswordHash(String password) {
+		String passwordHash = HashFactory.sha512(password);
+		return HashFactory.sha512(passwordHash + this.salt);
+	}
+
+	public static void main(String[] args) {
+		EntityManager manager = Persistence.createEntityManagerFactory("gameshunter").createEntityManager();
+		System.out.println("Inicio");
+		Usuario find = manager.find(Usuario.class, "gabriel.haeri@gmail.com");
+		System.out.println(find.getBirthDay());
 	}
 
 	public String getNome() {
@@ -120,20 +184,20 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getApelido() {
-		return apelido;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
+	public void setNickname(String apelido) {
+		this.nickname = apelido;
 	}
 
-	public Sexo getSexo() {
-		return sexo;
+	public Gender getGender() {
+		return gender;
 	}
 
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
+	public void setGender(Gender sexo) {
+		this.gender = sexo;
 	}
 
 	public String getCpf() {
@@ -144,28 +208,28 @@ public class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public LocalDate getBirthDay() {
+		return birthDay;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setBirthDay(LocalDate birthDay) {
+		this.birthDay = birthDay;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String telefone) {
+		this.phone = telefone;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setMobile(String celular) {
+		this.mobile = celular;
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -176,30 +240,29 @@ public class Usuario implements Serializable {
 		this.enderecos = enderecos;
 	}
 
-	public boolean isNovidadesEmail() {
-		return novidadesEmail;
+	public boolean isNewsLetterEmail() {
+		return newsLetterEmail;
 	}
 
-	public void setNovidadesEmail(boolean novidadesEmail) {
-		this.novidadesEmail = novidadesEmail;
+	public void setNewsLetterEmail(boolean bool) {
+		this.newsLetterEmail = bool;
 	}
 
-	public boolean isConcordaTermos() {
-		return concordaTermos;
+	public boolean isAgreeTermsOfService() {
+		return agreeTermsOfService;
 	}
 
-	public void setConcordaTermos(boolean concordaTermos) {
-		this.concordaTermos = concordaTermos;
+	public void setAgreeTermsOfService(boolean bool) {
+		this.agreeTermsOfService = bool;
 	}
 
-	public byte[] getImagem() {
+	public byte[] getImage() {
 
-		if (this.imagem != null)
-			return this.imagem;
+		if (this.picture != null)
+			return this.picture;
 		else {
 			try {
-				File file = new File(FileManager.defaultPath()
-						+ "/img/default-profile-picture.jpg");
+				File file = new File(FileManager.defaultPath() + "/img/default-profile-picture.jpg");
 				InputStream is = new FileInputStream(file);
 				return IOUtils.toByteArray(is);
 			} catch (IOException e) {
@@ -210,9 +273,9 @@ public class Usuario implements Serializable {
 		}
 	}
 
-	public void setImagem(byte[] imagem) {
+	public void setImage(byte[] imagem) {
 		// TODO Precisamos de uma lista com toda imagem que é adicionada.
-		this.imagem = imagem;
+		this.picture = imagem;
 	}
 
 	/**
@@ -236,8 +299,7 @@ public class Usuario implements Serializable {
 	 * @return verdadeiro caso possa ser adicionado, falso caso não.
 	 */
 	private boolean podeAdicionar(Endereco endereco) {
-		return enderecos.isEmpty()
-				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
+		return enderecos.isEmpty() || (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
@@ -250,8 +312,7 @@ public class Usuario implements Serializable {
 	public Endereco pegaEndereco(Integer numero) {
 
 		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
+			throw new IllegalArgumentException("Informe o valor real do elemento");
 		return enderecos.get(numero - 1);
 	}
 
@@ -263,13 +324,12 @@ public class Usuario implements Serializable {
 	 */
 	public void removeEndereco(Integer numero) {
 		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
+			throw new IllegalArgumentException("Informe o valor real do elemento");
 		enderecos.remove(numero - 1);
 	}
 
 	/**
-	 * Altera um endereço pelo endereço passado
+	 * Altera o endereço desejado
 	 * 
 	 * @param alterado
 	 *            Endereço alterado para que a troca seja feita
@@ -295,17 +355,16 @@ public class Usuario implements Serializable {
 	 * @param celular
 	 * @param enderecos
 	 */
-	public Usuario(String email, String nome, String apelido, Sexo sexo,
-			String cpf, LocalDate dataNascimento, String telefone,
-			String celular, Endereco... enderecos) {
+	public Usuario(String email, String nome, String apelido, Gender sexo, String cpf, LocalDate dataNascimento,
+			String telefone, String celular, Endereco... enderecos) {
 		this.email = email;
 		this.nome = nome;
-		this.apelido = apelido;
-		this.sexo = sexo;
+		this.nickname = apelido;
+		this.gender = sexo;
 		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.telefone = telefone;
-		this.celular = celular;
+		this.birthDay = dataNascimento;
+		this.phone = telefone;
+		this.mobile = celular;
 		this.enderecos = Arrays.asList(enderecos);
 	}
 
@@ -314,17 +373,14 @@ public class Usuario implements Serializable {
 		// FIXME incompleto
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
+		result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result
-				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((enderecos == null) ? 0 : enderecos.hashCode());
+		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
-		result = prime * result
-				+ ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		return result;
 	}
 
@@ -338,20 +394,20 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (apelido == null) {
-			if (other.apelido != null)
+		if (nickname == null) {
+			if (other.nickname != null)
 				return false;
-		} else if (!apelido.equals(other.apelido))
+		} else if (!nickname.equals(other.nickname))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
+		if (birthDay == null) {
+			if (other.birthDay != null)
 				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
+		} else if (!birthDay.equals(other.birthDay))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -368,12 +424,12 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (sexo != other.sexo)
+		if (gender != other.gender)
 			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
+		if (phone == null) {
+			if (other.phone != null)
 				return false;
-		} else if (!telefone.equals(other.telefone))
+		} else if (!phone.equals(other.phone))
 			return false;
 		return true;
 	}

@@ -55,9 +55,9 @@
 							class="control-label" id="novidades-label">Receber
 								novidades por e-mail</label></td>
 						<td class="td-input" id="td-novidades-email-input"><form:radiobutton
-								path="usuario.novidadesEmail" value="true" label="Sim"
+								path="usuario.newsLetterEmail" value="true" label="Sim"
 								id="novidades-email-sim" /> <form:radiobutton
-								path="usuario.novidadesEmail" value="false" label="Não"
+								path="usuario.newsLetterEmail" value="false" label="Não"
 								id="novidades-email-nao" /></td>
 					</tr>
 					<tr>
@@ -65,10 +65,10 @@
 							class="control-label" id="termos-label">Termos de uso</label></td>
 						<td class="td-input" id="td-termos-input"><div
 								class="checkbox">
-								<form:checkbox path="usuario.concordaTermos" value="true"
+								<form:checkbox path="usuario.agreeTermsOfService" value="true"
 									label="Eu li e concordo com os Termos de uso e a Política de privacidade." />
 								<br />
-								<form:errors path="usuario.concordaTermos"
+								<form:errors path="usuario.agreeTermsOfService"
 									cssClass="text-danger" />
 							</div></td>
 					</tr>

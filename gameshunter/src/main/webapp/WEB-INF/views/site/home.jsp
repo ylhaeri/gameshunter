@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 </head>
 <body>
 	<div class="wrapper">
-		<c:import url="cabecalho.jsp"></c:import>
+		<gameshunter:header />
 
 		<main class="container">
 		<div>
@@ -45,6 +46,7 @@
 
 		</main>
 	</div>
-	<c:import url="rodape.jsp"></c:import>
+
+	<gameshunter:footer />
 </body>
 </html>

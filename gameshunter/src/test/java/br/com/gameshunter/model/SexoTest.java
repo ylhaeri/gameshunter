@@ -12,13 +12,13 @@ public class SexoTest {
 
 	@Test
 	public void deveConterOsGenerosNecessarios() {
-		Sexo fem = Sexo.Feminino;
-		Sexo masc = Sexo.Masculino;
-		Sexo indef = Sexo.Indefinido;
+		Gender fem = Gender.Feminino;
+		Gender masc = Gender.Masculino;
+		Gender indef = Gender.Indefinido;
 
-		List<Sexo> lista = Arrays.asList(Sexo.values());
+		List<Gender> lista = Arrays.asList(Gender.values());
 
 		assertThat(lista, hasItems(fem, masc, indef));
-		assertNotNull(Sexo.valueOf("Feminino"));
+		assertNotNull(Gender.valueOf("Feminino"));
 	}
 }

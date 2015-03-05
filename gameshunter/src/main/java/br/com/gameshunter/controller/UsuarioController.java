@@ -88,12 +88,18 @@ public class UsuarioController {
 	public String cadastrado(@Valid Usuario usuario, BindingResult result) {
 
 		if (result.hasErrors()) {
-			usuario.setConcordaTermos(false);
-			result.getAllErrors().forEach(System.out::println);
+
+			usuario.setAgreeTermsOfService(false);
+			return "/usuario/novo";
+		} else if (usuario.getPassword().length() > 50) {
+
+			usuario.setAgreeTermsOfService(false);
+			result.rejectValue("password", null, "Deve ter entre 6 e 50 caracteres.");
 			return "/usuario/novo";
 		} else {
-			service.add(usuario);
 
+			usuario.generatePassword();
+			service.add(usuario);
 			return "/usuario/cadastrado";
 		}
 	}
@@ -102,7 +108,8 @@ public class UsuarioController {
 	public ModelAndView login(@RequestParam("path") String path, @Valid Login login, BindingResult result,
 			HttpSession session) {
 
-		// TODO fazer o direcionamento para as páginas corretamente. Decidir se
+		// TODO fazer o redirecionamento para as páginas corretamente. Decidir
+		// se
 		// vai ser estático ou baseado na página onde o usuário estava quando
 		// tentou logar. Creio que o ideal é guardar no login as últimas
 		// visitadas pelo usuário, pra dai decidir onde redirecionar. Passar as
@@ -120,7 +127,7 @@ public class UsuarioController {
 					"Essa conta não existe. Insira outro login ou <a href='/gameshunter/usuario/novo&"
 							+ login.getEmail() + "/' style='text-transform:initial'>cadastre-se</a>.");
 			return new ModelAndView("/site/home", "login", login);
-		} else if (!usuario.getSenha().equals(login.getSenha())) {
+		} else if (!usuario.getPassword().equals(login.getSenha())) {
 			result.rejectValue("email", null,
 					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
 			return new ModelAndView("/site/home", "login", login);
@@ -155,7 +162,7 @@ public class UsuarioController {
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-		return usuario.getImagem();
+		return usuario.getImage();
 	}
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
@@ -164,7 +171,7 @@ public class UsuarioController {
 	public String setFoto(HttpSession session, @RequestParam("file") MultipartFile file) throws IOException {
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		usuario.setImagem(file.getBytes());
+		usuario.setImage(file.getBytes());
 		service.update(usuario);
 
 		return "redirect:/usuario/perfil";
