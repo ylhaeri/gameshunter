@@ -50,7 +50,8 @@ public class SpringConfig {
 		SimpleEmail email = new SimpleEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator("testeghunter@gmail.com", "xbifexbacon"));
+		email.setAuthenticator(new DefaultAuthenticator(
+				"testeghunter@gmail.com", "xbifexbacon"));
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom("testeghunter@gmail.com", "GamesHunter");
