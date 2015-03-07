@@ -65,7 +65,7 @@
 							class="control-label" id="termos-label">Termos de uso</label></td>
 						<td class="td-input" id="td-termos-input"><div
 								class="checkbox">
-								<form:checkbox path="usuario.agreeTermsOfService" value="true"
+								<form:checkbox path="usuario.agreeTermsOfService" id="termos-servico-input" value="true"
 									label="Eu li e concordo com os Termos de uso e a Política de privacidade." />
 								<br />
 								<form:errors path="usuario.agreeTermsOfService"
@@ -74,7 +74,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Enviar"
+						<td><input type="submit" id="cadastro-enviar" value="Enviar"
 							class="btn btn-primary"></td>
 					</tr>
 				</table>

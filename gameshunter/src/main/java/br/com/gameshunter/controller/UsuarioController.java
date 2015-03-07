@@ -70,7 +70,6 @@ public class UsuarioController {
 
 	@RequestMapping(value = "novo", method = RequestMethod.GET)
 	public ModelAndView novo() {
-		System.out.println(usuario.getNome());
 		ModelAndView mav = new ModelAndView("/usuario/novo");
 		mav.addObject("usuario", usuario);
 
@@ -79,7 +78,6 @@ public class UsuarioController {
 
 	@RequestMapping(value = "novo&{email}", method = RequestMethod.GET)
 	public ModelAndView novo(@PathVariable("email") String email) {
-		usuario.setNome("Aranha");
 		ModelAndView mav = new ModelAndView("/usuario/novo");
 		usuario.setEmail(email);
 		mav.addObject("usuario", usuario);

@@ -141,12 +141,12 @@
 			<version>2.45.0</version>
 			<exclusions>
 				<exclusion>
-					<groupId>xalan</groupId>
-					<artifactId>xalan</artifactId>
+					<groupId></groupId>
+					<artifactId></artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- Ghost Driver para o Selenium. Exclusão de jars aparentemente inúteis -->
+		<!--Ghost Driver para o Selenium. Exclusão de jars aparentemente inúteis -->
 		<dependency>
 			<groupId>com.github.detro.ghostdriver</groupId>
 			<artifactId>phantomjsdriver</artifactId>

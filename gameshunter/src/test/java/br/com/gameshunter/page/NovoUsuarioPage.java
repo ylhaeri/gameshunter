@@ -1,5 +1,5 @@
-package br.com.gameshunter.page;
-
-public class NovoUsuarioPage {
-
-}
+//package br.com.gameshunter.page;
+//
+//public class NovoUsuarioPage {
+//
+//}
