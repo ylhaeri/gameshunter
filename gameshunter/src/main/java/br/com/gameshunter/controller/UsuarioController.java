@@ -28,6 +28,7 @@ import br.com.gameshunter.service.UsuarioService;
 public class UsuarioController {
 
 	private UsuarioService service;
+	private Usuario usuario;
 
 	// private final RequestMappingHandlerMapping handlerMapping;
 	//
@@ -50,8 +51,9 @@ public class UsuarioController {
 	// }
 
 	@Autowired
-	public UsuarioController(UsuarioService service) {
+	public UsuarioController(UsuarioService service, Usuario usuario) {
 		this.service = service;
+		this.usuario = usuario;
 	}
 
 	@InitBinder
@@ -68,16 +70,17 @@ public class UsuarioController {
 
 	@RequestMapping(value = "novo", method = RequestMethod.GET)
 	public ModelAndView novo() {
+		System.out.println(usuario.getNome());
 		ModelAndView mav = new ModelAndView("/usuario/novo");
-		mav.addObject("usuario", new Usuario());
+		mav.addObject("usuario", usuario);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "novo&{email}", method = RequestMethod.GET)
 	public ModelAndView novo(@PathVariable("email") String email) {
+		usuario.setNome("Aranha");
 		ModelAndView mav = new ModelAndView("/usuario/novo");
-		Usuario usuario = new Usuario();
 		usuario.setEmail(email);
 		mav.addObject("usuario", usuario);
 
@@ -94,7 +97,8 @@ public class UsuarioController {
 		} else if (usuario.getPassword().length() > 50) {
 
 			usuario.setAgreeTermsOfService(false);
-			result.rejectValue("password", null, "Deve ter entre 6 e 50 caracteres.");
+			result.rejectValue("password", null,
+					"Deve ter entre 6 e 50 caracteres.");
 			return "/usuario/novo";
 		} else {
 
@@ -105,8 +109,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam("path") String path, @Valid Login login, BindingResult result,
-			HttpSession session) {
+	public ModelAndView login(@RequestParam("path") String path,
+			@Valid Login login, BindingResult result, HttpSession session) {
 
 		// TODO fazer o redirecionamento para as páginas corretamente. Decidir
 		// se
@@ -121,7 +125,8 @@ public class UsuarioController {
 			return new ModelAndView("/site/home");
 		Usuario usuario = service.find(login.getEmail());
 		if (usuario == null) {
-			result.rejectValue("email", "login.email.not.found", new Object[] { login.getEmail() },
+			result.rejectValue("email", "login.email.not.found",
+					new Object[] { login.getEmail() },
 					"Essa conta não existe. Insira outro login ou cadastre-se.");
 			// FIXME deve pegar a mensagem da validation messages
 			return new ModelAndView("/site/home", "login", login);
@@ -166,7 +171,8 @@ public class UsuarioController {
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
 	// apropriado
 	@RequestMapping(value = "setFoto", method = RequestMethod.POST)
-	public String setFoto(HttpSession session, @RequestParam("file") MultipartFile file) throws IOException {
+	public String setFoto(HttpSession session,
+			@RequestParam("file") MultipartFile file) throws IOException {
 
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		usuario.setImage(file.getBytes());

@@ -11,10 +11,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import br.com.gameshunter.model.Endereco;
-import br.com.gameshunter.model.Login;
 import br.com.gameshunter.model.Usuario;
-import br.com.gameshunter.schedule.Arara;
+import br.com.gameshunter.schedule.AraraScheduled;
 
 @Configuration
 @EnableTransactionManagement
@@ -26,29 +24,18 @@ public class SpringConfig {
 		return new Usuario();
 	}
 
-	@Bean(initMethod = "init")
-	@Scope("prototype")
-	public Endereco endereco() {
-		return new Endereco();
-	}
-
-	@Bean(initMethod = "init")
-	@Scope("prototype")
-	public Login login() {
-		return new Login();
-	}
-
 	@Bean
-	public Arara arara() {
-		return new Arara();
+	public AraraScheduled arara() {
+		return new AraraScheduled();
 	}
 
 	@Bean
 	@Scope("prototype")
 	public SimpleEmail simpleEmail() {
-		// FIXME Ajeitar a configuração, só fiz algo que pega
+		// FIXME Ajeitar a configuração, só fiz algo que pega. Não sei se da
+		// para melhorar ou não
 		SimpleEmail email = new SimpleEmail();
-		email.setHostName("smtp.googlemail.com");
+		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
 		email.setAuthenticator(new DefaultAuthenticator(
 				"testeghunter@gmail.com", "xbifexbacon"));

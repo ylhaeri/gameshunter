@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
 	}
 
 	@Id
-	@Email
+	@Email(message = "{user.email.invalid}")
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
 	@Column(length = 128)
@@ -67,11 +67,11 @@ public class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	// TODO deve ser uma classe
+	@CPF
 	@NotEmpty(message = "{user.cpf.empty}")
 	@Size(min = 14, max = 14, message = "{user.cpf.size}")
-	@CPF
 	private String cpf;
-	@NotNull(message = "{user.birth.null}")
+	@NotNull(message = "{user.bday.null}")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Convert(converter = LocalDateDBConverter.class)
 	private LocalDate birthDay;
@@ -82,7 +82,8 @@ public class Usuario implements Serializable {
 	// TODO deve ser uma classe
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String mobile;
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE })
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
+			CascadeType.MERGE })
 	private List<Endereco> enderecos = new ArrayList<>(3);
 	private boolean newsLetterEmail = true;
 	@AssertTrue(message = "{user.terms_of_service.agreement}")
@@ -113,7 +114,7 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * Setter para uso exclusivo da JPA
+	 * Setter para uso exclusivo da JPA e Spring
 	 * 
 	 * @deprecated Para settar a senha do usuário, deve-se usar o método
 	 *             {@link #generatePassword}
@@ -256,7 +257,8 @@ public class Usuario implements Serializable {
 			return this.picture;
 		else {
 			try {
-				File file = new File(FileManager.defaultPath() + "/img/default-profile-picture.jpg");
+				File file = new File(FileManager.defaultPath()
+						+ "/img/default-profile-picture.jpg");
 				InputStream is = new FileInputStream(file);
 				return IOUtils.toByteArray(is);
 			} catch (IOException e) {
@@ -293,7 +295,8 @@ public class Usuario implements Serializable {
 	 * @return verdadeiro caso possa ser adicionado, falso caso não.
 	 */
 	private boolean podeAdicionar(Endereco endereco) {
-		return enderecos.isEmpty() || (enderecos.size() < 3 && !enderecos.contains(endereco));
+		return enderecos.isEmpty()
+				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
 	}
 
 	/**
@@ -306,7 +309,8 @@ public class Usuario implements Serializable {
 	public Endereco pegaEndereco(Integer numero) {
 
 		if (numero < 1)
-			throw new IllegalArgumentException("Informe o valor real do elemento");
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
 		return enderecos.get(numero - 1);
 	}
 
@@ -318,7 +322,8 @@ public class Usuario implements Serializable {
 	 */
 	public void removeEndereco(Integer numero) {
 		if (numero < 1)
-			throw new IllegalArgumentException("Informe o valor real do elemento");
+			throw new IllegalArgumentException(
+					"Informe o valor real do elemento");
 		enderecos.remove(numero - 1);
 	}
 
@@ -336,51 +341,37 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	/**
-	 * FIXME Construtor incompleto Construtor completo.
-	 * 
-	 * @param email
-	 * @param nome
-	 * @param apelido
-	 * @param sexo
-	 * @param cpf
-	 * @param dataNascimento
-	 * @param telefone
-	 * @param celular
-	 * @param enderecos
-	 */
-	public Usuario(String email, String nome, String apelido, Gender sexo, String cpf, LocalDate dataNascimento,
-			String telefone, String celular, Endereco... enderecos) {
+	public Usuario(String email) {
 		this.email = email;
-		this.nome = nome;
-		this.nickname = apelido;
-		this.gender = sexo;
-		this.cpf = cpf;
-		this.birthDay = dataNascimento;
-		this.phone = telefone;
-		this.mobile = celular;
-		this.enderecos = Arrays.asList(enderecos);
 	}
 
 	@Override
 	public int hashCode() {
-		// FIXME incompleto
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
+		result = prime * result + (agreeTermsOfService ? 1231 : 1237);
+		result = prime * result
+				+ ((birthDay == null) ? 0 : birthDay.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((mobile == null) ? 0 : mobile.hashCode());
+		result = prime * result + (newsLetterEmail ? 1231 : 1237);
+		result = prime * result
+				+ ((nickname == null) ? 0 : nickname.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + Arrays.hashCode(picture);
+		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		// FIXME incompleto
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -388,20 +379,17 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (nickname == null) {
-			if (other.nickname != null)
-				return false;
-		} else if (!nickname.equals(other.nickname))
-			return false;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
+		if (agreeTermsOfService != other.agreeTermsOfService)
 			return false;
 		if (birthDay == null) {
 			if (other.birthDay != null)
 				return false;
 		} else if (!birthDay.equals(other.birthDay))
+			return false;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -413,17 +401,41 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!enderecos.equals(other.enderecos))
 			return false;
+		if (gender != other.gender)
+			return false;
+		if (mobile == null) {
+			if (other.mobile != null)
+				return false;
+		} else if (!mobile.equals(other.mobile))
+			return false;
+		if (newsLetterEmail != other.newsLetterEmail)
+			return false;
+		if (nickname == null) {
+			if (other.nickname != null)
+				return false;
+		} else if (!nickname.equals(other.nickname))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (gender != other.gender)
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
 			return false;
 		if (phone == null) {
 			if (other.phone != null)
 				return false;
 		} else if (!phone.equals(other.phone))
+			return false;
+		if (!Arrays.equals(picture, other.picture))
+			return false;
+		if (salt == null) {
+			if (other.salt != null)
+				return false;
+		} else if (!salt.equals(other.salt))
 			return false;
 		return true;
 	}

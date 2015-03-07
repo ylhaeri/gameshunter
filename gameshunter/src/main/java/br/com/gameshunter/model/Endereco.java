@@ -121,7 +121,7 @@ public class Endereco {
 	 */
 	public String formatado() throws Exception {
 		/*
-		 * FIXME
+		 * FIXME Pode esperar, prioridade para os outros
 		 * 
 		 * Formatos:
 		 * 
@@ -147,8 +147,10 @@ public class Endereco {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result
+				+ ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result
+				+ ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		return result;
 	}

@@ -1,7 +1,7 @@
 package br.com.gameshunter.schedule;
 import org.springframework.scheduling.annotation.Scheduled;
 
-public class Arara {
+public class AraraScheduled {
 
 	@Scheduled(fixedDelay = 3000000)
 	public void teste() {
