@@ -1,10 +1,14 @@
 package br.com.gameshunter.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -20,15 +24,31 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gameshunter.model.Login;
-import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.model.User;
 import br.com.gameshunter.service.UsuarioService;
 
 @Controller
 @RequestMapping("usuario")
 public class UsuarioController {
 
+	@RequestMapping("ararinha")
+	public @ResponseBody byte[] testa(HttpSession session) throws IOException {
+		File file = new File(session.getServletContext().getRealPath(
+				"/resources/img/Brazil-Flag-icon.png"));
+		InputStream is = new FileInputStream(file);
+		return IOUtils.toByteArray(is);
+	}
+	
+	@RequestMapping("ararinha2")
+	public @ResponseBody byte[] testas(HttpSession session) throws IOException {
+		File file = new File(session.getServletContext().getRealPath(
+				"/resources/img/United-States-Flag-icon.png"));
+		InputStream is = new FileInputStream(file);
+		return IOUtils.toByteArray(is);
+	}
+
 	private UsuarioService service;
-	private Usuario usuario;
+	private User usuario;
 
 	// private final RequestMappingHandlerMapping handlerMapping;
 	//
@@ -51,7 +71,7 @@ public class UsuarioController {
 	// }
 
 	@Autowired
-	public UsuarioController(UsuarioService service, Usuario usuario) {
+	public UsuarioController(UsuarioService service, User usuario) {
 		this.service = service;
 		this.usuario = usuario;
 	}
@@ -86,7 +106,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "cadastrado", method = RequestMethod.POST)
-	public String cadastrado(@Valid Usuario usuario, BindingResult result) {
+	public String cadastrado(@Valid User usuario, BindingResult result) {
 
 		if (result.hasErrors()) {
 
@@ -121,14 +141,14 @@ public class UsuarioController {
 		// declarar o resource bundle do spring, não tenho certeza
 		if (result.hasErrors())
 			return new ModelAndView("/site/home");
-		Usuario usuario = service.find(login.getEmail());
+		User usuario = service.find(login.getEmail());
 		if (usuario == null) {
 			result.rejectValue("email", "login.email.not.found",
 					new Object[] { login.getEmail() },
 					"Essa conta não existe. Insira outro login ou cadastre-se.");
 			// FIXME deve pegar a mensagem da validation messages
 			return new ModelAndView("/site/home", "login", login);
-		} else if (!usuario.getPassword().equals(login.getSenha())) {
+		} else if (!usuario.isPasswordEqual(login.getSenha())) {
 			result.rejectValue("email", null,
 					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
 			return new ModelAndView("/site/home", "login", login);
@@ -161,9 +181,9 @@ public class UsuarioController {
 	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/png")
 	public @ResponseBody byte[] teste(HttpSession session) throws IOException {
 
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		User usuario = (User) session.getAttribute("usuario");
 
-		return usuario.getImage();
+		return usuario.getProfilePicture();
 	}
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
@@ -172,8 +192,8 @@ public class UsuarioController {
 	public String setFoto(HttpSession session,
 			@RequestParam("file") MultipartFile file) throws IOException {
 
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		usuario.setImage(file.getBytes());
+		User usuario = (User) session.getAttribute("usuario");
+		usuario.setProfilePicture(file.getBytes());
 		service.update(usuario);
 
 		return "redirect:/usuario/perfil";

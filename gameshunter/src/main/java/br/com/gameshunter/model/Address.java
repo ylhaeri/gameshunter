@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
  * @author Myho
  */
 @Entity
-public class Endereco {
+public class Address {
 
 	public void init() {
 		System.out.println("Novo Endereço");
@@ -94,7 +94,7 @@ public class Endereco {
 	/**
 	 * Construtor padrão de endereço.
 	 */
-	public Endereco() {
+	public Address() {
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Endereco {
 	 * @param numero
 	 * @param complemento
 	 */
-	public Endereco(Logradouro logradouro, Integer numero, String complemento) {
+	public Address(Logradouro logradouro, Integer numero, String complemento) {
 		this.logradouro = logradouro;
 		if (complemento == null)
 			this.complemento = "";
@@ -163,7 +163,7 @@ public class Endereco {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		Address other = (Address) obj;
 		if (complemento == null) {
 			if (other.complemento != null)
 				return false;

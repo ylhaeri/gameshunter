@@ -32,13 +32,13 @@
 	</bean>
 
 	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="ValidationMessages" />
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/i18n/ValidationMessages" />
 	</bean>
 
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<property name="defaultLocale" value="en" />
+		<property name="defaultLocale" value="pt_BR" />
 	</bean>
 
 	<bean id="multipartResolver"
@@ -47,7 +47,7 @@
 	<mvc:interceptors>
 		<!-- <bean class="br.com.gameshunter.interceptor.Teste" /> -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<property name="paramName" value="locale" />
+			<property name="paramName" value="language" />
 		</bean>
 	</mvc:interceptors>
 </beans>

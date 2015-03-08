@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.model.User;
 
 /**
  * Representa todo tipo de conexão relacionado ao Usuário.
@@ -21,15 +21,15 @@ public class UsuarioDAO {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public void add(Usuario usuario) {
+	public void add(User usuario) {
 		manager.persist(usuario);
 	}
 
-	public Usuario find(String email) {
-		return manager.find(Usuario.class, email);
+	public User find(String email) {
+		return manager.find(User.class, email);
 	}
 
-	public void update(Usuario usuario) {
+	public void update(User usuario) {
 		manager.merge(usuario);
 	}
 }

@@ -7,4 +7,13 @@ $(document).ready(function() {
 			window.location.reload()
 		})
 	})
+
+	$("#arara").ddslick({
+		width : 300,
+		imagePosition : "left",
+		selectText : "Select your favorite social network",
+		onSelected : function(data) {
+			console.log(data);
+		}
+	})
 })

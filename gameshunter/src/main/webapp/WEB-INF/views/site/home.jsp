@@ -35,8 +35,16 @@
 
 		</div>
 
+		Language : <a href="?language=en_US">English</a>| <a
+			href="?language=pt_BR">Português</a>
 
-		</main>
+		<h3>
+			<c:set var="teste" value="${pageContext.response.locale}"></c:set>
+			welcome.springmvc :
+			<spring:message code="welcome.springmvc" text="default text" />
+		</h3>
+
+		Current Locale: ${pageContext.response.locale} </main>
 	</div>
 
 	<gameshunter:footer />

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.gameshunter.dao.EnderecoDAO;
-import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Address;
 
 @Service
 public class EnderecoService {
@@ -14,7 +14,7 @@ public class EnderecoService {
 	private EnderecoDAO dao;
 
 	@Transactional
-	public void add(Endereco endereco) {
+	public void add(Address endereco) {
 		dao.add(endereco);
 	}
 }

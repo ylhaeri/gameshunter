@@ -35,18 +35,13 @@ import br.com.gameshunter.util.SaltFactory;
 import br.com.gameshunter.util.HashFactory;
 
 /**
- * Representa um usuário
- * 
  * @author Myho
+ *
  */
 @Entity
-public class Usuario implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	public void init() {
-		System.out.println("Novo usuario");
-	}
 
 	@Id
 	@Email(message = "{user.email.invalid}")
@@ -54,19 +49,22 @@ public class Usuario implements Serializable {
 	private String email;
 	@Column(length = 128)
 	@NotEmpty(message = "{user.password.empty}")
-	@Size(min = 6, message = "{user.password.size}")
+	@Size(min = 6, max = 128, message = "{user.password.size}")
 	private String password;
 	private String salt;
-	@NotEmpty(message = "{user.name.empty}")
-	@Size(min = 3, max = 50, message = "{user.name.size}")
-	private String nome;
+	@NotEmpty(message = "{user.firstName.empty}")
+	@Size(max = 50, message = "{user.firstName.size}")
+	private String firstName;
+	@NotEmpty(message = "{user.lastName.empty}")
+	@Size(max = 50, message = "{user.lastName.size}")
+	private String lastName;
 	@NotEmpty(message = "{user.nickname.empty}")
 	@Size(min = 4, max = 20, message = "{user.nickname.size}")
 	private String nickname;
-	@NotNull
+	@NotNull(message = "{user.gender.null}")
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	// TODO deve ser uma classe
+	// TODO deve ser uma classe e erros de internacionalização.
 	@CPF
 	@NotEmpty(message = "{user.cpf.empty}")
 	@Size(min = 14, max = 14, message = "{user.cpf.size}")
@@ -75,186 +73,192 @@ public class Usuario implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Convert(converter = LocalDateDBConverter.class)
 	private LocalDate birthDay;
-	// TODO deve ser uma classe
+	// TODO deve ser uma classe, provavelmente usaremos uma lista para tel e cel
 	@NotEmpty(message = "{user.phone.empty}")
 	@Size(min = 13, max = 13, message = "{user.phone.size}")
 	private String phone;
-	// TODO deve ser uma classe
+	// TODO deve ser uma classe, provavelmente usaremos uma lista para tel e cel
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String mobile;
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
 			CascadeType.MERGE })
-	private List<Endereco> enderecos = new ArrayList<>(3);
+	private List<Address> addresses;
 	private boolean newsLetterEmail = true;
 	@AssertTrue(message = "{user.terms_of_service.agreement}")
 	private boolean agreeTermsOfService;
 	@Lob
-	private byte[] picture;
+	private byte[] profilePicture;
 
-	/**
-	 * @return email do usuário
-	 */
+	/** Construtor padrão */
+	public User() {
+		addresses = new ArrayList<>(3);
+	}
+
+	/** @return */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email
-	 *            email do usuário
-	 */
+	/** @param email */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return senha do usuário
-	 */
+	/** @return */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * Setter para uso exclusivo da JPA e Spring
+	 * JPA/Spring's exclusive use. Use {@link #generatePassword()} if it is
+	 * necessary to set a new salt.
 	 * 
-	 * @deprecated Para settar a senha do usuário, deve-se usar o método
-	 *             {@link #generatePassword}
-	 * 
-	 * @param senha
-	 *            senha do usuário
+	 * @param password
 	 */
-	public void setPassword(String senha) {
-		this.password = senha;
+	@Deprecated
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getSalt() {
-		return salt;
-	}
-
+	/**
+	 * JPA's exclusive use. Use {@link #generatePassword()} if it is necessary
+	 * to set a new salt.
+	 * 
+	 * @param salt
+	 */
+	@Deprecated
 	@SuppressWarnings("unused")
 	private void setSalt(String salt) {
+		// TODO Bloquear o setter caso não esteja null/vazio
 		this.salt = salt;
 	}
 
-	/**
-	 * Realiza todo o procedimento necessário para garantir maior segurança à
-	 * senha do usuário.
-	 */
-	public void generatePassword() {
-
-		this.salt = SaltFactory.generateSalt();
-		this.password = saltedPasswordHash(this.password);
+	/** @return */
+	public String getFirstName() {
+		return firstName;
 	}
 
-	/**
-	 * Confere se a senha informa é igual a senha do usuário
-	 * 
-	 * @param password
-	 *            Senha que vai ser comparada
-	 * @return true se for igual, false se for diferente
-	 */
-	public boolean isPasswordEqual(String password) {
-
-		if (saltedPasswordHash(password).equals(this.password))
-			return true;
-		else
-			return false;
+	/** @param firstName */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	/**
-	 * Gera a senha com o salt
-	 * 
-	 * @param password
-	 * @return
-	 */
-	private String saltedPasswordHash(String password) {
-		String passwordHash = HashFactory.sha512(password);
-		return HashFactory.sha512(passwordHash + this.salt);
+	/** @return */
+	public String getLastName() {
+		return lastName;
 	}
 
-	public String getNome() {
-		return nome;
+	/** @param lastName */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	/** @return */
 	public String getNickname() {
 		return nickname;
 	}
 
-	public void setNickname(String apelido) {
-		this.nickname = apelido;
+	/** @param nickname */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
+	/** @return */
 	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender sexo) {
-		this.gender = sexo;
+	/** @param gender */
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
+	/** @return */
 	public String getCpf() {
+		// FIXME mesmo problema do campo
 		return cpf;
 	}
 
+	/** @param cpf */
 	public void setCpf(String cpf) {
+		// FIXME mesmo problema do campo
 		this.cpf = cpf;
 	}
 
+	/** @return */
 	public LocalDate getBirthDay() {
 		return birthDay;
 	}
 
+	/** @param birthDay */
 	public void setBirthDay(LocalDate birthDay) {
 		this.birthDay = birthDay;
 	}
 
+	/** @return */
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String telefone) {
-		this.phone = telefone;
+	/** @param phone */
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
+	/** @return */
 	public String getMobile() {
 		return mobile;
 	}
 
+	/** @param celular */
 	public void setMobile(String celular) {
 		this.mobile = celular;
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
+	/**
+	 * JPA's exclusive use. User addresses can only be changed through adding,
+	 * changing or removing addresses.
+	 * 
+	 * @param addresses
+	 */
+	@Deprecated
+	@SuppressWarnings("unused")
+	private void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
-	public boolean isNewsLetterEmail() {
+	/** @return */
+	public boolean isNewsletterEmail() {
+		// FIXME O nome tá péssimo, precisamos mudar o nome desse método, não
+		// faz sentido verificar se o cara quer receber e-mail de newsletter
+		// nessa bosta
 		return newsLetterEmail;
 	}
 
-	public void setNewsLetterEmail(boolean bool) {
+	/** @param bool */
+	public void setNewsletterEmail(boolean bool) {
+		// FIXME nome
 		this.newsLetterEmail = bool;
 	}
 
 	public boolean isAgreeTermsOfService() {
+		// FIXME O nome tá péssimo, precisamos mudar o nome desse método, não
+		// faz sentido verificar se o cara concordou com os termos
+		// nessa bosta
 		return agreeTermsOfService;
 	}
 
+	/** @param bool */
 	public void setAgreeTermsOfService(boolean bool) {
+		// FIXME nome
 		this.agreeTermsOfService = bool;
 	}
 
-	public byte[] getImage() {
-
-		if (this.picture != null)
-			return this.picture;
+	/** @return */
+	public byte[] getProfilePicture() {
+		// TODO Acoplamento muito alto.
+		if (this.profilePicture != null)
+			return this.profilePicture;
 		else {
 			try {
 				File file = new File(FileManager.defaultPath()
@@ -269,80 +273,106 @@ public class Usuario implements Serializable {
 		}
 	}
 
-	public void setImage(byte[] imagem) {
+	/** @param profilePicture */
+	public void setProfilePicture(byte[] profilePicture) {
 		// TODO Precisamos de uma lista com toda imagem que é adicionada.
-		this.picture = imagem;
+		this.profilePicture = profilePicture;
 	}
 
 	/**
-	 * Responsável por adicionar novos endereços.
-	 * 
-	 * @param endereco
-	 *            O endereço que deve ser adicionado
+	 * Do the whole process to ensure that the password is safer to store. Be
+	 * careful on usage. User will no longer be able to login with his current
+	 * password, it is not possible to keep the same password, do not use unless
+	 * it is for user registration or password change
 	 */
-	public void adicionaEndereco(Endereco endereco) {
+	public void generatePassword() {
 
-		if (podeAdicionar(endereco))
-			this.enderecos.add(endereco);
+		// TODO bloquear o uso se a senha já existir, podemos fazer uso do
+		// length, o Sha 512 sempre gera o mesmo tamanho para qualquer String. O
+		// tamanho é 128, se não me engano
+		this.salt = SaltFactory.generateSalt();
+		this.password = saltedPasswordHash(this.password);
 	}
 
 	/**
-	 * Verifica se o endereço pode ser adicionado
+	 * Verify if the given password is equal to user's password
 	 * 
-	 * @param endereco
-	 *            Endereço que que será analisado.
-	 * 
-	 * @return verdadeiro caso possa ser adicionado, falso caso não.
+	 * @param password
+	 *            Password that will be checked
+	 * @return True if equal, false if not
 	 */
-	private boolean podeAdicionar(Endereco endereco) {
-		return enderecos.isEmpty()
-				|| (enderecos.size() < 3 && !enderecos.contains(endereco));
+	public boolean isPasswordEqual(String password) {
+
+		if (saltedPasswordHash(password).equals(this.password))
+			return true;
+		else
+			return false;
 	}
 
 	/**
-	 * Pega o endereço na lista
+	 * Generate salted password hash
 	 * 
-	 * @param numero
-	 *            Indice real do endereço na lista
+	 * @param password
+	 * @return Salted password hash
+	 */
+	private String saltedPasswordHash(String password) {
+		String passwordHash = HashFactory.sha512(password);
+		return HashFactory.sha512(passwordHash + this.salt);
+	}
+
+	/**
+	 * Add a new address to user address list
+	 * 
+	 * @param address
+	 */
+	public void addAddress(Address address) {
+
+		if (canAdd(address))
+			this.addresses.add(address);
+	}
+
+	/**
+	 * Verify if the address can be added
+	 * 
+	 * @param address
+	 * 
+	 * @return True if can be added, false if not
+	 */
+	private boolean canAdd(Address address) {
+		// FIXME Número de endereços hardcoded
+		return addresses.isEmpty()
+				|| (addresses.size() < 3 && !addresses.contains(address));
+	}
+
+	/**
+	 * Get the address in the list
+	 * 
+	 * @param index
+	 * 
 	 * @return Endereço
 	 */
-	public Endereco pegaEndereco(Integer numero) {
+	public Address pegaEndereco(Integer index) {
 
-		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
-		return enderecos.get(numero - 1);
+		return addresses.get(index);
 	}
 
 	/**
-	 * Remove o endereço da lista
+	 * Remove address from list
 	 * 
-	 * @param enviado
-	 *            Indice real do endereço na lista
+	 * @param index
 	 */
-	public void removeEndereco(Integer numero) {
-		if (numero < 1)
-			throw new IllegalArgumentException(
-					"Informe o valor real do elemento");
-		enderecos.remove(numero - 1);
+	public void removeAddress(Integer index) {
+		addresses.remove(index);
 	}
 
 	/**
-	 * Altera o endereço desejado
+	 * Update an address. Address is identified by its index
 	 * 
-	 * @param alterado
-	 *            Endereço alterado para que a troca seja feita
+	 * @param address
+	 *            Address with updated values
 	 */
-	public void alteraEndereco(Integer numero, Endereco alterado) {
-		enderecos.set(numero - 1, alterado);
-	}
-
-	/** Construtor padrão */
-	public Usuario() {
-	}
-
-	public Usuario(String email) {
-		this.email = email;
+	public void updateAddress(Integer index, Address address) {
+		addresses.set(index, address);
 	}
 
 	@Override
@@ -355,17 +385,18 @@ public class Usuario implements Serializable {
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
-				+ ((enderecos == null) ? 0 : enderecos.hashCode());
+				+ ((addresses == null) ? 0 : addresses.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((mobile == null) ? 0 : mobile.hashCode());
 		result = prime * result + (newsLetterEmail ? 1231 : 1237);
 		result = prime * result
 				+ ((nickname == null) ? 0 : nickname.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + Arrays.hashCode(picture);
+		result = prime * result + Arrays.hashCode(profilePicture);
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		return result;
 	}
@@ -378,7 +409,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		User other = (User) obj;
 		if (agreeTermsOfService != other.agreeTermsOfService)
 			return false;
 		if (birthDay == null) {
@@ -396,10 +427,10 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (enderecos == null) {
-			if (other.enderecos != null)
+		if (addresses == null) {
+			if (other.addresses != null)
 				return false;
-		} else if (!enderecos.equals(other.enderecos))
+		} else if (!addresses.equals(other.addresses))
 			return false;
 		if (gender != other.gender)
 			return false;
@@ -415,10 +446,10 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!nickname.equals(other.nickname))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!firstName.equals(other.firstName))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -430,7 +461,7 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!phone.equals(other.phone))
 			return false;
-		if (!Arrays.equals(picture, other.picture))
+		if (!Arrays.equals(profilePicture, other.profilePicture))
 			return false;
 		if (salt == null) {
 			if (other.salt != null)
@@ -438,5 +469,9 @@ public class Usuario implements Serializable {
 		} else if (!salt.equals(other.salt))
 			return false;
 		return true;
+	}
+
+	public void init() {
+		System.out.println("Novo usuario");
 	}
 }

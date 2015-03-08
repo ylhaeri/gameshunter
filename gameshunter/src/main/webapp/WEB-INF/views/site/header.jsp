@@ -36,6 +36,16 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
+	<c:set var="locale" value="${pageContext.response.locale}"></c:set>
+	<c:set var="pt" value="pt_BR"></c:set>
+	<div style="position: absolute; top: 0; right: 0;">
+		<select id="arara">
+			<option value="en_US" data-imagesrc="/gameshunter/usuario/ararinha2"
+				<c:if test="${locale eq 'en_US'}">selected="selected"</c:if>>English</option>
+			<option data-imagesrc="/gameshunter/usuario/ararinha"
+				<c:if test="${locale eq 'pt_BR'}">selected="selected"</c:if>>Português</option>
+		</select>
+	</div>
 
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">

@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.gameshunter.model.Endereco;
+import br.com.gameshunter.model.Address;
 
 /**
  * Representa todo tipo de conexão relacionada a Endereços.
@@ -25,7 +25,7 @@ public class EnderecoDAO {
 		return manager;
 	}
 
-	public void add(Endereco endereco) {
+	public void add(Address endereco) {
 		manager.persist(endereco);
 	}
 }

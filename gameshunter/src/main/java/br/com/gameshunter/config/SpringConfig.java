@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import br.com.gameshunter.model.Usuario;
+import br.com.gameshunter.model.User;
 import br.com.gameshunter.schedule.AraraScheduled;
 
 @Configuration
@@ -20,8 +20,8 @@ public class SpringConfig {
 
 	@Bean(initMethod = "init")
 	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-	public Usuario usuario() {
-		return new Usuario();
+	public User usuario() {
+		return new User();
 	}
 
 	@Bean

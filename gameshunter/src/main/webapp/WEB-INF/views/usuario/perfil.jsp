@@ -32,7 +32,7 @@
 			</form>
 
 			<div class="profile-banner-content">
-				<h1>${sessionScope['usuario'].apelido}</h1>
+				<h1>${sessionScope['usuario'].nickname}</h1>
 			</div>
 
 		</div>
@@ -41,31 +41,32 @@
 
 			<table class="profile-table">
 				<tr>
-					<td>Nome</td>
+					<td><spring:message code="user.name" /></td>
 				</tr>
 				<tr>
-					<td>Email</td>
+					<td><spring:message code="user.email" /></td>
 				</tr>
 				<tr>
-					<td>Sexo</td>
+					<td><spring:message code="user.gender" /></td>
 				</tr>
 				<tr>
-					<td>Data de Nascimento</td>
+					<td><spring:message code="user.bday" /></td>
 				</tr>
 				<tr>
-					<td>Telefone</td>
+					<td><spring:message code="user.phone" /></td>
 				</tr>
 				<tr>
-					<td>Celular</td>
+					<td><spring:message code="user.mobile" /></td>
 				</tr>
 			</table>
 
 			<table class="profile-table-information">
 				<tr>
-					<td>${sessionScope['usuario'].nome}</td>
+					<td>${sessionScope['usuario'].firstName}
+						${sessionScope['usuario'].lastName}</td>
 				</tr>
 				<tr>
-					<td>${sessionScope['usuario'].email}</td>
+					<td>${sessionScope['usuario'].nickname}</td>
 				</tr>
 				<tr>
 					<td>${sessionScope['usuario'].gender}</td>
