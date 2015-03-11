@@ -65,7 +65,7 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	// TODO deve ser uma classe e erros de internacionalização.
-	@CPF
+	@CPF(message = "{user.cpf.invalid}")
 	@NotEmpty(message = "{user.cpf.empty}")
 	@Size(min = 14, max = 14, message = "{user.cpf.size}")
 	private String cpf;
