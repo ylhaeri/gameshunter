@@ -26,10 +26,10 @@
 	<nav class="navigation">
 		<div class="container">
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />">Home</a></li>
-				<li><a href="#">Como funciona</a></li>
-				<li><a href="#">Sobre</a></li>
-				<li><a href="#">Fale conosco</a></li>
+				<li><a href="<c:url value="/" />"><div>Home</div></a></li>
+				<li><a href="#"><div>Como funciona</div></a></li>
+				<li><a href="#"><div>Sobre</div></a></li>
+				<li><a href="#"><div>Fale conosco</div></a></li>
 			</ul>
 		</div>
 	</nav>
