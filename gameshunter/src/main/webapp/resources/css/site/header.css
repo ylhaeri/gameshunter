@@ -2,7 +2,7 @@
 	width: 100%;
 	background: #5D57F5;
 	height: 150px;
-	display: flex;
+	display: inline-flex;
 	flex-grow: 1;
 	align-items: center;
 	justify-content: space-between;
@@ -18,7 +18,42 @@
 
 .logo:hover {
 	transform: rotate(360deg);
-	
+}
+
+.login {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+}
+
+.login > label{
+  color: #fff;
+}
+
+.login > input {
+	border-radius: 20px;
+	padding: 0px 5px;
+	margin: 0px 5px;
+	border: 0;
+	transition: .5s;
+}
+
+.login > input:hover, .login > input:focus{
+	box-shadow: 0 0 10px #fff;
+}
+
+.login > button:hover, .login > button:focus{
+	box-shadow: 0 0 10px #fff;
+}
+
+.login > button {
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 0px 6px;
+	border: 0;
+	font-weight: bold;
+    color: rgb(30, 1, 201);
 }
 
 .navigation {
