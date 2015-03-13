@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html"%>
 <!DOCTYPE html>
@@ -35,15 +36,15 @@
 			<h2>Precisamos definir o restantes</h2>
 
 		</div>
-
+		<form action="usuario/login" method="post">
+		<input type="hidden" name="path" value="/">
+			<input type="text" name="email"><input type="password"
+				name="senha"><input type="submit">
+		</form>
+		<form:errors path="login.email" />
 		Language : <a href="?language=en_US">English</a>| <a
-			href="?language=pt_BR">Português</a>
-
-		<h3>
-			welcome.springmvc :
-			<spring:message code="welcome.springmvc" />
-		</h3>
-
+				href="?language=pt_BR">Português</a>
+			<br />
 		Current Locale: ${pageContext.response.locale} </main>
 	</div>
 

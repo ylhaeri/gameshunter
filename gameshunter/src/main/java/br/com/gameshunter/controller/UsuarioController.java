@@ -145,11 +145,11 @@ public class UsuarioController {
 		if (usuario == null) {
 			result.rejectValue("email", "login.email.not.found",
 					new Object[] { login.getEmail() },
+					// resolver mensagem em português o.o'
 					"Essa conta não existe. Insira outro login ou cadastre-se.");
-			// FIXME deve pegar a mensagem da validation messages
 			return new ModelAndView("/site/home", "login", login);
 		} else if (!usuario.isPasswordEqual(login.getSenha())) {
-			result.rejectValue("email", null,
+			result.rejectValue("email", "login.password.not_match", null,
 					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
 			return new ModelAndView("/site/home", "login", login);
 		} else {
