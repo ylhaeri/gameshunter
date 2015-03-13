@@ -2,9 +2,18 @@
 	width: 100%;
 	background: #5D57F5;
 	height: 150px;
+	display: flex;
+	flex-grow: 200px;
+}
+
+.logo {
+	width: 150px
 }
 
 .navigation {
+
+	background: linear-gradient(to bottom, rgba(118, 140, 255, 0.74),
+		#1E00C9);
 	background: #99adff; /* Old browsers */
 	background: -moz-linear-gradient(top,  #99adff 0%, #1e00c9 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#99adff), color-stop(100%,#1e00c9)); /* Chrome,Safari4+ */
