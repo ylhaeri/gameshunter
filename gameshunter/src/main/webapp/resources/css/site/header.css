@@ -21,6 +21,7 @@
 .link-list li {
 	position: relative;
 	text-align: center;
+	padding: 0;
 	width: 150px;
 	height: 100%;
 	margin: 0;
@@ -40,6 +41,7 @@
 }
 
 .link-list li a div {
+	transition: .5s;
 	padding: 12px;
 	position: relative;
 	color: #fff;
