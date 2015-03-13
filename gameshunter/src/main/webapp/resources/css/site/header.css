@@ -1,11 +1,18 @@
 .header {
 	width: 100%;
-	  background: #5D57F5;
+	background: #5D57F5;
 	height: 150px;
 }
 
 .navigation {
-	background: linear-gradient(to bottom, rgba(118, 140, 255, 0.74), #1E00C9);
+	background: #99adff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #99adff 0%, #1e00c9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#99adff), color-stop(100%,#1e00c9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #99adff 0%,#1e00c9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #99adff 0%,#1e00c9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #99adff 0%,#1e00c9 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #99adff 0%,#1e00c9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99adff', endColorstr='#1e00c9',GradientType=0 ); /* IE6-9 */
 	height: 50px;
 }
 
@@ -27,7 +34,6 @@
 	margin: 0;
 	text-align: center;
 }
-
 
 .link-list li div:HOVER {
 	box-shadow: 0 0 20px #000;

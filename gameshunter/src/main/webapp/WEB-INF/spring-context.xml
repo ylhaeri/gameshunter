@@ -38,7 +38,6 @@
 
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-		<property name="defaultLocale" value="pt_BR" />
 	</bean>
 
 	<bean id="multipartResolver"
