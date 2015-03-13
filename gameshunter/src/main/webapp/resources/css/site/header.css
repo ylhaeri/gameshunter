@@ -3,11 +3,22 @@
 	background: #5D57F5;
 	height: 150px;
 	display: flex;
-	flex-grow: 200px;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .logo {
-	width: 150px
+	width: 100px;
+	height: 100px;
+	margin: 50px;
+	transition: 1s;
+	border-radius: 100%;
+}
+
+.logo:hover {
+	transform: rotate(360deg);
+	
 }
 
 .navigation {
