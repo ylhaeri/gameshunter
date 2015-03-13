@@ -18,23 +18,3 @@ body>.wrapper {
 	overflow: auto;
 	padding-bottom: 80px; /* deve ter a mesma altura do rodapé */
 }
-
-/* main */
-.container {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	width: 75%;
-	position: relative;
-}
-
-/* footers */
-.footer {
-	background-color: #222;
-	color: #eee;
-	padding: 30px 0;
-	width: 100%;
-	position: relative;
-	height: 80px;
-	margin-top: -80px; /* valor negativo da altura do rodapé */
-	clear: both;
-}
