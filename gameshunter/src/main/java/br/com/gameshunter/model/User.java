@@ -44,7 +44,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Email(message = "{user.email.invalid}")
+	@Email
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
 	@Column(length = 128)

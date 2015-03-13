@@ -5,8 +5,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Login {
 
-	@NotEmpty(message = "Digite o seu e-mail.")
-	@Email(message = "E-mail inválido.")
+	@Email
+	@NotEmpty(message = "{login.email.empty}")
 	private String email;
 	private String senha;
 
