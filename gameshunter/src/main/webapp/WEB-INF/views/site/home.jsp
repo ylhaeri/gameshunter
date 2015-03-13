@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<<<<<<< HEAD
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+======= >>>>>>> branch 'master' of
+https://github.com/ylhaeri/gameshunter.git
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html"%>
 <!DOCTYPE html>
@@ -37,14 +40,13 @@
 
 		</div>
 		<form action="usuario/login" method="post">
-		<input type="hidden" name="path" value="/">
-			<input type="text" name="email"><input type="password"
-				name="senha"><input type="submit">
+			<input type="hidden" name="path" value="/"> <input
+				type="text" name="email"><input type="password" name="senha"><input
+				type="submit">
 		</form>
-		<form:errors path="login.email" />
-		Language : <a href="?language=en_US">English</a>| <a
-				href="?language=pt_BR">Português</a>
-			<br />
+		<form:errors path="login.email" /> Language : <a
+			href="?language=en_US">English</a>| <a href="?language=pt_BR">Português</a>
+		<br />
 		Current Locale: ${pageContext.response.locale} </main>
 	</div>
 
