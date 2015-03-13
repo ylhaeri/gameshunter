@@ -1,11 +1,18 @@
 .header {
 	width: 100%;
-	  background: #5D57F5;
+	background: #5D57F5;
 	height: 150px;
+	display: flex;
+	flex-grow: 200px;
+}
+
+.logo {
+	width: 150px
 }
 
 .navigation {
-	background: linear-gradient(to bottom, rgba(118, 140, 255, 0.74), #1E00C9);
+	background: linear-gradient(to bottom, rgba(118, 140, 255, 0.74),
+		#1E00C9);
 	height: 50px;
 }
 
@@ -27,7 +34,6 @@
 	margin: 0;
 	text-align: center;
 }
-
 
 .link-list li div:HOVER {
 	box-shadow: 0 0 20px #000;

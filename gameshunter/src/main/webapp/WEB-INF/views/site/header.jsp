@@ -5,6 +5,7 @@
 <html>
 <header>
 	<div class="header">
+		<img alt="logo" src="<c:url value='/resources/img/site/logo.png'></c:url>" class="logo">
 		<c:set var="locale" value="${pageContext.response.locale}"></c:set>
 		<div style="position: absolute; top: 0; right: 0;">
 			<select id="arara">
