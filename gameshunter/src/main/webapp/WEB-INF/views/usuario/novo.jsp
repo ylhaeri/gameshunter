@@ -60,9 +60,9 @@
 								code="user.newsletter.email.true" var="newsletter_email_true" />
 							<spring:message code="user.newsletter.email.false"
 								var="newsletter_email_false" /> <form:radiobutton
-								path="usuario.newsletterEmail" value="true"
+								path="user.newsletterEmail" value="true"
 								label="${newsletter_email_true}" id="novidades-email-sim" /> <form:radiobutton
-								path="usuario.newsletterEmail" value="false"
+								path="user.newsletterEmail" value="false"
 								label="${newsletter_email_false}" id="novidades-email-false" /></td>
 					</tr>
 					<tr>
@@ -73,11 +73,11 @@
 								class="checkbox">
 								<spring:message code="user.terms_of_service.message"
 									var="user_terms_of_service" />
-								<form:checkbox path="usuario.agreeTermsOfService"
+								<form:checkbox path="user.agreeTermsOfService"
 									id="termos-servico-input" value="true"
 									label="${user_terms_of_service}" />
 								<br />
-								<form:errors path="usuario.agreeTermsOfService"
+								<form:errors path="user.agreeTermsOfService"
 									cssClass="text-danger" />
 							</div></td>
 					</tr>

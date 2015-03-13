@@ -38,7 +38,7 @@ public class UsuarioController {
 		InputStream is = new FileInputStream(file);
 		return IOUtils.toByteArray(is);
 	}
-	
+
 	@RequestMapping("ararinha2")
 	public @ResponseBody byte[] testas(HttpSession session) throws IOException {
 		File file = new File(session.getServletContext().getRealPath(
@@ -48,7 +48,7 @@ public class UsuarioController {
 	}
 
 	private UsuarioService service;
-	private User usuario;
+	private User user;
 
 	// private final RequestMappingHandlerMapping handlerMapping;
 	//
@@ -73,7 +73,7 @@ public class UsuarioController {
 	@Autowired
 	public UsuarioController(UsuarioService service, User usuario) {
 		this.service = service;
-		this.usuario = usuario;
+		this.user = usuario;
 	}
 
 	@InitBinder
@@ -91,7 +91,7 @@ public class UsuarioController {
 	@RequestMapping(value = "novo", method = RequestMethod.GET)
 	public ModelAndView novo() {
 		ModelAndView mav = new ModelAndView("/usuario/novo");
-		mav.addObject("usuario", usuario);
+		mav.addObject("user", user);
 
 		return mav;
 	}
@@ -99,29 +99,29 @@ public class UsuarioController {
 	@RequestMapping(value = "novo&{email}", method = RequestMethod.GET)
 	public ModelAndView novo(@PathVariable("email") String email) {
 		ModelAndView mav = new ModelAndView("/usuario/novo");
-		usuario.setEmail(email);
-		mav.addObject("usuario", usuario);
+		user.setEmail(email);
+		mav.addObject("usuario", user);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "cadastrado", method = RequestMethod.POST)
-	public String cadastrado(@Valid User usuario, BindingResult result) {
+	public String cadastrado(@Valid User user, BindingResult result) {
 
 		if (result.hasErrors()) {
 
-			usuario.setAgreeTermsOfService(false);
+			user.setAgreeTermsOfService(false);
 			return "/usuario/novo";
-		} else if (usuario.getPassword().length() > 50) {
+		} else if (user.getPassword().length() > 50) {
 
-			usuario.setAgreeTermsOfService(false);
+			user.setAgreeTermsOfService(false);
 			result.rejectValue("password", null,
 					"Deve ter entre 6 e 50 caracteres.");
 			return "/usuario/novo";
 		} else {
 
-			usuario.generatePassword();
-			service.add(usuario);
+			user.generatePassword();
+			service.add(user);
 			return "/usuario/cadastrado";
 		}
 	}
