@@ -1,6 +1,9 @@
+@CHARSET "UTF-8";
+
+
 .header {
 	width: 100%;
-	background: #5D57F5;
+	background-color: #5D57F5;
 	height: 150px;
 	display: inline-flex;
 	flex-grow: 1;

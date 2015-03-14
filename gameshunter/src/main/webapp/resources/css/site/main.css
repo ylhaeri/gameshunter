@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+.container {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	width: 75%;
+	position: relative;
+}

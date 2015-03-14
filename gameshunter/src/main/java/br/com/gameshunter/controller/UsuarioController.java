@@ -87,7 +87,6 @@ public class UsuarioController {
 	 * month) { if (string.equals(month[month.length - 1])) continue;
 	 * meses.add(string); } }
 	 */
-
 	@RequestMapping(value = "novo", method = RequestMethod.GET)
 	public ModelAndView novo() {
 		ModelAndView mav = new ModelAndView("/usuario/novo");
@@ -148,7 +147,7 @@ public class UsuarioController {
 					// resolver mensagem em português o.o'
 					"Essa conta não existe. Insira outro login ou cadastre-se.");
 			return new ModelAndView("/site/home", "login", login);
-		} else if (!usuario.isPasswordEqual(login.getSenha())) {
+		} else if (!usuario.isPasswordEqual(login.getPassword())) {
 			result.rejectValue("email", "login.password.not_match", null,
 					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
 			return new ModelAndView("/site/home", "login", login);

@@ -6,6 +6,7 @@
 <header>
 	<div class="header">
 
+
 		<img alt="circulo"
 			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
 			class="logo">
@@ -16,11 +17,16 @@
 			src="<c:url value='/resources/img/site/gh.png'></c:url>"
 			class="gh">
 
-		<form action="#" class="login">
-			<label for="user">Usuário </label> <input id="user" type="email"
-				name="usuario.email"><label for="password">Senha </label> <input
-				id="password" type="password" name="usuario.password">
+		<form id="form-login" action="<c:url value="/usuario/login"></c:url>"
+			method="post" class="login">
+			<input id="path" type="hidden" name="path"> <label
+				id="login-email-label" for="user">Usuário </label> <input
+				id="login-email-input" type="email" name="email"><label
+				id="login-password-label" for="password">Senha </label> <input
+				id="login-password-input" type="password" name="password">
 			<button type="submit">Login</button>
+			<br />
+			<form:errors path="login.email" htmlEscape="false" />
 		</form>
 
 		<c:set var="locale" value="${pageContext.response.locale}"></c:set>
