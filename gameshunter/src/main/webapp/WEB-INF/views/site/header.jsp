@@ -7,23 +7,23 @@
 <header>
 	<div class="header">
 
-		<img alt="circulo"
-			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
-			class="logo">
-			<img alt="controle"
+		<img alt="controle"
 			src="<c:url value='/resources/img/site/controle.png'></c:url>"
-			class="controle">
-			<img alt="controle"
-			src="<c:url value='/resources/img/site/gh.png'></c:url>"
-			class="gh">
+			class="controle"> <img alt="controle"
+			src="<c:url value='/resources/img/site/gh.png'></c:url>" class="gh">
+		<a href="<c:url value="/"></c:url>"><img alt="circulo"
+			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
+			class="logo"> </a>
+
 
 		<form id="form-login" action="<c:url value="/usuario/login"></c:url>"
 			method="post" class="login">
 			<input id="path" type="hidden" name="path"> <label
-				id="login-email-label" for="user"><spring:message code="id" /> </label> <input
-				id="login-email-input" type="email" name="email"><label
-				id="login-password-label" for="password"><spring:message code="password" /> </label> <input
-				id="login-password-input" type="password" name="password">
+				id="login-email-label" for="user"><spring:message code="id" />
+			</label> <input id="login-email-input" type="email" name="email"><label
+				id="login-password-label" for="password"><spring:message
+					code="password" /> </label> <input id="login-password-input"
+				type="password" name="password">
 			<button type="submit">Login</button>
 			<br />
 			<form:errors path="login.email" htmlEscape="false" />
@@ -56,10 +56,18 @@
 	<nav class="navigation">
 		<div class="container">
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />"><div><spring:message code="header.home" /></div></a></li>
-				<li><a href="<c:url value="/how-it-works" />"><div><spring:message code="header.how_it_works" /></div></a></li>
-				<li><a href="<c:url value="/about" />"><div><spring:message code="header.about" /></div></a></li>
-				<li><a href="<c:url value="/contact" />"><div><spring:message code="header.contact" /></div></a></li>
+				<li><a href="<c:url value="/" />"><div>
+							<spring:message code="header.home" />
+						</div></a></li>
+				<li><a href="<c:url value="/how-it-works" />"><div>
+							<spring:message code="header.how_it_works" />
+						</div></a></li>
+				<li><a href="<c:url value="/about" />"><div>
+							<spring:message code="header.about" />
+						</div></a></li>
+				<li><a href="<c:url value="/contact" />"><div>
+							<spring:message code="header.contact" />
+						</div></a></li>
 			</ul>
 		</div>
 	</nav>
