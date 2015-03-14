@@ -33,7 +33,7 @@
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="/WEB-INF/i18n/ValidationMessages" />
+		<property name="basenames" value="/WEB-INF/i18n/ValidationMessages,/WEB-INF/i18n/site/header" />
 	</bean>
 
 	<bean id="localeResolver"

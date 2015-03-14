@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <header>
 	<div class="header">
 
-		<a style="width: 0; border-radius: 100%;"
-			href="<c:url value="/"></c:url>"><img alt="logo"
+		<img alt="logo"
 			src="<c:url value='/resources/img/site/logo.png'></c:url>"
-			class="logo"></a>
+			class="logo">
 
 		<form id="form-login" action="<c:url value="/usuario/login"></c:url>"
 			method="post" class="login">
 			<input id="path" type="hidden" name="path"> <label
-				id="login-email-label" for="user">Usuário </label> <input
+				id="login-email-label" for="user"><spring:message code="id" /> </label> <input
 				id="login-email-input" type="email" name="email"><label
-				id="login-password-label" for="password">Senha </label> <input
+				id="login-password-label" for="password"><spring:message code="password" /> </label> <input
 				id="login-password-input" type="password" name="password">
 			<button type="submit">Login</button>
 			<br />
@@ -50,12 +50,10 @@
 	<nav class="navigation">
 		<div class="container">
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />"><div>Início</div></a></li>
-				<li><a href="<c:url value="/how-it-works" />"><div>Como
-							funciona</div></a></li>
-				<li><a href="<c:url value="/about" />"><div>Sobre</div></a></li>
-				<li><a href="<c:url value="/contact" />"><div>Fale
-							conosco</div></a></li>
+				<li><a href="<c:url value="/" />"><div><spring:message code="header.home" /></div></a></li>
+				<li><a href="<c:url value="/how-it-works" />"><div><spring:message code="header.how_it_works" /></div></a></li>
+				<li><a href="<c:url value="/about" />"><div><spring:message code="header.about" /></div></a></li>
+				<li><a href="<c:url value="/contact" />"><div><spring:message code="header.contact" /></div></a></li>
 			</ul>
 		</div>
 	</nav>
