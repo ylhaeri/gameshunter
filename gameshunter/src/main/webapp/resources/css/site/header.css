@@ -8,6 +8,20 @@
 	justify-content: space-between;
 }
 
+.gh {
+  position: absolute;
+  top: 85px;
+  width: 40px;
+  left: 79px;
+}
+
+.controle {
+	  position: absolute;
+  left: 71px;
+  width: 60px;
+  top: 50px;
+}
+
 .logo {
 	width: 100px;
 	height: 100px;

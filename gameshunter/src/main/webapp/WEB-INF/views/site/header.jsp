@@ -6,9 +6,15 @@
 <header>
 	<div class="header">
 
-		<img alt="logo"
-			src="<c:url value='/resources/img/site/logo.png'></c:url>"
+		<img alt="circulo"
+			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
 			class="logo">
+			<img alt="controle"
+			src="<c:url value='/resources/img/site/controle.png'></c:url>"
+			class="controle">
+			<img alt="controle"
+			src="<c:url value='/resources/img/site/gh.png'></c:url>"
+			class="gh">
 
 		<form action="#" class="login">
 			<label for="user">Usuário </label> <input id="user" type="email"
