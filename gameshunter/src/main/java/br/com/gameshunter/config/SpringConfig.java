@@ -6,7 +6,6 @@ import org.apache.commons.mail.SimpleEmail;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -19,7 +18,6 @@ import br.com.gameshunter.schedule.AraraScheduled;
 public class SpringConfig {
 
 	@Bean(initMethod = "init")
-	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public User usuario() {
 		return new User();
 	}

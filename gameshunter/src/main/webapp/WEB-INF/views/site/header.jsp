@@ -15,8 +15,7 @@
 			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
 			class="logo"> </a>
 
-
-		<form id="form-login" action="<c:url value="/usuario/login"></c:url>"
+		<form id="form-login" action="<c:url value="/user/login"></c:url>"
 			method="post" class="login">
 			<input id="path" type="hidden" name="path"> <label
 				id="login-email-label" for="user"><spring:message code="id" />
@@ -31,19 +30,14 @@
 
 		<c:set var="locale" value="${pageContext.response.locale}"></c:set>
 
-
-
-		<!--<div style="position: absolute; top: 0; right: 0;">
-			<select id="arara">
-				<option value="en_US" data-imagesrc="/gameshunter/usuario/ararinha2"
+		<div style="position: absolute; top: 30px; right: 0;">
+			<select id="language-selector">
+				<option value="en_US" data-imagesrc="/gameshunter/user/ararinha2"
 					<c:if test="${locale eq 'en_US'}">selected="selected"</c:if>>English</option>
-				<option data-imagesrc="/gameshunter/usuario/ararinha"
+				<option value="pt_BR" data-imagesrc="/gameshunter/user/ararinha"
 					<c:if test="${locale eq 'pt_BR'}">selected="selected"</c:if>>Português</option>
 			</select>
- 		</div>  -->
-
-
-
+		</div>
 
 		<c:choose>
 			<c:when test="${sessionScope['usuario'] == null}">
@@ -51,8 +45,9 @@
 			<c:otherwise>
 			</c:otherwise>
 		</c:choose>
-
+	
 	</div>
+	
 	<nav class="navigation">
 		<div class="container">
 			<ul class="list-inline link-list">

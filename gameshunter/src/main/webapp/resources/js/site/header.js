@@ -1,19 +1,16 @@
 $(document).ready(function() {
-	$("#path").val(window.location.pathname.replace("/gameshunter", ""))
+	$("#path").val(window.location.pathname.replace("/gameshunter", ""));
 
-	$("#btn-logout").click(function() {
-		// FIXME tá bem porco. Precisa tirar o ajax e ajeitar no controller
-		$.post("/gameshunter/usuario/logout", function() {
-			window.location.reload()
-		})
+	$("#language-selector").ddslick({
+		width : 200,
+		imagePosition : "left"
 	})
 
-	$("#arara").ddslick({
-		width : 300,
-		imagePosition : "left",
-		selectText : "Select your favorite social network",
-		onSelected : function(data) {
-			console.log(data);
-		}
+	$(".dd-options").click(function() {
+		var language = $("#language-selector").data('ddslick').selectedData.value;
+		var url = "/gameshunter/?language=" + language;
+		$.get(url, function() {
+			window.location.reload();
+		})
 	})
 })

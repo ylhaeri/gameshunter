@@ -16,7 +16,7 @@
 
 		<main class="container">
 		<h1>Bem vindo</h1>
-		<p>Enviamos um email para ${usuario.email} ativar o seu cadastro.
+		<p>Enviamos um email para ${sessionScope['user'].email} ativar o seu cadastro.
 			Verifique sua caixa de entrada.
 		</main>
 	</div>

@@ -10,6 +10,8 @@
 	justify-content: space-between;
 }
 
+
+/* Logo */
 .gh {
   position: absolute;
   top: 85px;
@@ -18,10 +20,10 @@
 }
 
 .controle {
-	  position: absolute;
-  left: 71px;
-  width: 60px;
-  top: 50px;
+	position: absolute;
+	left: 71px;
+	width: 60px;
+	top: 50px;
 }
 
 .logo {
@@ -36,6 +38,8 @@
 	transform: rotate(360deg);
 }
 
+
+/* Login form */
 .login {
   position: absolute;
   top: 0;
@@ -68,6 +72,13 @@
     color: rgb(30, 1, 201);
 }
 
+
+/* Nav bar */
+.navigation>.container {
+	padding: 0;
+	height: 100%;
+}
+
 .navigation {
 
 	background: linear-gradient(to bottom, rgba(118, 140, 255, 0.74),
@@ -81,11 +92,6 @@
 	background: linear-gradient(to bottom,  #99adff 0%,#1e00c9 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99adff', endColorstr='#1e00c9',GradientType=0 ); /* IE6-9 */
 	height: 50px;
-}
-
-.navigation>.container {
-	padding: 0;
-	height: 100%;
 }
 
 .link-list {
@@ -127,4 +133,27 @@
 	color: #fff;
 	width: 100%;
 	height: 100%;
+}
+
+
+/* Language selection */
+.dd-select{
+	height:55px;
+}
+
+.dd-option-image{
+	max-width:30px!important;
+}
+
+.dd-selected-image{ 
+	max-width:30px!important;
+}
+
+.dd-option-text{
+	line-height: 28px!important;
+	margin-top: 1px!important; 
+}
+
+.dd-selected-text{
+	margin-top:-12px!important;
 }

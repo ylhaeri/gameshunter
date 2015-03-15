@@ -25,11 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gameshunter.model.Login;
 import br.com.gameshunter.model.User;
-import br.com.gameshunter.service.UsuarioService;
+import br.com.gameshunter.service.UserService;
 
 @Controller
-@RequestMapping("usuario")
-public class UsuarioController {
+@RequestMapping("user")
+public class UserController {
 
 	@RequestMapping("ararinha")
 	public @ResponseBody byte[] testa(HttpSession session) throws IOException {
@@ -47,33 +47,13 @@ public class UsuarioController {
 		return IOUtils.toByteArray(is);
 	}
 
-	private UsuarioService service;
+	private UserService service;
 	private User user;
 
-	// private final RequestMappingHandlerMapping handlerMapping;
-	//
-	// @Autowired
-	// public UsuarioController(RequestMappingHandlerMapping handlerMapping,
-	// UsuarioService service) {
-	// this.handlerMapping = handlerMapping;
-	// this.service = service;
-	// }
-	//
-	// @RequestMapping(value = "/endpointdoc", method = RequestMethod.GET)
-	// public void show(Model model) {
-	// Map<RequestMappingInfo, HandlerMethod> handlerMethods =
-	// handlerMapping.getHandlerMethods();
-	// handlerMethods.forEach((r, h) -> {
-	// System.out.println(r.getPatternsCondition());
-	// System.out.println(h.getMethod());
-	// System.out.println("___________________");
-	// });
-	// }
-
 	@Autowired
-	public UsuarioController(UsuarioService service, User usuario) {
+	public UserController(UserService service, User user) {
 		this.service = service;
-		this.user = usuario;
+		this.user = user;
 	}
 
 	@InitBinder
@@ -81,47 +61,42 @@ public class UsuarioController {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}
 
-	/*
-	 * static { String[] month = new
-	 * DateFormatSymbols(Locale.getDefault()).getMonths(); for (String string :
-	 * month) { if (string.equals(month[month.length - 1])) continue;
-	 * meses.add(string); } }
-	 */
-	@RequestMapping(value = "novo", method = RequestMethod.GET)
-	public ModelAndView novo() {
-		ModelAndView mav = new ModelAndView("/usuario/novo");
+	@RequestMapping(value = "signup", method = RequestMethod.GET)
+	public ModelAndView signUp() {
+		ModelAndView mav = new ModelAndView("/user/signup");
 		mav.addObject("user", user);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "novo&{email}", method = RequestMethod.GET)
-	public ModelAndView novo(@PathVariable("email") String email) {
-		ModelAndView mav = new ModelAndView("/usuario/novo");
+	@RequestMapping(value = "signup&{email}", method = RequestMethod.GET)
+	public ModelAndView signUp(@PathVariable("email") String email) {
+		ModelAndView mav = new ModelAndView("/user/new");
 		user.setEmail(email);
-		mav.addObject("usuario", user);
+		mav.addObject("user", user);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "cadastrado", method = RequestMethod.POST)
-	public String cadastrado(@Valid User user, BindingResult result) {
+	@RequestMapping(value = "registered", method = RequestMethod.POST)
+	public String registered(@Valid User user, BindingResult result) {
 
 		if (result.hasErrors()) {
 
 			user.setAgreeTermsOfService(false);
-			return "/usuario/novo";
+			return "/user/signup";
 		} else if (user.getPassword().length() > 50) {
 
 			user.setAgreeTermsOfService(false);
+			// FIXME existe um problema com o valor máximo
 			result.rejectValue("password", null,
 					"Deve ter entre 6 e 50 caracteres.");
-			return "/usuario/novo";
+			return "/user/signup";
 		} else {
 
 			user.generatePassword();
 			service.add(user);
-			return "/usuario/cadastrado";
+			return "/user/registered";
 		}
 	}
 
@@ -140,47 +115,49 @@ public class UsuarioController {
 		// declarar o resource bundle do spring, não tenho certeza
 		if (result.hasErrors())
 			return new ModelAndView("/site/home");
-		User usuario = service.find(login.getEmail());
-		if (usuario == null) {
+		User user = service.find(login.getEmail());
+		if (user == null) {
 			result.rejectValue("email", "login.email.not.found",
 					new Object[] { login.getEmail() },
-					// resolver mensagem em português o.o'
+					// TODO resolver mensagem em português o.o'
 					"Essa conta não existe. Insira outro login ou cadastre-se.");
 			return new ModelAndView("/site/home", "login", login);
-		} else if (!usuario.isPasswordEqual(login.getPassword())) {
+		} else if (!user.isPasswordEqual(login.getPassword())) {
 			result.rejectValue("email", "login.password.not_match", null,
+			// TODO resolver mensagem em português o.o'
 					"Usuário ou senha incorretos. Verifique os seus dados e tente novamente.");
 			return new ModelAndView("/site/home", "login", login);
 		} else {
-			session.setAttribute("usuario", usuario);
+			session.setAttribute("user", user);
 			return new ModelAndView("redirect:" + path);
 		}
 	}
 
-	@RequestMapping(value = "perfil", method = RequestMethod.GET)
-	public String perfil(HttpSession session) {
+	@RequestMapping(value = "account", method = RequestMethod.GET)
+	public String profile(HttpSession session) {
 		// FIXME Parece estranho :x Tem que trocar esse if por um interceptor,
 		// vamos ter que filtar esse interceptor todas as páginas que o usuário
 		// não pode entrar sem estar logado, provavelmente resolve o problema de
 		// redirecionamento quando deslogar também.
-		if (session.getAttribute("usuario") == null)
+		if (session.getAttribute("user") == null)
 			return "redirect:/";
+		System.out.println(user.getEmail());
 
-		return "/usuario/perfil";
+		return "/user/account";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.POST)
 	public @ResponseBody void logout(HttpSession session) {
 
-		session.removeAttribute("usuario");
+		session.removeAttribute("user");
 	}
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
-	// apropriado
+	// apropriado, provavelmente a forma como a foto é pegava será alterada
 	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/png")
 	public @ResponseBody byte[] teste(HttpSession session) throws IOException {
 
-		User usuario = (User) session.getAttribute("usuario");
+		User usuario = (User) session.getAttribute("user");
 
 		return usuario.getProfilePicture();
 	}
@@ -191,10 +168,10 @@ public class UsuarioController {
 	public String setFoto(HttpSession session,
 			@RequestParam("file") MultipartFile file) throws IOException {
 
-		User usuario = (User) session.getAttribute("usuario");
+		User usuario = (User) session.getAttribute("user");
 		usuario.setProfilePicture(file.getBytes());
 		service.update(usuario);
 
-		return "redirect:/usuario/perfil";
+		return "redirect:/user/account";
 	}
 }

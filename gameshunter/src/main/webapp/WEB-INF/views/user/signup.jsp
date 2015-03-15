@@ -41,7 +41,7 @@
 
 		<main class="container">
 		<form id="cadastro-form" class="form-inline" method="post"
-			action="cadastrado">
+			action="registered">
 			<div class="form-group">
 				<h1 class="h1"
 					style="display: inline; margin-right: 10px; margin-bottom: 20px;">
@@ -51,7 +51,7 @@
 					<spring:message code="form.field.required" /></span>
 				<table id="table-cadastro-usuario" style="margin-top: 25px;"
 					class="table">
-					<c:import url="cadastro.jsp"></c:import>
+					<c:import url="form.jsp"></c:import>
 					<tr>
 						<td class="td-label" id="td-novidades-label"><label
 							class="control-label" id="novidades-label"><spring:message

@@ -11,7 +11,7 @@ $(document).ready(function() {
 		$('#logradouro-input').attr('readonly', true);
 		$('#bairro-input').attr('readonly', true);
 		if (regex.test(cep)) {
-			$.get("../endereco/cep/" + cep, function(data) {
+			$.get("../address/cep/" + cep, function(data) {
 				if (typeof data == "string")
 					return;
 				else if (data.bairro != undefined) {

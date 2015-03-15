@@ -12,13 +12,13 @@ import br.com.gameshunter.model.User;
 import br.com.gameshunter.system.AppConfig;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
 	private UsuarioDAO dao;
 	private SimpleEmail mail;
 
 	@Autowired
-	public UsuarioService(UsuarioDAO dao, SimpleEmail mail) {
+	public UserService(UsuarioDAO dao, SimpleEmail mail) {
 		this.dao = dao;
 		this.mail = mail;
 	}

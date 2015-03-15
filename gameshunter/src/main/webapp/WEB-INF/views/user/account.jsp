@@ -22,17 +22,17 @@
 		<main class="container">
 
 		<div class="profile-banner">
-			<form action='<c:url value="/usuario/setFoto"></c:url>' method="post"
+			<form action='<c:url value="/user/setFoto"></c:url>' method="post"
 				enctype="multipart/form-data">
 				<img alt="foto-do-perfil" id="usuario-foto-label"
-					src="<c:url value="/usuario/teste"></c:url>"
+					src="<c:url value="/user/teste"></c:url>"
 					class="img-circle img-thumbnail" /><br /> <input type="file"
 					name="file"> <input type="submit" style="color: black">
 				<div id="progressNumber"></div>
 			</form>
 
 			<div class="profile-banner-content">
-				<h1>${sessionScope['usuario'].nickname}</h1>
+				<h1>${sessionScope['user'].nickname}</h1>
 			</div>
 
 		</div>
@@ -62,23 +62,23 @@
 
 			<table class="profile-table-information">
 				<tr>
-					<td>${sessionScope['usuario'].firstName}
-						${sessionScope['usuario'].lastName}</td>
+					<td>${sessionScope['user'].firstName}
+						${sessionScope['user'].lastName}</td>
 				</tr>
 				<tr>
-					<td>${sessionScope['usuario'].nickname}</td>
+					<td>${sessionScope['user'].nickname}</td>
 				</tr>
 				<tr>
-					<td>${sessionScope['usuario'].gender}</td>
+					<td>${sessionScope['user'].gender}</td>
 				</tr>
 				<tr>
-					<td><spring:eval expression="usuario.birthDay" /></td>
+					<td><spring:eval expression="user.birthDay" /></td>
 				</tr>
 				<tr>
-					<td>${sessionScope['usuario'].phone}</td>
+					<td>${sessionScope['user'].phone}</td>
 				</tr>
 				<tr>
-					<td>${sessionScope['usuario'].mobile}</td>
+					<td>${sessionScope['user'].mobile}</td>
 				</tr>
 			</table>
 		</div>

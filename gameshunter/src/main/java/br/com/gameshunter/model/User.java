@@ -80,6 +80,7 @@ public class User implements Serializable {
 	// TODO deve ser uma classe, provavelmente usaremos uma lista para tel e cel
 	@Size(min = 13, max = 14, message = "{user.mobile.size}")
 	private String mobile;
+	@Size(max = 3)
 	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
 			CascadeType.MERGE })
 	private List<Address> addresses;
@@ -286,7 +287,6 @@ public class User implements Serializable {
 	 * it is for user registration or password change
 	 */
 	public void generatePassword() {
-
 		// TODO bloquear o uso se a senha já existir, podemos fazer uso do
 		// length, o Sha 512 sempre gera o mesmo tamanho para qualquer String. O
 		// tamanho é 128, se não me engano
@@ -302,7 +302,6 @@ public class User implements Serializable {
 	 * @return True if equal, false if not
 	 */
 	public boolean isPasswordEqual(String password) {
-
 		if (saltedPasswordHash(password).equals(this.password))
 			return true;
 		else
@@ -326,7 +325,6 @@ public class User implements Serializable {
 	 * @param address
 	 */
 	public void addAddress(Address address) {
-
 		if (canAdd(address))
 			this.addresses.add(address);
 	}
@@ -352,7 +350,6 @@ public class User implements Serializable {
 	 * @return Endereço
 	 */
 	public Address pegaEndereco(Integer index) {
-
 		return addresses.get(index);
 	}
 
