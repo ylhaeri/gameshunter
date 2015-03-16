@@ -6,7 +6,8 @@
 <html>
 <header>
 	<div class="header">
-
+		
+		<div class="container-logo">
 		<img alt="controle"
 			src="<c:url value='/resources/img/site/controle.png'></c:url>"
 			class="controle"> <img alt="controle"
@@ -14,13 +15,15 @@
 		<a href="<c:url value="/"></c:url>"><img alt="circulo"
 			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
 			class="logo"> </a>
-
+		</div>
+		
+		
 		<form id="form-login" action="<c:url value="/user/login"></c:url>"
 			method="post" class="login">
 			<input id="path" type="hidden" name="path"> <label
-				id="login-email-label" for="user"><spring:message code="id" />
+				id="login-email-label" for="login-email-input"><spring:message code="id" />
 			</label> <input id="login-email-input" type="email" name="email"><label
-				id="login-password-label" for="password"><spring:message
+				id="login-password-label" for="login-password-input"><spring:message
 					code="password" /> </label> <input id="login-password-input"
 				type="password" name="password">
 			<button type="submit">Login</button>
