@@ -3,10 +3,12 @@
 /* general */
 body * {
 	font-size: 100%;
+	
 }
 
 html, body, .wrapper {
 	height: 100%;
+	background-color: #e9eaed;
 }
 
 body>.wrapper {
