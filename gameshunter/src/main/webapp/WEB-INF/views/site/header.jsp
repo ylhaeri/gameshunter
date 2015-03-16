@@ -12,9 +12,9 @@
 			src="<c:url value='/resources/img/site/controle.png'></c:url>"
 			class="controle"> <img alt="controle"
 			src="<c:url value='/resources/img/site/gh.png'></c:url>" class="gh">
-		<a href="<c:url value="/"></c:url>"><img alt="circulo"
+		<a href="<c:url value="/"></c:url>" tabindex="-1"><img alt="circulo"
 			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
-			class="logo"> </a>
+			class="logo" tabindex="1"> </a>
 		</div>
 		
 		
@@ -54,7 +54,7 @@
 	<nav class="navigation">
 		<div class="container">
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />"><div>
+				<li><a href="<c:url value="/" />"><div tabindex="2">
 							<spring:message code="header.home" />
 						</div></a></li>
 				<li><a href="<c:url value="/how-it-works" />"><div>
