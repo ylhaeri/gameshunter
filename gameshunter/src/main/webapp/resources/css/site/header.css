@@ -118,7 +118,7 @@
  text-align: center;
 }
 
-.link-list li div:HOVER {
+.link-list li div:hover, .link-list li div:focus {
  box-shadow: 0 0 20px #000;
  background: #6e82ea; /* Old browsers */
  background: -moz-linear-gradient(top, #6e82ea 0%, #231e49 100%); /* FF3.6+ */

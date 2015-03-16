@@ -22,10 +22,10 @@
 			method="post" class="login">
 			<input id="path" type="hidden" name="path"> <label
 				id="login-email-label" for="login-email-input"><spring:message code="id" />
-			</label> <input id="login-email-input" type="email" name="email"><label
+			</label> <input id="login-email-input" type="email" name="email" tabindex="1"><label
 				id="login-password-label" for="login-password-input"><spring:message
 					code="password" /> </label> <input id="login-password-input"
-				type="password" name="password">
+				type="password" name="password" tabindex="1">
 			<button type="submit">Login</button>
 			<br />
 			<form:errors path="login.email" htmlEscape="false" />
