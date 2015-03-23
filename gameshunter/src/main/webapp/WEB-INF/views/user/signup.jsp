@@ -12,6 +12,8 @@
 <gameshunter:resources />
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/usuario/novo.css"></c:url>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/usuario/signup.css"></c:url>">
 <script
 	src="<c:url value="/resources/js/jquery/jquery-masked-input.js"></c:url>"></script>
 <script src="<c:url value="/resources/js/usuario/novo.js"></c:url>"></script>
