@@ -17,6 +17,7 @@
 			class="logo" tabindex="1"> </a>
 		</div>
 		
+		<button class="open-menu">abrir menu</button>
 		
 		<form id="form-login" action="<c:url value="/user/login"></c:url>"
 			method="post" class="login">
@@ -30,6 +31,7 @@
 			<br />
 			<form:errors path="login.email" htmlEscape="false" />
 		</form>
+		
 
 		<c:set var="locale" value="${pageContext.response.locale}"></c:set>
 
@@ -53,6 +55,7 @@
 	
 	<nav class="navigation">
 		<div class="container">
+			<button class='close-menu'>fechar menu</button>
 			<ul class="list-inline link-list">
 				<li><a href="<c:url value="/" />"><div tabindex="2">
 							<spring:message code="header.home" />
@@ -69,5 +72,6 @@
 			</ul>
 		</div>
 	</nav>
+		
 </header>
 </html>
