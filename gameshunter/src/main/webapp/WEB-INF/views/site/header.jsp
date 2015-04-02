@@ -31,18 +31,6 @@
 			<br />
 			<form:errors path="login.email" htmlEscape="false" />
 		</form>
-		
-
-		<c:set var="locale" value="${pageContext.response.locale}"></c:set>
-
-		<div style="position: absolute; top: 30px; right: 0;">
-			<select id="language-selector">
-				<option value="en_US" data-imagesrc="/gameshunter/user/ararinha2"
-					<c:if test="${locale eq 'en_US'}">selected="selected"</c:if>>English</option>
-				<option value="pt_BR" data-imagesrc="/gameshunter/user/ararinha"
-					<c:if test="${locale eq 'pt_BR'}">selected="selected"</c:if>>Português</option>
-			</select>
-		</div>
 
 		<c:choose>
 			<c:when test="${sessionScope['usuario'] == null}">
