@@ -6,7 +6,9 @@
 <html>
 <header>
 	<div class="header">
-
+		<div class="menu-img">
+			<img alt="menu" src="<c:url value="/resources/img/menu-icon.svg" />">
+		</div>
 		<c:choose>
 			<c:when test="${sessionScope['user'] == null}">
 				<form action='<c:url value="/user/login" />' method="post">
@@ -31,19 +33,24 @@
 
 	<nav class="navigation">
 		<div class="container">
+		
+		<div class="menu-close">
+			<img alt="close-menu" src="<c:url value="/resources/img/cross-icon.svg" />">
+		</div>
+		
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />"><span tabindex="2">
+				<li><a href="<c:url value="/" />"><div class="menu">
 							<spring:message code="header.home" />
-					</span></a></li>
-				<li><a href="<c:url value="/how-it-works" />"><span>
+					</div></a></li>
+				<li><a href="<c:url value="/how-it-works" />"><div class="menu">
 							<spring:message code="header.how_it_works" />
-					</span></a></li>
-				<li><a href="<c:url value="/about" />"><span> <spring:message
+					</div></a></li>
+				<li><a href="<c:url value="/about" />"><div class="menu"><spring:message
 								code="header.about" />
-					</span></a></li>
-				<li><a href="<c:url value="/contact" />"><span> <spring:message
+					</div></a></li>
+				<li><a href="<c:url value="/contact" />"><div class="menu"><spring:message
 								code="header.contact" />
-					</span></a></li>
+					</div></a></li>
 			</ul>
 		</div>
 	</nav>

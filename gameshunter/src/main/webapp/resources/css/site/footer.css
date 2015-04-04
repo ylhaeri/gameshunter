@@ -1,1 +1,8 @@
-.footer{width:100%}.footer>.container{padding:0;height:100%}
+footer {
+	width: 100%
+}
+
+footer>.container {
+	padding: 0;
+	height: 100%
+}
