@@ -1,15 +1,25 @@
 $(document).ready(function() {
 	$("#path").val(window.location.pathname.replace("/gameshunter", ""));
 
-	$('.open-menu').click(function() {
-		$('.navigation').css({
-			'left' : '0'
-		});
+	$('.menu-img').click(function() {
+		$('.navigation').addClass('open-menu');
+		$("html").addClass("transparent-background");
 	});
+	
+	$('.menu-close').click(function(){
+		$("html").removeClass("transparent-background");
+		$('.navigation').removeClass("open-menu");
+	});
+	
+	
+	$(document).click(function(event) {
+		if (event.target === document.documentElement) {
+			$("html").removeClass("transparent-background");
+			$('.navigation').removeClass("open-menu");
+		}
 
-	$('.close-menu').click(function() {
-		$('.navigation').css({
-			'left' : '-90%'
-		});
 	});
+	
+	
+
 });
