@@ -1,14 +1,10 @@
 package br.com.gameshunter.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -31,21 +27,13 @@ import br.com.gameshunter.service.UserService;
 @RequestMapping("user")
 public class UserController {
 
-	@RequestMapping("ararinha")
-	public @ResponseBody byte[] testa(HttpSession session) throws IOException {
-		File file = new File(session.getServletContext().getRealPath(
-				"/resources/img/Brazil-Flag-icon.png"));
-		InputStream is = new FileInputStream(file);
-		return IOUtils.toByteArray(is);
-	}
-
-	@RequestMapping("ararinha2")
-	public @ResponseBody byte[] testas(HttpSession session) throws IOException {
-		File file = new File(session.getServletContext().getRealPath(
-				"/resources/img/United-States-Flag-icon.png"));
-		InputStream is = new FileInputStream(file);
-		return IOUtils.toByteArray(is);
-	}
+//	@RequestMapping("ararinha")
+//	public @ResponseBody byte[] testa(HttpSession session) throws IOException {
+//		File file = new File(session.getServletContext().getRealPath(
+//				"/resources/img/Brazil-Flag-icon.png"));
+//		InputStream is = new FileInputStream(file);
+//		return IOUtils.toByteArray(is);
+//	}
 
 	private UserService service;
 	private User user;
@@ -147,9 +135,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.POST)
-	public @ResponseBody void logout(HttpSession session) {
+	public String logout(HttpSession session) {
 
 		session.removeAttribute("user");
+		return "redirect:/";
 	}
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja

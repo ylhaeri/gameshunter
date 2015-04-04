@@ -1,0 +1,29 @@
+@smartphone : ~"(min-width: 320px) and (max-width:450px)";
+
+@media @smartphone {
+	header {
+		width: 100%;
+	}
+}
+
+html, body, .wrapper {
+	height: 100%;
+}
+
+body>.wrapper {
+	height: auto;
+	min-height: 100%;
+}
+
+main {
+	overflow: auto;
+	padding-bottom: 80px; /* deve ter a mesma altura do rodapé */
+}
+
+.footer {
+	position: relative;
+	margin-top: -80px; /* valor negativo da altura do rodapé */
+	height: 80px;
+	clear:both;
+	background-color: lighten(darkblue, 40%);
+}

@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
 <title>Games Hunter</title>
 <gameshunter:resources />
 <link rel="stylesheet"

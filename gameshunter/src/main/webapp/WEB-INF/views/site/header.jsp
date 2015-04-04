@@ -6,60 +6,47 @@
 <html>
 <header>
 	<div class="header">
-		
-		<div class="container-logo">
-		<img alt="controle"
-			src="<c:url value='/resources/img/site/controle.png'></c:url>"
-			class="controle"> <img alt="controle"
-			src="<c:url value='/resources/img/site/gh.png'></c:url>" class="gh">
-		<a href="<c:url value="/"></c:url>" tabindex="-1"><img alt="circulo"
-			src="<c:url value='/resources/img/site/circulo-logo.png'></c:url>"
-			class="logo" tabindex="1"> </a>
-		</div>
-		
-		<button class="open-menu">abrir menu</button>
-		
-		<form id="form-login" action="<c:url value="/user/login"></c:url>"
-			method="post" class="login">
-			<input id="path" type="hidden" name="path"> <label
-				id="login-email-label" for="login-email-input"><spring:message code="id" />
-			</label> <input id="login-email-input" type="email" name="email" tabindex="1"><label
-				id="login-password-label" for="login-password-input"><spring:message
-					code="password" /> </label> <input id="login-password-input"
-				type="password" name="password" tabindex="1">
-			<button type="submit">Login</button>
-			<br />
-			<form:errors path="login.email" htmlEscape="false" />
-		</form>
 
 		<c:choose>
-			<c:when test="${sessionScope['usuario'] == null}">
+			<c:when test="${sessionScope['user'] == null}">
+				<form action='<c:url value="/user/login" />' method="post">
+					<div>
+						<input type="hidden" name="path" id="path"> <label>E-mail</label><input
+							type="text" name="email"> <label>Senha</label><input
+							type="password" name="password"> <input type="submit">
+						<form:errors path="login.email"></form:errors>
+					</div>
+					<a href="<c:url value="/user/signup" />">Cadastre-se</a>
+				</form>
 			</c:when>
 			<c:otherwise>
+				<a href="<c:url value="/user/account" />">Minha conta</a>
+				<form action="<c:url value="/user/logout" />" method="post">
+					<input type="submit" value="Logout">
+				</form>
 			</c:otherwise>
 		</c:choose>
-	
+
 	</div>
-	
+
 	<nav class="navigation">
 		<div class="container">
-			<button class='close-menu'>fechar menu</button>
 			<ul class="list-inline link-list">
-				<li><a href="<c:url value="/" />"><div tabindex="2">
+				<li><a href="<c:url value="/" />"><span tabindex="2">
 							<spring:message code="header.home" />
-						</div></a></li>
-				<li><a href="<c:url value="/how-it-works" />"><div>
+					</span></a></li>
+				<li><a href="<c:url value="/how-it-works" />"><span>
 							<spring:message code="header.how_it_works" />
-						</div></a></li>
-				<li><a href="<c:url value="/about" />"><div>
-							<spring:message code="header.about" />
-						</div></a></li>
-				<li><a href="<c:url value="/contact" />"><div>
-							<spring:message code="header.contact" />
-						</div></a></li>
+					</span></a></li>
+				<li><a href="<c:url value="/about" />"><span> <spring:message
+								code="header.about" />
+					</span></a></li>
+				<li><a href="<c:url value="/contact" />"><span> <spring:message
+								code="header.contact" />
+					</span></a></li>
 			</ul>
 		</div>
 	</nav>
-		
+
 </header>
 </html>
