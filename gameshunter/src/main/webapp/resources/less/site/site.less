@@ -1,18 +1,5 @@
-@smartphone: ~"(min-width: 300px) and (max-width:500px)";
-.wrapper (@height: 10px) {
-	main {
-		overflow: auto;
-		padding-bottom: @height;
-	}
-
-	footer {
-		position: relative;
-		margin-top: -@height;
-		height: @height;
-		clear: both;
-		background-color: lighten(darkblue, 40%);
-	}
-}
+@import '../mixin/wrapper.less';
+@import '../variables.less';
 
 html , body , .wrapper {
 	height: 100%;
@@ -23,14 +10,13 @@ body > .wrapper {
 	min-height: 100%;
 }
 
-@media @smartphone {
+@media @low-res {
 	header , main , footer {
 		width: 100%;
 	}
 
 	header {
 		height: 10%;
-		background-color: #5858ff;
 	}
 
 	.wrapper (50px);
