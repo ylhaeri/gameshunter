@@ -1,29 +1,38 @@
-@smartphone : ~"(min-width: 320px) and (max-width:500px)";
+@smartphone: ~"(min-width: 300px) and (max-width:500px)";
+.wrapper (@height: 10px) {
+	main {
+		overflow: auto;
+		padding-bottom: @height;
+	}
 
-@media @smartphone {
-	header, main, footer {
-		width: 100%;
+	footer {
+		position: relative;
+		margin-top: -@height;
+		height: @height;
+		clear: both;
+		background-color: lighten(darkblue, 40%);
 	}
 }
 
-html, body, .wrapper {
+html , body , .wrapper {
 	height: 100%;
 }
 
-body>.wrapper {
+body > .wrapper {
 	height: auto;
 	min-height: 100%;
 }
 
-main {
-	overflow: auto;
-	padding-bottom: 80px; /* deve ter a mesma altura do rodapé */
+@media @smartphone {
+	header , main , footer {
+		width: 100%;
+	}
+
+	header {
+		height: 10%;
+		background-color: #5858ff;
+	}
+
+	.wrapper (50px);
 }
 
-footer {
-	position: relative;
-	margin-top: -80px; /* valor negativo da altura do rodapé */
-	height: 80px;
-	clear:both;
-	background-color: lighten(darkblue, 40%);
-}
