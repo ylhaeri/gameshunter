@@ -1,13 +1,15 @@
-.wrapper (@height: 100px) {
+@import 'variables.less';
+.wrapper (@padding: 30px , @height: 100px) {
 	main {
 		overflow: auto;
-		padding-bottom: @height;
+		padding-top: @padding!important;
+		padding-bottom: @height+@padding!important;
 	}
 
 	footer {
 		position: relative;
-		margin-top: -@height;
-		height: @height;
+		margin-top: -@height!important;
+		height: @height!important;
 		clear: both;
 	}
 }

@@ -1,7 +1,7 @@
 @import '../variables.less';
 @import '../mixin.less';
 header {
-	min-height: @min-header-height;
+	height: @min-header-height;
 	display: flex;
 	form {
 		display: none;
@@ -33,14 +33,14 @@ nav {
 }
 
 .menu-img {
-	height: 50px;
+	height: 100%;
 	width: 15%;
 	.img {
 		cursor: pointer;
-		background-size: 100%;
+		background-size: 100px;
 		background-repeat: no-repeat;
 		background-image: url('../../img/menu-icon.svg');
-		height: 85%;
+		height: 100%;
 		width: 87.5%;
 	}
 }

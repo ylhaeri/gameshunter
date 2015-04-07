@@ -9,7 +9,6 @@ body > .wrapper {
 	min-height: 100%;
 }
 
-
 .hue () {
 	header , main , footer {
 		display: none;
@@ -35,7 +34,7 @@ body > .wrapper {
 }
 
 @media @smartphone {
-	.wrapper (50px);
+	.wrapper (30px, 50px);
 	header , main , footer {
 		display: block;
 		width: 100%;
@@ -45,11 +44,12 @@ body > .wrapper {
 		height: 10%;
 	}
 
-	main {
-		.centralizado (85%);
+	.container {
+		.centralizado (85%);  
 	}
 }
 
 @media not all and (max-width: @max-smartphone-width) {
-	.hue; 
+	.hue;
 }
+
