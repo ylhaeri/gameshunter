@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
 transpilers=si.gos.transpiler.core.transpiler.less
 transpilers/si.gos.transpiler.core.transpiler.less/options=clean-css
-transpilers/si.gos.transpiler.core.transpiler.less/paths=src/main/webapp/resources/less/site\:src/main/webapp/resources/less/site
+transpilers/si.gos.transpiler.core.transpiler.less/paths=src/main/webapp/resources/less/site\:src/main/webapp/resources/css/site

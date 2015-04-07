@@ -16,6 +16,7 @@
 </head>
 <body>
 	<div class="wrapper">
+		<div id="hu3"></div>
 		<gameshunter:header />
 
 		<main class="container">
@@ -28,18 +29,9 @@
 				PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO
 				EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
 
-			<h2>Novidades</h2>
-			<p>Conteúdo de novidades... (CONTEÚDO APENAS PARA PREENCHER O
-				ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM
-				BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO
-				APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
-
-			<h2>Precisamos definir o restantes</h2>
+			<h2>Precisamos definir o restante</h2>
 
 		</div>
-		Language : <a href="?language=en_US">English</a>| <a
-			href="?language=pt_BR">Português</a> <br />
-		Current Locale: ${pageContext.response.locale} </main>
 	</div>
 
 	<gameshunter:footer />

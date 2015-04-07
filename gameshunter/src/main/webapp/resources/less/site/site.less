@@ -1,6 +1,5 @@
 @import '../mixin.less';
 @import '../variables.less';
-
 html , body , .wrapper {
 	height: 100%;
 }
@@ -10,8 +9,35 @@ body > .wrapper {
 	min-height: 100%;
 }
 
-@media @low-res {
+
+.hue () {
 	header , main , footer {
+		display: none;
+	}
+
+	#hu3 {
+		display: block;
+	}
+}
+
+#hu3 {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: pink;
+}
+
+@media not all and (min-width: @min-device-width) {
+	.hue;
+}
+
+@media @smartphone {
+	.wrapper (50px);
+	header , main , footer {
+		display: block;
 		width: 100%;
 	}
 
@@ -19,6 +45,11 @@ body > .wrapper {
 		height: 10%;
 	}
 
-	.wrapper (50px);
+	main {
+		.centralizado (85%);
+	}
 }
 
+@media not all and (max-width: @max-smartphone-width) {
+	.hue; 
+}

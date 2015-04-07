@@ -1,6 +1,14 @@
+// Resoluções
+@min-device-width : 310px;
+@min-smartphone-width : 310px;
+@max-smartphone-width : 500px;
+
 // Media queries
-@low-res : ~"(min-width: 300px) and (max-width:500px)";
+@smartphone : ~"(min-width:@{min-smartphone-width}) and (max-width:@{max-smartphone-width})";
 
 // Theme
 @bgcolor : lighten(darkblue, 45%);
 @navcolor : white;
+
+// Min e max height dos elementos
+@min-header-height : 50px;
