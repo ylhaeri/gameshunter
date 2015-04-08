@@ -1,1 +1,13 @@
-footer,header{background-color:#7272ff}body{background-color:#e9eaed}nav{background-color:#7272ff}nav a div{color:#fff}
+footer,
+header {
+  background-color: #7272ff;
+}
+body {
+  background-color: #e9eaed;
+}
+nav {
+  background-color: #7272ff;
+}
+nav a div {
+  color: white;
+}
