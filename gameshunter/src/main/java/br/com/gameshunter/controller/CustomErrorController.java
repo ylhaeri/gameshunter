@@ -32,7 +32,8 @@ class CustomErrorController {
 		if (requestUri == null) {
 			requestUri = "Unknown";
 		}
-
+// TODO
+		@SuppressWarnings("unused")
 		String message = MessageFormat.format(
 				"{0} returned for {1} with message {3}", statusCode,
 				requestUri, exceptionMessage);

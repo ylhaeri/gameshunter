@@ -24,12 +24,13 @@ public class UserService {
 	}
 
 	@Transactional
-	public void add(User usuario) {
+	public void add(User user) {
 		// TODO placeholder do envio de e-mail
 		// FIXME Precisa fazer a classe para enviar os e-mails
+		user.generatePassword();
 		if (AppConfig.isSendconfirmation()) {
 			try {
-				mail.addTo(usuario.getEmail(), usuario.getFirstName());
+				mail.addTo(user.getEmail(), user.getFirstName());
 				mail.setSubject("Cadastro GamesHunter, sei la");
 				mail.setMsg("Oi, ainda não tem mensagem, sorry");
 				mail.send();
@@ -38,7 +39,7 @@ public class UserService {
 			}
 		}
 
-		dao.add(usuario);
+		dao.add(user);
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.NEVER)

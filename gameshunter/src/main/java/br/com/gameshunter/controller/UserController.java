@@ -27,13 +27,14 @@ import br.com.gameshunter.service.UserService;
 @RequestMapping("user")
 public class UserController {
 
-//	@RequestMapping("ararinha")
-//	public @ResponseBody byte[] testa(HttpSession session) throws IOException {
-//		File file = new File(session.getServletContext().getRealPath(
-//				"/resources/img/Brazil-Flag-icon.png"));
-//		InputStream is = new FileInputStream(file);
-//		return IOUtils.toByteArray(is);
-//	}
+	// @RequestMapping("ararinha")
+	// public @ResponseBody byte[] testa(HttpSession session) throws IOException
+	// {
+	// File file = new File(session.getServletContext().getRealPath(
+	// "/resources/img/Brazil-Flag-icon.png"));
+	// InputStream is = new FileInputStream(file);
+	// return IOUtils.toByteArray(is);
+	// }
 
 	private UserService service;
 	private User user;
@@ -71,18 +72,11 @@ public class UserController {
 
 		if (result.hasErrors()) {
 
+			result.getAllErrors().forEach(System.out::println);
 			user.setAgreeTermsOfService(false);
-			return "/user/signup";
-		} else if (user.getPassword().length() > 50) {
-
-			user.setAgreeTermsOfService(false);
-			// FIXME existe um problema com o valor máximo
-			result.rejectValue("password", null,
-					"Deve ter entre 6 e 50 caracteres.");
 			return "/user/signup";
 		} else {
 
-			user.generatePassword();
 			service.add(user);
 			return "/user/registered";
 		}

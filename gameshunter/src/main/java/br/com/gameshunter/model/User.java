@@ -31,8 +31,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.gameshunter.converter.LocalDateDBConverter;
 import br.com.gameshunter.system.FileManager;
-import br.com.gameshunter.util.SaltFactory;
 import br.com.gameshunter.util.HashFactory;
+import br.com.gameshunter.util.SaltFactory;
 
 /**
  * @author Myho
@@ -49,7 +49,7 @@ public class User implements Serializable {
 	private String email;
 	@Column(length = 128)
 	@NotEmpty(message = "{user.password.empty}")
-	@Size(min = 6, max = 128, message = "{user.password.size}")
+	// TODO Tamanho da senha não está sendo validado, precisa resolver
 	private String password;
 	private String salt;
 	@NotEmpty(message = "{user.firstName.empty}")
@@ -130,7 +130,6 @@ public class User implements Serializable {
 	@Deprecated
 	@SuppressWarnings("unused")
 	private void setSalt(String salt) {
-		// TODO Bloquear o setter caso não esteja null/vazio
 		this.salt = salt;
 	}
 
