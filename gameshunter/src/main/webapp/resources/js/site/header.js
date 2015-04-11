@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#path").val(window.location.pathname.replace("/gameshunter", ""));
+	$(".path").val(window.location.pathname.replace("/gameshunter", ""));
 
 	$('.menu-img').click(function() {
 		$('.navigation').addClass('open-menu');

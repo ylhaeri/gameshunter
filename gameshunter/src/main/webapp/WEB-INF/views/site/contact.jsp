@@ -14,27 +14,25 @@
 	href="<c:url value="/resources/css/site/contact.css"></c:url>">
 </head>
 <body>
-	<div class="wrapper">
-		<gameshunter:header />
-		<main class="container">
+	<gameshunter:header />
+	<main class="container">
 
-		<fieldset class="form-box">
-			<form class="form-description">
-				<label for="nome">Nome:</label> <input id="nome" type="text"
-					name="nome" placeholder="Digite seu nome"> <label
-					for="email">E-mail:</label> <input id="email" type="email"
-					name="email" placeholder="Digite seu e-mail"> <label
-					for="mensagem">Mensagem:</label>
-				<textarea id="mensagem" rows="5" cols="10"
-					placeholder="Digite sua mensagem" name="mensagem"></textarea>
-				<button type="submit">Enviar</button>
+	<fieldset class="form-box">
+		<form class="form-description">
+			<label for="nome">Nome:</label> <input id="nome" type="text"
+				name="nome" placeholder="Digite seu nome"> <label
+				for="email">E-mail:</label> <input id="email" type="email"
+				name="email" placeholder="Digite seu e-mail"> <label
+				for="mensagem">Mensagem:</label>
+			<textarea id="mensagem" rows="5" cols="10"
+				placeholder="Digite sua mensagem" name="mensagem"></textarea>
+			<button type="submit">Enviar</button>
 
-			</form>
-		</fieldset>
+		</form>
+	</fieldset>
 
-		</main>
+	</main>
 
-	</div>
 	<gameshunter:footer />
 </body>
 </html>

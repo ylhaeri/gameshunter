@@ -11,15 +11,13 @@
 </head>
 <body>
 
-	<div class="wrapper">
-		<gameshunter:header />
+	<gameshunter:header />
 
-		<main class="container">
-		<h1>Bem vindo</h1>
-		<p>Enviamos um email para ${sessionScope['user'].email} ativar o seu cadastro.
-			Verifique sua caixa de entrada.
-		</main>
-	</div>
+	<main class="container">
+	<h1>Bem vindo</h1>
+	<p>Enviamos um email para ${sessionScope['user'].email} ativar o
+		seu cadastro. Verifique sua caixa de entrada.
+	</main>
 
 	<gameshunter:footer />
 </body>

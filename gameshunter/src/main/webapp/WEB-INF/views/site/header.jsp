@@ -3,30 +3,29 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <header>
 	<div class="menu-img">
 		<div class="img"></div>
 	</div>
-	<c:choose>
-		<c:when test="${sessionScope['user'] == null}">
-			<form action='<c:url value="/user/login" />' method="post">
-				<div>
-					<input type="hidden" name="path" id="path"> <label>E-mail</label><input
-						type="text" name="email"> <label>Senha</label><input
-						type="password" name="password"> <input type="submit">
-					<form:errors path="login.email"></form:errors>
-				</div>
-				<a href="<c:url value="/user/signup" />">Cadastre-se</a>
-			</form>
-		</c:when>
-		<c:otherwise>
-			<a href="<c:url value="/user/account" />">Minha conta</a>
-			<form action="<c:url value="/user/logout" />" method="post">
-				<input type="submit" value="Logout">
-			</form>
-		</c:otherwise>
-	</c:choose>
+	<shiro:notAuthenticated>
+		<form action='<c:url value="/user/login" />' method="post">
+			<div>
+				<input type="hidden" name="path" class="path"> <label>E-mail</label><input
+					type="text" name="email"> <label>Senha</label><input
+					type="password" name="password"> <input type="submit">
+				<form:errors path="login.email"></form:errors>
+			</div>
+			<a href="<c:url value="/user/signup" />">Cadastre-se</a>
+		</form>
+	</shiro:notAuthenticated>
+	<shiro:authenticated>
+		<a href="<c:url value="/user/account" />">Minha conta</a>
+		<form action="<c:url value="/user/logout" />" method="post">
+			<input type="submit" value="Logout">
+		</form>
+	</shiro:authenticated>
 
 
 	<nav class="navigation">

@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.common.base.Throwables;
 
+/**
+ * To add new HTTP error handlers, just declare it on web.xml.
+ */
 @Controller
-class CustomErrorController {
+public class HttpErrorController {
 
-	@RequestMapping("error")
+	@RequestMapping("http405")
 	public String customError(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		// retrieve some useful information from the request
@@ -32,7 +35,7 @@ class CustomErrorController {
 		if (requestUri == null) {
 			requestUri = "Unknown";
 		}
-// TODO
+		// TODO
 		@SuppressWarnings("unused")
 		String message = MessageFormat.format(
 				"{0} returned for {1} with message {3}", statusCode,

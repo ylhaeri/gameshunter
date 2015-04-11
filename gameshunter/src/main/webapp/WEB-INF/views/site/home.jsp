@@ -15,22 +15,20 @@
 	href="<c:url value="/resources/css/site/home.css"></c:url>">
 </head>
 <body>
-	<div class="wrapper">
-		<div id="hu3"></div>
-		<gameshunter:header />
+	<gameshunter:header />
+	<div id="hu3"></div>
 
-		<main class="container">
-		<div>
-			<h1>Em busca de novos jogos? Cadastre-se e confira!</h1>
+	<main class="container">
+	<div>
+		<h1>Em busca de novos jogos? Cadastre-se e confira!</h1>
 
-			<a href="<c:url value="/usuario/cadastrado" />">Cadastrado-teste</a>
+		<a href="<c:url value="/usuario/cadastrado" />">Cadastrado-teste</a>
 
-			<p>Coonteúdo para pessoas novas... (CONTEÚDO APENAS PARA
-				PREENCHER O ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO
-				EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
+		<p>Coonteúdo para pessoas novas... (CONTEÚDO APENAS PARA PREENCHER
+			O ESPAÇO EM BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM
+			BRANCO-CONTEÚDO APENAS PARA PREENCHER O ESPAÇO EM BRANCO)</p>
 
-			<h2>Precisamos definir o restante</h2>
-		</div>
+		<h2>Precisamos definir o restante</h2>
 	</div>
 
 	<gameshunter:footer />

@@ -12,10 +12,8 @@
 <gameshunter:resources />
 </head>
 <body>
-	<div class="wrapper">
-		<gameshunter:header />
+	<gameshunter:header />
 
-	</div>
 	<gameshunter:footer />
 </body>
 </html>

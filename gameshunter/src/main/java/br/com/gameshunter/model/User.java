@@ -31,8 +31,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.gameshunter.converter.LocalDateDBConverter;
 import br.com.gameshunter.system.FileManager;
-import br.com.gameshunter.util.HashFactory;
-import br.com.gameshunter.util.SaltFactory;
 
 /**
  * @author Myho
@@ -51,7 +49,6 @@ public class User implements Serializable {
 	@NotEmpty(message = "{user.password.empty}")
 	// TODO Tamanho da senha não está sendo validado, precisa resolver
 	private String password;
-	private String salt;
 	@NotEmpty(message = "{user.firstName.empty}")
 	@Size(max = 50, message = "{user.firstName.size}")
 	private String firstName;
@@ -112,25 +109,13 @@ public class User implements Serializable {
 
 	/**
 	 * JPA/Spring's exclusive use. Use {@link #generatePassword()} if it is
-	 * necessary to set a new salt.
+	 * necessary to set a new password.
 	 * 
 	 * @param password
 	 */
 	@Deprecated
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	/**
-	 * JPA's exclusive use. Use {@link #generatePassword()} if it is necessary
-	 * to set a new salt.
-	 * 
-	 * @param salt
-	 */
-	@Deprecated
-	@SuppressWarnings("unused")
-	private void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	/** @return */
@@ -289,8 +274,8 @@ public class User implements Serializable {
 		// TODO bloquear o uso se a senha já existir, podemos fazer uso do
 		// length, o Sha 512 sempre gera o mesmo tamanho para qualquer String. O
 		// tamanho é 128, se não me engano
-		this.salt = SaltFactory.generateSalt();
-		this.password = saltedPasswordHash(this.password);
+
+		// TODO alterar para o shiro
 	}
 
 	/**
@@ -301,10 +286,8 @@ public class User implements Serializable {
 	 * @return True if equal, false if not
 	 */
 	public boolean isPasswordEqual(String password) {
-		if (saltedPasswordHash(password).equals(this.password))
-			return true;
-		else
-			return false;
+		// TODO alterar para o shiro
+		return false;
 	}
 
 	/**
@@ -314,8 +297,8 @@ public class User implements Serializable {
 	 * @return Salted password hash
 	 */
 	private String saltedPasswordHash(String password) {
-		String passwordHash = HashFactory.sha512(password);
-		return HashFactory.sha512(passwordHash + this.salt);
+		// TODO alterar para o shiro
+		return null;
 	}
 
 	/**
@@ -393,7 +376,6 @@ public class User implements Serializable {
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + Arrays.hashCode(profilePicture);
-		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		return result;
 	}
 
@@ -458,11 +440,6 @@ public class User implements Serializable {
 		} else if (!phone.equals(other.phone))
 			return false;
 		if (!Arrays.equals(profilePicture, other.profilePicture))
-			return false;
-		if (salt == null) {
-			if (other.salt != null)
-				return false;
-		} else if (!salt.equals(other.salt))
 			return false;
 		return true;
 	}

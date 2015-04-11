@@ -52,7 +52,7 @@ body > .wrapper {
     width: 85%;
   }
 }
-@media not all and (max-width: 500px) {
+@media not all and (max-width: 2000px) {
   header,
   main,
   footer {
