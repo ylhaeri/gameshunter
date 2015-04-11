@@ -57,16 +57,9 @@
 		<property name="credentialsMatcher" ref="passwordMatcher" />
 	</bean>
 
-	<bean id="cookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-		<property name="name" value="AppCookie" />
-		<property name="secure" value="true" />
-		<property name="httpOnly" value="false" />
-	</bean>
-
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- Change to realms if need to add another realm -->
 		<property name="realm" ref="authenticationRealm" />
-		<property name="sessionManager.sessionIdCookie" ref="cookie" />
 		<!-- By default the servlet container sessions will be used. Uncomment 
 			this line to use shiro's native sessions (see the JavaDoc for more): -->
 		<!-- <property name="sessionMode" value="native"/> -->
