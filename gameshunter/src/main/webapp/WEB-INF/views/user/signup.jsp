@@ -11,7 +11,7 @@
 <title>Games Hunter</title>
 <gameshunter:resources />
 <script
-	src="<c:url value="/resources/js/jquery/jquery-masked-input.js"></c:url>"></script>
+	src="<c:url value="/resources/js/jquery/masked-input.min.js"></c:url>"></script>
 <script src="<c:url value="/resources/js/usuario/novo.js"></c:url>"></script>
 </head>
 <body>

@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,7 +15,11 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.annotation.Scope;
@@ -42,11 +47,17 @@ public class UserController {
 
 	private User user;
 	private UserService service;
+	DefaultWebSecurityManager securityManager;
+	LightCookieRememberMeManager rememberMeManager;
 
 	@Autowired
-	public UserController(User user, UserService service) {
+	public UserController(User user, UserService service,
+			DefaultWebSecurityManager securityManager) {
 		this.user = user;
 		this.service = service;
+		this.securityManager = securityManager;
+		this.rememberMeManager = (LightCookieRememberMeManager) securityManager
+				.getRememberMeManager();
 	}
 
 	@InitBinder
@@ -92,7 +103,8 @@ public class UserController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam("path") String path,
-			@Valid Login login, BindingResult result) {
+			@Valid Login login, BindingResult result,
+			HttpServletResponse response) {
 
 		UsernamePasswordToken token = new UsernamePasswordToken(
 				login.getEmail(), login.getPassword());
@@ -110,17 +122,7 @@ public class UserController {
 			// unexpected condition error?
 			System.out.println("Algum hue");
 		}
-		token.setRememberMe(true);
-		System.out.println("Token remembered " + token.isRememberMe());
-		token.setRememberMe(true);
-		System.out.println("Subject remembered " + subject.isRemembered());
-		token.setRememberMe(true);
-		System.out.println("Time out " + subject.getSession().getTimeout());
-		token.setRememberMe(true);
-		System.out.println(subject.getSession().getId());
-		token.setRememberMe(true);
-		subject.getSession().getAttributeKeys().forEach(System.out::println);
-		token.setRememberMe(true);
+		rememberMeManager.getCookie();
 		return new ModelAndView("redirect:/");
 	}
 

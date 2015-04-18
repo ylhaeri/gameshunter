@@ -33,6 +33,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 		Set<Permission> permissions = new HashSet<Permission>();
 		Collection<User> principalsList = principals.byType(User.class);
 
+		System.out.println(principals == null);
 		if (principalsList.isEmpty()) {
 			throw new AuthorizationException("Empty principals list!");
 		}
