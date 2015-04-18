@@ -13,7 +13,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -40,17 +40,8 @@ import br.com.gameshunter.service.UserService;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserController {
 
-	// @RequestMapping("ararinha")
-	// public @ResponseBody byte[] testa(HttpSession session) throws IOException
-	// {
-	// File file = new File(session.getServletContext().getRealPath(
-	// "/resources/img/Brazil-Flag-icon.png"));
-	// InputStream is = new FileInputStream(file);
-	// return IOUtils.toByteArray(is);
-	// }
-
-	private UserService service;
 	private User user;
+	private UserService service;
 
 	@Autowired
 	public UserController(User user, UserService service) {
@@ -101,36 +92,11 @@ public class UserController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam("path") String path,
-			@Valid Login login, BindingResult result, HttpSession session) {
-
-		// TODO fazer o redirecionamento para as páginas corretamente. Decidir
-		// se
-		// vai ser estático ou baseado na página onde o usuário estava quando
-		// tentou logar. Creio que o ideal é guardar no login as últimas
-		// visitadas pelo usuário, pra dai decidir onde redirecionar. Passar as
-		// mensagens de erro para o validation messages, mas não consegui
-		// colocar as chaves normalmente, precisa pesquisar como faz, caso não
-		// conseguir precisa ser retirado da classe do sistema, acho que é só
-		// declarar o resource bundle do spring, não tenho certeza
-		/*
-		 * if (result.hasErrors()) return new ModelAndView("/site/home"); User
-		 * user = service.find(login.getEmail()); if (user == null) {
-		 * result.rejectValue("email", "login.email.not.found", new Object[] {
-		 * login.getEmail() }, // TODO resolver mensagem em português o.o'
-		 * "Essa conta não existe. Insira outro login ou cadastre-se."); return
-		 * new ModelAndView("/site/home", "login", login); } else if
-		 * (!user.isPasswordEqual(login.getPassword())) {
-		 * result.rejectValue("email", "login.password.not_match", null, // TODO
-		 * resolver mensagem em português o.o'
-		 * "Usuário ou senha incorretos. Verifique os seus dados e tente novamente."
-		 * ); return new ModelAndView("/site/home", "login", login); } else {
-		 * session.setAttribute("user", user); return new
-		 * ModelAndView("redirect:" + path); }
-		 */
+			@Valid Login login, BindingResult result) {
 
 		UsernamePasswordToken token = new UsernamePasswordToken(
 				login.getEmail(), login.getPassword());
-
+		token.setRememberMe(true);
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
@@ -144,12 +110,21 @@ public class UserController {
 			// unexpected condition error?
 			System.out.println("Algum hue");
 		}
+		token.setRememberMe(true);
+		System.out.println("Token remembered " + token.isRememberMe());
+		token.setRememberMe(true);
+		System.out.println("Subject remembered " + subject.isRemembered());
+		token.setRememberMe(true);
+		System.out.println("Time out " + subject.getSession().getTimeout());
+		token.setRememberMe(true);
 		System.out.println(subject.getSession().getId());
-		subject.getSession().setAttribute("teste", "arara");
+		token.setRememberMe(true);
 		subject.getSession().getAttributeKeys().forEach(System.out::println);
-		return null;
+		token.setRememberMe(true);
+		return new ModelAndView("redirect:/");
 	}
 
+	@RequiresUser
 	@RequestMapping(value = "account", method = RequestMethod.GET)
 	public String profile(HttpSession session) {
 		// FIXME Parece estranho :x Tem que trocar esse if por um interceptor,
@@ -158,25 +133,13 @@ public class UserController {
 		// redirecionamento quando deslogar também.
 		if (session.getAttribute("user") == null)
 			return "redirect:/";
-		System.out.println(user.getEmail());
-
 		return "/user/account";
-	}
-
-	@RequestMapping(value = "logout", method = RequestMethod.POST)
-	public String logout(HttpSession session) {
-
-		Subject subject = SecurityUtils.getSubject();
-		System.out.println(subject.getSession().getId());
-		System.out.println("http session " + session.getId());
-		subject.logout();
-		return "redirect:/";
 	}
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
 	// apropriado, provavelmente a forma como a foto é pegava será alterada
-	@RequestMapping(value = "teste", method = RequestMethod.GET, produces = "image/png")
-	public @ResponseBody byte[] teste(HttpSession session) throws IOException {
+	@RequestMapping(value = "getPicture", method = RequestMethod.GET)
+	public @ResponseBody byte[] getPicture(HttpSession session) {
 
 		User usuario = (User) session.getAttribute("user");
 
@@ -185,8 +148,8 @@ public class UserController {
 
 	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
 	// apropriado
-	@RequestMapping(value = "setFoto", method = RequestMethod.POST)
-	public String setFoto(HttpSession session,
+	@RequestMapping(value = "setPicture", method = RequestMethod.POST)
+	public String setPicture(HttpSession session,
 			@RequestParam("file") MultipartFile file) throws IOException {
 
 		User usuario = (User) session.getAttribute("user");

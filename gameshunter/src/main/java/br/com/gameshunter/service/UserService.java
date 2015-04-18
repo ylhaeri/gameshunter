@@ -2,6 +2,7 @@ package br.com.gameshunter.service;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -19,18 +20,21 @@ public class UserService {
 
 	private UsuarioDAO dao;
 	private SimpleEmail mail;
+	private DefaultPasswordService service;
 
 	@Autowired
-	public UserService(UsuarioDAO dao, SimpleEmail mail) {
+	public UserService(UsuarioDAO dao, SimpleEmail mail,
+			DefaultPasswordService service) {
 		this.dao = dao;
 		this.mail = mail;
+		this.service = service;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Transactional
 	public void add(User user) {
-		// TODO placeholder do envio de e-mail
 		// FIXME Precisa fazer a classe para enviar os e-mails
-		user.generatePassword();
+		user.setPassword(service.encryptPassword(user.getPassword()));
 		if (AppConfig.isSendconfirmation()) {
 			try {
 				mail.addTo(user.getEmail(), user.getFirstName());

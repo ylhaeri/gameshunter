@@ -15,7 +15,7 @@ public enum Gender {
 	}
 
 	public String getLabel() {
-		// FIXME Isso tá meio estranho, deve estar errado lol Achei no SOF
+		// TODO Temporário, achar maneira melhor de fazer isso.
 		ResourceBundle bundle = ResourceBundle.getBundle("/WEB-INF/i18n/ValidationMessages",
 				LocaleContextHolder.getLocale());
 		return bundle.getString(code);

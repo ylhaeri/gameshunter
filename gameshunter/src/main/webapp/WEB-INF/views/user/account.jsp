@@ -21,12 +21,13 @@
 	<main class="container">
 
 	<div class="profile-banner">
-		<form action='<c:url value="/user/setFoto"></c:url>' method="post"
+		<img alt="foto-do-perfil" id="usuario-foto-label"
+			src="<c:url value="/user/getPicture" />"
+			class="img-circle img-thumbnail" /><br /> <input type="file"
+			name="file">
+		<form action='<c:url value="/user/setPicture" />' method="post"
 			enctype="multipart/form-data">
-			<img alt="foto-do-perfil" id="usuario-foto-label"
-				src="<c:url value="/user/teste"></c:url>"
-				class="img-circle img-thumbnail" /><br /> <input type="file"
-				name="file"> <input type="submit" style="color: black">
+			<input type="submit" style="color: black">
 			<div id="progressNumber"></div>
 		</form>
 

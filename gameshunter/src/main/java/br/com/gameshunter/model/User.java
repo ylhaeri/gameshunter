@@ -45,7 +45,7 @@ public class User implements Serializable {
 	@Email
 	@NotEmpty(message = "{user.email.empty}")
 	private String email;
-	@Column(length = 128)
+	@Column(length = 136)
 	@NotEmpty(message = "{user.password.empty}")
 	// TODO Tamanho da senha não está sendo validado, precisa resolver
 	private String password;
@@ -108,8 +108,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * JPA/Spring's exclusive use. Use {@link #generatePassword()} if it is
-	 * necessary to set a new password.
+	 * JPA/Spring's exclusive use. If it is necessary to set a new password, use
+	 * the UserService.
 	 * 
 	 * @param password
 	 */
@@ -262,43 +262,6 @@ public class User implements Serializable {
 	public void setProfilePicture(byte[] profilePicture) {
 		// TODO Precisamos de uma lista com toda imagem que é adicionada.
 		this.profilePicture = profilePicture;
-	}
-
-	/**
-	 * Do the whole process to ensure that the password is safer to store. Be
-	 * careful on usage. User will no longer be able to login with his current
-	 * password, it is not possible to keep the same password, do not use unless
-	 * it is for user registration or password change
-	 */
-	public void generatePassword() {
-		// TODO bloquear o uso se a senha já existir, podemos fazer uso do
-		// length, o Sha 512 sempre gera o mesmo tamanho para qualquer String. O
-		// tamanho é 128, se não me engano
-
-		// TODO alterar para o shiro
-	}
-
-	/**
-	 * Verify if the given password is equal to user's password
-	 * 
-	 * @param password
-	 *            Password that will be checked
-	 * @return True if equal, false if not
-	 */
-	public boolean isPasswordEqual(String password) {
-		// TODO alterar para o shiro
-		return false;
-	}
-
-	/**
-	 * Generate salted password hash
-	 * 
-	 * @param password
-	 * @return Salted password hash
-	 */
-	private String saltedPasswordHash(String password) {
-		// TODO alterar para o shiro
-		return null;
 	}
 
 	/**

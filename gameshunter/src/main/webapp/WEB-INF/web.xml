@@ -4,28 +4,9 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>GamesHunter</display-name>
 
-	<error-page>
-		<error-code>405</error-code>
-		<location>/http405</location>
-	</error-page>
-
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-	<servlet>
-		<servlet-name>spring mvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/applicationContext.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<multipart-config>
-			<max-file-size>500</max-file-size>
-			<max-request-size>1000</max-request-size>
-		</multipart-config>
-	</servlet>
 
 	<!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
 	<filter>
@@ -37,6 +18,16 @@
 		</init-param>
 	</filter>
 
+	<filter>
+		<filter-name>CookieLogging</filter-name>
+		<filter-class>br.com.gameshunter.controller.CookieLoggingFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CookieLogging</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<!-- Make sure any request you want accessible to Shiro is filtered. /* 
 		catches all -->
 	<!-- requests. Usually this filter mapping is defined first (before all 
@@ -46,6 +37,35 @@
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<filter>
+		<filter-name>logoutFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>logoutFilter</filter-name>
+		<url-pattern>/user/logout</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>spring mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>500</max-file-size>
+			<max-request-size>1000</max-request-size>
+		</multipart-config>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -60,12 +80,14 @@
 		</init-param>
 	</filter>
 
-	<servlet-mapping>
-		<servlet-name>spring mvc</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<error-page>
+		<error-code>405</error-code>
+		<location>/http405</location>
+	</error-page>
+
 </web-app>
