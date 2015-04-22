@@ -55,6 +55,6 @@ public class AuthenticationRealm extends AuthorizingRealm {
 
 		User user = service.find(upToken.getUsername());
 
-		return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+		return new SimpleAuthenticationInfo(user.getEmail(), user.getPassword(), getName());
 	}
 }

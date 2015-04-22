@@ -9,7 +9,7 @@
 	<div class="menu-img">
 		<div class="img"></div>
 	</div>
-	<shiro:notAuthenticated>
+	<shiro:guest>
 		<form action='<c:url value="/user/login" />' method="post">
 			<div>
 				<input type="hidden" name="path" class="path"> <label>E-mail</label><input
@@ -19,13 +19,13 @@
 			</div>
 			<a href="<c:url value="/user/signup" />">Cadastre-se</a>
 		</form>
-	</shiro:notAuthenticated>
-	<shiro:authenticated>
+	</shiro:guest>
+	<shiro:user>
 		<a href="<c:url value="/user/account" />">Minha conta</a>
 		<form action="<c:url value="/user/logout" />" method="post">
 			<input type="submit" value="Logout">
 		</form>
-	</shiro:authenticated>
+	</shiro:user>
 
 
 	<nav class="navigation">

@@ -25,7 +25,7 @@ public class UsuarioDAO {
 		manager.persist(usuario);
 	}
 
-	public User find(String email) {
+	public User find(Object email) {
 		return manager.find(User.class, email);
 	}
 

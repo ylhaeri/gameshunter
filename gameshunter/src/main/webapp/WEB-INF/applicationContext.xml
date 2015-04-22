@@ -16,10 +16,14 @@
 	<context:component-scan base-package="br.com.gameshunter." />
 	<task:annotation-driven />
 
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basenames"
-			value="/WEB-INF/i18n/ValidationMessages,/WEB-INF/i18n/site/header, /WEB-INF/i18n/general" />
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="java.security.Security.addProvider" />
+		<property name="arguments">
+			<list>
+				<bean class="org.bouncycastle.jce.provider.BouncyCastleProvider" />
+			</list>
+		</property>
 	</bean>
 
 	<import resource="shiro-spring-config.xml" />

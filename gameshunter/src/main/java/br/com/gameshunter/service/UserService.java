@@ -50,7 +50,7 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.NEVER)
-	public User find(String email) {
+	public User find(Object email) {
 		User usuario = dao.find(email);
 		if (usuario != null)
 			return usuario;

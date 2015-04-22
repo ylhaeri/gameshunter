@@ -10,7 +10,7 @@
 	</bean>
 
 	<!-- <bean id="sessionCookie" class="org.apache.shiro.web.servlet.SimpleCookie"> 
-		<property name="name" value="JesusBicicleta" /> <property name="path" value="/gameshunter/" 
+		<property name="name" value="session" /> <property name="path" value="/gameshunter/" 
 		/> <property name="httpOnly" value="true" /> </bean> -->
 
 	<bean id="sessionDAO"
@@ -81,15 +81,8 @@
 	<!-- <bean id="anotherFilter" class="..."> ... </bean> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<!-- The 'filters' property is not necessary since any declared javax.servlet.Filter 
-			bean -->
-		<!-- defined will be automatically acquired and available via its beanName 
-			in chain -->
-		<!-- definitions, but you can perform instance overrides or name aliases 
-			here if you like: -->
 		<!-- <property name="filters"> <util:map> <entry key="anAlias" value-ref="someFilter"/> 
 			</util:map> </property> -->
-		<!-- <property name="filterChainDefinitions"> <value> </value> </property> -->
 	</bean>
 
 

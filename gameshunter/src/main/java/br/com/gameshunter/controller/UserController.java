@@ -5,7 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -15,11 +14,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresUser;
-import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.Cookie;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.annotation.Scope;
@@ -47,17 +42,11 @@ public class UserController {
 
 	private User user;
 	private UserService service;
-	DefaultWebSecurityManager securityManager;
-	LightCookieRememberMeManager rememberMeManager;
 
 	@Autowired
-	public UserController(User user, UserService service,
-			DefaultWebSecurityManager securityManager) {
+	public UserController(User user, UserService service) {
 		this.user = user;
 		this.service = service;
-		this.securityManager = securityManager;
-		this.rememberMeManager = (LightCookieRememberMeManager) securityManager
-				.getRememberMeManager();
 	}
 
 	@InitBinder
@@ -122,41 +111,37 @@ public class UserController {
 			// unexpected condition error?
 			System.out.println("Algum hue");
 		}
-		rememberMeManager.getCookie();
 		return new ModelAndView("redirect:/");
 	}
 
 	@RequiresUser
 	@RequestMapping(value = "account", method = RequestMethod.GET)
-	public String profile(HttpSession session) {
-		// FIXME Parece estranho :x Tem que trocar esse if por um interceptor,
-		// vamos ter que filtar esse interceptor todas as páginas que o usuário
-		// não pode entrar sem estar logado, provavelmente resolve o problema de
-		// redirecionamento quando deslogar também.
-		if (session.getAttribute("user") == null)
-			return "redirect:/";
-		return "/user/account";
+	public ModelAndView profile() {
+
+		Subject subject = SecurityUtils.getSubject();
+		User user = service.find(subject.getPrincipal());
+
+		return new ModelAndView("/user/account", "user", user);
 	}
 
-	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
-	// apropriado, provavelmente a forma como a foto é pegava será alterada
+	@RequiresUser
 	@RequestMapping(value = "getPicture", method = RequestMethod.GET)
-	public @ResponseBody byte[] getPicture(HttpSession session) {
+	public @ResponseBody byte[] getPicture() {
 
-		User usuario = (User) session.getAttribute("user");
-
-		return usuario.getProfilePicture();
+		Subject subject = SecurityUtils.getSubject();
+		User user = service.find(subject.getPrincipal());
+		return user.getProfilePicture();
 	}
 
-	// FIXME Mapeado e feito somente para testes, não acho que o lugar seja
-	// apropriado
+	@RequiresUser
 	@RequestMapping(value = "setPicture", method = RequestMethod.POST)
-	public String setPicture(HttpSession session,
-			@RequestParam("file") MultipartFile file) throws IOException {
+	public String setPicture(@RequestParam("file") MultipartFile file)
+			throws IOException {
 
-		User usuario = (User) session.getAttribute("user");
-		usuario.setProfilePicture(file.getBytes());
-		service.update(usuario);
+		Subject subject = SecurityUtils.getSubject();
+		User user = service.find(subject.getPrincipal());
+		user.setProfilePicture(file.getBytes());
+		service.update(user);
 
 		return "redirect:/user/account";
 	}

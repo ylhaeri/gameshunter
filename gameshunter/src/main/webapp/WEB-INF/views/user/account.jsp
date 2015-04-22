@@ -62,23 +62,23 @@
 
 		<table class="profile-table-information">
 			<tr>
-				<td>${sessionScope['user'].firstName}
-					${sessionScope['user'].lastName}</td>
+				<td>${requestScope['user'].firstName}
+					${requestScope['user'].lastName}</td>
 			</tr>
 			<tr>
-				<td>${sessionScope['user'].nickname}</td>
+				<td>${requestScope['user'].nickname}</td>
 			</tr>
 			<tr>
-				<td>${sessionScope['user'].gender}</td>
+				<td>${user.gender}</td>
 			</tr>
 			<tr>
-				<td><spring:eval expression="user.birthDay" /></td>
+				<td><spring:eval expression="${requestScope['user'].birthDay}" /></td>
 			</tr>
 			<tr>
-				<td>${sessionScope['user'].phone}</td>
+				<td>${requestScope['user'].phone}</td>
 			</tr>
 			<tr>
-				<td>${sessionScope['user'].mobile}</td>
+				<td>${requestScope['user'].mobile}</td>
 			</tr>
 		</table>
 	</div>
