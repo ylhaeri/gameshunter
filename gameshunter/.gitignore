@@ -1,2 +1,5 @@
-+/.externalToolBuilders
-/workspace/
+#Eclipse
+.metadata
+local.properties
+.externalToolBuilders
+/target/
