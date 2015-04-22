@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <tr>
 	<td class="td-label" id="td-nome-label"><span
@@ -98,6 +98,7 @@
 		class="control-label" for="confirma-senha-input"><spring:message
 				code="user.confirm_password" /></label></td>
 	<td class="td-input" id="td-confirma-senha-input"><input
-		id="confirma-senha-input" class="form-control" type="password" name="password" /> <form:errors
-			path="user.password" cssClass="text-danger" /></td>
+		id="confirma-senha-input" class="form-control" type="password"
+		name="password" /> <form:errors path="user.password"
+			cssClass="text-danger" /></td>
 </tr>
