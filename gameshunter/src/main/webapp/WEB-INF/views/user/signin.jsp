@@ -1,5 +1,5 @@
-<%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="gameshunter" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!Doctype html>
 <html>
 <head>
