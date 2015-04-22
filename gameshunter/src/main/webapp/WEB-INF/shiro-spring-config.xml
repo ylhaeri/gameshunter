@@ -69,24 +69,10 @@
 		<property name="redirectUrl" value="/" />
 	</bean>
 
-	<!-- Define any javax.servlet.Filter beans you want anywhere in this application 
-		context. -->
-	<!-- They will automatically be acquired by the 'shiroFilter' bean above 
-		and made available -->
-	<!-- to the 'filterChainDefinitions' property. Or you can manually/explicitly 
-		add them -->
-	<!-- to the shiroFilter's 'filters' Map if desired. See its JavaDoc for 
-		more details. -->
-	<!-- <bean id="someFilter" class="..."/> -->
-	<!-- <bean id="anotherFilter" class="..."> ... </bean> -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<!-- <property name="filters"> <util:map> <entry key="anAlias" value-ref="someFilter"/> 
-			</util:map> </property> -->
+	<!-- <property name="filterChainDefinitions"> <value> </value> </property> -->
 	</bean>
-
-
-
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 	<bean

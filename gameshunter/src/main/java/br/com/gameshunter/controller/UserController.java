@@ -1,10 +1,10 @@
 package br.com.gameshunter.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,14 +53,14 @@ public class UserController {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}
 
-	@RequestMapping(value = "signup", method = RequestMethod.GET)
+	@RequestMapping(value = "signup", method = GET)
 	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView("/user/signup");
 		mav.addObject("user", user);
 		return mav;
 	}
 
-	@RequestMapping(value = "signup&{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "signup&{email}", method = GET)
 	public ModelAndView signUp(@PathVariable("email") String email) {
 		ModelAndView mav = new ModelAndView("/user/new");
 		user.setEmail(email);
@@ -70,7 +69,7 @@ public class UserController {
 		return mav;
 	}
 
-	@RequestMapping(value = "registered", method = RequestMethod.POST)
+	@RequestMapping(value = "registered", method = POST)
 	public String registered(@Valid User user, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -85,20 +84,23 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "signin", method = GET)
+	@RequestMapping(value = "login", method = GET)
 	public String signin() {
-		return "/user/signin";
+		return "/user/login";
 	}
 
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam("path") String path,
-			@Valid Login login, BindingResult result,
-			HttpServletResponse response) {
+	@RequestMapping(value = "login", method = POST)
+	public ModelAndView login(
+			@Valid Login login,
+			BindingResult result,
+			@RequestParam(value = "rememberMe", defaultValue = "false") boolean remember) {
 
 		UsernamePasswordToken token = new UsernamePasswordToken(
 				login.getEmail(), login.getPassword());
-		token.setRememberMe(true);
+		token.setRememberMe(remember);
+
 		Subject subject = SecurityUtils.getSubject();
+
 		try {
 			subject.login(token);
 		} catch (UnknownAccountException uae) {
@@ -111,11 +113,12 @@ public class UserController {
 			// unexpected condition error?
 			System.out.println("Algum hue");
 		}
+
 		return new ModelAndView("redirect:/");
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "account", method = RequestMethod.GET)
+	@RequestMapping(value = "account", method = GET)
 	public ModelAndView profile() {
 
 		Subject subject = SecurityUtils.getSubject();
@@ -125,7 +128,7 @@ public class UserController {
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "getPicture", method = RequestMethod.GET)
+	@RequestMapping(value = "getPicture", method = GET)
 	public @ResponseBody byte[] getPicture() {
 
 		Subject subject = SecurityUtils.getSubject();
@@ -134,7 +137,7 @@ public class UserController {
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "setPicture", method = RequestMethod.POST)
+	@RequestMapping(value = "setPicture", method = POST)
 	public String setPicture(@RequestParam("file") MultipartFile file)
 			throws IOException {
 

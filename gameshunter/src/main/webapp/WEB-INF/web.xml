@@ -80,4 +80,14 @@
 		<location>/http405</location>
 	</error-page>
 
+
+	<filter>
+		<filter-name>URLSessionFilter</filter-name>
+		<filter-class>br.com.gameshunter.filter.URLSessionFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>URLSessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

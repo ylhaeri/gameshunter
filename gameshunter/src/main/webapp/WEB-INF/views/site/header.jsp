@@ -12,9 +12,10 @@
 	<shiro:guest>
 		<form action='<c:url value="/user/login" />' method="post">
 			<div>
-				<input type="hidden" name="path" class="path"> <label>E-mail</label><input
-					type="text" name="email"> <label>Senha</label><input
-					type="password" name="password"> <input type="submit">
+				<label>E-mail</label><input type="text" name="email"> <label>Senha</label><input
+					type="password" name="password"> <input type="hidden"
+					name="rememberMe" value="true"> <input type="submit"
+					value="login">
 				<form:errors path="login.email"></form:errors>
 			</div>
 			<a href="<c:url value="/user/signup" />">Cadastre-se</a>

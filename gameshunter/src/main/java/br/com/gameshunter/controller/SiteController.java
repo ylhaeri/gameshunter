@@ -2,6 +2,7 @@ package br.com.gameshunter.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -14,6 +15,7 @@ public class SiteController {
 
 	@RequestMapping(value = "/", method = GET)
 	public String index() {
+		System.out.println(SecurityUtils.getSubject().getSession().getId());
 		return "site/home";
 	}
 

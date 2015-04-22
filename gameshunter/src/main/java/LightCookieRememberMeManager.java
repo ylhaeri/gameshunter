@@ -1,4 +1,4 @@
-package br.com.gameshunter.controller;
+
 
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 
