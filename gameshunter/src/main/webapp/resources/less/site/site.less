@@ -1,6 +1,6 @@
 @import '../mixin.less';
 @import '../variables.less';
-html , body , .wrapper {
+html , body {
 	height: 100%;
 }
 
@@ -9,8 +9,10 @@ body > .wrapper {
 	min-height: 100%;
 }
 
+.wrapper (30px , 80px);
+
 .hue () {
-	header , main , footer {
+	.header , .main , .footer {
 		display: none;
 	}
 
@@ -29,26 +31,10 @@ body > .wrapper {
 	background: pink;
 }
 
-@media not all and (min-width: @min-supported-width) {
-	.hue;
+.container {
+	.centralizado (85%);
 }
 
-@media @smartphone {
-	.wrapper (30px, 50px);
-	header , main , footer {
-		display: block;
-		width: 100%;
-	}
-
-	header {
-		height: 10%;
-	}
-
-	.container {
-		.centralizado (85%);  
-	}
-}
-
-@media not all and (max-width: @max-supported-width) {
+@media not all and (min-width: @min-supported-width) and (max-width: @max-supported-width) {
 	.hue;
 }

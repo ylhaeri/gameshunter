@@ -1,68 +1,28 @@
 @import '../variables.less';
 @import '../mixin.less';
-@media @smartphone {
-	header {
-		height: @min-header-height;
-		display: flex;
-		form {
-			display: none;
-		}
-	}
+.menu-img {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	max-width: 50px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-image: url('../../img/menu-icon.svg');
+}
 
-	nav {
-		position: fixed;
-		height: 100%;
-		width: 80%;
-		max-width: 320px;
-		left: -90%;
-		z-index: 1;
-		transition: .5s;
-		a {
-			text-decoration: none;
-			div {
-				width: 100%;
-				padding: 1em 0;
-				text-align: center;
-			}
-		}
-	}
+.close-menu {
+	display: inline-block;
+	cursor: pointer;
+	height: 25px;
+	width: 25px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-image: url('../../img/cross-icon.svg');
+}
 
-	.menu {
-		&:nth-child(1n + 0) {
-			border-bottom: 1px solid #fff;
-		}
-	}
-
-	.menu-img {
-		height: 100%;
-		width: 15%;
-		max-width: 50px;
-		.img {
-			cursor: pointer;
-			margin: 10% 0;
-			background-repeat: no-repeat;
-			background-image: url('../../img/menu-icon.svg');
-			height: 80%;
-		}
-	}
-
-	.open-menu {
-		top: 0;
-		left: 0;
-	}
-
-	.menu-close {
-		cursor: pointer;
-		margin-left: 90%;
-		margin-top: 3%;
-		width: 25px;
-		height: auto;
-		img {
-			padding: 15% 15% 15% 0;
-			width: 70%;
-			height: 70%;
-		}
-	}
+.open-menu {
+	top: 0 ! important;
+	left: 0 ! important;
 }
 
 .transparent-background {
@@ -78,3 +38,64 @@
 	}
 }
 
+@media @smartphone1 {
+	.header {
+		padding: 3%;
+		box-sizing: border-box;
+		.container {
+			margin: 0;
+			width: 100%;
+		}
+
+		.close-menu {
+			margin-left: 80%;
+			margin-top: 10%;
+		}
+
+		.menu-img {
+			margin: 3%;
+		}
+
+		.account-content {
+			float: right;
+		}
+
+		.nav {
+			position: fixed;
+			height: 100%;
+			width: 80%;
+			max-width: 320px;
+			left: -90%;
+			z-index: 1;
+			transition: .5s;
+			.link-list {
+				.menu-link:nth-child(n) {
+					display: inline-block;
+					border-bottom: 1px solid #fff;
+					text-decoration: none;
+					width: 100%;
+					padding: 1em 0;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+@media @smartphone2 {
+	body {
+		background: red;
+	}
+}
+
+@media @ipad1 {
+	body {
+		background: black;
+	}
+}
+
+@media @ipad2 {
+	.container {
+		background: blue;
+	}
+}

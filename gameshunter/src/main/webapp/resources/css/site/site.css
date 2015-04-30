@@ -1,11 +1,22 @@
 html,
-body,
-.wrapper {
+body {
   height: 100%;
 }
 body > .wrapper {
   height: auto;
   min-height: 100%;
+}
+.main {
+  overflow: auto;
+  padding-top: 30px ! important;
+  padding-bottom: 110px ! important;
+}
+.footer {
+  position: relative;
+  padding: 16px 0 20px 0;
+  margin-top: -80px ! important;
+  height: 80px ! important;
+  clear: both;
 }
 #hu3 {
   display: none;
@@ -16,46 +27,14 @@ body > .wrapper {
   right: 0;
   background: pink;
 }
-@media not all and (min-width: 310px) {
-  header,
-  main,
-  footer {
-    display: none;
-  }
-  #hu3 {
-    display: block;
-  }
+.container {
+  margin: 0 auto;
+  width: 85%;
 }
-@media (min-width:310px) and (max-width:500px) {
-  main {
-    overflow: auto;
-    padding-top: 30px ! important;
-    padding-bottom: 80px ! important;
-  }
-  footer {
-    position: relative;
-    margin-top: -50px ! important;
-    height: 50px ! important;
-    clear: both;
-  }
-  header,
-  main,
-  footer {
-    display: block;
-    width: 100%;
-  }
-  header {
-    height: 10%;
-  }
-  .container {
-    margin: 0 auto;
-    width: 85%;
-  }
-}
-@media not all and (max-width: 2000px) {
-  header,
-  main,
-  footer {
+@media not all and (min-width: 310px) and (max-width: 2000px) {
+  .header,
+  .main,
+  .footer {
     display: none;
   }
   #hu3 {

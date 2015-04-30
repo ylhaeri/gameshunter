@@ -35,8 +35,7 @@
 		<!-- <property name="sessionIdCookie" ref="sessionCookie" /> -->
 	</bean>
 
-	<bean id="rememberMeManager"
-		class="br.com.gameshunter.controller.LightCookieRememberMeManager" />
+	<bean id="rememberMeManager" class="LightCookieRememberMeManager" />
 
 	<!-- Security Manager -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -71,7 +70,7 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-	<!-- <property name="filterChainDefinitions"> <value> </value> </property> -->
+		<!-- <property name="filterChainDefinitions"> <value> </value> </property> -->
 	</bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

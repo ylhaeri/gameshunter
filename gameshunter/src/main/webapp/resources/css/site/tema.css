@@ -1,13 +1,13 @@
-footer,
-header {
+.footer,
+.header {
   background-color: #7272ff;
 }
 body {
   background-color: #e9eaed;
 }
-nav {
+.nav {
   background-color: #7272ff;
 }
-nav a div {
+.nav .menu-link {
   color: white;
 }

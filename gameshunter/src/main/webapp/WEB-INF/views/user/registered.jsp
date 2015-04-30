@@ -13,7 +13,7 @@
 
 	<gameshunter:header />
 
-	<main class="container">
+	<main class="main container">
 	<h1>Bem vindo</h1>
 	<p>Enviamos um email para ${sessionScope['user'].email} ativar o
 		seu cadastro. Verifique sua caixa de entrada.

@@ -1,16 +1,30 @@
 // Resoluções
 @min-supported-width : 310px;
-@min-smartphone-width : 310px;
-@max-smartphone-width : 500px;
 @max-supported-width : 2000px;
 
+@min-smartphone1-width : 310px;
+@min-smartphone2-width : 468px;
+
+@min-ipad1-width : 750px;
+@min-ipad2-width : 1010px;
+
 // Media queries
-@smartphone : ~"(min-width:@{min-smartphone-width}) and (max-width:@{max-smartphone-width})";
+@smartphone1 : ~"(min-width:@{min-smartphone1-width})";
+@smartphone2 : ~"(min-width:@{min-smartphone2-width})";
+
+@ipad1 : ~"(min-width:@{min-ipad1-width})";
+@ipad2 : ~"(min-width:@{min-ipad2-width})";
+
 
 // Theme
 @themebg : lighten(darkblue, 45%);
 @navcolor : white;
 @bodybg : #e9eaed;
 
-// Min e max height dos elementos
-@min-header-height : 50px;
+// Default attributes
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HEADER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@default-header-height: 12vh;

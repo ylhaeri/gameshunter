@@ -17,7 +17,7 @@
 <body>
 	<gameshunter:header />
 
-	<main class="container">
+	<main class="main container">
 	<form id="cadastro-form" class="form-inline" method="post"
 		action="registered">
 		<div class="form-group">
@@ -29,7 +29,7 @@
 					code="form.field.required" /></span>
 			<table id="table-cadastro-usuario" style="margin-top: 25px;"
 				class="table">
-				<c:import url="form.jsp"></c:import>
+				<c:import url="import/form.jsp"></c:import>
 				<tr>
 					<td class="td-label" id="td-novidades-label"><label
 						class="control-label" id="novidades-label"><spring:message

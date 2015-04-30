@@ -15,7 +15,7 @@
 </head>
 <body>
 	<gameshunter:header />
-	<main class="container">
+	<main class="main container">
 
 	<fieldset class="form-box">
 		<form class="form-description">

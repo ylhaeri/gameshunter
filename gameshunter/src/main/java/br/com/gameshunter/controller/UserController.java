@@ -5,6 +5,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -128,22 +129,27 @@ public class UserController {
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "getPicture", method = GET)
-	public @ResponseBody byte[] getPicture() {
+	@RequestMapping(value = "profilePicture", method = GET)
+	public @ResponseBody byte[] getPicture(HttpServletResponse response) {
 
 		Subject subject = SecurityUtils.getSubject();
 		User user = service.find(subject.getPrincipal());
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=alex.gay";
+		response.setHeader(headerKey, headerValue);
 		return user.getProfilePicture();
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "setPicture", method = POST)
+	@RequestMapping(value = "profilePicture", method = POST)
 	public String setPicture(@RequestParam("file") MultipartFile file)
 			throws IOException {
 
 		Subject subject = SecurityUtils.getSubject();
 		User user = service.find(subject.getPrincipal());
 		user.setProfilePicture(file.getBytes());
+		byte[] bytes = file.getBytes();
+		System.out.println("Bytes " + bytes[0]);
 		service.update(user);
 
 		return "redirect:/user/account";

@@ -18,7 +18,7 @@
 	<gameshunter:header />
 	<div id="hu3"></div>
 
-	<main class="container">
+	<main class="main container">
 	<div>
 		<h1>Em busca de novos jogos? Cadastre-se e confira!</h1>
 
@@ -30,7 +30,7 @@
 
 		<h2>Precisamos definir o restante</h2>
 	</div>
-
+	
 	<gameshunter:footer />
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<gameshunter:header />
-	<main class="container">
+	<main class="main container">
 	<form action='<c:url value="/user/login" />' method="post">
 		<div>
 			<label>E-mail</label><input type="text" name="email"> <br />

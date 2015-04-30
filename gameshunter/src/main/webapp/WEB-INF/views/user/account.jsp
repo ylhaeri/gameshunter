@@ -18,17 +18,15 @@
 <body>
 
 	<gameshunter:header />
-	<main class="container">
+	<main class="main container">
 
 	<div class="profile-banner">
 		<img alt="foto-do-perfil" id="usuario-foto-label"
 			src="<c:url value="/user/getPicture" />"
-			class="img-circle img-thumbnail" /><br /> <input type="file"
-			name="file">
+			class="img-circle img-thumbnail" /><br />
 		<form action='<c:url value="/user/setPicture" />' method="post"
 			enctype="multipart/form-data">
-			<input type="submit" style="color: black">
-			<div id="progressNumber"></div>
+			<input type="file" name="file"> <input type="submit">
 		</form>
 
 		<div class="profile-banner-content">
