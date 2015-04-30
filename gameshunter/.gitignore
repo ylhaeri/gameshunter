@@ -1,5 +1,2 @@
-#Eclipse
-.metadata
-local.properties
-.externalToolBuilders
 /target/
+*.bat
