@@ -1,5 +1,37 @@
 @import '../mixin.less';
 @import '../variables.less';
+@media (min-width: 310px) and (max-width: 500px) {
+	h1 {
+		font-size: 1.5em;
+		padding: 0 0 1em;
+	}
+
+	p {
+		font-size: .75em;
+		padding: .75em 0;
+	}
+
+	.container {
+		.centralizado (85%);
+	}
+
+	input , label, .inline  {
+		display: block;
+		width: 80%;
+		margin: .5em 10%;
+	}
+	
+	.inline > *, .inline > span * {
+		width: auto;
+		display: inline;
+		margin: 0 .25em .5em;
+	}
+	
+	.inline #sexo-label {
+		display: block;
+	}
+}
+
 html , body {
 	height: 100%;
 }
@@ -10,7 +42,6 @@ body > .wrapper {
 }
 
 .wrapper (30px , 80px);
-
 .hue () {
 	.header , .main , .footer {
 		display: none;
@@ -31,10 +62,3 @@ body > .wrapper {
 	background: pink;
 }
 
-.container {
-	.centralizado (85%);
-}
-
-@media not all and (min-width: @min-supported-width) and (max-width: @max-supported-width) {
-	.hue;
-}

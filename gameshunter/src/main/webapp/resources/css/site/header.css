@@ -30,10 +30,10 @@
   right: 0;
   background: rgba(0, 0, 0, 0.4);
 }
-@media (min-width:310px) {
+@media (min-width: 310px) and (max-width: 500px) {
   .header {
-    padding: 3%;
     box-sizing: border-box;
+    height: 50px;
   }
   .header .container {
     margin: 0;
@@ -44,7 +44,9 @@
     margin-top: 10%;
   }
   .header .menu-img {
-    margin: 3%;
+    max-width: 50px;
+    max-height: 50px;
+    height: 100%;
   }
   .header .account-content {
     float: right;
@@ -67,7 +69,7 @@
     text-align: center;
   }
 }
-@media (min-width:468px) {
+@media (min-width:500px) {
   body {
     background: red;
   }

@@ -3,7 +3,7 @@
 @max-supported-width : 2000px;
 
 @min-smartphone1-width : 310px;
-@min-smartphone2-width : 468px;
+@min-smartphone2-width : 500px;
 
 @min-ipad1-width : 750px;
 @min-ipad2-width : 1010px;
@@ -15,10 +15,11 @@
 @ipad1 : ~"(min-width:@{min-ipad1-width})";
 @ipad2 : ~"(min-width:@{min-ipad2-width})";
 
+@smartphone : ~"(min-width: 310px) and (max-width: 500px)"; 
 
 // Theme
 @themebg : lighten(darkblue, 45%);
-@navcolor : white;
+@navcolor : yellow;
 @bodybg : #e9eaed;
 
 // Default attributes

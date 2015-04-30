@@ -38,10 +38,10 @@
 	}
 }
 
-@media @smartphone1 {
+@media (min-width: 310px) and (max-width: 500px) {
 	.header {
-		padding: 3%;
 		box-sizing: border-box;
+		height: 50px;
 		.container {
 			margin: 0;
 			width: 100%;
@@ -53,7 +53,9 @@
 		}
 
 		.menu-img {
-			margin: 3%;
+			max-width: 50px;
+			max-height: 50px;
+			height: 100%;
 		}
 
 		.account-content {

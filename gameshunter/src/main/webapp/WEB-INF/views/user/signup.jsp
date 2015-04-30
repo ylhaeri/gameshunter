@@ -27,44 +27,32 @@
 			</h1>
 			<span style="margin-left: 15px;"><span class="teste"></span> <spring:message
 					code="form.field.required" /></span>
-			<table id="table-cadastro-usuario" style="margin-top: 25px;"
-				class="table">
-				<c:import url="import/form.jsp"></c:import>
-				<tr>
-					<td class="td-label" id="td-novidades-label"><label
-						class="control-label" id="novidades-label"><spring:message
-								code="user.newsletter.email" /></label></td>
-					<td class="td-input" id="td-novidades-email-input"><spring:message
-							code="user.newsletter.email.true" var="newsletter_email_true" />
-						<spring:message code="user.newsletter.email.false"
-							var="newsletter_email_false" /> <form:radiobutton
-							path="user.newsletterEmail" value="true"
-							label="${newsletter_email_true}" id="novidades-email-sim" /> <form:radiobutton
-							path="user.newsletterEmail" value="false"
-							label="${newsletter_email_false}" id="novidades-email-false" /></td>
-				</tr>
-				<tr>
-					<td class="td-label" id="td-termos-label"><label
-						class="control-label" id="termos-label"><spring:message
-								code="user.terms_of_service" /></label></td>
-					<td class="td-input" id="td-termos-input"><div
-							class="checkbox">
-							<spring:message code="user.terms_of_service.message"
-								var="user_terms_of_service" />
-							<form:checkbox path="user.agreeTermsOfService"
-								id="termos-servico-input" value="true"
-								label="${user_terms_of_service}" />
-							<br />
-							<form:errors path="user.agreeTermsOfService"
-								cssClass="text-danger" />
-						</div></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" id="cadastro-enviar" value="Enviar"
-						class="btn btn-primary"></td>
-				</tr>
-			</table>
+
+			<c:import url="import/form.jsp"></c:import>
+			<label class="control-label" id="novidades-label"><spring:message
+					code="user.newsletter.email" /></label>
+			<spring:message code="user.newsletter.email.true"
+				var="newsletter_email_true" />
+			<spring:message code="user.newsletter.email.false"
+				var="newsletter_email_false" />
+			<form:radiobutton path="user.newsletterEmail" value="true"
+				label="${newsletter_email_true}" id="novidades-email-sim" />
+			<form:radiobutton path="user.newsletterEmail" value="false"
+				label="${newsletter_email_false}" id="novidades-email-false" />
+			<label class="control-label" id="termos-label"><spring:message
+					code="user.terms_of_service" /></label>
+			<div class="checkbox">
+				<spring:message code="user.terms_of_service.message"
+					var="user_terms_of_service" />
+				<form:checkbox path="user.agreeTermsOfService"
+					id="termos-servico-input" value="true"
+					label="${user_terms_of_service}" />
+				<br />
+				<form:errors path="user.agreeTermsOfService" cssClass="text-danger" />
+			</div>
+
+			<input type="submit" id="cadastro-enviar" value="Enviar"
+				class="btn btn-primary">
 		</div>
 	</form>
 	</main>
