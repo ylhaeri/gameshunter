@@ -20,21 +20,21 @@
 <form:errors path="user.lastName" cssClass="text-danger" />
 
 
-
-
 <span class="asterisk_input"> </span>
 <label id="apelido-label" class="control-label" for="apelido-input"><spring:message
 		code="user.nickname" /></label>
 <form:input id="apelido-input" class="form-control" path="user.nickname" />
 <form:errors path="user.nickname" cssClass="text-danger" />
 
+
+<span class="asterisk_input"> </span>
+<label id="sexo-label" class="control-label" for="sexo-input"> <spring:message
+		code="user.gender" /></label>
 <div class="inline">
-<span class="asterisk_input" > </span>
-<label id="sexo-label" class="control-label" for="sexo-input">
-<spring:message	code="user.gender" /></label>
-<form:radiobuttons path="user.gender" itemLabel="label" />
-<form:errors path="user.gender" cssClass="text-danger" />
+	<form:radiobuttons element="span class = 'inline'" path="user.gender" />
 </div>
+<form:errors path="user.gender" cssClass="text-danger" />
+
 
 <span class="asterisk_input"> </span>
 <label id="cpf-label" class="control-label" for="cpf-input"><spring:message
@@ -62,7 +62,6 @@
 <form:input id="nascimento-input" class="form-control"
 	path="user.birthDay" />
 <form:errors path="user.birthDay" cssClass="text-danger" />
-
 
 
 <span class="asterisk_input"> </span>

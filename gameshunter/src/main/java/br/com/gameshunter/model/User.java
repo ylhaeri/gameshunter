@@ -288,7 +288,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * Get the address in the list
+	 * Get the desired address in the list
 	 * 
 	 * @param index
 	 * 

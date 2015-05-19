@@ -17,6 +17,9 @@ import br.com.gameshunter.schedule.AraraScheduled;
 @EnableTransactionManagement
 public class SpringConfig {
 
+	// TODO ehcache não tá funcionando direito, precisa concertar. Tá dentro da
+	// pasta resources
+
 	@Bean(initMethod = "init")
 	public User usuario() {
 		return new User();

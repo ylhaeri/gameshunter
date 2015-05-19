@@ -1,59 +1,79 @@
-@media (min-width: 310px) and (max-width: 500px) {
-  h1 {
-    font-size: 1.5em;
-    padding: 0 0 1em;
-  }
-  p {
-    font-size: .75em;
-    padding: .75em 0;
-  }
-  .container {
-    margin: 0 auto;
-    width: 85%;
-  }
-  input,
-  label,
-  .inline {
-    display: block;
-    width: 80%;
-    margin: .5em 10%;
-  }
-  .inline > *,
-  .inline > span * {
-    width: auto;
-    display: inline;
-    margin: 0 .25em .5em;
-  }
-  .inline #sexo-label {
-    display: block;
-  }
+@media (min-width: 300px) and (max-width: 500px) {
+	
+	h1 {
+		font-size: 1.5em;
+		padding: 0 0 1em;
+	}
+	
+	p {
+		font-size: .75em;
+		padding: .75em 0;
+	}
+	
+	.container {
+		margin: 0 auto;
+		width: 85%;
+	}
+	
+	input, label, .inline {
+		display: block;
+		width: 80%;
+		margin: .5em 10%;
+	}
+	
+	.inline > *, .inline > span * {
+		width: auto;
+		display: inline;
+		margin: 0 .25em .5em;
+	}
+	
+	.inline #sexo-label {
+		display: block;
+	}
+	
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Wrapper~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  */
+	.main {
+		padding-top: 30px;
+		padding-bottom: 80px; /* Footer height + desired padding */
+	}
+	
+	.footer {
+		margin-top: -50px; /* Must be the negative value of it's height */
+		height: 50px;
+	}
 }
-html,
-body {
-  height: 100%;
+
+@media (min-width: 1280px) and (max-width: 1920px) {
+	
+	.menu-img, .close-menu {
+		display: none;
+	}
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Wrapper~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  */
+	.main {
+		padding-top: 30px;
+		padding-bottom: 130px; /* Footer height + desired padding */
+	}
+	
+	.footer {
+		margin-top: -100px; /* Must be the negative value of it's height */
+		height: 100px;
+	}
 }
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Wrapper~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  */
+html, body {
+	height: 100%;
+}
+
 body > .wrapper {
-  height: auto;
-  min-height: 100%;
-}
-.main {
-  overflow: auto;
-  padding-top: 30px ! important;
-  padding-bottom: 110px ! important;
-}
-.footer {
-  position: relative;
-  padding: 16px 0 20px 0;
-  margin-top: -80px ! important;
-  height: 80px ! important;
-  clear: both;
-}
-#hu3 {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: pink;
+	height: auto;
+	min-height: 100%;
 }

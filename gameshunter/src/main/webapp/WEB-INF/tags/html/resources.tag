@@ -2,12 +2,12 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/reset.css" />">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/site/site.css" />">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/site/tema.css" />">
-<link rel="stylesheet"
 	href="<c:url value="/resources/css/site/header.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/site/footer.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/site.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/site/tema.css" />">
 <script src="<c:url value="/resources/js/jquery/jquery.min.js" />"></script>
 <script src="<c:url value="/resources/js/site/header.js" />"></script>

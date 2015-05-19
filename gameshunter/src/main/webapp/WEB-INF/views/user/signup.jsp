@@ -16,7 +16,6 @@
 </head>
 <body>
 	<gameshunter:header />
-
 	<main class="main container">
 	<form id="cadastro-form" class="form-inline" method="post"
 		action="registered">
@@ -35,13 +34,15 @@
 				var="newsletter_email_true" />
 			<spring:message code="user.newsletter.email.false"
 				var="newsletter_email_false" />
-			<form:radiobutton path="user.newsletterEmail" value="true"
-				label="${newsletter_email_true}" id="novidades-email-sim" />
-			<form:radiobutton path="user.newsletterEmail" value="false"
-				label="${newsletter_email_false}" id="novidades-email-false" />
+			<div class="inline">
+				<form:radiobutton path="user.newsletterEmail" value="true"
+					label="${newsletter_email_true}" />
+				<form:radiobutton path="user.newsletterEmail" value="false"
+					label="${newsletter_email_false}" />
+			</div>
 			<label class="control-label" id="termos-label"><spring:message
 					code="user.terms_of_service" /></label>
-			<div class="checkbox">
+			<div class="inline">
 				<spring:message code="user.terms_of_service.message"
 					var="user_terms_of_service" />
 				<form:checkbox path="user.agreeTermsOfService"

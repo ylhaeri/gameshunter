@@ -49,21 +49,19 @@ public class UserController {
 		this.service = service;
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-	}
-
 	@RequestMapping(value = "signup", method = GET)
 	public ModelAndView signUp() {
+		
 		ModelAndView mav = new ModelAndView("/user/signup");
 		mav.addObject("user", user);
+		
 		return mav;
 	}
 
 	@RequestMapping(value = "signup&{email}", method = GET)
 	public ModelAndView signUp(@PathVariable("email") String email) {
-		ModelAndView mav = new ModelAndView("/user/new");
+		
+		ModelAndView mav = new ModelAndView("/user/signup");
 		user.setEmail(email);
 		mav.addObject("user", user);
 
