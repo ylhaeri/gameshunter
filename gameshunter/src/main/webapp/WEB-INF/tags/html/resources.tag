@@ -21,6 +21,8 @@
 		<script src=<c:url value="/resources/js/respond.min.js" /> "></script>
 	<![endif]-->
 	
+	<script src="<c:url value="resources/js/bootstrap.min.js" /> "></script>
+	
 	<script src="<c:url value="resources/js/owl.carousel.min.js" /> "></script>
 	<script src="<c:url value="resources/js/jquery/sticky.js" /> "></script>
     
