@@ -54,7 +54,7 @@
           }
           if (s.currentTop != newTop) {
             s.stickyElement
-              .css('position', 'fixed')
+              .attr('style', 'position: fixed !important')
               .css('top', newTop);
 
             if (typeof s.getWidthFrom !== 'undefined') {

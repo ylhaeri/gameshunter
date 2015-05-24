@@ -17,13 +17,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +32,6 @@ import br.com.gameshunter.service.UserService;
 
 @Controller
 @RequestMapping("user")
-@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserController {
 
 	private User user;
@@ -118,7 +112,7 @@ public class UserController {
 
 	@RequiresUser
 	@RequestMapping(value = "account", method = GET)
-	public ModelAndView profile() {
+	public ModelAndView account() {
 
 		Subject subject = SecurityUtils.getSubject();
 		User user = service.find(subject.getPrincipal());
@@ -127,7 +121,7 @@ public class UserController {
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "profilePicture", method = GET)
+	@RequestMapping(value = "profile-picture", method = GET)
 	public @ResponseBody byte[] getPicture(HttpServletResponse response) {
 
 		Subject subject = SecurityUtils.getSubject();
@@ -139,7 +133,7 @@ public class UserController {
 	}
 
 	@RequiresUser
-	@RequestMapping(value = "profilePicture", method = POST)
+	@RequestMapping(value = "profile-picture", method = POST)
 	public String setPicture(@RequestParam("file") MultipartFile file)
 			throws IOException {
 

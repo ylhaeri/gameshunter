@@ -4,7 +4,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ public class SiteController {
 	}
 
 	@RequestMapping(value = "contact", method = GET)
-	@RequiresAuthentication
 	public String contact() {
 		return "site/contact";
 	}

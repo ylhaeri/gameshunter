@@ -1,10 +1,16 @@
 jQuery(document).ready(function($){
     
-    // jQuery sticky Menu
-    
+	if(window.location.pathname.endsWith('/gameshunter/'))
+		$('a[href="/gameshunter/"]').closest('li').addClass('active');
+	else
+		$('a[href*="'+window.location.pathname+'"]').closest('li').addClass('active');
+	
 	$(".mainmenu-area").sticky({topSpacing:0});
-    
-    
+
+	 $('.carousel').carousel({
+		   interval: 10000
+	  });
+
     $('.product-carousel').owlCarousel({
         loop:true,
         nav:true,
@@ -22,7 +28,7 @@ jQuery(document).ready(function($){
             }
         }
     });  
-    
+
     $('.related-products-carousel').owlCarousel({
         loop:true,
         nav:true,

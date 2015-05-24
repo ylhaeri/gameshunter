@@ -22,15 +22,15 @@
 
 	<div class="profile-banner">
 		<img alt="foto-do-perfil" id="usuario-foto-label"
-			src="<c:url value="/user/getPicture" />"
+			src="<c:url value="/user/profile-picture" />"
 			class="img-circle img-thumbnail" /><br />
-		<form action='<c:url value="/user/setPicture" />' method="post"
+		<form action='<c:url value="/user/profile-picture" />' method="post"
 			enctype="multipart/form-data">
 			<input type="file" name="file"> <input type="submit">
 		</form>
 
 		<div class="profile-banner-content">
-			<h1>${sessionScope['user'].nickname}</h1>
+			<h1>${requestScope['user'].nickname}</h1>
 		</div>
 
 	</div>
@@ -40,42 +40,27 @@
 		<table class="profile-table">
 			<tr>
 				<td><spring:message code="user.name" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="user.email" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="user.gender" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="user.bday" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="user.phone" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="user.mobile" /></td>
-			</tr>
-		</table>
-
-		<table class="profile-table-information">
-			<tr>
 				<td>${requestScope['user'].firstName}
 					${requestScope['user'].lastName}</td>
 			</tr>
 			<tr>
-				<td>${requestScope['user'].nickname}</td>
+				<td><spring:message code="user.email" /></td>
+				<td>${requestScope['user'].email}</td>
 			</tr>
 			<tr>
+				<td><spring:message code="user.gender" /></td>
 				<td>${user.gender}</td>
 			</tr>
 			<tr>
+				<td><spring:message code="user.bday" /></td>
 				<td><spring:eval expression="${requestScope['user'].birthDay}" /></td>
 			</tr>
 			<tr>
+				<td><spring:message code="user.phone" /></td>
 				<td>${requestScope['user'].phone}</td>
 			</tr>
 			<tr>
+				<td><spring:message code="user.mobile" /></td>
 				<td>${requestScope['user'].mobile}</td>
 			</tr>
 		</table>

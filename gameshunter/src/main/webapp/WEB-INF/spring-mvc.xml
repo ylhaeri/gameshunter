@@ -37,4 +37,6 @@
 		<property name="basenames"
 			value="/WEB-INF/i18n/ValidationMessages,/WEB-INF/i18n/site/header, /WEB-INF/i18n/general" />
 	</bean>
+	
+	<import resource="spring-mvc-shiro.xml" />
 </beans>

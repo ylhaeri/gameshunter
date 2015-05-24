@@ -28,7 +28,7 @@
 
 	<bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="globalSessionTimeout" value="100000" />
+		<property name="globalSessionTimeout" value="900000" />
 		<property name="sessionDAO" ref="sessionDAO" />
 		<property name="cacheManager" ref="ehCacheManager" />
 		<property name="sessionIdCookieEnabled" value="true" />
@@ -77,15 +77,4 @@
 	<bean
 		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor" />
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
-
-	<bean id="secureRemoteInvocationExecutor"
-		class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
-	<bean id="secureRemoteInvocationFactory"
-		class="org.apache.shiro.spring.remoting.SecureRemoteInvocationFactory" />
 </beans>
